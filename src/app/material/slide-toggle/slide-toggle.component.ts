@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slide-toggle.component.scss']
 })
 export class SlideToggleComponent implements OnInit {
+  firstToggle: boolean;
 
   constructor() { }
 
   ngOnInit() {
   }
-
+  
+  onFormSubmit() {
+    alert(`You submitted the form.`);
+  }
 }

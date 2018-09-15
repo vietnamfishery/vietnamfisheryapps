@@ -25,7 +25,6 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SliderComponent } from './slider/slider.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { StepperComponent } from './stepper/stepper.component';
-import { TableComponent } from './table/table.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
@@ -60,7 +59,6 @@ import { TypographyComponent } from './typography/typography.component';
     SliderComponent,
     SnackBarComponent,
     StepperComponent,
-    TableComponent,
     TabsComponent,
     ToolbarComponent,
     TooltipComponent,

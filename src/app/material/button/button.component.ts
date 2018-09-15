@@ -12,4 +12,7 @@ export class ButtonComponent implements OnInit {
   ngOnInit() {
   }
 
+  isDisabled = false;
+  clickCounter = 0;
+  toggleDisable = false;
 }

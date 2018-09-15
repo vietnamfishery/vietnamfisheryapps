@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MediaComponent implements OnInit {
 
-  constructor() { }
+  images: any[] = [];
+  num = 1;
+  constructor() {
+    for (this.num; this.num <= 21; this.num += 1) {
+      this.images.push(this.num);
+    }
+  }
 
   ngOnInit() {
   }

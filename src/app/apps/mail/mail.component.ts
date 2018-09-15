@@ -23,9 +23,21 @@ export class MailComponent implements OnInit {
   messages: Message[];
   selectedMessage: Message;
   sidePanelOpened = true;
-  constructor() { }
+  constructor(private mailService: MailService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getMessages();
   }
 
+  isOver(): boolean {
+    return this.mediaMatcher.matches;
+  }
+
+  getMessages(): void {
+    this.mailService.getMessages().then(messages => this.messages = messages);
+  }
+
+  onSelect(message: Message): void {
+    this.selectedMessage = message;
+  }
 }

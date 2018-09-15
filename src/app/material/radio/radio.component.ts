@@ -6,7 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./radio.component.scss']
 })
 export class RadioComponent implements OnInit {
-
+  isAlignEnd = false;
+  isDisabled = false;
+  isRequired = false;
+  favoriteSeason = 'Autumn';
+  seasonOptions = [
+    'Winter',
+    'Spring',
+    'Summer',
+    'Autumn',
+  ];
+  
   constructor() { }
 
   ngOnInit() {

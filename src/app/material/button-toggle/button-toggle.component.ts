@@ -7,6 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonToggleComponent implements OnInit {
 
+  isVertical = false;
+  isDisabled = false;
+  favoritePie = 'Apple';
+  pieOptions = [
+    'Apple',
+    'Cherry',
+    'Pecan',
+    'Lemon',
+  ];
+  
   constructor() { }
 
   ngOnInit() {
