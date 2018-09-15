@@ -6,21 +6,23 @@
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="text-xs-center pb-1">
               <img src="assets/images/logo-dark.svg" alt=""/>
-              <p class="mat-text-muted">Enter your email and we'll send you instructions on how to reset your password.</p>
+              <p class="mat-text-muted">Nhập email của bạn và chúng tôi sẽ gửi cho bạn hướng dẫn về cách đặt lại mật khẩu của bạn.</p>
             </div>
             <div  fxLayout="column"  fxLayoutAlign="space-around">
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Email address" type="email" [formControl]="form.controls['email']">
+                  <input matInput placeholder="Địa chỉ email" type="email" [formControl]="form.controls['email']">
                 </mat-form-field>
-                <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn">You must include an email address.</small>
-                <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">You must include a valid email address.</small>
+                <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn">Địa
+                    chỉ email không được để trống.</small>
+                <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Địa
+                    chỉ email không hợp lệ.</small>
               </div>
-              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Login</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Gửi</button>
             </div>
             <div class="pt-1 pb-1 text-xs-center">
-              <a [routerLink]="['/session/signin']">Access your account</a>&nbsp;&nbsp;&nbsp;&nbsp;
-              <a [routerLink]="['/session/signup']">Sign up for a new account</a>
+              <a [routerLink]="['/session/signin']">Truy cập tài khoản</a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a [routerLink]="['/session/signup']">Đăng ký một tài khoản mới?</a>
             </div>
           </form>
          </mat-card-content>
