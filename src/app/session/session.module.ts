@@ -8,10 +8,21 @@ import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { MatIconModule, MatCardModule, MatInputModule, MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     SessionRoutingModule
   ],
   declarations: [ErrorComponent, ForgotComponent, LockscreenComponent, NotFoundComponent, SigninComponent, SignupComponent]

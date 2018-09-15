@@ -6,9 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-paging.component.scss']
 })
 export class TablePagingComponent implements OnInit {
+  rows = [];
 
-  constructor() { }
+  constructor() {
+    this.fetch((data) => {
+      this.rows = data;
+    });
+  }
 
+  fetch(cb) {
+    const req = new XMLHttpRequest();
+    req.open('GET', `assets/data/company.json`);
+
+    req.onload = () => {
+      cb(JSON.parse(req.response));
+    };
+
+    req.send();
+  }
+  
   ngOnInit() {
   }
 

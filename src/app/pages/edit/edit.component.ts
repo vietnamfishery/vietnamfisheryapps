@@ -7,6 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
+  systems: Object[] = [{
+    name: 'Lights',
+    on: false,
+  }, {
+    name: 'Surround Sound',
+    on: true,
+  }, {
+    name: 'T.V.',
+    on: true,
+  }, {
+    name: 'Entertainment System',
+    on: true,
+  }, ];
+  
   constructor() { }
 
   ngOnInit() {

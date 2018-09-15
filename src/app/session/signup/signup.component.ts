@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { CustomValidators } from 'ng2-validation';
+import { Router } from '@angular/router';
+
+const password = new FormControl('', Validators.required);
+const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +13,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.form = this.fb.group( {
+      email: [null, Validators.compose([Validators.required, CustomValidators.email])],
+      password: password,
+      confirmPassword: confirmPassword
+    } );
+  }
+
+  onSubmit() {
+    this.router.navigate( ['/dashboard'] );
   }
 
 }
