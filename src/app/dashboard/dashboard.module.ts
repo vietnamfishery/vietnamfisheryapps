@@ -6,6 +6,7 @@ import { MatIconModule, MatCardModule, MatButtonModule, MatListModule, MatProgre
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { DashboardComponent } from './dashboard.component'
 
 @NgModule({
   imports: [
@@ -21,6 +22,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FlexLayoutModule,
     DashboardRoutingModule
   ],
-  declarations: []
+  declarations: [
+    DashboardComponent
+  ]
 })
 export class DashboardModule { }

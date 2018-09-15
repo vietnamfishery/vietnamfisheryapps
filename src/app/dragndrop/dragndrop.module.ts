@@ -5,6 +5,7 @@ import { DragndropRoutingModule } from './dragndrop-routing.module';
 import { MatIconModule, MatCheckboxModule, MatCardModule, MatListModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DragulaModule } from 'ng2-dragula';
+import { DragndropComponent } from './dragndrop.component';
 
 @NgModule({
   imports: [
@@ -14,9 +15,11 @@ import { DragulaModule } from 'ng2-dragula';
     MatCheckboxModule,
     MatListModule,
     FlexLayoutModule,
-    DragulaModule,
+    DragulaModule.forRoot(),
     DragndropRoutingModule
   ],
-  declarations: []
+  declarations: [
+    DragndropComponent
+  ]
 })
 export class DragndropModule { }

@@ -4,7 +4,7 @@
       <div class="taskboard-header text-uppercase">
         <strong>{{board.title}}</strong>
       </div>
-      <div class="taskboard-cards" [dragula]='"task-group"'>
+      <div class="taskboard-cards" attr.dragula='"task-group"'>
         <div class="taskboard-task" *ngFor="let task of board.tasks" [ngClass]="task.class">
           <div class="taskboard-task-title">{{task.title}}</div>
           <small class="card-text text-muted">{{task.description}}</small>

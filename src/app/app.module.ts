@@ -44,9 +44,6 @@ import {
   AccordionLinkDirective,
   AccordionDirective
 } from './core';
-import { TaskboardComponent } from './taskboard/taskboard.component';
-import { ChartlibComponent } from './chartlib/chartlib.component';
-import { DragndropComponent } from './dragndrop/dragndrop.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -62,12 +59,9 @@ export function createTranslateLoader(http: HttpClient) {
     NotificationComponent,
     OptionsComponent,
     SidebarComponent,
-    TaskboardComponent,
-    ChartlibComponent,
     AccordionAnchorDirective,
     AccordionLinkDirective,
-    AccordionDirective,
-    DragndropComponent
+    AccordionDirective
   ],
   imports: [
     BrowserModule,

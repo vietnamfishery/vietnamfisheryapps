@@ -8,7 +8,7 @@ import { TooltipPosition } from '@angular/material';
   preserveWhitespaces: false,
   styleUrls: ['./tooltip.component.scss']
 })
-export class TooltipComponent implements OnInit {
+export class TooltipsComponent implements OnInit {
   position: TooltipPosition = 'below';
   message = 'Here is the tooltip';
   tooltips: string[] = [];

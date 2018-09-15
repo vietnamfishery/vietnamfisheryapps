@@ -13,8 +13,8 @@ import { ExpansionComponent } from './expansion/expansion.component';
 import { GridListComponent } from './grid-list/grid-list.component';
 import { InputComponent } from './input/input.component';
 import { ListComponent } from './list/list.component';
-import { MenuComponent } from '../core';
-import { ProgressBarComponent } from '@swimlane/ngx-datatable';
+import { MenuComponent } from './menu/menu.component';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
 import { RadioComponent } from './radio/radio.component';
 import { RippleComponent } from './ripple/ripple.component';
@@ -26,7 +26,7 @@ import { StepperComponent } from './stepper/stepper.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TABS_ROUTES } from './tabs/routes';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { TooltipComponent } from '@angular/material';
+import { TooltipsComponent } from './tooltip/tooltip.component';
 import { TypographyComponent } from './typography/typography.component';
 import { TablePagesComponent } from './table-pages/table-pages.component';
 import { TABLE_ROUTES } from './table-pages/table-pages-routing.module';
@@ -61,7 +61,7 @@ const routes: Routes = [
       { path: 'table', component: TablePagesComponent, children: TABLE_ROUTES },
       { path: 'tabs', component: TabsComponent, children: TABS_ROUTES },
       { path: 'toolbar', component: ToolbarComponent },
-      { path: 'tooltip', component: TooltipComponent },
+      { path: 'tooltip', component: TooltipsComponent },
       { path: 'typography', component: TypographyComponent },
       { path: 'expansion', component: ExpansionComponent },
       { path: 'stepper', component: StepperComponent },

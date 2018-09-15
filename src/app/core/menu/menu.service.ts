@@ -96,8 +96,7 @@ const MENUITEMS: Array<Menu> = [
     children: [
       // {state: 'editor', name: 'EDITOR'},
       {state: 'validation', name: 'VALIDATION'},
-      {state: 'upload', name: 'UPLOAD'},
-      {state: 'tree', name: 'TREE'},
+      {state: 'upload', name: 'UPLOAD'}
     ]
   },
   {
@@ -188,12 +187,6 @@ const MENUITEMS: Array<Menu> = [
       {state: 'forgot', name: 'FORGOT'},
       {state: 'lockscreen', name: 'LOCKSCREEN'},
     ]
-  },
-  {
-    state: 'http://primer.nyasha.me/docs',
-    name: 'DOCS',
-    type: 'extTabLink',
-    icon: 'local_library'
   }
 ];
 

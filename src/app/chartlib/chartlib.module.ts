@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import 'chart.js';
 import { ChartlibRoutingModule } from './chartlib-routing.module';
 import { ChartlibComponent } from './chartlib.component';
 import { MatCardModule } from '@angular/material';

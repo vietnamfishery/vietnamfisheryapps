@@ -24,4 +24,4 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
   ],
   declarations: [MapGoogleComponent, MapLeafletComponent]
 })
-export class MapsModule { }
+export class MapModule { }

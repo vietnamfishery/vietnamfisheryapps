@@ -8,7 +8,7 @@ import { TaskboardComponent } from './taskboard.component';
 @NgModule({
   imports: [
     CommonModule,
-    DragulaModule,
+    DragulaModule.forRoot(),
     TaskboardRoutingModule
   ],
   declarations: [
