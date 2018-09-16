@@ -38,10 +38,16 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'dragndrop',
     loadChildren: './dragndrop/dragndrop.module#DragndropModule'
-  }, {
+  }, 
+  {
     path: 'pages',
     loadChildren: './pages/pages.module#PagesModule'
-  }]
+  },
+  {
+    path: 'quan-ly-ao',
+    loadChildren: './pond-management/pond-management.module#PondManagementModule'
+  }
+]
 }, {
   path: '',
   component: AuthLayoutComponent,

@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 
 const password = new FormControl('', Validators.required);
 const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
+const ho = new FormControl('', Validators.required);
+const ten = new FormControl('', Validators.required);
+const username = new FormControl('', Validators.required);
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +24,10 @@ export class SignupComponent implements OnInit {
     this.form = this.fb.group( {
       email: [null, Validators.compose([Validators.required, CustomValidators.email])],
       password: password,
-      confirmPassword: confirmPassword
+      confirmPassword: confirmPassword,
+      ho: ho,
+      ten: ten,
+      username: username
     } );
   }
 

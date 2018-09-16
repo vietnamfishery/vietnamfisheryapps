@@ -1,0 +1,39 @@
+<mat-card fxLayout="column">
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">THÊM AO NUÔI</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi tiết thông tin cho ao nuôi của bạn</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80" fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form [formGroup]="form">
+          <mat-card-content fxLayout="column">
+              <mat-form-field>
+                <input matInput placeholder="Tên ao nuôi" type="text">
+              </mat-form-field>
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0" fxLayoutGap.xs="0">
+                <mat-form-field fxFlex="100">
+                  <input matInput placeholder="Diện tích ao">
+                </mat-form-field>
+                <mat-form-field fxFlex="100">
+                  <input matInput placeholder="Fir" >
+                </mat-form-field>
+              </div>
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Thêm</button>
+              <button mat-raised-button color="warn" type="submit">Huỷ</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

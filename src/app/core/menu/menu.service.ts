@@ -28,6 +28,12 @@ const MENUITEMS: Array<Menu> = [
     icon: 'explore'
   },
   {
+    state: 'quan-ly-ao',
+    name: 'Quản lý ao',
+    type: 'link',
+    icon: 'view_quilt'
+  },
+  {
     state: 'apps',
     name: 'APPS',
     type: 'sub',
