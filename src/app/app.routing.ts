@@ -18,6 +18,14 @@ export const AppRoutes: Routes = [{
     loadChildren: './diary/diary.module#DiaryModule'
   },
   {
+    path: 'quan-ly-ao',
+    loadChildren: './pond-management/pond-management.module#PondManagementModule'
+  },
+  {
+    path: 'quan-ly-vu-nuoi',
+    loadChildren: './seasion-management/seasion-management.module#SeasionManagementModule'
+  },
+  {
     path: 'widgets',
     loadChildren: './widgets/widgets.module#WidgetsModule'
   }, {
@@ -48,10 +56,6 @@ export const AppRoutes: Routes = [{
   {
     path: 'pages',
     loadChildren: './pages/pages.module#PagesModule'
-  },
-  {
-    path: 'quan-ly-ao',
-    loadChildren: './pond-management/pond-management.module#PondManagementModule'
   }
 ]
 }, {
