@@ -40,6 +40,12 @@ const MENUITEMS: Array<Menu> = [
     icon: 'view_quilt'
   },
   {
+    state: 'quan-ly-chuan-bi-ao',
+    name: 'Quản lý chuẩn bị ao',
+    type: 'link',
+    icon: 'view_quilt'
+  },
+  {
     state: 'apps',
     name: 'APPS',
     type: 'sub',

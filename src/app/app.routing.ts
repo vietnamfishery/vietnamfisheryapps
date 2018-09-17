@@ -18,6 +18,10 @@ export const AppRoutes: Routes = [{
     loadChildren: './diary/diary.module#DiaryModule'
   },
   {
+    path: 'quan-ly-chuan-bi-ao',
+    loadChildren: './pond-prepare-management/pond-prepare-management.module#PondPrepareManagementModule'
+  },
+  {
     path: 'widgets',
     loadChildren: './widgets/widgets.module#WidgetsModule'
   }, {
