@@ -28,6 +28,12 @@ const MENUITEMS: Array<Menu> = [
     icon: 'explore'
   },
   {
+    state: 'ghi-nhat-ky',
+    name: 'Ghi nhật ký',
+    type: 'link',
+    icon: 'explore'
+  },
+  {
     state: 'quan-ly-ao',
     name: 'Quản lý ao',
     type: 'link',

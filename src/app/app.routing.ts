@@ -8,10 +8,16 @@ export const AppRoutes: Routes = [{
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
-  }, {
+  },
+  {
     path: 'apps',
     loadChildren: './apps/apps.module#AppsModule'
-  }, {
+  },
+  {
+    path: 'ghi-nhat-ky',
+    loadChildren: './diary/diary.module#DiaryModule'
+  },
+  {
     path: 'widgets',
     loadChildren: './widgets/widgets.module#WidgetsModule'
   }, {

@@ -1,15 +1,19 @@
 .logo-main {
-    text-transform: uppercase;
+  font-family: "Quicksand-Bold";
+  text-transform: uppercase;
     font-weight: 700;
-    // font-style: italic;
-    font-size: 19px;
-    line-height: 80%;
+  font-size: 19px;
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
+  line-height: 100%;
 }
 
 .menu-n-logo {
-    display: inherit;
+  display: inherit;
 }
 
 .fxClass-xs {
-    display: none !important;
+  display: none !important;
 }
