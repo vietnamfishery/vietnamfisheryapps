@@ -12,22 +12,19 @@
               <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="5px">
                 <div class="pb-1" fxFlex.xs="100" fxFlex.gt-xs="auto">
                   <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Họ của bạn" type="text" [formControl]="form.controls['ho']">
+                    <input matInput placeholder="Họ của bạn" type="text">
                   </mat-form-field>
-                  <small *ngIf="form.controls['ho'].touched" class="mat-text-warn">Họ của bạn không được để trống.</small>
                 </div>
                 <div class="pb-1" fxFlex.xs="100" fxFlex.gt-xs="auto">
                   <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Tên của bạn" type="text" [formControl]="form.controls['ten']">
+                    <input matInput placeholder="Tên của bạn" type="text">
                   </mat-form-field>
-                  <small *ngIf="form.controls['ten'].touched" class="mat-text-warn">Tên của bạn không được để trống.</small>
                 </div>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Tên người dùng" type="text" [formControl]="form.controls['username']">
+                  <input matInput placeholder="Tên người dùng" type="text">
                 </mat-form-field>
-                <small *ngIf="form.controls['username'].touched" class="mat-text-warn">Tên người dùng không được để trống.</small>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">

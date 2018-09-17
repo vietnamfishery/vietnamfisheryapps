@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { CustomValidators } from 'ng2-validation';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -11,12 +10,11 @@ import { CustomValidators } from 'ng2-validation';
 export class AddPondComponent implements OnInit {
 
   public form: FormGroup;
-  
+  // selected = 'option2';
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.fb.group({
-      // fname: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(10)])]
     });
   }
 

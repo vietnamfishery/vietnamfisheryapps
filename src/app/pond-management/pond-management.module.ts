@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { PondManagementRoutingModule } from './pond-management-routing.module';
 import { PondManagementComponent, DialogAddPond } from './pond-management.component';
-import { MatSidenavModule, MatCardModule, MatToolbarModule, MatTabsModule, MatIconModule, MatButtonModule, MatTooltipModule, MatListModule, MatButtonToggleModule, MatCheckboxModule, MatSliderModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatProgressBarModule } from '@angular/material';
+import { MatSidenavModule, MatCardModule, MatToolbarModule, MatTabsModule, MatIconModule, MatButtonModule, MatTooltipModule, MatListModule, MatButtonToggleModule, MatCheckboxModule, MatSliderModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatProgressBarModule, MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddPondComponent } from './add-pond/add-pond.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FileUploadModule } from 'ng2-file-upload';
+import { DetailPondComponent } from './detail-pond/detail-pond.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-
+    MatSelectModule,
     MatRadioModule,
     MatProgressBarModule,
     NgxDatatableModule,
@@ -41,7 +42,8 @@ import { FileUploadModule } from 'ng2-file-upload';
   declarations: [
     PondManagementComponent,
     DialogAddPond,
-    AddPondComponent
+    AddPondComponent,
+    DetailPondComponent
   ],
   bootstrap: [PondManagementComponent]
 })

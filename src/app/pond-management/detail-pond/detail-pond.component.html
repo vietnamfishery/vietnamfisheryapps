@@ -1,10 +1,10 @@
 <mat-card fxLayout="column">
   <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
     <mat-card-title>
-      <h2 class="mat-headline center-align">THÊM AO NUÔI</h2>
+      <h2 class="mat-headline center-align">THÔNG TIN AO NUÔI</h2>
     </mat-card-title>
     <mat-card-subtitle>
-      <h4 class="subtitle">Nhập chi tiết thông tin cho ao nuôi của bạn</h4>
+      <h4 class="subtitle">Chi tiết thông tin cho ao nuôi của bạn</h4>
     </mat-card-subtitle>
   </div>
   <div fxLayout="row">
@@ -33,14 +33,22 @@
                 <input matInput placeholder="Độ sâu của ao" type="text">
               </mat-form-field>
             </div>
-            <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
-            <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+            <!-- <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
+            <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br /> -->
+            <mat-card fxLayout="row">
+              <div fxFlexOffset="25" fxFlex="50">
+                <div class="media-grid compact bg-cover">
+                  <img src="../../../assets/images/avatar.jpg" alt="img-pond">
+                </div>
+              </div>
+            </mat-card>
           </mat-card-content>
           <hr>
           <mat-card-actions>
             <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Thêm</button>
-              <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-ao">Huỷ</button>
+              <button mat-raised-button color="primary">Sửa</button>
+              <button mat-raised-button color="primary" type="submit" disabled>Lưu</button>
+              <button mat-raised-button color="warn" routerLink="/quan-ly-ao">Trở lại</button>
             </div>
           </mat-card-actions>
         </form>
