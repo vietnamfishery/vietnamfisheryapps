@@ -8,6 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule } from '@angular/forms';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     FormsModule,
     NgxDatatableModule,
+    FileUploadModule,
     ProfileManagementRoutingModule
   ],
   declarations: [ProfileManagementComponent, ProfileEditComponent]
