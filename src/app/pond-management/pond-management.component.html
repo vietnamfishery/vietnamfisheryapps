@@ -1,69 +1,75 @@
-<mat-toolbar class="table-header" fxLayout="row">
-  <h1 class="mat-headline center-align" fxFlex='100'>Quản lý ao nuôi</h1>
-  <a mat-flat-button color="white" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao" matTooltipPosition="above" fxFlex style="margin-right: 10px">
-    <mat-icon>library_add</mat-icon>
-  </a>
-</mat-toolbar>
-<mat-sidenav-container class="background-none shadow-none">
-  <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
-    <hr>
-
-    <div class="pa-1">
-      <h3 class="mt-1">Trạng thái</h3>
-      <div class="pb-1">
-        <mat-checkbox>Đang nuôi</mat-checkbox>
-      </div>
-      <div class="pb-1">
-        <mat-checkbox>Trống</mat-checkbox>
-      </div>
-    </div>
-    <hr>
-
-    <div class="pa-1">
-      <h3>Số lượng vụ nuôi</h3>
-      <div class="pb-1">
-        <mat-checkbox>Tăng dần</mat-checkbox>
-      </div>
-      <div class="pb-1">
-        <mat-checkbox>Giảm dần</mat-checkbox>
-      </div>
-    </div>
-    <hr>
-
-    <div class="pa-1">
-      <button mat-raised-button color="primary">Lọc</button>
-    </div>
-
-  </mat-sidenav>
-  <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
-    <button (click)="productsnav.toggle()" mat-icon-button>
-      <mat-icon>short_text</mat-icon>
-    </button>
-    <span class="mr-1 ml-1">Lọc</span>
+<mat-card fxLayout="column">
+  <mat-toolbar class="table-header" fxLayout="row">
+    <h1 class="mat-headline center-align" fxFlex='100'>Quản lý ao nuôi</h1>
+    <a mat-flat-button color="white" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao" matTooltipPosition="above"
+      fxFlex style="margin-right: 10px">
+      <mat-icon>library_add</mat-icon>
+    </a>
   </mat-toolbar>
+  <div fxLayout="row">
+    <mat-sidenav-container class="background-none shadow-none">
+      <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
+        <hr>
 
-  <div fxLayout="row wrap">
-    <div routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="pointer" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
-      <mat-card>
-        <div fxLayout="row">
-          <div class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url(../../assets/images/unsplash/'+ pond.id +'.jpg)'}"
-            fxFlex="40">
-            <figure>
-              <div class="product-badge" *ngIf="pond.status === 'empty'"><span>Trống</span></div>
-            </figure>
+        <div class="pa-1">
+          <h3 class="mt-1">Trạng thái</h3>
+          <div class="pb-1">
+            <mat-checkbox>Đang nuôi</mat-checkbox>
           </div>
-          <div class="pa-1" fxFlex>
-            <div fxLayout="column">
-              <div>
-                <h4 class="ma-0" style="text-transform: uppercase;">{{ pond.name }}</h4>
-              </div>
-              <div class="mat-text-primary text-xl">
-                <span> {{ pond.price }} vụ</span>
-              </div>
-            </div>
+          <div class="pb-1">
+            <mat-checkbox>Trống</mat-checkbox>
           </div>
         </div>
-      </mat-card>
-    </div>
+        <hr>
+
+        <div class="pa-1">
+          <h3>Số lượng vụ nuôi</h3>
+          <div class="pb-1">
+            <mat-checkbox>Tăng dần</mat-checkbox>
+          </div>
+          <div class="pb-1">
+            <mat-checkbox>Giảm dần</mat-checkbox>
+          </div>
+        </div>
+        <hr>
+
+        <div class="pa-1">
+          <button mat-raised-button color="primary">Lọc</button>
+        </div>
+
+      </mat-sidenav>
+      <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
+        <button (click)="productsnav.toggle()" mat-icon-button>
+          <mat-icon>short_text</mat-icon>
+        </button>
+        <span class="mr-1 ml-1">Lọc</span>
+      </mat-toolbar>
+
+      <div fxLayout="row wrap">
+        <div routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="pointer" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50"
+          fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
+          <mat-card>
+            <div fxLayout="row">
+              <div class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url(../../assets/images/unsplash/'+ pond.id +'.jpg)'}"
+                fxFlex="40">
+                <figure>
+                  <div class="product-badge" *ngIf="pond.status === 'empty'"><span>Trống</span></div>
+                </figure>
+              </div>
+              <div class="pa-1" fxFlex>
+                <div fxLayout="column">
+                  <div>
+                    <h4 class="ma-0" style="text-transform: uppercase;">{{ pond.name }}</h4>
+                  </div>
+                  <div class="mat-text-primary text-xl">
+                    <span> {{ pond.price }} vụ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </mat-sidenav-container>
   </div>
-</mat-sidenav-container>
+</mat-card>

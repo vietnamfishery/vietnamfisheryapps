@@ -26,6 +26,10 @@ export const AppRoutes: Routes = [{
     loadChildren: './seasion-management/seasion-management.module#SeasionManagementModule'
   },
   {
+    path: 'thong-tin-ca-nhan',
+    loadChildren: './profile-management/profile-management.module#ProfileManagementModule'
+  },
+  {
     path: 'widgets',
     loadChildren: './widgets/widgets.module#WidgetsModule'
   }, {

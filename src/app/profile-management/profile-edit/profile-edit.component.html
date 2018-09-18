@@ -1,0 +1,69 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row></mat-toolbar-row>
+  <mat-toolbar-row></mat-toolbar-row>
+</mat-toolbar>
+
+<div fxLayout="row wrap" fxLayoutAlign="center start">
+  <div fxFlex.gt-sm="55" fxFlex="100">
+    <mat-card class="mat-card-top">
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template matTabLabel>Thông tin</ng-template>
+          <mat-card-content>
+            <form fxLayout="column" fxFlexOffset="15" fxFlex="70">
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+                fxLayoutGap.xs="0">
+                <mat-form-field class="mb-1" fxFlex="100">
+                  <input matInput placeholder="Họ">
+                </mat-form-field>
+                <mat-form-field class="mb-1" fxFlex="100">
+                  <input matInput placeholder="Tên">
+                </mat-form-field>
+              </div>
+              <mat-form-field class="mb-1">
+                <input matInput placeholder="Số điện thoại liên hệ">
+              </mat-form-field>
+
+              <mat-form-field class="mb-1">
+                <input matInput placeholder="Địa chỉ liên lạc">
+              </mat-form-field>
+
+              <mat-form-field class="mb-1">
+                <input matInput placeholder="Địa chỉ email">
+              </mat-form-field>
+              <mat-form-field class="mb-1">
+                <input matInput placeholder="Tên tài khoản">
+              </mat-form-field>
+
+            </form>
+          </mat-card-content>
+        </mat-tab>
+        <mat-tab>
+          <ng-template matTabLabel>Mật khẩu</ng-template>
+          <mat-card-content>
+            <form fxLayout="column" fxFlexOffset="15" fxFlex="70">
+
+              <mat-form-field class="mb-1">
+                <input matInput placeholder="Mật khẩu cũ" type="password">
+              </mat-form-field>
+
+              <mat-form-field class="mb-1">
+                <input matInput placeholder="Mật khẩu thay đổi" type="password">
+              </mat-form-field>
+
+              <mat-form-field class="mb-1">
+                <input matInput placeholder="Xác nhận mật khẩu thay đổi" type="password">
+              </mat-form-field>
+
+            </form>
+          </mat-card-content>
+        </mat-tab>
+      </mat-tab-group>
+      <hr>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary">Lưu</button>
+        <button mat-raised-button color="warn">Huỷ</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
