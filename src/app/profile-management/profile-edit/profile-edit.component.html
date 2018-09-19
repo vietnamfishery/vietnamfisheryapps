@@ -20,6 +20,13 @@
                   <input matInput placeholder="Tên">
                 </mat-form-field>
               </div>
+
+              <mat-form-field class="mb-1">
+                <input matInput [matDatepicker]="picker" placeholder="Ngày sinh">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
               <mat-form-field class="mb-1">
                 <input matInput placeholder="Số điện thoại liên hệ">
               </mat-form-field>
@@ -36,7 +43,7 @@
               </mat-form-field>
 
               <h4 class="subtitle" style=" color: #aa9e9e">Thay đổi ảnh đại diện</h4>
-              <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+              <input type="file" multiple /><br />
 
             </form>
           </mat-card-content>

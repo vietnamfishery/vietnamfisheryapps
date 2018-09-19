@@ -45,6 +45,12 @@ const MENUITEMS: Array<Menu> = [
     type: 'link',
     icon: 'view_carousel'
   },
+  // {
+  //   state: 'quan-ly-chat-thai',
+  //   name: 'Quản lý chất thải',
+  //   type: 'link',
+  //   icon: 'delete_sweep'
+  // },
   {
     state: 'apps',
     name: 'APPS',
