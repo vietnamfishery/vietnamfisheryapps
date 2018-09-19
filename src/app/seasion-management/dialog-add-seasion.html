@@ -1,0 +1,36 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <form>
+        <div class="text-xs-center pb-1">
+            <h2 class="mat-text-muted">THÊM VỤ NUÔI CHO AO NUÔI</h2>
+            <div class="pb-1">
+                <hr>
+            </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-around">
+            <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                    <mat-select [(value)]="selected" placeholder="Ao nuôi">
+                        <mat-option>None</mat-option>
+                        <mat-option value="option1">Ao 1</mat-option>
+                        <mat-option value="option2">Ao 2</mat-option>
+                        <mat-option value="option3">Ao 3</mat-option>
+                        <mat-option value="option3">Ao 4</mat-option>
+                        <mat-option value="option3">Ao 5</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Tên vụ nuôi" type="text">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="pb-1">
+            <hr>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-around">
+            <button mat-flat-button color="primary">Thêm</button>
+            <button mat-flat-button [mat-dialog-close]="true" color="warn">Huỷ</button>
+        </div>
+    </form>
+</div>
