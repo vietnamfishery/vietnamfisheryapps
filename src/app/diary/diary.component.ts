@@ -5,21 +5,7 @@ import { Subject } from 'rxjs';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
 import { colors } from '../contants/colors';
 import { ELEMENT_DATA } from '../contants/table-data';
-
-/**
- * define for table ::start::
- */
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-/**
- * define for table ::end::
- */
+import { PeriodicElement } from '../models/PeriodicElement';
 
 @Component({
   selector: 'app-calendar-dialog',

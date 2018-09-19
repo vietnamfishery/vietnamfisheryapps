@@ -1,10 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PondPrepareManagementComponent } from './pond-prepare-management.component';
+import { PondPrepareCaptureComponent } from './pond-prepare-capture/pond-prepare-capture.component';
+import { PondPrepareListComponent } from './pond-prepare-list/pond-prepare-list.component';
+import { PondPrepareDetailComponent } from './pond-prepare-detail/pond-prepare-detail.component';
 
 const routes: Routes = [
   { 
-     path: '', component: PondPrepareManagementComponent
+    path: '', component: PondPrepareListComponent
+  },
+  {
+    path: 'them-chi-tiet-chuan-bi-ao-nuoi', component: PondPrepareCaptureComponent
+  },
+  {
+    path: 'chi-tiet-chuan-bi-ao-nuoi', component: PondPrepareDetailComponent
   }
 ];
 

@@ -1,4 +1,4 @@
-import { PeriodicElement } from "../diary/diary.component";
+import { PeriodicElement } from "../models/PeriodicElement";
 
 export const ELEMENT_DATA: PeriodicElement[] = [
     { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
