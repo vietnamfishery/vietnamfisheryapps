@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
 import { colors } from '../contants/colors';
 import { ELEMENT_DATA } from '../contants/table-data';
+import { DiaryService } from './diary.service';
 
 /**
  * define for table ::start::
@@ -136,7 +137,10 @@ export class DiaryComponent implements OnInit {
    * Table define ::end::
    */
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private diaryService: DiaryService
+    ) { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -188,4 +192,10 @@ export class DiaryComponent implements OnInit {
     });
     this.refresh.next();
   }
+
+  addDiary(value){
+    if(value === 'prepare'){
+      this.diaryService.addPondPreapre(value);
+    }
+  } 
 }
