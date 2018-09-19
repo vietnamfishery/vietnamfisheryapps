@@ -31,7 +31,7 @@ const MENUITEMS: Array<Menu> = [
     state: 'ghi-nhat-ky',
     name: 'Ghi nhật ký',
     type: 'link',
-    icon: 'explore'
+    icon: 'note_add'
   },
   {
     state: 'quan-ly-ao',

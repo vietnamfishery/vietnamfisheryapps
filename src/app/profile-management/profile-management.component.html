@@ -1,0 +1,53 @@
+<mat-card fxLayout="column">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1 class="mat-headline center-align">Quản lý thông tin</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="wrapper">
+    <div fxLayout="row wrap">
+      <div fxFlex="100">
+        <mat-card>
+          <mat-card-content>
+            <div fxLayout="row">
+              <div fxFlex="45" class="text-xs-center text">
+                <h1 class="ma-0"><b>Vo </b><b>Hoai Phong</b></h1>
+                <p class="mt-xs mb-xs">22/06/1996</p>
+                <p class="mt-xs mb-xs"><small>Thị trấn Thứ 11, An Minh, Kiên Giang</small></p>
+                <p class="mt-xs mb-xs"><small>vo.hoaiphongamkg@gmail.com</small></p>
+                <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" color="primary">Cập nhật</button>
+              </div>
+              <div fxFlex="10" fxLayoutAlign="center center">
+              </div>
+              <div fxFlex="45">
+                <figure>
+                  <div class="text-xs-center">
+                    <img src="../../assets/images/face6.jpg" alt="" class="radius-circle">
+                    <div class="text-md mt10">VoHoaiPhong</div>
+                  </div>
+                  <div class="text-xs-center"><small>01635119228</small></div>
+                </figure>
+              </div>
+            </div>
+            <br>
+          </mat-card-content>
+          <hr>
+          <mat-card-content>
+            <div fxLayout="row" class="text-xs-center">
+              <div fxFlex="49">
+                <h1 class="ma-0"><b>20</b></h1>
+                <small>Tổng ao nuôi đang có</small>
+              </div>
+              <div fxFlex="49">
+                <h1 class="ma-0"><b>86</b></h1>
+                <small>Tổng vụ nuôi</small>
+              </div>
+            </div>
+          </mat-card-content>
+          <hr>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <br>
+</mat-card>
