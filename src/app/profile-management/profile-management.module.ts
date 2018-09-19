@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileManagementRoutingModule } from './profile-management-routing.module';
 import { ProfileManagementComponent } from './profile-management.component';
-import { MatToolbarModule, MatProgressBarModule, MatCardModule, MatIconModule, MatButtonModule, MatTabsModule, MatInputModule, MatListModule, MatSlideToggleModule, MatDatepickerModule } from '@angular/material';
+import { MatToolbarModule, MatProgressBarModule, MatCardModule, MatIconModule, MatButtonModule, MatTabsModule, MatInputModule, MatListModule, MatSlideToggleModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -27,6 +27,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     NgxDatatableModule,
     FileUploadModule,
+    MatNativeDateModule,
     ProfileManagementRoutingModule
   ],
   declarations: [ProfileManagementComponent, ProfileEditComponent]
