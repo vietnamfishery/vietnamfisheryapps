@@ -2,7 +2,7 @@
     <mat-toolbar class="table-header" fxLayout="row">
         <h1 class="mat-headline" fxFlex='100'>Quản lý kho</h1>
     </mat-toolbar>
-    <div fxLayout="column">
+    <mat-card-content fxLayout="column">
         <div fxLayout="row" fxLayout.xs="column">
             <a routerLink="/quan-ly-kho/thuc-an" fxFlex="100" routerLinkActive="active">
                 <mat-card class="card-widget mat-teal active">
@@ -44,6 +44,6 @@
                 </mat-card>
             </a>
         </div>
-    </div>
+    </mat-card-content>
     <router-outlet></router-outlet>
 </mat-card>

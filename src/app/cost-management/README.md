@@ -7,3 +7,7 @@
 * Xem thông tin lịch sử nhập giống.
 
 * Thống kê thu hoạch theo vụ, theo ao, theo đợt, theo thời gian.
+
+# Ghi chú:
+
+Set tabs mặc định - thêm attribute selectedIndex="<vị trí tabs (bắt đầu từ 0)>"  vào thẻ mat-tab-group

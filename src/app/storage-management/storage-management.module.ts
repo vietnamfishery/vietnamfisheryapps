@@ -6,8 +6,10 @@ import { StorageManagementComponent } from './storage-management.component';
 import { MaterialManagementComponent } from './material-management/material-management.component';
 import { VeterinaryManagementComponent } from './veterinary-management/veterinary-management.component';
 import { FoodsManagementComponent } from './foods-management/foods-management.component';
-import { MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule } from '@angular/material';
+import { MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule, MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   imports: [
@@ -19,6 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     MatTableModule,
     MatSortModule,
+    FormsModule,
     MatPaginatorModule,
     MatTooltipModule,
     StorageManagementRoutingModule

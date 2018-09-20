@@ -15,7 +15,9 @@ export class MaterialManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor() {
+    window.sessionStorage.setItem('typeStorage', 'materials');
+  }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;

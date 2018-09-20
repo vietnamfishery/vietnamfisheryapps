@@ -15,7 +15,8 @@ export class FoodsManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;

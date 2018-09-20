@@ -15,7 +15,10 @@ export class VeterinaryManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  
+  constructor() {
+    window.sessionStorage.setItem('typeStorage', 'veterinaries');
+  }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
