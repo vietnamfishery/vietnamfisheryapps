@@ -1,0 +1,46 @@
+<mat-card fxLayout="column">
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">THÊM THÔNG TIN THU HOẠCH</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi tiết thông tin thu hoạch của bạn</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form style="font-size:20px">
+          <mat-card-content fxLayout="column">
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Tên loài thu hoạch">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Tôm thẻ</mat-option>
+                <mat-option value="option2">Tôm sú</mat-option>
+                <mat-option value="option3">Cua biển</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Số lượng" type="text">
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Giá đơn vị" type="text">
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
+              <button mat-raised-button type="submit" class="mat-green-700">Thêm</button>
+              <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-thu-hoach">Huỷ</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

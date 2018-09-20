@@ -46,6 +46,18 @@ const MENUITEMS: Array<Menu> = [
     icon: 'view_carousel'
   },
   {
+    state: 'quan-ly-chat-thai',
+    name: 'Quản lý chất thải',
+    type: 'link',
+    icon: 'delete_sweep'
+  },
+  {
+    state: 'quan-ly-thu-hoach',
+    name: 'Quản lý thu hoạch',
+    type: 'link',
+    icon: 'attach_money'
+  },
+  {
     state: 'quan-ly-kho',
     name: 'Quản lý kho',
     type: 'sub',
