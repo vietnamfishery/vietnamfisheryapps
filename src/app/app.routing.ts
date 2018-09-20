@@ -29,10 +29,10 @@ export const AppRoutes: Routes = [{
     path: 'thong-tin-ca-nhan',
     loadChildren: './profile-management/profile-management.module#ProfileManagementModule'
   },
-  // {
-  //   path: 'quan-ly-chat-thai',
-  //   loadChildren: './waste-management/waste-management.module#WasteManagementModule'
-  // },
+  {
+    path: 'quan-ly-chat-thai',
+    loadChildren: './waste-management/waste-management.module#WasteManagementModule'
+  },
   {
     path: 'widgets',
     loadChildren: './widgets/widgets.module#WidgetsModule'

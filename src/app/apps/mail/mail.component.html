@@ -67,7 +67,7 @@
   </mat-toolbar>
   <div #mailcontent class="main-content" fxLayout="row" fxLayoutAlign="center start" [perfectScrollbar]="config" [disabled]="isOver()">
     <div class="messages-list" fxFlex.gt-sm="90" fxFlex.gt-xs="95" fxFlex="100">
-      <mat-accordion [displayMode]="displayMode" [multi]="multi">
+      <mat-accordion>
         <mat-expansion-panel  [hideToggle]="hideToggle" *ngFor="let message of messages; let i = index" [class.selected]="message === selectedMessage">
           <mat-expansion-panel-header (click)="onSelect(message)">
             <div fxLayout="row" fxLayoutAlign="none center" class="w-100">
