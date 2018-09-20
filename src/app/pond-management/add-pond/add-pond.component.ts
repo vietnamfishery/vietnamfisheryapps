@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class AddPondComponent implements OnInit {
 
   public form: FormGroup;
-  // selected = 'option2';
+  selected = 'option2';
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {

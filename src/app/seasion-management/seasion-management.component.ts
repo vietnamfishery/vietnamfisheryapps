@@ -30,6 +30,8 @@ export class SeasionManagementComponent implements OnInit {
     });
   }
 
+  selected = 'option2';
+
   fetch(cb) {
     const req = new XMLHttpRequest();
     req.open('GET', `assets/data/company.json`);
@@ -62,6 +64,8 @@ export class SeasionManagementComponent implements OnInit {
   templateUrl: './dialog-add-seasion.html',
 })
 export class DialogAddSeasion {
+  selected = 'option2';
+
   constructor(
     public dialogRef: MatDialogRef<DialogAddSeasion>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }

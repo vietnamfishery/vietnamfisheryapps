@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class DetailPondComponent implements OnInit {
 
   public form: FormGroup;
+  selected = 'option2';
   
   constructor(private fb: FormBuilder) { }
 

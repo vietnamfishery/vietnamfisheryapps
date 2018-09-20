@@ -1,3 +1,161 @@
-<p>
-  import-management works!
-</p>
+<mat-card fxLayout="column" fxLayoutGap="20px">
+  <mat-toolbar class="table-header" fxLayout="row">
+    <h1 class="mat-headline center-align" fxFlex='100'>Quản lý nhập</h1>
+    <!-- <a mat-flat-button color="white" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao" matTooltipPosition="above"
+        fxFlex style="margin-right: 10px">
+        <mat-icon>library_add</mat-icon>
+      </a> -->
+  </mat-toolbar>
+  <mat-card>
+    <mat-tab-group mat-stretch-tabs class="pd-bottom-20" selectedIndex="1">
+      <mat-tab label="NHẬP KHO">
+        <div class="mr-top-10">
+          <form>
+            <div fxLayout="row">
+              <div fxLayout="column" fxLayoutGap="5px" fxFlex="50" fxFlexOffset="25" fxFlex.md="60" fxFlexOffset.md="20"
+                fxFlex.sm="80" fxFlexOffset.sm="10" fxFlex.xs="90" fxFlexOffset.xs="5">
+                <mat-form-field>
+                  <mat-select placeholder="Loại" required [(ngModel)]="selectedValue" name="type">
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                      {{food.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Tên vật phẩm</mat-label>
+                  <input matInput placeholder="Tên vật phẩm" value="" required>
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                  <mat-form-field fxFlex="50" fxFlex.xs="100">
+                    <mat-label>Số lượng</mat-label>
+                    <input matInput placeholder="Số lượng" value="" required>
+                  </mat-form-field>
+                  <mat-form-field fxFlex="50" fxFlex.xs="100">
+                    <mat-select placeholder="Đơn vị tính" required [(ngModel)]="selectedValue" name="unit">
+                      <mat-option *ngFor="let food of foods" [value]="food.value">
+                        {{food.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <mat-form-field>
+                  <mat-label>Tổng giá</mat-label>
+                  <input matInput placeholder="Tổng giá nhập" value="" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Số lô</mat-label>
+                  <input matInput placeholder="Số lô" value="">
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                  <mat-form-field fxFlex="50" fxFlex.xs="100">
+                    <mat-label>Ngày sản xuất</mat-label>
+                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="dom" placeholder="Chọn một ngày"
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
+                    <mat-datepicker #dom></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field fxFlex="50" fxFlex.xs="100">
+                    <mat-label>Hạn sử dụng</mat-label>
+                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="ed" placeholder="Chọn một ngày"
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="ed"></mat-datepicker-toggle>
+                    <mat-datepicker #ed></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <mat-form-field>
+                  <mat-label>Nhà cung cấp</mat-label>
+                  <input matInput placeholder="Nhà cung cấp" value="" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Ghi chú</mat-label>
+                  <textarea matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..."></textarea>
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayoutAlign="end center">
+                  <button mat-raised-button class="mat-green-700">Thêm</button>
+                  <button mat-raised-button>Huỷ</button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+      <mat-tab label="NHẬP GIỐNG">
+        <div class="mr-top-10">
+          <form>
+            <div fxLayout="row">
+              <div fxLayout="column" fxLayoutGap="5px" fxFlex="50" fxFlexOffset="25" fxFlex.md="60" fxFlexOffset.md="20"
+                fxFlex.sm="80" fxFlexOffset.sm="10" fxFlex.xs="90" fxFlexOffset.xs="5">
+                <mat-form-field>
+                  <mat-label>Tên giống</mat-label>
+                  <input matInput placeholder="Tên giống" value="" required>
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                  <mat-form-field fxFlex="50" fxFlex.xs="100">
+                    <mat-label>Số lượng</mat-label>
+                    <input matInput placeholder="Số lượng" value="" required>
+                  </mat-form-field>
+                  <mat-form-field fxFlex="50" fxFlex.xs="100">
+                    <mat-select placeholder="Đơn vị tính" required [(ngModel)]="selectedValue" name="unit">
+                      <mat-option *ngFor="let food of foods" [value]="food.value">
+                        {{food.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <mat-form-field>
+                  <mat-label>Tổng giá</mat-label>
+                  <input matInput placeholder="Tổng giá" value="">
+                </mat-form-field>
+
+                <hr/>
+
+                <mat-form-field>
+                  <mat-label>Vòng đời</mat-label>
+                  <input matInput placeholder="Vòng đời" value="">
+                </mat-form-field>
+                
+                <mat-form-field>
+                  <mat-label>Cơ quan kiểm định</mat-label>
+                  <input matInput placeholder="Cơ quan kiểm định" value="">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Chất lượng</mat-label>
+                  <input matInput placeholder="Chất lượng qua đánh giá cảm quan" value="">
+                </mat-form-field>
+
+                <hr>
+
+                <mat-form-field>
+                  <mat-label>Nhà cung cấp</mat-label>
+                  <input matInput placeholder="Nhà cung cấp" value="" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Ghi chú</mat-label>
+                  <textarea matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..."></textarea>
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayoutAlign="end center">
+                  <button mat-raised-button class="mat-green-700">Thêm</button>
+                  <button mat-raised-button>Huỷ</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</mat-card>
