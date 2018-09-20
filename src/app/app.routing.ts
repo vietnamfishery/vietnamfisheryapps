@@ -34,6 +34,10 @@ export const AppRoutes: Routes = [{
     loadChildren: './waste-management/waste-management.module#WasteManagementModule'
   },
   {
+    path: 'quan-ly-thu-hoach',
+    loadChildren: './harvest-management/harvest-management.module#HarvestManagementModule'
+  },
+  {
     path: 'widgets',
     loadChildren: './widgets/widgets.module#WidgetsModule'
   }, {

@@ -61,7 +61,7 @@ export function createTranslateLoader(http: HttpClient) {
     SidebarComponent,
     AccordionAnchorDirective,
     AccordionLinkDirective,
-    AccordionDirective
+    AccordionDirective,
   ],
   imports: [
     BrowserModule,

@@ -52,6 +52,12 @@ const MENUITEMS: Array<Menu> = [
     icon: 'delete_sweep'
   },
   {
+    state: 'quan-ly-thu-hoach',
+    name: 'Quản lý thu hoạch',
+    type: 'link',
+    icon: 'attach_money'
+  },
+  {
     state: 'apps',
     name: 'APPS',
     type: 'sub',
