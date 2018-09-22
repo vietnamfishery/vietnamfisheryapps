@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate( ['/dashboard'] );
+    this.router.navigate( ['/session/signin'] );
   }
 
 }

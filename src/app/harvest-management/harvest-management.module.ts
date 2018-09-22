@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HarvestManagementRoutingModule } from './harvest-management-routing.module';
 import { HarvestManagementComponent, DialogAddHarvest } from './harvest-management.component';
-import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSidenavModule, MatSliderModule, MatListModule, MatButtonToggleModule, MatTabsModule, MatCheckboxModule } from '@angular/material';
+import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSidenavModule, MatSliderModule, MatListModule, MatButtonToggleModule, MatTabsModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -32,6 +32,8 @@ import { EditDetailHarvestComponent } from './edit-detail-harvest/edit-detail-ha
     NgxDatatableModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     HarvestManagementRoutingModule
   ],
   entryComponents: [HarvestManagementComponent, DialogAddHarvest],
