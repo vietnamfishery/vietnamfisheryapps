@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PondManagementRoutingModule } from './pond-management-routing.module';
-import { PondManagementComponent, DialogAddPond } from './pond-management.component';
+import { PondManagementComponent, DialogAddRole } from './pond-management.component';
 import { MatSidenavModule, MatCardModule, MatToolbarModule, MatTabsModule, MatIconModule, MatButtonModule, MatTooltipModule, MatListModule, MatButtonToggleModule, MatCheckboxModule, MatSliderModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatProgressBarModule, MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,10 +40,10 @@ import { PondEnvironmentComponent } from './pond-environment/pond-environment.co
     FileUploadModule,
     PondManagementRoutingModule
   ],
-  entryComponents: [PondManagementComponent, DialogAddPond],
+  entryComponents: [PondManagementComponent, DialogAddRole],
   declarations: [
     PondManagementComponent,
-    DialogAddPond,
+    DialogAddRole,
     AddPondComponent,
     DetailPondComponent,
     GrowthsPresentComponent,

@@ -48,3 +48,8 @@
 .pointer{
   cursor: pointer;
 }
+
+.zoom:hover {
+  transform: scale(1.001);
+  font-weight: 700;
+}

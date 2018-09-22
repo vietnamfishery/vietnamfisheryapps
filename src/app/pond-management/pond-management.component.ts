@@ -50,8 +50,8 @@ export class PondManagementComponent implements OnInit {
     return window.matchMedia(`(max-width: 960px)`).matches;
   }
 
-  openDialogAdd(): void {
-    const dialogRef = this.dialog.open(DialogAddPond, {
+  openDialogAddRole(): void {
+    const dialogRef = this.dialog.open(DialogAddRole, {
       width: '260px',
       data: {name: this.name, animal: this.animal}
     });
@@ -68,12 +68,12 @@ export class PondManagementComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-add-pond',
-  templateUrl: './dialog-add-pond.html',
+  selector: 'dialog-add-roles',
+  templateUrl: './dialog-add-roles.html',
 })
-export class DialogAddPond {
+export class DialogAddRole {
   constructor(
-    public dialogRef: MatDialogRef<DialogAddPond>,
+    public dialogRef: MatDialogRef<DialogAddRole>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {

@@ -46,8 +46,7 @@
       </mat-toolbar>
 
       <div fxLayout="row wrap">
-        <div routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="pointer" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50"
-          fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
+        <div class="zoom" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
           <mat-card>
             <div fxLayout="row">
               <div class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url(../../assets/images/unsplash/'+ pond.id +'.jpg)'}"
@@ -58,8 +57,20 @@
               </div>
               <div class="pa-1" fxFlex>
                 <div fxLayout="column">
-                  <div>
-                    <h4 class="ma-0" style="text-transform: uppercase;">{{ pond.name }}</h4>
+                  <div fxLayout="row">
+                    <div fxFlex>
+                      <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond.name }}</h4>
+                    </div>
+                    <a (click)="openDialogAddRole()" matTooltip="Cấp quyền quản lý" matTooltipPosition="above" style="margin-right:5px">
+                      <mat-icon>library_add</mat-icon>
+                    </a>
+                    <a routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="pointer" matTooltip="Chi tiết ao nuôi"
+                      matTooltipPosition="above">
+                      <mat-icon>library_books</mat-icon>
+                    </a>
+                  </div>
+                  <div class="mat-text-accent text-xl" *ngIf="pond.name === 'Ao số 4'">
+                    <span><small>Giao cho: Ngo Dang</small></span>
                   </div>
                   <div class="mat-text-primary text-xl">
                     <span> {{ pond.price }} vụ</span>
