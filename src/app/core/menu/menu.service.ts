@@ -79,7 +79,13 @@ const MENUITEMS: Array<Menu> = [
       {state: 'nhap-kho', name: 'Nhập kho'},
       {state: 'lich-su-nhap-giong', name: 'Lịch sử nhập giống'},
     ]
-  }
+  },
+  {
+    state: 'quan-ly-phan-quyen',
+    name: 'Quản lý phân quyền',
+    type: 'link',
+    icon: 'record_voice_over'
+  },
 ];
 
 @Injectable(

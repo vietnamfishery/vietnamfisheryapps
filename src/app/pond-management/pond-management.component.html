@@ -61,7 +61,7 @@
                     <div fxFlex>
                       <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond.name }}</h4>
                     </div>
-                    <a (click)="openDialogAddRole()" matTooltip="Cấp quyền quản lý" matTooltipPosition="above" style="margin-right:5px">
+                    <a (click)="openDialogAddRole()" matTooltip="Giao quyền quản lý" matTooltipPosition="above" style="margin-right:5px">
                       <mat-icon>library_add</mat-icon>
                     </a>
                     <a routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="pointer" matTooltip="Chi tiết ao nuôi"
@@ -70,7 +70,7 @@
                     </a>
                   </div>
                   <div class="mat-text-accent text-xl" *ngIf="pond.name === 'Ao số 4'">
-                    <span><small>Giao cho: Ngo Dang</small></span>
+                    <span><small>Tran Ba Long Nguyen</small></span>
                   </div>
                   <div class="mat-text-primary text-xl">
                     <span> {{ pond.price }} vụ</span>

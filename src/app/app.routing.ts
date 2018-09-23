@@ -30,27 +30,31 @@ export const AppRoutes: Routes = [
       path: 'quan-ly-chi-phi',
       loadChildren: './cost-management/cost-management.module#CostManagementModule'
     },
-  {
-    path: 'quan-ly-chat-thai',
-    loadChildren: './waste-management/waste-management.module#WasteManagementModule'
-  },
-  {
-    path: 'quan-ly-thu-hoach',
-    loadChildren: './harvest-management/harvest-management.module#HarvestManagementModule'
-  },
+    {
+      path: 'quan-ly-chat-thai',
+      loadChildren: './waste-management/waste-management.module#WasteManagementModule'
+    },
+    {
+      path: 'quan-ly-thu-hoach',
+      loadChildren: './harvest-management/harvest-management.module#HarvestManagementModule'
+    },
     {
       path: 'thong-tin-ca-nhan',
       loadChildren: './profile-management/profile-management.module#ProfileManagementModule'
+    },
+    {
+      path: 'quan-ly-phan-quyen',
+      loadChildren: './role-management/role-management.module#RoleManagementModule'
     }
-  ]
-}, {
-  path: '',
-  component: AuthLayoutComponent,
-  children: [{
-    path: 'session',
-    loadChildren: './session/session.module#SessionModule'
-  }]
-}, {
-  path: '**',
-  redirectTo: 'session/404'
-}];
+    ]
+  }, {
+    path: '',
+    component: AuthLayoutComponent,
+    children: [{
+      path: 'session',
+      loadChildren: './session/session.module#SessionModule'
+    }]
+  }, {
+    path: '**',
+    redirectTo: 'session/404'
+  }];

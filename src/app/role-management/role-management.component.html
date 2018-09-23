@@ -1,0 +1,45 @@
+<mat-card fxLayout="column">
+  <mat-toolbar class="table-header" fxLayout="row">
+    <h1 class="mat-headline center-align" fxFlex='100'>Quản lý phân quyền</h1>
+    <a mat-flat-button color="white" (click)="openDialogAddRoleManagement()" matTooltip="Thêm mới quyền"
+      matTooltipPosition="above" style="margin-right: 5px;">
+      <mat-icon>group_add</mat-icon>
+    </a>
+  </mat-toolbar>
+  <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column">
+    <div fxLayout="column" fxFlex="22">
+      <div class="pb-1">
+        <form>
+          <mat-card-content fxLayout="column">
+            <div fxFlexOffset="5" fxLayout="column" fxFlex="90">
+              <mat-form-field>
+                <mat-select [(value)]="selected" placeholder="Quyền quản lý">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Quản lý ao</mat-option>
+                  <mat-option value="option2">Quản lý kho</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlexOffset="5" fxLayout="column" fxFlex="90" fxLayoutAlign="center center">
+              <span>
+                <h3 style="font-weight:400">Thêm Tài Khoản</h3>
+              </span>
+              <a mat-flat-button class="mat-green-700" matTooltip="Thêm tài khoản quản lý" matTooltipPosition="above">
+                <mat-icon>person_add</mat-icon>
+              </a>
+            </div>
+            <br>
+          </mat-card-content>
+        </form>
+      </div>
+    </div>
+    <div fxLayout="column" fxFlex="78">
+      <div fxFlexOffset="4">
+        <ngx-datatable fxFlexOffset="5" fxFlex="90" class="material" [rows]="rows" [columns]="[{name:'Name'},{name:'Gender'}]"
+          [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10">
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+  <br>
+</mat-card>
