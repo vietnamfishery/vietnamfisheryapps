@@ -1,0 +1,84 @@
+<mat-card fxLayout="column">
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">THÔNG TIN THẢ NUÔI</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Sửa chi tiết thông tin thả nuôi nuôi của bạn</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form style="font-size:20px">
+          <mat-card-content fxLayout="column">
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Ao nuôi">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Ao nuôi 1</mat-option>
+                <mat-option value="option2">Ao nuôi 2</mat-option>
+                <mat-option value="option3">Ao nuôi 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Vụ nuôi">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Vụ nuôi 1</mat-option>
+                <mat-option value="option2">Vụ nuôi 2</mat-option>
+                <mat-option value="option3">Vụ nuôi 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Ngày thả nuôi">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Tổng giá trị thả" type="text">
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Số lượng thả" type="text">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Độ pH ban đầu" type="text">
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Độ mặn ban đầu" type="text">
+              </mat-form-field>
+            </div>
+            <!-- <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Tên giống thả nuôi">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Tôm càng</mat-option>
+                <mat-option value="option2">Tôm sú</mat-option>
+                <mat-option value="option3">Tôm thẻ chân trắng</mat-option>
+              </mat-select>
+            </mat-form-field> -->
+            <mat-form-field class="example-full-width">
+              <input type="text" placeholder="Giống nuôi" aria-label="Number" matInput [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
+              <button mat-raised-button type="submit" class="mat-green-700">Sửa</button>
+              <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-tha-nuoi">Huỷ</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

@@ -4,6 +4,7 @@ import { MaterialManagementComponent } from './material-management/material-mana
 import { FoodsManagementComponent } from './foods-management/foods-management.component';
 import { VeterinaryManagementComponent } from './veterinary-management/veterinary-management.component';
 import { StorageManagementComponent } from './storage-management.component';
+import { BreedManagementComponent } from './breed-management/breed-management.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
       { path: '', component: FoodsManagementComponent },
       { path: 'thuc-an', component: FoodsManagementComponent },
       { path: 'co-so-vat-chat', component: MaterialManagementComponent },
-      { path: 'thuoc-va-duoc-pham', component: VeterinaryManagementComponent }
+      { path: 'thuoc-va-duoc-pham', component: VeterinaryManagementComponent },
+      { path: 'giong-nuoi', component: BreedManagementComponent }
     ]
   }
 ];

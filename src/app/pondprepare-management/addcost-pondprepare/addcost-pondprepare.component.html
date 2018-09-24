@@ -1,0 +1,73 @@
+<mat-card fxLayout="column">
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">CHI PHÍ KHÁC</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi phí phát sinh của bạn</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form style="font-size:20px">
+          <mat-card-content fxLayout="column">
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Ao nuôi">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Ao nuôi 1</mat-option>
+                <mat-option value="option2">Ao nuôi 2</mat-option>
+                <mat-option value="option3">Ao nuôi 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Vụ nuôi">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Vụ nuôi 1</mat-option>
+                <mat-option value="option2">Vụ nuôi 2</mat-option>
+                <mat-option value="option3">Vụ nuôi 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Tên công việc">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Công việc 1</mat-option>
+                <mat-option value="option2">Công việc 2</mat-option>
+                <mat-option value="option3">Công việc 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Ngày thêm chi phí">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input type="text" matInput placeholder="Tên chi phí">
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Giá trị" type="text">
+              </mat-form-field>
+            </div>
+            <mat-form-field fxFlex="100">
+              <input type="text" matInput placeholder="Người chịu trách nhiệm">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Ghi chú" rows="5"></textarea>
+            </mat-form-field>
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
+              <button mat-raised-button type="submit" class="mat-green-700">Thêm</button>
+              <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-chuan-bi-ao">Huỷ</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

@@ -10,6 +10,7 @@ import { MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTab
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { BreedManagementComponent } from './breed-management/breed-management.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { StoreModule } from '@ngrx/store';
     StorageManagementComponent, 
     MaterialManagementComponent, 
     VeterinaryManagementComponent, 
-    FoodsManagementComponent
+    FoodsManagementComponent, BreedManagementComponent
   ]
 })
 export class StorageManagementModule { }

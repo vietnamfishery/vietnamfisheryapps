@@ -45,6 +45,14 @@ export const AppRoutes: Routes = [
     {
       path: 'quan-ly-phan-quyen',
       loadChildren: './role-management/role-management.module#RoleManagementModule'
+    },
+    {
+      path: 'quan-ly-tha-nuoi',
+      loadChildren: './stocking-management/stocking-management.module#StockingManagementModule'
+    },
+    {
+      path: 'quan-ly-chuan-bi-ao',
+      loadChildren: './pondprepare-management/pondprepare-management.module#PondprepareManagementModule'
     }
     ]
   }, {
