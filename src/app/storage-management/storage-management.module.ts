@@ -6,11 +6,12 @@ import { StorageManagementComponent } from './storage-management.component';
 import { MaterialManagementComponent } from './material-management/material-management.component';
 import { VeterinaryManagementComponent } from './veterinary-management/veterinary-management.component';
 import { FoodsManagementComponent } from './foods-management/foods-management.component';
-import { MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule, MatSelectModule } from '@angular/material';
+import { MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatTabsModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { BreedManagementComponent } from './breed-management/breed-management.component';
+import { ImportManagementComponent } from './import-management/import-management.component';
 
 @NgModule({
   imports: [
@@ -25,13 +26,19 @@ import { BreedManagementComponent } from './breed-management/breed-management.co
     FormsModule,
     MatPaginatorModule,
     MatTooltipModule,
+    StoreModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatTabsModule,
     StorageManagementRoutingModule
   ],
   declarations: [
     StorageManagementComponent, 
     MaterialManagementComponent, 
     VeterinaryManagementComponent, 
-    FoodsManagementComponent, BreedManagementComponent
+    FoodsManagementComponent, BreedManagementComponent, ImportManagementComponent
   ]
 })
 export class StorageManagementModule { }

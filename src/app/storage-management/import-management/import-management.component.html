@@ -1,12 +1,9 @@
-<mat-card fxLayout="column" fxLayoutGap="20px">
-  <mat-toolbar class="table-header" fxLayout="row">
-    <h1 class="mat-headline center-align" fxFlex='100'>Quản lý nhập</h1>
-    <!-- <a mat-flat-button color="white" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao" matTooltipPosition="above"
-        fxFlex style="margin-right: 10px">
-        <mat-icon>library_add</mat-icon>
-      </a> -->
-  </mat-toolbar>
-  <mat-card>
+<div fxLayout="column" style="padding: 10px 20px">
+  <div fxLayout="row" fxLayoutAlign="end end" class="mr-5">
+    <h3 fxFlex="100" fxLayoutAlign="center center"><span>NHẬP KHO</span></h3>
+  </div>
+  <hr>
+  <div class="row">
     <mat-tab-group mat-stretch-tabs class="pd-bottom-20" selectedIndex="1">
       <mat-tab label="NHẬP KHO">
         <div class="mr-top-10">
@@ -118,13 +115,13 @@
                   <input matInput placeholder="Tổng giá" value="">
                 </mat-form-field>
 
-                <hr/>
+                <hr />
 
                 <mat-form-field>
                   <mat-label>Vòng đời</mat-label>
                   <input matInput placeholder="Vòng đời" value="">
                 </mat-form-field>
-                
+
                 <mat-form-field>
                   <mat-label>Cơ quan kiểm định</mat-label>
                   <input matInput placeholder="Cơ quan kiểm định" value="">
@@ -147,15 +144,15 @@
                   <textarea matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..."></textarea>
                 </mat-form-field>
 
-                <div fxLayout="row" fxLayoutAlign="end center">
+                <div fxLayout="row" fxLayoutAlign="center center">
                   <button mat-raised-button class="mat-green-700">Thêm</button>
                   <button mat-raised-button>Huỷ</button>
                 </div>
               </div>
             </div>
           </form>
-          </div>
+        </div>
       </mat-tab>
     </mat-tab-group>
-  </mat-card>
-</mat-card>
+  </div>
+</div>

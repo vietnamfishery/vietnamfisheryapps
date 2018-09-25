@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { CostManagementRoutingModule } from './cost-management-routing.module';
 import { CostManagementComponent } from './cost-management.component';
-import { ImportManagementComponent } from './import-management/import-management.component';
 import { BreedsManagementComponent } from './breeds-management/breeds-management.component';
 import { HarvestManagementComponent } from './harvest-management/harvest-management.component';
 import { TotalComponent } from './total/total.component';
@@ -28,6 +27,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTabsModule,
     CostManagementRoutingModule
   ],
-  declarations: [CostManagementComponent, ImportManagementComponent, BreedsManagementComponent, HarvestManagementComponent, TotalComponent]
+  declarations: [CostManagementComponent, BreedsManagementComponent, HarvestManagementComponent, TotalComponent]
 })
 export class CostManagementModule { }

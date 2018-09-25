@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GrowthsPresentComponent } from './growths-present.component';
+import { CouponManagementComponent } from './coupon-management.component';
 
-describe('GrowthsPresentComponent', () => {
-  let component: GrowthsPresentComponent;
-  let fixture: ComponentFixture<GrowthsPresentComponent>;
+describe('CouponManagementComponent', () => {
+  let component: CouponManagementComponent;
+  let fixture: ComponentFixture<CouponManagementComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GrowthsPresentComponent ]
+      declarations: [ CouponManagementComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GrowthsPresentComponent);
+    fixture = TestBed.createComponent(CouponManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

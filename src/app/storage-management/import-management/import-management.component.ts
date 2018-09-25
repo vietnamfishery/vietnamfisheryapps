@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { foods } from '../../contants/select-data';
-import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { foods } from '../../contants/select-data';
 import { MY_FORMATS_DATE } from '../../contants/format-date';
 
 @Component({
@@ -15,13 +15,14 @@ import { MY_FORMATS_DATE } from '../../contants/format-date';
   ],
 })
 export class ImportManagementComponent implements OnInit {
+
   foods = foods;
   selectedValue: string;
 
   minDate = new Date(2000, 0, 1);
   maxDate = new Date(2020, 0, 1);
-  constructor(private adapter: DateAdapter<any>) { }
 
+  constructor(private adapter: DateAdapter<any>) { }
 
   vietnamese() {
     this.adapter.setLocale('vi');

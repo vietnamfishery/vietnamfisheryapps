@@ -1,0 +1,50 @@
+<mat-card fxLayout="column">
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">TÀI KHOẢN</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi tiết thông tin cho tài khoản bạn muốn thêm</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form style="font-size:20px">
+          <mat-card-content fxLayout="column">
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Họ" type="text">
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Tên" type="text">
+              </mat-form-field>
+            </div>
+            <mat-form-field>
+              <input matInput name="username" placeholder="Tên đăng nhập" type="text">
+            </mat-form-field>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput name="password" type="password" placeholder="Mật khẩu" type="text">
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput name="repassword" type="password" placeholder="Mật khẩu xác nhận" type="text">
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
+              <button mat-raised-button type="submit" class="mat-green-700">Thêm</button>
+              <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-nhan-vien">Huỷ</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

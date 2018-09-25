@@ -47,12 +47,20 @@ export const AppRoutes: Routes = [
       loadChildren: './role-management/role-management.module#RoleManagementModule'
     },
     {
+      path: 'quan-ly-nhan-vien',
+      loadChildren: './employees-management/employees-management.module#EmployeesManagementModule'
+    },
+    {
       path: 'quan-ly-tha-nuoi',
       loadChildren: './stocking-management/stocking-management.module#StockingManagementModule'
     },
     {
       path: 'quan-ly-chuan-bi-ao',
       loadChildren: './pondprepare-management/pondprepare-management.module#PondprepareManagementModule'
+    },
+    {
+      path: 'lich-su-nhap-kho',
+      loadChildren: './coupon-management/coupon-management.module#CouponManagementModule'
     }
     ]
   }, {

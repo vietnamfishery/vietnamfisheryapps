@@ -10,8 +10,6 @@ import { AddPondComponent } from './add-pond/add-pond.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FileUploadModule } from 'ng2-file-upload';
 import { DetailPondComponent } from './detail-pond/detail-pond.component';
-import { GrowthsPresentComponent } from './growths-present/growths-present.component';
-import { PondEnvironmentComponent } from './pond-environment/pond-environment.component';
 
 @NgModule({
   imports: [
@@ -46,8 +44,6 @@ import { PondEnvironmentComponent } from './pond-environment/pond-environment.co
     DialogAddRole,
     AddPondComponent,
     DetailPondComponent,
-    GrowthsPresentComponent,
-    PondEnvironmentComponent
   ],
   bootstrap: [PondManagementComponent]
 })

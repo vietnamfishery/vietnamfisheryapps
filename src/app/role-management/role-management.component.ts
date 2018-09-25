@@ -37,7 +37,7 @@ export class RoleManagementComponent implements OnInit {
 
   openDialogAddRoleManagement(): void {
     const dialogRef = this.dialog.open(DialogAddRoleManagement, {
-      width: '260px',
+      width: '280px',
       data: {name: this.name, animal: this.animal}
     });
 
@@ -57,6 +57,8 @@ export class RoleManagementComponent implements OnInit {
   templateUrl: './dialog-add-role-management.html',
 })
 export class DialogAddRoleManagement {
+
+  pondList: string[] = ['Ao nuôi 1', 'Ao nuôi 2', 'Ao nuôi 3', 'Ao nuôi 4', 'Ao nuôi 5', 'Ao nuôi 6', 'Ao nuôi 7', 'Ao nuôi 8'];
   constructor(
     public dialogRef: MatDialogRef<DialogAddRoleManagement>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}

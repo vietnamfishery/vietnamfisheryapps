@@ -23,7 +23,7 @@ export interface Menu {
 const MENUITEMS: Array<Menu> = [
   {
     state: '/',
-    name: 'HOME',
+    name: 'Trang chủ',
     type: 'link',
     icon: 'explore'
   },
@@ -58,6 +58,12 @@ const MENUITEMS: Array<Menu> = [
     icon: 'attach_money'
   },
   {
+    state: 'lich-su-nhap-kho',
+    name: 'Lịch sử nhập kho',
+    type: 'link',
+    icon: 'update'
+  },
+  {
     state: 'quan-ly-kho',
     name: 'Quản lý kho',
     type: 'sub',
@@ -66,7 +72,8 @@ const MENUITEMS: Array<Menu> = [
       {state: 'thuc-an', name: 'Thức ăn'},
       {state: 'co-so-vat-chat', name: 'Cơ sở vật chất'},
       {state: 'thuoc-va-duoc-pham', name: 'Thuốc và Dược phẩm'},
-      {state: 'giong-nuoi', name: 'Giống nuôi'}
+      {state: 'giong-nuoi', name: 'Giống nuôi'},
+      {state: 'nhap-kho', name: 'Nhập kho'}
     ]
   },
   {
@@ -77,7 +84,6 @@ const MENUITEMS: Array<Menu> = [
     children: [
       {state: 'tong-chi-phi', name: 'Tổng chi phí'},
       {state: 'thu-hoach', name: 'Thu hoạch'},
-      {state: 'nhap-kho', name: 'Nhập kho'},
       {state: 'lich-su-nhap-giong', name: 'Lịch sử nhập giống'},
     ]
   },
@@ -86,6 +92,12 @@ const MENUITEMS: Array<Menu> = [
     name: 'Quản lý phân quyền',
     type: 'link',
     icon: 'record_voice_over'
+  },
+  {
+    state: 'quan-ly-nhan-vien',
+    name: 'Quản lý nhân viên',
+    type: 'link',
+    icon: 'assignment_ind'
   },
   {
     state: 'quan-ly-tha-nuoi',

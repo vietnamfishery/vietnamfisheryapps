@@ -4,6 +4,7 @@ import { PondprepareManagementComponent } from './pondprepare-management.compone
 import { AddPondprepareComponent } from './add-pondprepare/add-pondprepare.component';
 import { EditPondprepareComponent } from './edit-pondprepare/edit-pondprepare.component';
 import { AddcostPondprepareComponent } from './addcost-pondprepare/addcost-pondprepare.component';
+import { EditcostPondprepareComponent } from './editcost-pondprepare/editcost-pondprepare.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'sua-chi-phi-phat-sinh',
-    component: AddcostPondprepareComponent
+    component: EditcostPondprepareComponent
   }
 ];
 
