@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export interface DialogData {
   animal: string;
@@ -72,9 +73,18 @@ export class PondManagementComponent implements OnInit {
   templateUrl: './dialog-add-roles.html',
 })
 export class DialogAddRole {
+  public form: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<DialogAddRole>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      user_roles: [null, Validators.compose([Validators.required])]
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

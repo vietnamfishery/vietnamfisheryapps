@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-detail-pond',
@@ -15,6 +15,10 @@ export class DetailPondComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      pond: [null, Validators.compose([Validators.required])],
+      pondarea: [null, Validators.compose([Validators.required])],
+      ponddepth: [null, Validators.compose([Validators.required])],
+      pondstatus: [null, Validators.compose([Validators.required])]
     });
   }
 

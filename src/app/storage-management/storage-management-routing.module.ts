@@ -6,6 +6,8 @@ import { VeterinaryManagementComponent } from './veterinary-management/veterinar
 import { StorageManagementComponent } from './storage-management.component';
 import { BreedManagementComponent } from './breed-management/breed-management.component';
 import { ImportManagementComponent } from './import-management/import-management.component';
+import { CouponManagementComponent } from './coupon-management/coupon-management.component';
+import { ChangePriceManagementComponent } from './change-price-management/change-price-management.component';
 
 
 const routes: Routes = [
@@ -18,8 +20,16 @@ const routes: Routes = [
       { path: 'co-so-vat-chat', component: MaterialManagementComponent },
       { path: 'thuoc-va-duoc-pham', component: VeterinaryManagementComponent },
       { path: 'giong-nuoi', component: BreedManagementComponent },
-      { path: 'nhap-kho', component: ImportManagementComponent },
+      { path: 'nhap-kho', component: ImportManagementComponent }
     ]
+  },
+  {
+    path: 'lich-su-nhap-kho',
+    component: CouponManagementComponent
+  },
+  {
+    path: 'bien-dong-gia',
+    component: ChangePriceManagementComponent
   }
 ];
 

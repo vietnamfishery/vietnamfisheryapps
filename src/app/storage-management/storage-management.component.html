@@ -1,6 +1,14 @@
 <mat-card fxLayout="column" fxLayoutGap="20px">
     <mat-toolbar class="table-header" fxLayout="row">
-        <h1 class="mat-headline" fxFlex='100'>Quản lý kho</h1>
+        <h2 class="mat-headline" fxFlex='100'>Quản lý kho</h2>
+        <a mat-flat-button routerLink="/quan-ly-kho/lich-su-nhap-kho" color="white" matTooltip="Xem lịch sử nhập kho"
+            matTooltipPosition="above" style="margin-right: 5px;">
+            <mat-icon>store</mat-icon>
+        </a>
+        <a mat-flat-button routerLink="/quan-ly-kho/bien-dong-gia" color="white" matTooltip="Xem biến động giá"
+            matTooltipPosition="above" style="margin-right: 2px;">
+            <mat-icon>swap_vertical_circle</mat-icon>
+        </a>
     </mat-toolbar>
     <mat-card-content fxLayout="column">
         <div fxLayout="row" fxLayout.xs="column">

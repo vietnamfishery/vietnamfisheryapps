@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -10,11 +10,15 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class AddPondComponent implements OnInit {
 
   public form: FormGroup;
-  selected = 'option2';
+  // selected = 'option2';
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.fb.group({
+      pond: [null, Validators.compose([Validators.required])],
+      pondarea: [null, Validators.compose([Validators.required])],
+      ponddepth: [null, Validators.compose([Validators.required])],
+      pondstatus: [null, Validators.compose([Validators.required])]
     });
   }
 

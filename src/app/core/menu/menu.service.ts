@@ -21,12 +21,12 @@ export interface Menu {
 }
 
 const MENUITEMS: Array<Menu> = [
-  {
-    state: '/',
-    name: 'Trang chủ',
-    type: 'link',
-    icon: 'explore'
-  },
+  // {
+  //   state: '/',
+  //   name: 'Trang chủ',
+  //   type: 'link',
+  //   icon: 'explore'
+  // },
   {
     state: 'ghi-nhat-ky',
     name: 'Ghi nhật ký',
@@ -46,22 +46,16 @@ const MENUITEMS: Array<Menu> = [
     icon: 'view_carousel'
   },
   {
-    state: 'quan-ly-chat-thai',
-    name: 'Quản lý chất thải',
+    state: 'quan-ly-chuan-bi-ao',
+    name: 'Quản lý chuẩn bị ao',
     type: 'link',
-    icon: 'delete_sweep'
+    icon: 'gavel'
   },
   {
-    state: 'quan-ly-thu-hoach',
-    name: 'Quản lý thu hoạch',
+    state: 'quan-ly-tha-nuoi',
+    name: 'Quản lý thả nuôi',
     type: 'link',
-    icon: 'attach_money'
-  },
-  {
-    state: 'lich-su-nhap-kho',
-    name: 'Lịch sử nhập kho',
-    type: 'link',
-    icon: 'update'
+    icon: 'pan_tool'
   },
   {
     state: 'quan-ly-kho',
@@ -72,9 +66,15 @@ const MENUITEMS: Array<Menu> = [
       {state: 'thuc-an', name: 'Thức ăn'},
       {state: 'co-so-vat-chat', name: 'Cơ sở vật chất'},
       {state: 'thuoc-va-duoc-pham', name: 'Thuốc và Dược phẩm'},
-      {state: 'giong-nuoi', name: 'Giống nuôi'},
-      {state: 'nhap-kho', name: 'Nhập kho'}
+      {state: 'giong-nuoi', name: 'Giống nuôi'}
+      // {state: 'nhap-kho', name: 'Nhập kho'}
     ]
+  },
+  {
+    state: 'quan-ly-thu-hoach',
+    name: 'Quản lý thu hoạch',
+    type: 'link',
+    icon: 'attach_money'
   },
   {
     state: 'quan-ly-chi-phi',
@@ -84,7 +84,7 @@ const MENUITEMS: Array<Menu> = [
     children: [
       {state: 'tong-chi-phi', name: 'Tổng chi phí'},
       {state: 'thu-hoach', name: 'Thu hoạch'},
-      {state: 'lich-su-nhap-giong', name: 'Lịch sử nhập giống'},
+      // {state: 'lich-su-nhap-giong', name: 'Lịch sử nhập giống'},
     ]
   },
   {
@@ -100,17 +100,11 @@ const MENUITEMS: Array<Menu> = [
     icon: 'assignment_ind'
   },
   {
-    state: 'quan-ly-tha-nuoi',
-    name: 'Quản lý thả nuôi',
+    state: 'quan-ly-chat-thai',
+    name: 'Quản lý chất thải',
     type: 'link',
-    icon: 'pan_tool'
+    icon: 'delete_sweep'
   },
-  {
-    state: 'quan-ly-chuan-bi-ao',
-    name: 'Quản lý chuẩn bị ao',
-    type: 'link',
-    icon: 'gavel'
-  }
 ];
 
 @Injectable(

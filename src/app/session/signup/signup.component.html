@@ -12,21 +12,24 @@
               <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="5px">
                 <div class="pb-1" fxFlex.xs="100" fxFlex.gt-xs="auto">
                   <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Họ của bạn" type="text">
+                    <input matInput placeholder="Họ của bạn" type="text" [formControl]="form.controls['ho']">
                   </mat-form-field>
+                  <small *ngIf="form.controls['ho'].hasError('required') && form.controls['ho'].touched" class="mat-text-warn">Họ của bạn không được để trống.</small>
                 </div>
                 <div class="pb-1" fxFlex.xs="100" fxFlex.gt-xs="auto">
                   <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Tên của bạn" type="text">
+                    <input matInput placeholder="Tên của bạn" type="text" [formControl]="form.controls['ten']">
                   </mat-form-field>
+                  <small *ngIf="form.controls['ten'].hasError('required') && form.controls['ten'].touched" class="mat-text-warn">Tên của bạn không được để trống.</small>
                 </div>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Tên đăng nhập" type="text">
+                  <input matInput placeholder="Tên đăng nhập" type="text" [formControl]="form.controls['username']">
                 </mat-form-field>
+                <small *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched" class="mat-text-warn">Tên đăng nhập không được để trống.</small>
               </div>
-              <div class="pb-1">
+              <!-- <div class="pb-1">
                 <mat-form-field style="width: 100%">
                   <input matInput placeholder="Địa chỉ email" type="email" [formControl]="form.controls['email']">
                 </mat-form-field>
@@ -34,7 +37,7 @@
                   chỉ email không được để trống.</small>
                 <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Địa
                   chỉ email không hợp lệ.</small>
-              </div>
+              </div> -->
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
                   <input matInput type="password" placeholder="Mật khẩu" [formControl]="form.controls['password']">

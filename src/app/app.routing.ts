@@ -57,10 +57,6 @@ export const AppRoutes: Routes = [
     {
       path: 'quan-ly-chuan-bi-ao',
       loadChildren: './pondprepare-management/pondprepare-management.module#PondprepareManagementModule'
-    },
-    {
-      path: 'lich-su-nhap-kho',
-      loadChildren: './coupon-management/coupon-management.module#CouponManagementModule'
     }
     ]
   }, {

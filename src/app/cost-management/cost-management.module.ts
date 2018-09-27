@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { CostManagementRoutingModule } from './cost-management-routing.module';
 import { CostManagementComponent } from './cost-management.component';
-import { BreedsManagementComponent } from './breeds-management/breeds-management.component';
 import { HarvestManagementComponent } from './harvest-management/harvest-management.component';
 import { TotalComponent } from './total/total.component';
 import { MatIconModule, MatToolbarModule, MatTooltipModule, MatCardModule, MatSelectModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatNativeDateModule, MatTabsModule } from '@angular/material';
@@ -27,6 +26,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTabsModule,
     CostManagementRoutingModule
   ],
-  declarations: [CostManagementComponent, BreedsManagementComponent, HarvestManagementComponent, TotalComponent]
+  declarations: [CostManagementComponent, HarvestManagementComponent, TotalComponent]
 })
 export class CostManagementModule { }
