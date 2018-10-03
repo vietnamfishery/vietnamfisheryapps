@@ -11,9 +11,9 @@
             <div fxLayout="column" fxLayoutAlign="space-around">
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Tên đăng nhập" [formControl]="form.controls['uname']" autocomplete="off">
+                  <input matInput placeholder="Tên đăng nhập" [formControl]="form.controls['username']" autocomplete="off">
                 </mat-form-field>
-                <small *ngIf="form.controls['uname'].hasError('required') && form.controls['uname'].touched" class="mat-text-warn">Tên đăng nhập không được để trống.</small>
+                <small *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched" class="mat-text-warn">Tên đăng nhập không được để trống.</small>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">

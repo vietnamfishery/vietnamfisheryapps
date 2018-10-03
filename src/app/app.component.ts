@@ -8,9 +8,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  // readonly ROOT_URL = 'https://jsonplaceholder.typicode.com';
-
   constructor(translate: TranslateService, private http: HttpClient) {
     translate.addLangs(['en', 'fr']);
     translate.setDefaultLang('en');

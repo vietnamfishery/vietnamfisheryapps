@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SessionService } from '../session.service';
 
 @Component({
   selector: 'app-signin',
@@ -11,16 +12,24 @@ export class SigninComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private sessionService: SessionService
+  ) { }
 
   ngOnInit() {
     this.form = this.fb.group ( {
-      uname: [null , Validators.compose ( [ Validators.required ] )] , password: [null , Validators.compose ( [ Validators.required ] )]
+      username: [null , Validators.compose ( [ Validators.required ] )] , password: [null , Validators.compose ( [ Validators.required ] )]
     } );
   }
 
   onSubmit() {
-    this.router.navigate ( [ '/dashboard' ] );
+    console.log(this.form.value);
+    this.sessionService.signin(this.form.value).subscribe(res => {
+      console.log(res);
+    });
+    // this.router.navigate ( [ '/dashboard' ] );
   }
 
 }
