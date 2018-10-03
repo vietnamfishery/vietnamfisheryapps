@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-    <form>
+    <form [formGroup]="form">
         <div class="text-xs-center pb-1">
             <h2 class="mat-text-muted">THÊM VỤ NUÔI CHO AO NUÔI</h2>
             <div class="pb-1">
@@ -9,7 +9,7 @@
         <div fxLayout="column" fxLayoutAlign="space-around">
             <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                    <mat-select [(value)]="selected" placeholder="Ao nuôi">
+                    <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pond']">
                         <mat-option>None</mat-option>
                         <mat-option value="option1">Ao 1</mat-option>
                         <mat-option value="option2">Ao 2</mat-option>
@@ -19,12 +19,17 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+            <small *ngIf="form.controls['pond'].hasError('required') && form.controls['pond'].touched"
+            class="mat-text-warn">Chưa chọn ao nuôi.</small>
             <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Tên vụ nuôi" type="text">
+                    <input matInput placeholder="Tên vụ nuôi" type="text" [formControl]="form.controls['seasionName']">
                 </mat-form-field>
             </div>
+            <small *ngIf="form.controls['seasionName'].hasError('required') && form.controls['seasionName'].touched"
+            class="mat-text-warn">Tên vụ nuôi không được để trống.</small>
         </div>
+        <br>
         <div class="pb-1">
             <hr>
         </div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { RoleManagementRoutingModule } from './role-management-routing.module';
 import { RoleManagementComponent, DialogAddRoleManagement } from './role-management.component';
-import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatDialogModule, MatInputModule, MatCheckboxModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatDialogModule, MatInputModule, MatCheckboxModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -22,6 +22,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDialogModule,
     MatInputModule,
     MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     RoleManagementRoutingModule
   ],
   entryComponents: [RoleManagementComponent, DialogAddRoleManagement],

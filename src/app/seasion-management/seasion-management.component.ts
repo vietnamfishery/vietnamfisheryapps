@@ -1,7 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 
+import { PeriodicElement } from '../models/PeriodicElement';
+import { ELEMENT_DATA } from '../contants/table-data';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface DialogData {
   animal: string;
@@ -16,7 +19,11 @@ export interface DialogData {
 })
 export class SeasionManagementComponent implements OnInit {
 
-  rows = [];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   animal: string;
   name: string;
@@ -24,24 +31,8 @@ export class SeasionManagementComponent implements OnInit {
   constructor(
     private router: Router,
     public dialog: MatDialog
-  ) {
-    this.fetch((data) => {
-      this.rows = data;
-    });
-  }
+  ) { }
 
-  selected = 'option2';
-
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', `assets/data/company.json`);
-
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
-
-    req.send();
-  }
 
   openDialogAddSeasion(): void {
     const dialogRef = this.dialog.open(DialogAddSeasion, {
@@ -55,6 +46,8 @@ export class SeasionManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 }
@@ -64,10 +57,19 @@ export class SeasionManagementComponent implements OnInit {
   templateUrl: './dialog-add-seasion.html',
 })
 export class DialogAddSeasion {
-  selected = 'option2';
+  // selected = 'option2';
+  public form: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddSeasion>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private fb: FormBuilder
+    ) { }
 
+    ngOnInit() {
+      this.form = this.fb.group({
+        seasionName: [null, Validators.compose([Validators.required])],
+        pond: [null, Validators.compose([Validators.required])]
+      });
+    }
 }

@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+
+interface marker {
+	lat: number;
+	lng: number;
+	label?: string;
+	draggable: boolean;
+}
+
 @Component({
   selector: 'app-profile-management',
   templateUrl: './profile-management.component.html',
@@ -18,12 +26,59 @@ export class ProfileManagementComponent implements OnInit {
     }
   };
 
+  zoom: number = 10;
+  title: string = 'ĐỊA CHỈ TRÊN BẢNG ĐỒ';
+  lat: number = 10.036344152103853;
+  lng: number = 105.78569861415724;
 
+  
   constructor() { 
 
   }
 
   ngOnInit() {
   }
+
+
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }
+
+  // locationChosen = false;
+
+  // onChoseLocation(event) {
+  //   this.lat = event.coords.lat;
+  //   this.lng= event.coords.lng;
+  //   this.locationChosen = true;
+  //   console.log(event);
+  // }
+  
+  mapClicked($event: any) {
+    this.markers.push({
+      lat: $event.coords.lat,
+      lng: $event.coords.lng,
+      draggable: true
+    });
+    console.log($event);
+  }
+  
+  markerDragEnd(m: marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+  
+  markers: marker[] = [
+	  {
+		  lat: 10.03082457630006,
+		  lng: 105.76896160840988,
+		  label: 'Vo Hoai Phong',
+		  draggable: true
+	  },
+	  {
+		  lat: 51.373858,
+		  lng: 7.215982,
+		  label: 'Nguyen Viet Huan',
+		  draggable: false
+	  }
+  ]
 
 }

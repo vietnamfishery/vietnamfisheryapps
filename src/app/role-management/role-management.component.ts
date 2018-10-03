@@ -1,7 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { DialogData } from '../pond-management/pond-management.component';
 import { Router } from '@angular/router';
+
+import { PeriodicElement } from '../models/PeriodicElement';
+import { ELEMENT_DATA } from '../contants/table-data';
 
 @Component({
   selector: 'app-role-management',
@@ -10,7 +13,11 @@ import { Router } from '@angular/router';
 })
 export class RoleManagementComponent implements OnInit {
 
-  rows = [];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   animal: string;
   name: string;
@@ -18,22 +25,8 @@ export class RoleManagementComponent implements OnInit {
   constructor(
     private router: Router,
     public dialog: MatDialog
-  ) { 
-    this.fetch((data) => {
-      this.rows = data;
-    });
-  }
+  ) {}
 
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', `assets/data/company.json`);
-
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
-
-    req.send();
-  }
 
   openDialogAddRoleManagement(): void {
     const dialogRef = this.dialog.open(DialogAddRoleManagement, {
@@ -48,9 +41,13 @@ export class RoleManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 }
+
+
 
 @Component({
   selector: 'dialog-add-role-management',

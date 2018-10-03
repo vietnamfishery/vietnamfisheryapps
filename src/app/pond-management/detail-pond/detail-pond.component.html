@@ -16,7 +16,8 @@
             <mat-form-field>
               <input matInput placeholder="Tên ao nuôi" type="text" [formControl]="form.controls['pond']">
             </mat-form-field>
-            <small *ngIf="form.controls['pond'].hasError('required') && form.controls['pond'].touched" class="mat-text-warn">Tên ao không được để trống.</small>
+            <small *ngIf="form.controls['pond'].hasError('required') && form.controls['pond'].touched" class="mat-text-warn">Tên
+              ao không được để trống.</small>
 
             <mat-form-field>
               <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['pondstatus']">
@@ -26,7 +27,8 @@
                 <mat-option value="option3">Đang nâng cấp</mat-option>
               </mat-select>
             </mat-form-field>
-            <small *ngIf="form.controls['pondstatus'].hasError('required') && form.controls['pondstatus'].touched" class="mat-text-warn">Cần cho biết trạng thái của ao.</small>
+            <small *ngIf="form.controls['pondstatus'].hasError('required') && form.controls['pondstatus'].touched"
+              class="mat-text-warn">Cần cho biết trạng thái của ao.</small>
 
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
@@ -37,18 +39,34 @@
                 <input matInput placeholder="Độ sâu của ao" type="text" [formControl]="form.controls['ponddepth']">
               </mat-form-field>
             </div>
-            <small *ngIf="form.controls['pondarea'].hasError('required') && form.controls['pondarea'].touched" class="mat-text-warn">Diện tích không được để trống.</small>
-            <small *ngIf="form.controls['ponddepth'].hasError('required') && form.controls['ponddepth'].touched" class="mat-text-warn">Độ sâu không được để trống.</small>
-            
+            <small *ngIf="form.controls['pondarea'].hasError('required') && form.controls['pondarea'].touched" class="mat-text-warn">Diện
+              tích không được để trống.</small>
+            <small *ngIf="form.controls['ponddepth'].hasError('required') && form.controls['ponddepth'].touched" class="mat-text-warn">Độ
+              sâu không được để trống.</small>
+            <br>
+            <h4>Ảnh ao nuôi</h4>
             <!-- <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
             <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br /> -->
             <mat-card fxLayout="row">
-              <div fxFlexOffset="25" fxFlex="50">
+              <div fxFlexOffset="5" fxFlex="90">
+                <br>
                 <div class="media-grid compact bg-cover">
-                  <img src="/assets/images/face3.jpg" alt="img-pond">
+                  <img src="/assets/images/ponds/10.jpg" alt="img-pond" class="img-pond-detail-style">
                 </div>
               </div>
             </mat-card>
+            <br>
+            <div>
+              <agm-map [latitude]="lat" [longitude]="lng">
+                <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
+                  [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+                </agm-marker>
+                <agm-info-window>
+                  <strong>Thông tin ao nuôi</strong>
+                </agm-info-window>
+              </agm-map>
+            </div>
+            <br>
           </mat-card-content>
           <hr>
           <mat-card-actions>

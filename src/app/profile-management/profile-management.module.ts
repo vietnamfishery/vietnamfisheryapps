@@ -9,6 +9,7 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -28,7 +29,10 @@ import { FileUploadModule } from 'ng2-file-upload';
     NgxDatatableModule,
     FileUploadModule,
     MatNativeDateModule,
-    ProfileManagementRoutingModule
+    ProfileManagementRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD5txeKO9Fi2JGxEy60I3jqE0Y7DU57KY0'
+    })
   ],
   declarations: [ProfileManagementComponent, ProfileEditComponent]
 })
