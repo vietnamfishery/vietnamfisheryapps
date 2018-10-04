@@ -27,7 +27,12 @@ export class SigninComponent implements OnInit {
   onSubmit() {
     // console.log(this.form.value);
     this.sessionService.signin(this.form.value).subscribe(res => {
-      console.log(res);
+      if(res.success) {
+        document.cookie = 'vietnamfishery=vietnamfishery%' + res.token;
+        this.router.navigate( ['/'] );
+      } else {
+        this.form.reset();
+      }
     });
     // this.sessionService.getfail().subscribe(data => {
     //   console.log(data);
