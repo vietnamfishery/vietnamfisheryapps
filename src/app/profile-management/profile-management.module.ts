@@ -31,7 +31,7 @@ import { AgmCoreModule } from '@agm/core';
     MatNativeDateModule,
     ProfileManagementRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD5txeKO9Fi2JGxEy60I3jqE0Y7DU57KY0'
+      apiKey: 'AIzaSyDdRw3FWa-aducrcuof3jHJ61BW_9kGe9c'
     })
   ],
   declarations: [ProfileManagementComponent, ProfileEditComponent]
