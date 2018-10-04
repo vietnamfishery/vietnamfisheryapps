@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PondManagementService } from './pond-management.service';
 
 export interface DialogData {
   animal: string;
@@ -22,7 +23,8 @@ export class PondManagementComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private pondManagementService: PondManagementService
   ) {
     for (this.num; this.num <= 15; this.num += 1) {
       this.addProducts(this.num);

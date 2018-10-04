@@ -46,19 +46,28 @@
             <div>
               <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
 
-                <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
-                  [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">      
-                </agm-marker>   
-                
+                <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
+                  [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+                </agm-marker>
+
                 <!-- <agm-info-window>
                     <strong>Thông tin</strong>
                   </agm-info-window> -->
 
               </agm-map>
-            </div>
+            </div><br>
 
-            <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
-            <input type="file" multiple /><br />
+            <!-- <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
+            <input type="file" multiple /><br /> -->
+
+            <label for="singleFile">
+              <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
+            </label>
+            <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" />
+            <br>
+            <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'" [httpUrl]="'http://localhost:8180/jax-rs-jersey-application-sample'">
+              <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
+            </mat-file-upload-queue>
           </mat-card-content>
           <hr>
           <mat-card-actions>

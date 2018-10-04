@@ -13,6 +13,8 @@ import { AddPondComponent } from './add-pond/add-pond.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FileUploadModule } from 'ng2-file-upload';
 import { DetailPondComponent } from './detail-pond/detail-pond.component';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+import { PondManagementService } from './pond-management.service';
 
 @NgModule({
   imports: [
@@ -42,6 +44,7 @@ import { DetailPondComponent } from './detail-pond/detail-pond.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDdRw3FWa-aducrcuof3jHJ61BW_9kGe9c'
     }),
+    MatFileUploadModule,
     PondManagementRoutingModule
   ],
   entryComponents: [PondManagementComponent, DialogAddRole],
@@ -50,6 +53,9 @@ import { DetailPondComponent } from './detail-pond/detail-pond.component';
     DialogAddRole,
     AddPondComponent,
     DetailPondComponent,
+  ],
+  providers:[
+    PondManagementService
   ],
   bootstrap: [PondManagementComponent]
 })
