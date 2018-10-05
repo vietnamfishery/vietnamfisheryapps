@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-addcost-pondprepare',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddcostPondprepareComponent implements OnInit {
 
-  constructor() { }
+  public form: FormGroup;
+  
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      label: [null, Validators.compose([Validators.required])],
+      value: [null, Validators.compose([Validators.required])],
+      responsible: [null, Validators.compose([Validators.required])]
+    });
   }
 
 }

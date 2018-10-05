@@ -38,11 +38,18 @@
                 <input matInput placeholder="Độ sâu của ao" type="number" [formControl]="form.controls['ponddepth']">
               </mat-form-field>
             </div>
-            <small *ngIf="form.controls['pondarea'].hasError('required') && form.controls['pondarea'].touched" class="mat-text-warn">Diện
-              tích không được để trống.</small>
-            <small *ngIf="form.controls['ponddepth'].hasError('required') && form.controls['ponddepth'].touched" class="mat-text-warn">Độ
-              sâu không được để trống.</small>
-
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                  <small *ngIf="form.controls['pondarea'].hasError('required') && form.controls['pondarea'].touched" class="mat-text-warn">Diện
+                      tích không được để trống.</small>
+              </div>
+              <div fxFlex="100">
+                  <small *ngIf="form.controls['ponddepth'].hasError('required') && form.controls['ponddepth'].touched" class="mat-text-warn">Độ
+                      sâu không được để trống.</small>
+              </div>
+            </div>
+            <br>  
             <div>
               <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
 
@@ -72,7 +79,7 @@
           <hr>
           <mat-card-actions>
             <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button type="submit" class="mat-green-700">Thêm</button>
+              <button mat-raised-button type="submit"color="primary" class="btn-block" [disabled]="!form.valid">Thêm</button>
               <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-ao">Huỷ</button>
             </div>
           </mat-card-actions>

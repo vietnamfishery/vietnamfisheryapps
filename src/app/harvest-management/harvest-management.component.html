@@ -7,7 +7,7 @@
     </a>
   </mat-toolbar>
   <div fxLayout="row">
-    <mat-sidenav-container class="background-none shadow-none">
+    <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px">
       <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
         <hr>
         <div class="pa-1" fxLayout="column">
@@ -51,27 +51,6 @@
         </button>
         <span class="mr-1 ml-1">Lọc</span>
       </mat-toolbar>
-      <!-- <div fxLayout="row">
-        <div fxFlexOffset="10" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
-          fxLayoutGap.xs="0">
-          <mat-form-field fxFlex="100">
-            <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Ao 1</mat-option>
-              <mat-option value="option2">Ao 2</mat-option>
-              <mat-option value="option3">Ao 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field fxFlex="100">
-            <mat-select [(value)]="selected" placeholder="Tên vụ nuôi">
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Vụ nuôi 1</mat-option>
-              <mat-option value="option2">Vụ nuôi 2</mat-option>
-              <mat-option value="option3">Vụ nuôi 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div> -->
       <div fxLayout="row" fxFlex>
         <br>
       </div>
@@ -84,10 +63,6 @@
                   <div fxFlex="100">
                     <h4 class="ma-0" style="text-transform: uppercase;">{{ pond.name }}</h4>
                   </div>
-                  <!-- <a routerLink="/quan-ly-thu-hoach/them-chi-tiet-thu-hoach" matTooltip="Nhập chi tiết thu hoạch"
-                    matTooltipPosition="above" style="margin-right:5px">
-                    <mat-icon style="color:cornflowerblue">library_books</mat-icon>
-                  </a> -->
                   <a routerLink="/quan-ly-thu-hoach/sua-chi-tiet-thu-hoach" matTooltip="Sửa" matTooltipPosition="above">
                     <mat-icon>create</mat-icon>
                   </a>

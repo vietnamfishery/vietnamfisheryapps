@@ -37,15 +37,6 @@ export class AddPondComponent implements OnInit {
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
-
-  // locationChosen = false;
-
-  // onChoseLocation(event) {
-  //   this.lat = event.coords.lat;
-  //   this.lng= event.coords.lng;
-  //   this.locationChosen = true;
-  //   console.log(event);
-  // }
   
   mapClicked($event: any) {
     this.markers.push({

@@ -6,8 +6,9 @@ import { EmployeesManagementComponent } from './employees-management.component';
 import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatSortModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MatTableModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAccountEmployeesComponent } from './add-account-employees/add-account-employees.component';
+import { EmployeesManagementService } from './employees-management.service';
 
 @NgModule({
   imports: [
@@ -28,7 +29,11 @@ import { AddAccountEmployeesComponent } from './add-account-employees/add-accoun
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    ReactiveFormsModule,
     EmployeesManagementRoutingModule
+  ],
+  providers:[
+    EmployeesManagementService
   ],
   declarations: [EmployeesManagementComponent, AddAccountEmployeesComponent]
 })

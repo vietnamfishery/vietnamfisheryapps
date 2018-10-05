@@ -11,49 +11,56 @@
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
       fxFlexOffset.md="15" fxFlex.md="70">
       <div>
-        <form style="font-size:20px">
+        <form [formGroup]="form" style="font-size:20px">
           <mat-card-content fxLayout="column">
             <mat-form-field>
-              <mat-select [(value)]="selected" placeholder="Ao nuôi">
-                <mat-option>None</mat-option>
-                <mat-option value="option1">Ao nuôi 1</mat-option>
-                <mat-option value="option2">Ao nuôi 2</mat-option>
-                <mat-option value="option3">Ao nuôi 3</mat-option>
-              </mat-select>
+              <input matInput readonly placeholder="Ao nuôi" type="text">
             </mat-form-field>
             <mat-form-field>
-              <mat-select [(value)]="selected" placeholder="Vụ nuôi">
-                <mat-option>None</mat-option>
-                <mat-option value="option1">Vụ nuôi 1</mat-option>
-                <mat-option value="option2">Vụ nuôi 2</mat-option>
-                <mat-option value="option3">Vụ nuôi 3</mat-option>
-              </mat-select>
+              <input matInput readonly placeholder="Vụ nuôi" type="text">
             </mat-form-field>
             <mat-form-field>
+              <input matInput readonly placeholder="Tên công việc" type="text">
+            </mat-form-field>
+            <!-- <mat-form-field>
               <mat-select [(value)]="selected" placeholder="Tên công việc">
                 <mat-option>None</mat-option>
                 <mat-option value="option1">Công việc 1</mat-option>
                 <mat-option value="option2">Công việc 2</mat-option>
                 <mat-option value="option3">Công việc 3</mat-option>
               </mat-select>
-            </mat-form-field>
-            <mat-form-field>
+            </mat-form-field> -->
+            <!-- <mat-form-field>
               <input matInput [matDatepicker]="picker" placeholder="Ngày thêm chi phí">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+            </mat-form-field> -->
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input type="text" matInput placeholder="Tên chi phí">
+                <input type="text" matInput placeholder="Tên chi phí" [formControl]="form.controls['label']">
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Giá trị" type="text">
+                <input matInput placeholder="Giá trị" type="number" [formControl]="form.controls['value']">
               </mat-form-field>
             </div>
+
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                  <small *ngIf="form.controls['label'].hasError('required') && form.controls['label'].touched"
+                  class="mat-text-warn">Tên chi phí không được trống.</small>
+              </div>
+              <div fxFlex="100">
+                  <small *ngIf="form.controls['value'].hasError('required') && form.controls['value'].touched"
+                  class="mat-text-warn">Giá trị không được trống.</small>
+              </div>
+            </div>
             <mat-form-field fxFlex="100">
-              <input type="text" matInput placeholder="Người chịu trách nhiệm">
+              <input type="text" matInput placeholder="Người chịu trách nhiệm" [formControl]="form.controls['responsible']">
             </mat-form-field>
+            <small *ngIf="form.controls['responsible'].hasError('required') && form.controls['responsible'].touched"
+                  class="mat-text-warn">Người chịu trách nhiệm không được trống.</small>
             <mat-form-field class="example-full-width">
               <textarea matInput placeholder="Ghi chú" rows="5"></textarea>
             </mat-form-field>
@@ -61,7 +68,7 @@
           <hr>
           <mat-card-actions>
             <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button type="submit" class="mat-green-700">Thêm</button>
+              <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!form.valid">Thêm</button>
               <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-chuan-bi-ao">Huỷ</button>
             </div>
           </mat-card-actions>

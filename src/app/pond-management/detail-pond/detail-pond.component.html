@@ -33,16 +33,23 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Diện tích ao" type="text" [formControl]="form.controls['pondarea']">
+                <input matInput placeholder="Diện tích ao" type="number" [formControl]="form.controls['pondarea']">
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ sâu của ao" type="text" [formControl]="form.controls['ponddepth']">
+                <input matInput placeholder="Độ sâu của ao" type="number" [formControl]="form.controls['ponddepth']">
               </mat-form-field>
             </div>
-            <small *ngIf="form.controls['pondarea'].hasError('required') && form.controls['pondarea'].touched" class="mat-text-warn">Diện
-              tích không được để trống.</small>
-            <small *ngIf="form.controls['ponddepth'].hasError('required') && form.controls['ponddepth'].touched" class="mat-text-warn">Độ
-              sâu không được để trống.</small>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                  <small *ngIf="form.controls['pondarea'].hasError('required') && form.controls['pondarea'].touched" class="mat-text-warn">Diện
+                      tích không được để trống.</small>
+              </div>
+              <div fxFlex="100">
+                  <small *ngIf="form.controls['ponddepth'].hasError('required') && form.controls['ponddepth'].touched" class="mat-text-warn">Độ
+                      sâu không được để trống.</small>
+              </div>
+            </div>
             <br>
             <h4>Ảnh ao nuôi</h4>
             <!-- <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
@@ -71,9 +78,8 @@
           <hr>
           <mat-card-actions>
             <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button color="primary">Sửa</button>
-              <button mat-raised-button type="submit" disabled>Lưu</button>
-              <button mat-raised-button color="warn" routerLink="/quan-ly-ao">Trở lại</button>
+              <button mat-raised-button type="submit" color="primary" class="btn-block" [disabled]="!form.valid">Sửa</button>
+              <button mat-raised-button color="warn" routerLink="/quan-ly-ao">Huỷ</button>
             </div>
           </mat-card-actions>
         </form>

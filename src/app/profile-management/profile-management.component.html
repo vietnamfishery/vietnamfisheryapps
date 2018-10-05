@@ -23,7 +23,7 @@
               <div fxFlex="45">
                 <figure>
                   <div class="text-xs-center">
-                    <img src="../../assets/images/face1.jpg" alt="" class="radius-circle">
+                    <img src="/assets/images/face1.jpg" alt="" class="radius-circle img-responsive" width="128" height="128">
                     <div class="text-md mt10">VoHoaiPhong</div>
                   </div>
                   <div class="text-xs-center"><small>01635119228</small></div>
@@ -50,7 +50,6 @@
       </div>
     </div>
     <br>
-    <!-- (mapClick)="onChoseLocation($event)" -->
     <mat-card>
       <mat-card-content>
         <h2> {{ title }}</h2>
@@ -60,7 +59,8 @@
             [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
 
             <agm-info-window>
-              <strong>Thông tin người dùng</strong>
+              <strong>Võ Hoài Phong</strong><br>
+              <strong>An Minh, Kiên Giang</strong>
             </agm-info-window>
 
           </agm-marker>
