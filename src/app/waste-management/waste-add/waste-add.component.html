@@ -10,7 +10,7 @@
         <form [formGroup]="form">
           <mat-card-content fxLayout="column">
             <mat-form-field>
-              <mat-select [(value)]="selected" placeholder="Danh mục">
+              <mat-select [(value)]="selected" placeholder="Danh mục" required>
                 <mat-option>None</mat-option>
                 <mat-option value="option1">Xác tôm, cá</mat-option>
                 <mat-option value="option2">Rác</mat-option>
@@ -22,7 +22,7 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0" fxFlex="100">
               <mat-form-field fxFlex="100">
-                <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
+                <mat-select [(value)]="selected" placeholder="Tên ao nuôi" required>
                   <mat-option>None</mat-option>
                   <mat-option value="option5">Ao 1</mat-option>
                   <mat-option value="option6">Ao 2</mat-option>
@@ -32,7 +32,7 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <mat-select [(value)]="selected" placeholder="Tên vụ nuôi">
+                <mat-select [(value)]="selected" placeholder="Tên vụ nuôi" required>
                   <mat-option>None</mat-option>
                   <mat-option value="option10">Vụ nuôi 1</mat-option>
                   <mat-option value="option11">Vụ nuôi 2</mat-option>
@@ -46,7 +46,7 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Số lượng hoặc trọng lượng" type="text">
+                <input matInput placeholder="Số lượng hoặc trọng lượng" type="text" required>
               </mat-form-field>
               <mat-form-field fxFlex="100">
                 <input matInput placeholder="Người xử lý" type="text">
@@ -67,37 +67,6 @@
         <br>
       </div>
     </div>
-  </div>
-  <br>
-  <div fxFlex="100">
-    <ngx-datatable #mydatatable class="material" [headerHeight]="50" [limit]="5" [columnMode]="'force'" [footerHeight]="50"
-      [rowHeight]="'auto'" [rows]="rows">
-      <ngx-datatable-column name="Name">
-        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-          <span title="Double click to edit" (dblclick)="editing[row.$$index + '-name'] = true" *ngIf="!editing[row.$$index + '-name']">
-            {{value}}
-          </span>
-          <input autofocus (blur)="updateValue($event, 'name', value, row)" *ngIf="editing[row.$$index + '-name']" type="text"
-            [value]="value" />
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Gender">
-        <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-          <span title="Double click to edit" (dblclick)="editing[row.$$index + '-gender'] = true" *ngIf="!editing[row.$$index + '-gender']">
-            {{value}}
-          </span>
-          <select *ngIf="editing[row.$$index + '-gender']" (change)="updateValue($event, 'gender', value, row)" [value]="value">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Age">
-        <ng-template ngx-datatable-cell-template let-value="value">
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
   </div>
   <br>
 </mat-card>

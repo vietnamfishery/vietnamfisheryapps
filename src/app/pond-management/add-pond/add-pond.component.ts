@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PondManagementService } from '../pond-management.service';
+
 
 
 interface marker {
@@ -18,14 +20,19 @@ export class AddPondComponent implements OnInit {
 
   public form: FormGroup;
   // selected = 'option2';
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private pondManagementService: PondManagementService,
+    private cd: ChangeDetectorRef
+    ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       pond: [null, Validators.compose([Validators.required])],
       pondarea: [null, Validators.compose([Validators.required])],
       ponddepth: [null, Validators.compose([Validators.required])],
-      pondstatus: [null, Validators.compose([Validators.required])]
+      pondstatus: [null, Validators.compose([Validators.required])],
+      file: [null, Validators.required]
     });
   }
 
@@ -59,5 +66,30 @@ export class AddPondComponent implements OnInit {
 		  draggable: true
 	  }
   ]
+
+  onSubmit(){
+    const pond = this.form.value;
+    console.log(pond);
+    this.pondManagementService.addpond(pond).subscribe();
+  }
+
+  onFileChange(event) {
+    let reader = new FileReader();
+   
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+    
+      reader.onload = () => {
+        this.form.patchValue({
+          file: reader.result
+        });
+        
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      };
+    }
+    console.log(this.form);
+  }
 
 }

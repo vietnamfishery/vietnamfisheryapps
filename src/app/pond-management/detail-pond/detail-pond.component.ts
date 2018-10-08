@@ -31,8 +31,8 @@ export class DetailPondComponent implements OnInit {
 
   zoom: number = 10;
   // title: string = 'Địa chỉ trên bảng đồ';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = 10.03082457630006;
+  lng: number = 105.76896160840988;
 
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)

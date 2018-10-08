@@ -11,15 +11,17 @@
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
       fxFlexOffset.md="15" fxFlex.md="70">
       <div>
-        <form [formGroup]="form" style="font-size:20px">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" style="font-size:20px" enctype="multipart/form-data">
           <mat-card-content fxLayout="column">
             <mat-form-field>
-              <input matInput placeholder="Tên ao nuôi" type="text" [formControl]="form.controls['pond']">
+              <input matInput placeholder="Tên ao nuôi" type="text" [formControl]="form.controls['pond']" required
+                autocomplete="off">
             </mat-form-field>
             <small *ngIf="form.controls['pond'].hasError('required') && form.controls['pond'].touched" class="mat-text-warn">Tên
               ao không được để trống.</small>
             <mat-form-field>
-              <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['pondstatus']">
+              <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['pondstatus']"
+                required>
                 <mat-option>None</mat-option>
                 <mat-option value="option1">Ao trống</mat-option>
                 <mat-option value="option2">Đang nuôi</mat-option>
@@ -32,34 +34,34 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Diện tích ao" type="number" [formControl]="form.controls['pondarea']">
+                <input matInput placeholder="Diện tích ao" type="number" [formControl]="form.controls['pondarea']"
+                  required autocomplete="off">
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ sâu của ao" type="number" [formControl]="form.controls['ponddepth']">
+                <input matInput placeholder="Độ sâu của ao" type="number" [formControl]="form.controls['ponddepth']"
+                  required autocomplete="off">
               </mat-form-field>
             </div>
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <div fxFlex="100">
-                  <small *ngIf="form.controls['pondarea'].hasError('required') && form.controls['pondarea'].touched" class="mat-text-warn">Diện
-                      tích không được để trống.</small>
+                <small *ngIf="form.controls['pondarea'].hasError('required') && form.controls['pondarea'].touched"
+                  class="mat-text-warn">Diện
+                  tích không được để trống.</small>
               </div>
               <div fxFlex="100">
-                  <small *ngIf="form.controls['ponddepth'].hasError('required') && form.controls['ponddepth'].touched" class="mat-text-warn">Độ
-                      sâu không được để trống.</small>
+                <small *ngIf="form.controls['ponddepth'].hasError('required') && form.controls['ponddepth'].touched"
+                  class="mat-text-warn">Độ
+                  sâu không được để trống.</small>
               </div>
             </div>
-            <br>  
+            <br>
             <div>
               <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
 
                 <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
                   [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
                 </agm-marker>
-
-                <!-- <agm-info-window>
-                    <strong>Thông tin</strong>
-                  </agm-info-window> -->
 
               </agm-map>
             </div><br>
@@ -70,16 +72,18 @@
             <label for="singleFile">
               <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
             </label>
-            <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" />
+            <input id="singleFile" type="file" (change)="onFileChange($event)" />
+            <!-- <small *ngIf="form.controls['img_pond'].hasError('required') && form.controls['img_pond'].touched" class="mat-text-warn">Diện
+                tích không được để trống.</small> -->
             <br>
-            <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'" [httpUrl]="'http://localhost:8180/jax-rs-jersey-application-sample'">
+            <!-- <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'" [httpUrl]="'https://drive.google.com/drive/u/1/folders/0BzONmyo5U7dOcGRobTVxcU1WUVU'">
               <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
-            </mat-file-upload-queue>
+            </mat-file-upload-queue> -->
           </mat-card-content>
           <hr>
           <mat-card-actions>
             <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button type="submit"color="primary" class="btn-block" [disabled]="!form.valid">Thêm</button>
+              <button mat-raised-button type="submit" color="primary" class="btn-block" [disabled]="!form.valid">Thêm</button>
               <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-ao">Huỷ</button>
             </div>
           </mat-card-actions>

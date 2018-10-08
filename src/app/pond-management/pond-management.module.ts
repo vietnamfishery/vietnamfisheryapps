@@ -11,7 +11,6 @@ import { AgmCoreModule } from '@agm/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddPondComponent } from './add-pond/add-pond.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { FileUploadModule } from 'ng2-file-upload';
 import { DetailPondComponent } from './detail-pond/detail-pond.component';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { PondManagementService } from './pond-management.service';
@@ -40,7 +39,6 @@ import { PondManagementService } from './pond-management.service';
     MatProgressBarModule,
     NgxDatatableModule,
     ReactiveFormsModule,
-    FileUploadModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDdRw3FWa-aducrcuof3jHJ61BW_9kGe9c'
     }),
