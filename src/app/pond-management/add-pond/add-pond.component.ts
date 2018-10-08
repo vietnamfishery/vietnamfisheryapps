@@ -2,8 +2,6 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from '../pond-management.service';
 
-
-
 interface marker {
 	lat: number;
 	lng: number;
@@ -17,7 +15,7 @@ interface marker {
   styleUrls: ['./add-pond.component.scss']
 })
 export class AddPondComponent implements OnInit {
-
+  private selectedFile: Promise<string> | null = null;
   public form: FormGroup;
   // selected = 'option2';
   constructor(
@@ -32,7 +30,8 @@ export class AddPondComponent implements OnInit {
       pondarea: [null, Validators.compose([Validators.required])],
       ponddepth: [null, Validators.compose([Validators.required])],
       pondstatus: [null, Validators.compose([Validators.required])],
-      file: [null, Validators.required]
+      image: [null, Validators.compose([Validators.required])],
+      files: [null, Validators.required]
     });
   }
 
@@ -82,14 +81,15 @@ export class AddPondComponent implements OnInit {
     
       reader.onload = () => {
         this.form.patchValue({
-          file: reader.result
+          files: reader.result
         });
-        
         // need to run CD since file load runs outside of zone
         this.cd.markForCheck();
       };
     }
-    console.log(this.form);
+    this.selectedFile = new Promise((resolve, reject) => {
+      resolve(this.form.value.image.split('\\')[this.form.value.image.split('\\').length -1].toString())
+    });
   }
 
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { api_url, api_port } from '../contants/api';
-import { httpOptions } from '../contants/http';
+import { headers } from '../contants/http';
 import { IUsers } from '../models/users';
 
 const host = api_url + ':' + api_port + '/api';
@@ -17,6 +17,6 @@ export class EmployeesManagementService {
   ) { }
 
   public register_employees(user: IUsers): Observable<any> {
-    return this.http.post(host + '/user/register', user, httpOptions);
+    return this.http.post(host + '/user/register', user, headers.APP_JSON);
   }
 }

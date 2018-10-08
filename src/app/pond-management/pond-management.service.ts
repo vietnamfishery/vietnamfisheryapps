@@ -2,31 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { api_url, api_port } from '../contants/api';
+// import { headers } from '../contants/http';
 
 const host = api_url + ':' + api_port + '/api';
-
+const headers = new  HttpHeaders();
+headers.append('Content-Type', 'multipart/form-data');
 @Injectable({
   providedIn: 'root'
 })
 export class PondManagementService {
 
   constructor(
-    private http: HttpClient,
-    private headers : HttpHeaders
+    private http: HttpClient
   ) {
-    
+
   }
 
-  // public getpond(pond: any): Observable<any> {
-  //   return this.http.get(host + '/', pond);
-  // }
-
   public addpond(pond: any): Observable<any> {
-    this.headers = new HttpHeaders({
-      'Content-Type' :'multipart/form-data'
-    });
-    return this.http.post(host + '/uploads/image', pond, { headers: this.headers});
-  }  
-
-
+    return this.http.post(host + '/uploads/image', pond, {headers});
+  }
 }
