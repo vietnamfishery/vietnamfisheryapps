@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { headers } from './../contants/http';
+import { APP_JSON } from './../contants/http';
 import { api_url, api_port } from './../contants/api';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -18,7 +18,7 @@ export class SessionService {
   ) { }
 
   public register(user: IUsers): Observable<any> {
-    return this.http.post(host + '/user/register', user, headers.APP_JSON);
+    return this.http.post(host + '/user/register', user, {headers: APP_JSON});
   }
 
   public signin(user: any): Observable<any> {
