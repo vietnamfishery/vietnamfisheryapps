@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from '../pond-management.service';
@@ -31,7 +32,7 @@ export class AddPondComponent implements OnInit {
       ponddepth: [null, Validators.compose([Validators.required])],
       pondstatus: [null, Validators.compose([Validators.required])],
       image: [null, Validators.compose([Validators.required])],
-      files: [null, Validators.required]
+      files: [null, Validators.required],
     });
   }
 
