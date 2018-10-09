@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from '../pond-management.service';
+import { api_url, api_port } from '../../contants/api';
 
 interface marker {
 	lat: number;
@@ -16,6 +17,7 @@ interface marker {
   styleUrls: ['./add-pond.component.scss']
 })
 export class AddPondComponent implements OnInit {
+  private httpUrl: string = api_url + ':' + api_port + '/api/uploads/image';
   private selectedFile: Promise<string> | null = null;
   public form: FormGroup;
   // selected = 'option2';
@@ -31,8 +33,8 @@ export class AddPondComponent implements OnInit {
       pondarea: [null, Validators.compose([Validators.required])],
       ponddepth: [null, Validators.compose([Validators.required])],
       pondstatus: [null, Validators.compose([Validators.required])],
-      image: [null, Validators.compose([Validators.required])],
-      files: [null, Validators.required],
+      files: [null, Validators.compose([Validators.required])],
+      image: [null, Validators.compose([Validators.required])]
     });
   }
 
@@ -68,25 +70,29 @@ export class AddPondComponent implements OnInit {
   ]
 
   onSubmit(){
-    const pond = this.form.value;
-    console.log(pond);
-    this.pondManagementService.addpond(pond).subscribe();
+    this.pondManagementService.addpond(this.form).subscribe(data => {
+      console.log(data);
+    });
   }
 
   onFileChange(event) {
     let reader = new FileReader();
-   
+
     if(event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-    
-      reader.onload = () => {
+      const [files]: File[] = event.target.files;
         this.form.patchValue({
-          files: reader.result
+          files
         });
-        // need to run CD since file load runs outside of zone
-        this.cd.markForCheck();
-      };
+      
+      // reader.readAsDataURL(files);
+    
+      // reader.onload = () => {
+      //   this.form.patchValue({
+      //     files: reader.result
+      //   });
+      //   // need to run CD since file load runs outside of zone
+      //   this.cd.markForCheck();
+      // };
     }
     this.selectedFile = new Promise((resolve, reject) => {
       resolve(this.form.value.image.split('\\')[this.form.value.image.split('\\').length -1].toString())
