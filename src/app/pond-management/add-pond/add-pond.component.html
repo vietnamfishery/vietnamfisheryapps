@@ -66,26 +66,27 @@
               </agm-map>
             </div><br>
             <div fxFlex="100">
-              <button mat-raised-button type="button">
+              <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
+              <button mat-flat-button class="mat-green-700" type="button">
                 <label for="fileToUpload">
-                  Tải ảnh lên...
+                  Tải ảnh lên ...
                 </label>
-              </button>
-              &nbsp;
+              </button>&nbsp;
               <span>{{ selectedFile | async }}</span>
               <input id="fileToUpload" type="file" [formControl]="form.controls['image']" hidden (change)="onFileChange($event)">
             </div>
-            <!-- <div fxFlex="100" class="upfile">
-              <button mat-raised-button type="button">
-                <label for="singleFile">Tải ảnh lên...</label>
-              </button>
-              <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" hidden/>
-              <br>
-  
-              <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'" [httpUrl]="httpUrl">
-                <mat-file-upload *ngIf="fileUploadQueue.files.length > 0" [file]="fileUploadQueue.files[fileUploadQueue.files.length -1] || []" [id]="i"></mat-file-upload>
-              </mat-file-upload-queue>
-            </div> -->
+
+            <!-- <h4 class="subtitle" style=" color: #aa9e9e">Thêm ảnh cho ao</h4>
+            <input type="file" multiple /><br /> -->
+
+            <!-- <label for="singleFile">Upload file</label>
+            <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" />
+            <br>
+
+            <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'" [httpUrl]="'http://localhost:3000/api/uploads/image'">
+
+              <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
+            </mat-file-upload-queue> -->
 
           </mat-card-content>
           <hr>
