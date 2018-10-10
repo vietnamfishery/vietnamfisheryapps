@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { api_url, api_port } from '../contants/api';
+import { api_url, api_port } from '../constants/api';
 // import { headers } from '../contants/http';
 
 const host = api_url + ':' + api_port + '/api';
