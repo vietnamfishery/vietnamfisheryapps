@@ -82,9 +82,9 @@ const MENUITEMS: Array<Menu> = [
     type: 'sub',
     icon: 'style',
     children: [
-      {state: 'tong-chi-phi', name: 'Tổng chi phí'},
+      {state: 'chi-phi-chuan-bi-ao', name: 'Chi phí chuẩn bị ao'},
+      {state: 'chi-phi-cham-soc', name: 'Chi phí chăm sóc'},
       {state: 'thu-hoach', name: 'Thu hoạch'},
-      // {state: 'lich-su-nhap-giong', name: 'Lịch sử nhập giống'},
     ]
   },
   {

@@ -12,20 +12,20 @@
               <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="5px">
                 <div class="pb-1" fxFlex.xs="100" fxFlex.gt-xs="auto">
                   <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Họ của bạn" type="text" [formControl]="form.controls['lastname']">
+                    <input matInput placeholder="Họ của bạn" type="text" [formControl]="form.controls['lastname']" autocomplete="off" >
                   </mat-form-field>
                   <small *ngIf="form.controls['lastname'].hasError('required') && form.controls['lastname'].touched" class="mat-text-warn">Họ của bạn không được để trống.</small>
                 </div>
                 <div class="pb-1" fxFlex.xs="100" fxFlex.gt-xs="auto">
                   <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Tên của bạn" type="text" [formControl]="form.controls['firstname']">
+                    <input matInput placeholder="Tên của bạn" type="text" [formControl]="form.controls['firstname']" autocomplete="off" >
                   </mat-form-field>
                   <small *ngIf="form.controls['firstname'].hasError('required') && form.controls['firstname'].touched" class="mat-text-warn">Tên của bạn không được để trống.</small>
                 </div>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Tên đăng nhập" type="text" [formControl]="form.controls['username']">
+                  <input matInput placeholder="Tên đăng nhập" type="text" [formControl]="form.controls['username']" autocomplete="off">
                 </mat-form-field>
                 <small *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched" class="mat-text-warn">Tên đăng nhập không được để trống.</small>
               </div>
@@ -40,14 +40,14 @@
               </div> -->
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput type="password" placeholder="Mật khẩu" [formControl]="form.controls['password']">
+                  <input matInput type="password" placeholder="Mật khẩu" [formControl]="form.controls['password']" autocomplete="off">
                 </mat-form-field>
                 <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched"
                   class="mat-text-warn">Mật khẩu không được để trống.</small>
               </div>
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Mật khẩu xác nhận" [formControl]="form.controls['confirmPassword']" type="password">
+                  <input matInput placeholder="Mật khẩu xác nhận" [formControl]="form.controls['confirmPassword']" type="password" autocomplete="off">
                 </mat-form-field>
                 <small *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched"
                   class="mat-text-warn">Mật khẩu xác nhận không được để trống.</small>

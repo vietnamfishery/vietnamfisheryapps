@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TotalComponent } from './total.component';
+import { CostTakecareofComponent } from './cost-takecareof.component';
 
-describe('TotalComponent', () => {
-  let component: TotalComponent;
-  let fixture: ComponentFixture<TotalComponent>;
+describe('CostTakecareofComponent', () => {
+  let component: CostTakecareofComponent;
+  let fixture: ComponentFixture<CostTakecareofComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TotalComponent ]
+      declarations: [ CostTakecareofComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TotalComponent);
+    fixture = TestBed.createComponent(CostTakecareofComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

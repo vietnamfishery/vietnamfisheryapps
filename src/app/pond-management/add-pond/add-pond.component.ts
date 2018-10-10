@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from '../pond-management.service';
