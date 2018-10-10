@@ -22,7 +22,7 @@
                 <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="mat-text-warn">Mật khẩu không được để trống.</small>
               </div>
               <div class="pb-1">
-                <mat-checkbox [formControl]="form.controls['keepLogin']">Ghi nhớ đăng nhập</mat-checkbox>
+                <mat-checkbox>Ghi nhớ đăng nhập</mat-checkbox>
               </div>
               <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Đăng nhập</button>
             </div>

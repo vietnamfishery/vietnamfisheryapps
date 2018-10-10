@@ -19,22 +19,20 @@ export class SigninComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      username: [null, Validators.compose([Validators.required])],
-      password: [null, Validators.compose([Validators.required])],
-      keepLogin: [null, Validators.compose([])],
-    });
+    this.form = this.fb.group ( {
+      username: [null , Validators.compose ( [ Validators.required ] )] , password: [null , Validators.compose ( [ Validators.required ] )]
+    } );
   }
 
   onSubmit() {
     // console.log(this.form.value);
     this.sessionService.signin(this.form.value).subscribe(res => {
-      // if(res.success) {
-      //   document.cookie = 'vietnamfishery=vietnamfishery%' + res.token;
-      //   this.router.navigate( ['/'] );
-      // } else {
-      //   this.form.reset();
-      // }
+      if(res.success) {
+        document.cookie = 'vietnamfishery=vietnamfishery%' + res.token;
+        this.router.navigate( ['/'] );
+      } else {
+        this.form.reset();
+      }
     });
     // this.sessionService.getfail().subscribe(data => {
     //   console.log(data);

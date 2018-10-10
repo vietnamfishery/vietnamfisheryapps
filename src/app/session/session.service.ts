@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUsers } from '../models/users';
-import { actionUserServices } from '../contants';
 
 const host = api_url + ':' + api_port + '/api';
 
@@ -23,7 +22,6 @@ export class SessionService {
   }
 
   public signin(user: any): Observable<any> {
-    user[`action`] = actionUserServices.LOGIN;
     return this.http.post(host + '/user/login', user);
   }
 
