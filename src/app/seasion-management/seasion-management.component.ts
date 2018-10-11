@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSort, MatPaginator, MatTab
 import { Router } from '@angular/router';
 
 import { PeriodicElement } from '../models/PeriodicElement';
-import { ELEMENT_DATA } from '../contants/table-data';
+import { ELEMENT_DATA } from '../constants/table-data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface DialogData {

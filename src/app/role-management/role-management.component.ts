@@ -4,7 +4,7 @@ import { DialogData } from '../pond-management/pond-management.component';
 import { Router } from '@angular/router';
 
 import { PeriodicElement } from '../models/PeriodicElement';
-import { ELEMENT_DATA } from '../contants/table-data';
+import { ELEMENT_DATA } from '../constants/table-data';
 
 @Component({
   selector: 'app-role-management',

@@ -3,8 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig, MatDialog, MatTableData
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
-import { colors } from '../contants/colors';
-import { ELEMENT_DATA } from '../contants/table-data';
+import { colors } from '../constants/colors';
+import { ELEMENT_DATA } from '../constants/table-data';
 import { DiaryService } from './diary.service';
 
 /**

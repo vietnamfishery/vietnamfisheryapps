@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { PeriodicElement } from '../models/PeriodicElement';
-import { ELEMENT_DATA } from '../contants/table-data';
+import { ELEMENT_DATA } from '../constants/table-data';
 
 @Component({
   selector: 'app-employees-management',

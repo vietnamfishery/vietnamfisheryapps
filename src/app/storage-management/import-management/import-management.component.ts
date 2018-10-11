@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { foods } from '../../contants/select-data';
-import { MY_FORMATS_DATE } from '../../contants/format-date';
+import { foods } from '../../constants/select-data';
+import { MY_FORMATS_DATE } from '../../constants/format-date';
 
 @Component({
   selector: 'app-import-management',

@@ -19,18 +19,22 @@ export class SigninComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.form = this.fb.group ({
+    this.form = this.fb.group({
       username: [null, Validators.compose([Validators.required])],
       password: [null, Validators.compose([Validators.required])],
-      keepLogin: [null, Validators.compose([])]
+      keepLogin: [false, Validators.compose([])]
     });
   }
 
   onSubmit() {
     this.sessionService.signin(this.form.value).subscribe(res => {
-      if(res.success) {
-        document.cookie = 'vietnamfishery=vietnamfishery%' + res.token;
-        this.router.navigate( ['/'] );
+      if (res.success) {
+        if (this.form.value.keepLogin) {
+          this.setCookie('vietnamfishery=vietnamfishery%', res.token, 365);
+        } else {
+          document.cookie = 'vietnamfishery=vietnamfishery%' + res.token;
+        }
+        this.router.navigate(['/']);
       } else {
         this.form.reset();
       }
@@ -39,6 +43,13 @@ export class SigninComponent implements OnInit {
     //   console.log(data);
     // });
     // this.router.navigate ( [ '/dashboard' ] );
+  }
+
+  setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
 }

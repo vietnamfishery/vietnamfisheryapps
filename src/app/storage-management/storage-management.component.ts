@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { foods } from '../contants/select-data';
+import { foods } from '../constants/select-data';
 
 @Component({
   selector: 'app-storage-management',
