@@ -20,6 +20,15 @@
             <small *ngIf="form.controls['pond'].hasError('required') && form.controls['pond'].touched" class="mat-text-warn">Tên
               ao không được để trống.</small>
             <mat-form-field>
+              <mat-label>Ngày tạo ao</mat-label>
+              <input matInput [matDatepicker]="dom" placeholder="Chọn một ngày" [formControl]="form.controls['pond_date']" required autocomplete="off">
+              <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
+              <mat-datepicker #dom></mat-datepicker>
+            </mat-form-field>
+            <small *ngIf="form.controls['pond_date'].hasError('required') && form.controls['pond_date'].touched" class="mat-text-warn">Ngày
+              tạo ao không được để trống.</small>
+
+            <mat-form-field>
               <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['pondstatus']"
                 required>
                 <mat-option>None</mat-option>

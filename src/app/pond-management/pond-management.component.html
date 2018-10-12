@@ -21,15 +21,16 @@
           </div>
         </div>
         <hr>
-
         <div class="pa-1">
           <h3>Số lượng vụ nuôi</h3>
-          <div class="pb-1">
-            <mat-checkbox>Tăng dần</mat-checkbox>
-          </div>
-          <div class="pb-1">
-            <mat-checkbox>Giảm dần</mat-checkbox>
-          </div>
+          <mat-radio-group>
+            <div class="pb-1">
+              <mat-radio-button value="1">Tăng dần</mat-radio-button>
+            </div>
+            <div class="pb-1">
+              <mat-radio-button value="2">Giảm dần</mat-radio-button>
+            </div>
+          </mat-radio-group>
         </div>
         <hr>
 
@@ -74,6 +75,9 @@
                   </div>
                   <div class="mat-text-primary text-xl">
                     <span> {{ pond.price }} vụ</span>
+                  </div>
+                  <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
+                    <span>22/06/1996</span>
                   </div>
                 </div>
               </div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PondManagementRoutingModule } from './pond-management-routing.module';
 import { PondManagementComponent, DialogAddRole } from './pond-management.component';
-import { MatSidenavModule, MatCardModule, MatToolbarModule, MatTabsModule, MatIconModule, MatButtonModule, MatTooltipModule, MatListModule, MatButtonToggleModule, MatCheckboxModule, MatSliderModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatProgressBarModule, MatSelectModule } from '@angular/material';
+import { MatSidenavModule, MatCardModule, MatToolbarModule, MatTabsModule, MatIconModule, MatButtonModule, MatTooltipModule, MatListModule, MatButtonToggleModule, MatCheckboxModule, MatSliderModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatProgressBarModule, MatSelectModule, MatDatepickerModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AgmCoreModule } from '@agm/core';
@@ -43,6 +43,7 @@ import { PondManagementService } from './pond-management.service';
       apiKey: 'AIzaSyDdRw3FWa-aducrcuof3jHJ61BW_9kGe9c'
     }),
     MatFileUploadModule,
+    MatDatepickerModule,
     PondManagementRoutingModule
   ],
   entryComponents: [PondManagementComponent, DialogAddRole],

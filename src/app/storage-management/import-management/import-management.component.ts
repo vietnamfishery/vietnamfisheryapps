@@ -25,10 +25,11 @@ export class ImportManagementComponent implements OnInit {
   constructor(private adapter: DateAdapter<any>) { }
 
   vietnamese() {
-    this.adapter.setLocale('vi');
+    this.adapter.setLocale('vn');
   }
 
   ngOnInit() {
+
   }
 
 }

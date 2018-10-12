@@ -6,44 +6,93 @@
 <div fxLayout="row wrap" fxLayoutAlign="center start">
   <div fxFlex.gt-sm="55" fxFlex="100">
     <mat-card class="mat-card-top">
-      <mat-tab-group color="accent">
+      <mat-tab-group color="primary">
         <mat-tab>
           <ng-template matTabLabel>Thông tin</ng-template>
           <mat-card-content>
-            <form fxLayout="column" fxFlexOffset="15" fxFlex="70">
-              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
-                fxLayoutGap.xs="0">
-                <mat-form-field class="mb-1" fxFlex="100">
-                  <input matInput placeholder="Họ">
-                </mat-form-field>
-                <mat-form-field class="mb-1" fxFlex="100">
-                  <input matInput placeholder="Tên">
-                </mat-form-field>
+            <form [formGroup]="form" (ngSubmit)="onSubmit_info()" fxLayout="column" fxFlexOffset="15" fxFlex="70">
+
+              <mat-form-field class="p-1">
+                <input matInput placeholder="Họ" [formControl]="form.controls['lastname']" autocomplete="off">
+              </mat-form-field>
+              <small *ngIf="form.controls['lastname'].hasError('required') && form.controls['lastname'].touched" class="mat-text-warn">Họ
+                của bạn không được để trống.</small>
+
+              <mat-form-field class="p-1">
+                <input matInput placeholder="Tên" [formControl]="form.controls['firstname']" autocomplete="off">
+              </mat-form-field>
+              <small *ngIf="form.controls['firstname'].hasError('required') && form.controls['firstname'].touched"
+                class="mat-text-warn">Tên của bạn không được để trống.</small>
+
+              <mat-form-field class="p-1">
+                <mat-label>Ngày sinh</mat-label>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="dom" placeholder="Chọn một ngày"
+                 autocomplete="off" [formControl]="form.controls['birthday']">
+                <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
+                <mat-datepicker #dom></mat-datepicker>
+              </mat-form-field>
+              <small *ngIf="form.controls['birthday'].hasError('required') && form.controls['birthday'].touched" class="mat-text-warn">Ngày
+                sinh không được để trống.</small>
+
+              <mat-form-field class="p-1">
+                <input matInput placeholder="Số điện thoại liên hệ" [formControl]="form.controls['phone']" autocomplete="off">
+              </mat-form-field>
+              <small *ngIf="form.controls['phone'].hasError('required') && form.controls['phone'].touched" class="mat-text-warn">Số
+                điện thoại liên hệ không được để trống.</small>
+
+              <mat-form-field class="p-1">
+                <mat-select [(value)]="selected" placeholder="Tỉnh / Thành phố" [formControl]="form.controls['province']">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Cần Thơ</mat-option>
+                  <mat-option value="option2">Kiên Giang</mat-option>
+                  <mat-option value="option3">Hậu Giang</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <small *ngIf="form.controls['province'].hasError('required') && form.controls['province'].touched" class="mat-text-warn">Bạn
+                chưa chọn tỉnh / thành phố</small>
+
+              <mat-form-field class="p-1">
+                <mat-select [(value)]="selected" placeholder="Quận / Huyện" [formControl]="form.controls['district']">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Ninh Kiều</mat-option>
+                  <mat-option value="option2">Cái Răng</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <small *ngIf="form.controls['district'].hasError('required') && form.controls['district'].touched" class="mat-text-warn">Bạn
+                chưa chọn quận / huyện</small>
+
+              <mat-form-field class="p-1">
+                <mat-select [(value)]="selected" placeholder="Xã / Thị Trấn" [formControl]="form.controls['town']">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Xã 1 </mat-option>
+                  <mat-option value="option2">Xã 2</mat-option>
+                  <mat-option value="option3">Xã 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <small *ngIf="form.controls['town'].hasError('required') && form.controls['town'].touched" class="mat-text-warn">Bạn
+                chưa chọn xã / thị trấn</small>
+
+              <mat-form-field class="p-1">
+                <input matInput placeholder="Địa chỉ email" type="email" [formControl]="form.controls['email']"
+                  autocomplete="off">
+              </mat-form-field>
+              <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn">Địa
+                chỉ email không được để trống.</small>
+              <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Địa
+                chỉ email không hợp lệ.</small>
+
+              <div fxFlex="100" class="p-1">
+                <h4 class="subtitle" style=" color: #aa9e9e">Thay đổi ảnh đại diện</h4>
+                <button mat-flat-button class="mat-green-700" type="button">
+                  <mat-icon>face</mat-icon>
+                  <label for="fileToUpload">
+                    Tải ảnh lên
+                  </label>
+                </button>&nbsp;
+                <span>{{ selectedFile | async }}</span>
+                <input id="fileToUpload" type="file" [formControl]="form.controls['image']" hidden (change)="onFileChange($event)">
               </div>
 
-              <mat-form-field class="mb-1">
-                <input matInput [matDatepicker]="picker" placeholder="Ngày sinh">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-
-              <mat-form-field class="mb-1">
-                <input matInput placeholder="Số điện thoại liên hệ">
-              </mat-form-field>
-
-              <mat-form-field class="mb-1">
-                <input matInput placeholder="Địa chỉ liên lạc">
-              </mat-form-field>
-
-              <mat-form-field class="mb-1">
-                <input matInput placeholder="Địa chỉ email">
-              </mat-form-field>
-              <mat-form-field class="mb-1">
-                <input matInput placeholder="Tên tài khoản">
-              </mat-form-field>
-
-              <h4 class="subtitle" style=" color: #aa9e9e">Thay đổi ảnh đại diện</h4>
-              <input type="file" multiple /><br />
 
             </form>
           </mat-card-content>
@@ -51,27 +100,42 @@
         <mat-tab>
           <ng-template matTabLabel>Mật khẩu</ng-template>
           <mat-card-content>
-            <form fxLayout="column" fxFlexOffset="15" fxFlex="70">
+            <form [formGroup]="form_Pass" (ngSubmit)="onSubmit_Pass()" fxLayout="column" fxFlexOffset="15" fxFlex="70">
 
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Mật khẩu cũ" type="password">
+                <input matInput placeholder="Tên tài khoản" [formControl]="form.controls['username']" autocomplete="off"
+                  readonly value="VoHoaiPhong">
               </mat-form-field>
 
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Mật khẩu thay đổi" type="password">
+                <input matInput placeholder="Mật khẩu cũ" type="password" [formControl]="form.controls['passwordhistory']"
+                  autocomplete="off">
               </mat-form-field>
+              <small *ngIf="form.controls['passwordhistory'].hasError('required') && form.controls['passwordhistory'].touched"
+                class="mat-text-warn">Mật khẩu cũ thay đổi không được để trống.</small>
 
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Xác nhận mật khẩu thay đổi" type="password">
+                <input matInput placeholder="Mật khẩu thay đổi" type="password" [formControl]="form.controls['passwordchange']"
+                  autocomplete="off">
               </mat-form-field>
-
+              <small *ngIf="form.controls['passwordchange'].hasError('required') && form.controls['passwordchange'].touched"
+                class="mat-text-warn">Mật khẩu thay đổi không được để trống.</small>
+              <mat-form-field class="mb-1">
+                <input matInput placeholder="Xác nhận mật khẩu thay đổi" type="password" [formControl]="form.controls['confirmPasswordchange']"
+                  autocomplete="off">
+              </mat-form-field>
+              <small *ngIf="form.controls['confirmPasswordchange'].hasError('required') && form.controls['confirmPasswordchange'].touched"
+                class="mat-text-warn">Mật khẩu xác nhận không được để trống.</small>
+              <small *ngIf="form.controls['confirmPasswordchange'].errors?.equalTo" class="mat-text-warn">Mật khẩu xác
+                nhận
+                chưa đúng.</small>
             </form>
           </mat-card-content>
         </mat-tab>
       </mat-tab-group>
       <hr>
       <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button class="mat-green-700">Lưu</button>
+        <button mat-raised-button color="primary" class="btn-block" type="submit">Lưu</button>
         <button mat-raised-button color="warn">Huỷ</button>
       </mat-card-actions>
     </mat-card>

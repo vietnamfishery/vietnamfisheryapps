@@ -29,15 +29,6 @@
                 </mat-form-field>
                 <small *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched" class="mat-text-warn">Tên đăng nhập không được để trống.</small>
               </div>
-              <!-- <div class="pb-1">
-                <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Địa chỉ email" type="email" [formControl]="form.controls['email']">
-                </mat-form-field>
-                <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn">Địa
-                  chỉ email không được để trống.</small>
-                <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Địa
-                  chỉ email không hợp lệ.</small>
-              </div> -->
               <div class="pb-1">
                 <mat-form-field style="width: 100%">
                   <input matInput type="password" placeholder="Mật khẩu" [formControl]="form.controls['password']" autocomplete="off">
@@ -55,9 +46,11 @@
                   chưa đúng.</small>
               </div>
               <div class="pb-1">
-                <mat-checkbox>Tôi đã đọc & đồng ý các điều khoản dịch vụ.</mat-checkbox>
+                <mat-checkbox [formControl]="form.controls['termsAndPolicies']">Tôi đã đọc & đồng ý các điều khoản dịch vụ.</mat-checkbox>
+                <small *ngIf="form.controls['termsAndPolicies'].hasError('required') && form.controls['termsAndPolicies'].touched"
+                  class="mat-text-warn">Bạn đã đồng ý với các điều khoản của hệ thống?</small>
               </div>
-              <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!form.valid">Tạo
+              <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!form.valid || !form.value.termsAndPolicies">Tạo
                 tài khoản</button>
             </div>
             <div class="pt-1 pb-1 text-xs-center">
