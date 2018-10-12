@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DiaryComponent } from './diary.component';
-import { AuthGuard } from '../auth/auth.guard';
+import { DiaryComponent } from '../diary/diary.component';
 
 const routes: Routes = [
   { path: '', component: DiaryComponent }
@@ -11,4 +10,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DiaryRoutingModule { }
+export class AuthRoutingModule { }

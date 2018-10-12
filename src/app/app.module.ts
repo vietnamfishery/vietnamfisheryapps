@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
-
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   MatSidenavModule,
   MatCardModule,
@@ -21,6 +21,7 @@ import {
   MatSelectModule,
   MatProgressBarModule
 } from '@angular/material';
+import { isLogin } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 
@@ -44,6 +45,9 @@ import {
   AccordionLinkDirective,
   AccordionDirective
 } from './core';
+import { StoreModule } from '@ngrx/store';
+import { authReducer } from './stores/auth.store';
+import { AppService } from './app.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -76,6 +80,12 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    StoreModule.forRoot({
+      auth: authReducer
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    }),
     LoadingBarRouterModule,
     MatSidenavModule,
     MatCardModule,
@@ -94,7 +104,7 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({ apiKey: 'YOURAPIKEY' }),
     PerfectScrollbarModule
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

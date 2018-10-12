@@ -1,11 +1,11 @@
-import { map } from 'rxjs/operators';
 import { headers } from './../constants/http';
 import { api_url, api_port } from './../constants/api';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IUsers } from '../models/users';
 import { actionUserServices } from '../constants';
+import { delay, tap } from 'rxjs/operators';
 
 const host = api_url + ':' + api_port + '/api';
 
@@ -13,7 +13,9 @@ const host = api_url + ':' + api_port + '/api';
   providedIn: 'root'
 })
 export class SessionService {
-
+  isLoggedIn = false;
+  // store the URL so we can redirect after logging in
+  redirectUrl: string;
   constructor(
     private http: HttpClient
   ) { }
@@ -25,10 +27,18 @@ export class SessionService {
 
   public signin(user: any): Observable<any> {
     user[`action`] = actionUserServices.LOGIN;
-    return this.http.post(host + '/user/login', user);
+    return this.http.post(host + '/user/login', user).pipe(
+      delay(1000),
+      tap(val => {
+        this.isLoggedIn = val.success
+      }));
   }
 
-  public getfail(): Observable<any> {
-    return this.http.get(host + '/user/login');
+  public signout(): void {
+    this.isLoggedIn = false;
+  }
+
+  public test(): Observable<any> {
+    return this.http.get(host + '/user/login-ui');
   }
 }
