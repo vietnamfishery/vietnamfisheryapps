@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AgmCoreModule } from '@agm/core';
 import { MatFileUploadModule } from 'angular-material-fileupload';
+import { ProfileManagementService } from './profile-management.service';
 
 @NgModule({
   imports: [
@@ -38,7 +39,10 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     MatFileUploadModule,
     MatSelectModule
   ],
-  declarations: [ProfileManagementComponent, ProfileEditComponent]
+  declarations: [ProfileManagementComponent, ProfileEditComponent],
+  providers:[
+    ProfileManagementService
+  ]
 })
 export class ProfileManagementModule { }
 

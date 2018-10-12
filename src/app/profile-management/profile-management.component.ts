@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileManagementService } from './profile-management.service';
 
 
 interface marker {
@@ -32,7 +33,9 @@ export class ProfileManagementComponent implements OnInit {
   lng: number = 105.78569861415724;
 
   
-  constructor() { 
+  constructor(
+    private profileManagementService: ProfileManagementService
+  ) { 
 
   }
 

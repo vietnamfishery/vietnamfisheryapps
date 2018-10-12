@@ -4,6 +4,7 @@ import { CustomValidators } from 'ng2-validation';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
+import { ProfileManagementService } from '../profile-management.service';
 
 
 const passwordhistory = new FormControl('', Validators.required);
@@ -32,7 +33,8 @@ export class ProfileEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
-    private adapter: DateAdapter<any>
+    private adapter: DateAdapter<any>,
+    private profileManagementService: ProfileManagementService
   ) { }
 
   ngOnInit() {
