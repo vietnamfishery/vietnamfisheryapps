@@ -25,10 +25,10 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group( {
-      // email: [null, Validators.compose([Validators.required, CustomValidators.email])],
       lastname: [null, Validators.compose([Validators.required])],
       firstname: [null, Validators.compose([Validators.required])],
       username: [null, Validators.compose([Validators.required])],
+      termsAndPolicies: [false, Validators.compose([Validators.required])],
       password: password,
       confirmPassword: confirmPassword
     } );
@@ -36,6 +36,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     delete this.form.value.confirmPassword;
+    console.log(this.form);
     const user: IUsers = this.form.value;
     this.sessionService.register(user).subscribe(res => {
       if(res.username){

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS_DATE } from '../../constants/format-date';
 
 interface marker {
   lat: number;
@@ -12,17 +14,26 @@ interface marker {
 @Component({
   selector: 'app-detail-pond',
   templateUrl: './detail-pond.component.html',
-  styleUrls: ['./detail-pond.component.scss']
+  styleUrls: ['./detail-pond.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN'}
+  ],
 })
 export class DetailPondComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private adapter: DateAdapter<any>
+  ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       pond: [null, Validators.compose([Validators.required])],
+      pond_date: [null, Validators.compose([Validators.required])],
       pondarea: [null, Validators.compose([Validators.required])],
       ponddepth: [null, Validators.compose([Validators.required])],
       pondstatus: [null, Validators.compose([Validators.required])]
@@ -30,7 +41,7 @@ export class DetailPondComponent implements OnInit {
   }
 
   zoom: number = 10;
-  // title: string = 'Địa chỉ trên bảng đồ';
+  // title: string = 'Địa chỉ trên bản đồ';
   lat: number = 10.03082457630006;
   lng: number = 105.76896160840988;
 

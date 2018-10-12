@@ -2,6 +2,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from '../pond-management.service';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS_DATE } from '../../constants/format-date';
 
 interface marker {
 	lat: number;
@@ -13,7 +16,12 @@ interface marker {
 @Component({
   selector: 'app-add-pond',
   templateUrl: './add-pond.component.html',
-  styleUrls: ['./add-pond.component.scss']
+  styleUrls: ['./add-pond.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN'}
+  ],
 })
 export class AddPondComponent implements OnInit {
   private selectedFile: Promise<string> | null = null;
@@ -22,12 +30,14 @@ export class AddPondComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private pondManagementService: PondManagementService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private adapter: DateAdapter<any>
     ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       pond: [null, Validators.compose([Validators.required])],
+      pond_date: [null, Validators.compose([Validators.required])],
       pondarea: [null, Validators.compose([Validators.required])],
       ponddepth: [null, Validators.compose([Validators.required])],
       pondstatus: [null, Validators.compose([Validators.required])],

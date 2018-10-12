@@ -11,15 +11,6 @@
       <div class="pb-1">
         <form>
           <mat-card-content fxLayout="column">
-            <mat-form-field fxFlex="100">
-              <mat-select [(value)]="selected" placeholder="Danh mục">
-                <mat-option>None</mat-option>
-                <mat-option value="option1">Xác tôm, cá</mat-option>
-                <mat-option value="option2">Rác</mat-option>
-                <mat-option value="option3">Chất thải</mat-option>
-                <mat-option value="option4">Hoá chất quá hạn sử dụng</mat-option>
-              </mat-select>
-            </mat-form-field>
             <div fxLayout="column" fxFlex="100">
               <mat-form-field fxFlex="100">
                 <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
@@ -39,6 +30,15 @@
                   <mat-option value="option12">Vụ nuôi 3</mat-option>
                   <mat-option value="option13">Vụ nuôi 4</mat-option>
                   <mat-option value="option14">Vụ nuôi 5</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <mat-select [(value)]="selected" placeholder="Danh mục">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Xác tôm, cá</mat-option>
+                  <mat-option value="option2">Rác</mat-option>
+                  <mat-option value="option3">Chất thải</mat-option>
+                  <mat-option value="option4">Hoá chất quá hạn sử dụng</mat-option>
                 </mat-select>
               </mat-form-field>
               <hr>

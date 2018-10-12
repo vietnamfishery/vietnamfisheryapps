@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SeasionManagementRoutingModule } from './seasion-management-routing.module';
 import { SeasionManagementComponent, DialogAddSeasion } from './seasion-management.component';
-import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatDialogModule, MatInputModule, MatSidenavModule, MatCheckboxModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatDialogModule, MatInputModule, MatSidenavModule, MatCheckboxModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDatepickerModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSortModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
     SeasionManagementRoutingModule
   ],
   entryComponents: [SeasionManagementComponent, DialogAddSeasion],

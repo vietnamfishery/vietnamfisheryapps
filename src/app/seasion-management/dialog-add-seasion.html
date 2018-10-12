@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <form [formGroup]="form">
         <div class="text-xs-center pb-1">
-            <h2 class="mat-text-muted">THÊM VỤ NUÔI CHO AO NUÔI</h2>
+            <h2 class="mat-text-muted">THÊM VỤ NUÔI</h2>
             <div class="pb-1">
                 <hr>
             </div>
@@ -19,15 +19,25 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <small *ngIf="form.controls['pond'].hasError('required') && form.controls['pond'].touched"
-            class="mat-text-warn">Chưa chọn ao nuôi.</small>
+            <small *ngIf="form.controls['pond'].hasError('required') && form.controls['pond'].touched" class="mat-text-warn">Chưa
+                chọn ao nuôi.</small>
             <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Tên vụ nuôi" type="text" [formControl]="form.controls['seasionName']">
+                    <input matInput placeholder="Tên vụ nuôi" type="text" [formControl]="form.controls['seasonName']" autocomplete="off" required>
                 </mat-form-field>
             </div>
-            <small *ngIf="form.controls['seasionName'].hasError('required') && form.controls['seasionName'].touched"
-            class="mat-text-warn">Tên vụ nuôi không được để trống.</small>
+            <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
+                class="mat-text-warn">Tên vụ nuôi không được để trống.</small>
+            <div class="pb-1">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="dom" placeholder="Ngày tạo vụ nuôi" [formControl]="form.controls['season_date']"
+                        required autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
+                    <mat-datepicker #dom></mat-datepicker>
+                </mat-form-field>
+                <small *ngIf="form.controls['season_date'].hasError('required') && form.controls['season_date'].touched"
+                    class="mat-text-warn">Ngày tạo vụ nuôi không được để trống.</small>
+            </div>
         </div>
         <br>
         <div class="pb-1">
