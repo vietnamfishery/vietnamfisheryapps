@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { api_url, api_port } from './constants';
+
+const host = api_url + ':' + api_port + '/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  constructor() {}
+  constructor(
+		private http: HttpClient
+  ) {}
   setCookie(cname, cvalue, exdays) {
     if(exdays != 0){
       var d = new Date();
@@ -26,5 +33,17 @@ export class AppService {
 			}
 		});
 		return res;
-	}
+  }
+  
+  getProvince(): Observable<any[]>{
+    return this.http.get<any[]>(host + '/province');
+  }
+
+  getDistrictid(): Observable<any[]>{
+    return this.http.get<any[]>(host + '/district');
+  }
+
+  getTown(): Observable<any[]>{
+    return this.http.get<any[]>(host + '/town');
+  }
 }

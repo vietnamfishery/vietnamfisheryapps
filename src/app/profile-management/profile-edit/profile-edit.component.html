@@ -10,7 +10,7 @@
         <mat-tab>
           <ng-template matTabLabel>Thông tin</ng-template>
           <mat-card-content>
-            <form [formGroup]="form" (ngSubmit)="onSubmit_info()" fxLayout="column" fxFlexOffset="15" fxFlex="70">
+            <form [formGroup]="form" (ngSubmit)="onSubmit_info()" fxLayout="column" fxFlexOffset="15" fxFlex="70" enctype="multipart/form-data">
 
               <mat-form-field class="p-1">
                 <input matInput placeholder="Họ" [formControl]="form.controls['lastname']" autocomplete="off">
@@ -27,7 +27,7 @@
               <mat-form-field class="p-1">
                 <mat-label>Ngày sinh</mat-label>
                 <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="dom" placeholder="Chọn một ngày"
-                 autocomplete="off" [formControl]="form.controls['birthday']">
+                  autocomplete="off" [formControl]="form.controls['birthday']">
                 <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
                 <mat-datepicker #dom></mat-datepicker>
               </mat-form-field>
@@ -41,18 +41,16 @@
                 điện thoại liên hệ không được để trống.</small>
 
               <mat-form-field class="p-1">
-                <mat-select [(value)]="selected" placeholder="Tỉnh / Thành phố" [formControl]="form.controls['province']">
-                  <mat-option>None</mat-option>
-                  <mat-option value="option1">Cần Thơ</mat-option>
-                  <mat-option value="option2">Kiên Giang</mat-option>
-                  <mat-option value="option3">Hậu Giang</mat-option>
+                <mat-select placeholder="Tỉnh / Thành phố" [formControl]="form.controls['province']">
+                  <mat-option >None</mat-option>
+                  <mat-option *ngFor="let pro of province" [value]="pro.provinceid">{{ pro.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <small *ngIf="form.controls['province'].hasError('required') && form.controls['province'].touched" class="mat-text-warn">Bạn
                 chưa chọn tỉnh / thành phố</small>
 
               <mat-form-field class="p-1">
-                <mat-select [(value)]="selected" placeholder="Quận / Huyện" [formControl]="form.controls['district']">
+                <mat-select [(value)]="district" placeholder="Quận / Huyện" [formControl]="form.controls['district']">
                   <mat-option>None</mat-option>
                   <mat-option value="option1">Ninh Kiều</mat-option>
                   <mat-option value="option2">Cái Răng</mat-option>
@@ -62,7 +60,7 @@
                 chưa chọn quận / huyện</small>
 
               <mat-form-field class="p-1">
-                <mat-select [(value)]="selected" placeholder="Xã / Thị Trấn" [formControl]="form.controls['town']">
+                <mat-select [(value)]="town" placeholder="Xã / Thị Trấn" [formControl]="form.controls['town']">
                   <mat-option>None</mat-option>
                   <mat-option value="option1">Xã 1 </mat-option>
                   <mat-option value="option2">Xã 2</mat-option>
@@ -92,7 +90,11 @@
                 <span>{{ selectedFile | async }}</span>
                 <input id="fileToUpload" type="file" [formControl]="form.controls['image']" hidden (change)="onFileChange($event)">
               </div>
-
+              <hr>
+              <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+                <button mat-raised-button color="primary" class="btn-block" type="submit">Lưu</button>
+                <button mat-raised-button color="warn">Huỷ</button>
+              </mat-card-actions>
 
             </form>
           </mat-card-content>
@@ -108,36 +110,37 @@
               </mat-form-field>
 
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Mật khẩu cũ" type="password" [formControl]="form.controls['passwordhistory']"
+                <input matInput placeholder="Mật khẩu cũ" type="password" [formControl]="form_Pass.controls['passwordhistory']"
                   autocomplete="off">
               </mat-form-field>
-              <small *ngIf="form.controls['passwordhistory'].hasError('required') && form.controls['passwordhistory'].touched"
+              <small *ngIf="form_Pass.controls['passwordhistory'].hasError('required') && form_Pass.controls['passwordhistory'].touched"
                 class="mat-text-warn">Mật khẩu cũ thay đổi không được để trống.</small>
 
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Mật khẩu thay đổi" type="password" [formControl]="form.controls['passwordchange']"
+                <input matInput placeholder="Mật khẩu thay đổi" type="password" [formControl]="form_Pass.controls['passwordchange']"
                   autocomplete="off">
               </mat-form-field>
-              <small *ngIf="form.controls['passwordchange'].hasError('required') && form.controls['passwordchange'].touched"
+              <small *ngIf="form_Pass.controls['passwordchange'].hasError('required') && form_Pass.controls['passwordchange'].touched"
                 class="mat-text-warn">Mật khẩu thay đổi không được để trống.</small>
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Xác nhận mật khẩu thay đổi" type="password" [formControl]="form.controls['confirmPasswordchange']"
+                <input matInput placeholder="Xác nhận mật khẩu thay đổi" type="password" [formControl]="form_Pass.controls['confirmPasswordchange']"
                   autocomplete="off">
               </mat-form-field>
-              <small *ngIf="form.controls['confirmPasswordchange'].hasError('required') && form.controls['confirmPasswordchange'].touched"
+              <small *ngIf="form_Pass.controls['confirmPasswordchange'].hasError('required') && form_Pass.controls['confirmPasswordchange'].touched"
                 class="mat-text-warn">Mật khẩu xác nhận không được để trống.</small>
-              <small *ngIf="form.controls['confirmPasswordchange'].errors?.equalTo" class="mat-text-warn">Mật khẩu xác
+              <small *ngIf="form_Pass.controls['confirmPasswordchange'].errors?.equalTo" class="mat-text-warn">Mật khẩu xác
                 nhận
                 chưa đúng.</small>
+              <hr>
+              <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+                <button mat-raised-button color="primary" class="btn-block" type="submit">Lưu</button>
+                <button mat-raised-button color="warn">Huỷ</button>
+              </mat-card-actions>
             </form>
           </mat-card-content>
         </mat-tab>
       </mat-tab-group>
-      <hr>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="primary" class="btn-block" type="submit">Lưu</button>
-        <button mat-raised-button color="warn">Huỷ</button>
-      </mat-card-actions>
+
     </mat-card>
   </div>
 </div>
