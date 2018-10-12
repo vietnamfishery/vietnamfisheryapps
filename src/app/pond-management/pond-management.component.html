@@ -50,7 +50,7 @@
         <div class="zoom" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
           <mat-card>
             <div fxLayout="row">
-              <div class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url(../../assets/images/ponds/'+ pond.id +'.jpg)'}"
+              <div routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url(../../assets/images/ponds/'+ pond.id +'.jpg)'}"
                 fxFlex="40">
                 <figure>
                   <div class="product-badge" *ngIf="pond.status === 'empty'"><span>Trống</span></div>

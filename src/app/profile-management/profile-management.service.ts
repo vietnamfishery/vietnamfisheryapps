@@ -12,4 +12,5 @@ export class ProfileManagementService {
   constructor(
     private http: HttpClient
   ) { }
+
 }
