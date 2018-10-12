@@ -1,22 +1,24 @@
 export interface IUsers {
-    userUUId: string,
-    firstName: string,
-    lastName: string,
-    username: string,
-    password: string,
-    birdthday: Date,
-    email: string,
-    phone: string,
-    address: string,
-    town: string,
-    district: string,
-    province: string,
-    roles: number,
-    status: number,
-    images: string,
-    createdBy: string,
-    createdDate: Date,
-    updatedBy: string,
-    updatedDate: Date,
+    userUUId: string;
+    firstname: string;
+    lastname: string;
+    username: string;
+    password: string;
+    birthday: Date;
+    email: string;
+    phone: string;
+    address: string;
+    town: string;
+    lat: number;
+    long: number;
+    district: string;
+    province: string;
+    roles: number;
+    status: number;
+    images: string;
+    createdBy: string;
+    createdDate: Date;
+    updatedBy: string;
+    updatedDate: Date;
     isDeleted: number
 }

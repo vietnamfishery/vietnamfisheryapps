@@ -7,6 +7,7 @@ export const environment = {
 };
 
 export const isLogin: string = '171FBD0786DD03FC65808AA5DDD5B00DDD5CA726D1FD9AC0D42C39F317989DA6';
+export const tokenName: string = 'vietnamfishery';
 
 
 /*
