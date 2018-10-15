@@ -50,21 +50,18 @@
                 chưa chọn tỉnh / thành phố</small>
 
               <mat-form-field class="p-1">
-                <mat-select [(value)]="district" placeholder="Quận / Huyện" [formControl]="form.controls['district']">
-                  <mat-option>None</mat-option>
-                  <mat-option value="option1">Ninh Kiều</mat-option>
-                  <mat-option value="option2">Cái Răng</mat-option>
+                <mat-select placeholder="Quận / Huyện" [formControl]="form.controls['district']" (click)="loadDistrict(form.value.province)">
+                  <mat-option >None</mat-option>
+                  <mat-option *ngFor="let dis of district" [value]="dis.districtid">{{ dis.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <small *ngIf="form.controls['district'].hasError('required') && form.controls['district'].touched" class="mat-text-warn">Bạn
                 chưa chọn quận / huyện</small>
 
               <mat-form-field class="p-1">
-                <mat-select [(value)]="town" placeholder="Xã / Thị Trấn" [formControl]="form.controls['town']">
+                <mat-select placeholder="Xã / Thị Trấn" [formControl]="form.controls['town']" (click)="loadTown(form.value.district)">
                   <mat-option>None</mat-option>
-                  <mat-option value="option1">Xã 1 </mat-option>
-                  <mat-option value="option2">Xã 2</mat-option>
-                  <mat-option value="option3">Xã 3</mat-option>
+                  <mat-option *ngFor="let w of ward" [value]="w.wardid">{{ w.name }}</mat-option>                  
                 </mat-select>
               </mat-form-field>
               <small *ngIf="form.controls['town'].hasError('required') && form.controls['town'].touched" class="mat-text-warn">Bạn

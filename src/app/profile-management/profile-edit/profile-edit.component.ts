@@ -11,7 +11,7 @@ import { tokenName } from '../../../environments';
 import { distanceInWordsToNow } from 'date-fns';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { sortBy } from 'lodash';
 
 const passwordhistory = new FormControl('', Validators.required);
 const passwordchange = new FormControl('', Validators.required);
@@ -36,10 +36,12 @@ export class ProfileEditComponent implements OnInit {
     // for select field of form
     province: any[];
     district: any[];
-    town: any[];
+    ward: any[];
 
     minDate = new Date(1940, 0, 1);
     maxDate = new Date();
+
+    sortedOptions: Observable<any[]>;
 
     constructor(
         private fb: FormBuilder,
@@ -50,8 +52,16 @@ export class ProfileEditComponent implements OnInit {
         private profileManagementService: ProfileManagementService
     ) {
         this.appService.getProvince().subscribe(pro => {
-            this.province = pro;
+            this.province = this._sorter(pro, 'name');
         });
+
+        // this.appService.getDistrict().subscribe(dis => {
+        //     this.district = this._sorter(dis, 'name');
+        // });
+        
+        // this.appService.getWard().subscribe(ward => {
+        //     this.ward = this._sorter(ward, 'name');
+        // });
     }
 
     ngOnInit() {
@@ -62,17 +72,23 @@ export class ProfileEditComponent implements OnInit {
             username: [null, Validators.compose([])],
             email: [null, Validators.compose([Validators.required, CustomValidators.email])],
             phone: [null, Validators.compose([Validators.required])],
-            province: [null, Validators.compose([Validators.required])],
-            district: [null, Validators.compose([Validators.required])],
-            town: [null, Validators.compose([Validators.required])],
+            province: [{
+                value: -1,
+            }, Validators.compose([Validators.required])],
+            district: [{
+                value: -1
+            }, Validators.compose([Validators.required])],
+            town: [{
+                value: -1
+            }, Validators.compose([Validators.required])],
             files: [null, Validators.compose([Validators.required])],
             image: [null, Validators.compose([])],
         });
         this.form_Pass = this.fbPass.group({
-            passwordhistory: passwordhistory,
-            passwordchange: passwordchange,
-            confirmPasswordchange: confirmPasswordchange
-        });
+            passwordhistory: [null, Validators.compose([Validators.required])],
+            passwordchange: [null, Validators.compose([Validators.required])],
+            confirmPasswordchange: [null, Validators.compose([Validators.required])],
+        })
         const token: string = this.appService.getCookie(tokenName);
         this.profileManagementService.getUserInfo(token).subscribe((val: IUsers )=> {
             this.form.patchValue({
@@ -81,9 +97,9 @@ export class ProfileEditComponent implements OnInit {
                 birthday: val.birthday,
                 email: val.email,
                 phone: val.phone,
-                provide: val.province,
+                province: val.province,
                 district: val.district,
-                town: val.town
+                town: val.town,
             });
         })
     }
@@ -101,8 +117,44 @@ export class ProfileEditComponent implements OnInit {
         });
     }
 
+    provinceChange() {
+        this.form.controls.district.enable()
+    }
+    
+    districtChange() {
+        this.form.controls.town.enable();
+    }
+
+    loadDistrict(idPro) {
+        if(idPro) {
+            this.appService.getDistrictByProvinceId(idPro).subscribe(data => {
+                this.district = this._sorter(data, 'name');
+            })
+        }
+    }
+
+    loadTown(idDis) {
+        if(idDis) {
+            this.appService.getWardByDistrictId(idDis).subscribe(data => {
+                this.ward = this._sorter(data, 'name');
+            })
+        }
+    }
+
     vietnamese() {
         this.adapter.setLocale('vi');
+    }
+
+    displayFn(obj: any): string {
+        return obj.name;
+    }
+
+    private _sorter(arr: Array<any>, name: string): Array<any> {
+        return sortBy(arr, [
+            (element) => {
+                return element[name]
+            }
+        ])
     }
 
     onSubmit_info(){

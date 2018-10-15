@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { api_url, api_port } from './constants';
 
@@ -39,11 +39,29 @@ export class AppService {
     return this.http.get<any[]>(host + '/province');
   }
 
-  getDistrictid(): Observable<any[]>{
+  getDistrict(): Observable<any[]>{
     return this.http.get<any[]>(host + '/district');
   }
+  
+  getDistrictByProvinceId(proId): Observable<any[]>{
+    return this.http.get<any[]>(host + '/district', {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'provinceid': proId
+			})
+    });
+  }
 
-  getTown(): Observable<any[]>{
-    return this.http.get<any[]>(host + '/town');
+  getWard(): Observable<any[]>{
+    return this.http.get<any[]>(host + '/ward');
+  }
+  
+  getWardByDistrictId(disId): Observable<any[]>{
+    return this.http.get<any[]>(host + '/ward', {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'districtid': disId
+			})
+    });
   }
 }
