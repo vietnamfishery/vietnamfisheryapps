@@ -58,6 +58,10 @@ export const AppRoutes: Routes = [
 				loadChildren: './stocking-management/stocking-management.module#StockingManagementModule'
 			},
 			{
+				path: 'quan-ly-tang-truong',
+				loadChildren: './growths-management/growths-management.module#GrowthsManagementModule'
+			},
+			{
 				path: 'quan-ly-chuan-bi-ao',
 				loadChildren: './pondprepare-management/pondprepare-management.module#PondprepareManagementModule'
 			}

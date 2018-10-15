@@ -48,8 +48,8 @@ export class AddPondComponent implements OnInit {
 
   zoom: number = 10;
   // title: string = 'Địa chỉ trên bảng đồ';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = 21.023874542759508;
+  lng: number = 105.80530600759744;
 
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)

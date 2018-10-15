@@ -28,8 +28,6 @@ export class WasteManagementComponent implements OnInit {
     this.step--;
   }
   
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
 }

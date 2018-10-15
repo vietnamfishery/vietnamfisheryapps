@@ -58,6 +58,12 @@ const MENUITEMS: Array<Menu> = [
     icon: 'pan_tool'
   },
   {
+    state: 'quan-ly-tang-truong',
+    name: 'Quản lý tăng trưởng',
+    type: 'link',
+    icon: 'timeline'
+  },
+  {
     state: 'quan-ly-kho',
     name: 'Quản lý kho',
     type: 'sub',

@@ -13,12 +13,14 @@
 
         <div class="pa-1">
           <h3 class="mt-1">Trạng thái</h3>
-          <div class="pb-1">
-            <mat-checkbox>Đang nuôi</mat-checkbox>
-          </div>
-          <div class="pb-1">
-            <mat-checkbox>Trống</mat-checkbox>
-          </div>
+          <mat-radio-group>
+            <div class="pb-1">
+              <mat-radio-button value="1">Đang nuôi</mat-radio-button>
+            </div>
+            <div class="pb-1">
+              <mat-radio-button value="2">Ao trống</mat-radio-button>
+            </div>
+          </mat-radio-group>
         </div>
         <hr>
         <div class="pa-1">
@@ -43,7 +45,7 @@
         <button (click)="productsnav.toggle()" mat-icon-button>
           <mat-icon>short_text</mat-icon>
         </button>
-        <span class="mr-1 ml-1">Lọc</span>
+        <span class="mr-1 ml-1">Xem theo</span>
       </mat-toolbar>
 
       <div fxLayout="row wrap">
