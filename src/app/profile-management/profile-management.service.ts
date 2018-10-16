@@ -64,11 +64,12 @@ export class ProfileManagementService {
 				'Authorization': token
 			})
 		}
-		const fd = new FormData();
+		// const fd = new FormData();
 		// const { password, passwordchange } = user;
 		// fd.append('password', password);
 		// fd.append('password', passwordchange);
-		fd.append('action', actionUserServices.CHANGEUSERPASSWORD);
-		return this.http.post(host + '/user/updateUserPassword', fd, h);
+		// fd.append('action', actionUserServices.CHANGEUSERPASSWORD);
+		user[`action`] = actionUserServices.CHANGEUSERPASSWORD;
+		return this.http.post(host + '/user/updateUserPassword', h);
 	}
 }

@@ -21,10 +21,20 @@
   font-weight: 500;
 }
 agm-map {
-  height: 500px;
+  height: 450px;
 }
 
 .img-responsive {
   background-position: center;
   overflow: hidden;
+}
+
+.title-maps {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.hr {
+  color: #e2e2e2;
+  border: 0.8px solid #e2e2e2;
 }

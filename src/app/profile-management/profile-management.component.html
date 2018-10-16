@@ -13,9 +13,10 @@
               <div fxFlex="45" class="text-xs-center text">
                 <h1 class="ma-0"><b>{{ userInfo.lastname || '' }}</b>&nbsp;<b>{{ userInfo.firstname || '' }}</b></h1>
                 <p class="mt-xs mb-xs" *ngIf="userInfo && bday != null">{{ bday || '' }}</p>
-                <p class="mt-xs mb-xs" *ngIf="userInfo && userInfo.war != null"><small>{{ userInfo.war.name || '' }}, {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></p>
+                <p class="mt-xs mb-xs" *ngIf="userInfo && userInfo.war != null"><small>{{ userInfo.war.name || '' }},
+                    {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></p>
                 <p class="mt-xs mb-xs"><small>{{ userInfo.email || '' }}</small></p>
-                <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700" (click)="dsklfjbgsdjkbfjhsdb()">Cập
+                <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700">Cập
                   nhật</button>
               </div>
               <div fxFlex="10" fxLayoutAlign="center center">
@@ -49,10 +50,11 @@
         </mat-card>
       </div>
     </div>
-    <br *ngIf="userInfo.long != null && userInfo.lat != null">
-    <mat-card >
+    <mat-card *ngIf="userInfo.district && userInfo.town">
       <mat-card-content>
-        <h2> {{ title }}</h2>
+          <h2 class="title-maps"> {{ title }}</h2>
+          <hr class="hr">
+          <br>
         <agm-map [latitude]="lat" [longitude]="lng">
 
           <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
