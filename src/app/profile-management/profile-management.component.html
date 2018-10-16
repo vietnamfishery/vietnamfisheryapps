@@ -12,7 +12,6 @@
             <div fxLayout="row">
               <div fxFlex="45" class="text-xs-center text">
                 <h1 class="ma-0"><b>{{ userInfo.lastname || '' }}</b>&nbsp;<b>{{ userInfo.firstname || '' }}</b></h1>
-                <!-- <p class="mt-xs mb-xs">20/05/1996</p> -->
                 <p class="mt-xs mb-xs" *ngIf="userInfo && bday != null">{{ bday || '' }}</p>
                 <p class="mt-xs mb-xs" *ngIf="userInfo && userInfo.war != null"><small>{{ userInfo.war.name || '' }}, {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></p>
                 <p class="mt-xs mb-xs"><small>{{ userInfo.email || '' }}</small></p>
@@ -51,24 +50,20 @@
       </div>
     </div>
     <br *ngIf="userInfo.long != null && userInfo.lat != null">
-    <mat-card *ngIf="userInfo.long != null && userInfo.lat != null">
+    <mat-card >
       <mat-card-content>
         <h2> {{ title }}</h2>
-        <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
+        <agm-map [latitude]="lat" [longitude]="lng">
 
           <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
-            [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+            [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable">
 
             <agm-info-window>
-              <strong>Võ Hoài Phong</strong><br>
-              <strong>An Minh, Kiên Giang</strong>
+              <strong>{{ userInfo.lastname || '' }} {{ userInfo.firstname || '' }}</strong><br>
+              <span>{{ userInfo.war.name || '' }}, {{ userInfo.dis.name || '' }} {{ userInfo.pro.name || '' }}</span>
             </agm-info-window>
 
           </agm-marker>
-
-          <!-- <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="true"
-            [editable]="true">
-          </agm-circle> -->
 
         </agm-map>
       </mat-card-content>

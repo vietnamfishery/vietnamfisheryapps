@@ -35,6 +35,21 @@ export class ProfileManagementComponent implements OnInit {
     lat: number = 10.036344152103853;
     lng: number = 105.78569861415724;
 
+    getlocation(str) {
+        if(str){
+          var lat = str.split(', ')[0].slice(0, -1);
+          var long = str.split(', ')[1].slice(0, -1);
+          return {
+            lat: (lat.split(" ")[0] - 0) + (lat.split(" ")[1] / 60) + (lat.split(" ")[2] / 3600),
+            long: (long.split(" ")[0] - 0) + (long.split(" ")[1] / 60) + (long.split(" ")[2] / 3600)
+          }
+        }
+        return {
+          lat: undefined,
+          long: undefined
+        }
+      }
+
     // thong tin user
     private userInfo: IUsers = {
         address: '',
@@ -64,14 +79,7 @@ export class ProfileManagementComponent implements OnInit {
     bday: string;
 
 
-    private markers: marker[] = [
-        {
-            lat: 10.03082457630006,
-            lng: 105.76896160840988,
-            label: 'Vo Hoai Phong',
-            draggable: true
-        }
-    ]
+    private markers: marker[] = []
 
     constructor(
         private profileManagementService: ProfileManagementService,
@@ -83,32 +91,25 @@ export class ProfileManagementComponent implements OnInit {
         const token: string = this.appService.getCookie(tokenName);
         this.profileManagementService.getUserInfo(token).subscribe((res: any) => {
             this.userInfo = res;
-            this.bday = moment(res.birthday).format(`DD - MM - YYYY`)
-            this.userInfo[`lat`] = null;
-            this.userInfo[`long`] = null;
+            this.bday = moment(res.birthday).format(`DD - MM - YYYY`);
+            const maker: any= {
+                lat: this.getlocation(res.war.location || res.dis.location).lat,
+                lng: this.getlocation(res.war.location || res.dis.location).long,
+                label: res.lastname + " " + res.firstname,
+                draggable: false
+            }
+            this.markers.push(maker);
+            // this.userInfo[`lat`] = null;
+            // this.userInfo[`long`] = null;
+            this.lat = this.getlocation(res.war.location || res.dis.location).lat;
+            this.lng = this.getlocation(res.war.location || res.dis.location).long;
             console.log(this.userInfo);
         });
     }
 
 
     clickedMarker(label: string, index: number) {
-        console.log(`clicked the marker: ${label || index}`)
+        // console.log(`clicked the marker: ${label || index}`);
     }
-    mapClicked($event: any) {
-        this.markers.push({
-            lat: $event.coords.lat,
-            lng: $event.coords.lng,
-            draggable: true
-        });
-        console.log($event);
-    }
-
-    markerDragEnd(m: marker, $event: MouseEvent) {
-        console.log('dragEnd', m, $event);
-    }
-
-
-    dsklfjbgsdjkbfjhsdb() {
-
-    }
+    
 }
