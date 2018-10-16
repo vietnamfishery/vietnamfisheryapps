@@ -13,7 +13,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { sortBy } from 'lodash';
 
-const passwordhistory = new FormControl('', Validators.required);
 const passwordchange = new FormControl('', Validators.required);
 const confirmPasswordchange = new FormControl('', CustomValidators.equalTo(passwordchange));
 
@@ -58,7 +57,7 @@ export class ProfileEditComponent implements OnInit {
         // this.appService.getDistrict().subscribe(dis => {
         //     this.district = this._sorter(dis, 'name');
         // });
-        
+
         // this.appService.getWard().subscribe(ward => {
         //     this.ward = this._sorter(ward, 'name');
         // });
@@ -81,16 +80,16 @@ export class ProfileEditComponent implements OnInit {
             town: [{
                 value: -1
             }, Validators.compose([Validators.required])],
-            files: [null, Validators.compose([Validators.required])],
+            files: [null, Validators.compose([])],
             image: [null, Validators.compose([])],
         });
         this.form_Pass = this.fbPass.group({
             passwordhistory: [null, Validators.compose([Validators.required])],
-            passwordchange: [null, Validators.compose([Validators.required])],
-            confirmPasswordchange: [null, Validators.compose([Validators.required])],
+            passwordchange: passwordchange,
+            confirmPasswordchange: confirmPasswordchange,
         })
         const token: string = this.appService.getCookie(tokenName);
-        this.profileManagementService.getUserInfo(token).subscribe((val: IUsers )=> {
+        this.profileManagementService.getUserInfo(token).subscribe((val: IUsers) => {
             this.form.patchValue({
                 lastname: val.lastname,
                 firstname: val.firstname,
@@ -120,13 +119,13 @@ export class ProfileEditComponent implements OnInit {
     provinceChange() {
         this.form.controls.district.enable()
     }
-    
+
     districtChange() {
         this.form.controls.town.enable();
     }
 
     loadDistrict(idPro) {
-        if(idPro) {
+        if (idPro) {
             this.appService.getDistrictByProvinceId(idPro).subscribe(data => {
                 this.district = this._sorter(data, 'name');
             })
@@ -134,7 +133,7 @@ export class ProfileEditComponent implements OnInit {
     }
 
     loadTown(idDis) {
-        if(idDis) {
+        if (idDis) {
             this.appService.getWardByDistrictId(idDis).subscribe(data => {
                 this.ward = this._sorter(data, 'name');
             })
@@ -157,11 +156,16 @@ export class ProfileEditComponent implements OnInit {
         ])
     }
 
-    onSubmit_info(){
+    onSubmit_info() {
         const token: string = this.appService.getCookie(tokenName);
         // console.log(this.form.value);
         this.profileManagementService.updateUserInfo(this.form.value, token).subscribe((res: IUsers) => {
             console.log(res);
         })
+    }
+
+    onSubmit_Pass() {
+        delete this.form_Pass.value.confirmPasswordchange;
+        console.log(this.form_Pass.value)
     }
 }

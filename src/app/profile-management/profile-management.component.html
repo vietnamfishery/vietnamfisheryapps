@@ -13,8 +13,8 @@
               <div fxFlex="45" class="text-xs-center text">
                 <h1 class="ma-0"><b>{{ userInfo.lastname || '' }}</b>&nbsp;<b>{{ userInfo.firstname || '' }}</b></h1>
                 <!-- <p class="mt-xs mb-xs">20/05/1996</p> -->
-                <!-- <p class="mt-xs mb-xs" *ngIf="userInfo && userInfo.birthday != null">{{ userInfo.birthday || '' }}</p> -->
-                <p class="mt-xs mb-xs" *ngIf="userInfo && userInfo.town != null"><small>{{ userInfo.town || '' }}, {{ userInfo.district || '' }}, {{ userInfo.province || '' }}</small></p>
+                <p class="mt-xs mb-xs" *ngIf="userInfo && bday != null">{{ bday || '' }}</p>
+                <p class="mt-xs mb-xs" *ngIf="userInfo && userInfo.war != null"><small>{{ userInfo.war.name || '' }}, {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></p>
                 <p class="mt-xs mb-xs"><small>{{ userInfo.email || '' }}</small></p>
                 <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700" (click)="dsklfjbgsdjkbfjhsdb()">Cập
                   nhật</button>

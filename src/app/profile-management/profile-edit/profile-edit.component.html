@@ -89,8 +89,8 @@
               </div>
               <hr>
               <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-                <button mat-raised-button color="primary" class="btn-block" type="submit">Lưu</button>
-                <button mat-raised-button color="warn">Huỷ</button>
+                <button mat-raised-button color="primary" class="btn-block" [disabled]="!form.valid" type="submit">Lưu</button>
+                <button mat-raised-button color="warn" routerLink="/thong-tin-ca-nhan">Huỷ</button>
               </mat-card-actions>
 
             </form>
@@ -100,11 +100,6 @@
           <ng-template matTabLabel>Mật khẩu</ng-template>
           <mat-card-content>
             <form [formGroup]="form_Pass" (ngSubmit)="onSubmit_Pass()" fxLayout="column" fxFlexOffset="15" fxFlex="70">
-
-              <mat-form-field class="mb-1">
-                <input matInput placeholder="Tên tài khoản" [formControl]="form.controls['username']" autocomplete="off"
-                  readonly value="VoHoaiPhong">
-              </mat-form-field>
 
               <mat-form-field class="mb-1">
                 <input matInput placeholder="Mật khẩu cũ" type="password" [formControl]="form_Pass.controls['passwordhistory']"
@@ -130,8 +125,8 @@
                 chưa đúng.</small>
               <hr>
               <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-                <button mat-raised-button color="primary" class="btn-block" type="submit">Lưu</button>
-                <button mat-raised-button color="warn">Huỷ</button>
+                <button mat-raised-button color="primary" class="btn-block" [disabled]="!form_Pass.valid" type="submit">Lưu</button>
+                <button mat-raised-button color="warn" routerLink="/thong-tin-ca-nhan">Huỷ</button>
               </mat-card-actions>
             </form>
           </mat-card-content>

@@ -3,6 +3,7 @@ import { api_url, api_port } from '../constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { actionUserServices } from '../constants';
+import { fbind } from 'q';
 
 const host = api_url + ':' + api_port + '/api';
 
@@ -54,5 +55,20 @@ export class ProfileManagementService {
 		// fd.append('pondDepth', ponddepth);
 		// fd.append('pondStatus', pondstatus);
 		// console.log(file);
+	}
+
+	updateUserPassword(user: any, token: string): Observable<any>{
+		const h: any = {
+			headers: new HttpHeaders({
+				'Access-Control-Allow-Origin': '*',
+				'Authorization': token
+			})
+		}
+		const fd = new FormData();
+		// const { password, passwordchange } = user;
+		// fd.append('password', password);
+		// fd.append('password', passwordchange);
+		fd.append('action', actionUserServices.CHANGEUSERPASSWORD);
+		return this.http.post(host + '/user/updateUserPassword', fd, h);
 	}
 }

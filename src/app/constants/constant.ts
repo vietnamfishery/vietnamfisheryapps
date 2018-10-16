@@ -5,5 +5,6 @@ export enum actionUserServices {
     LOGOUT = 'logout',
     UPDATEMYPROFILE = 'updateMyProfile',
     DELETE = 'delete',
-    USERINFO = 'getUserInfo'
+    USERINFO = 'getUserInfo',
+    CHANGEUSERPASSWORD = 'updateUserPassword'
 }

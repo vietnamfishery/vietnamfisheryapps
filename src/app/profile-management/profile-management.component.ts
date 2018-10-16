@@ -3,6 +3,7 @@ import { ProfileManagementService } from './profile-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
 import { IUsers } from '../models/users';
+import * as moment from 'moment';
 
 interface marker {
     lat: number;
@@ -60,6 +61,8 @@ export class ProfileManagementComponent implements OnInit {
         username: ''
     };
 
+    bday: string;
+
 
     private markers: marker[] = [
         {
@@ -80,6 +83,7 @@ export class ProfileManagementComponent implements OnInit {
         const token: string = this.appService.getCookie(tokenName);
         this.profileManagementService.getUserInfo(token).subscribe((res: any) => {
             this.userInfo = res;
+            this.bday = moment(res.birthday).format(`DD - MM - YYYY`)
             this.userInfo[`lat`] = null;
             this.userInfo[`long`] = null;
             console.log(this.userInfo);
