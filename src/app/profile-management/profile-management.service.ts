@@ -56,20 +56,15 @@ export class ProfileManagementService {
 		// console.log(file);
 	}
 
-	updateUserPassword(user: any, token: string): Observable<any>{
+	updateUserPassword(data: any, token: string): Observable<any>{
 		const h: any = {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
 				'Authorization': token
 			})
 		}
-		// const fd = new FormData();
-		// const { password, passwordchange } = user;
-		// fd.append('password', password);
-		// fd.append('password', passwordchange);
-		// fd.append('action', actionUserServices.CHANGEUSERPASSWORD);
-		user[`action`] = actionUserServices.CHANGEUSERPASSWORD;
-		return this.http.post(host + '/user/updateUserPassword', h);
+		data[`action`] = actionUserServices.CHANGEUSERPASSWORD;
+		return this.http.post(host + '/user/updateUserPassword', data, h);
 	}
 
 	loadImage(id: string){

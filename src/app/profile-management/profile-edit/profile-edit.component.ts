@@ -33,6 +33,8 @@ export class ProfileEditComponent implements OnInit {
     private errorFile: Promise<string> | null = null;
     private updateErrorTimeout: boolean = false;
     private updateSuccessTimeout: boolean = false;
+    private updatePasswordFailTimeout: boolean = false;
+    private updatePasswordSuccessTimeout: boolean = false;
     timeOut: boolean = false;
 
     // for select field of form
@@ -84,9 +86,9 @@ export class ProfileEditComponent implements OnInit {
             images: [null, Validators.compose([])],
         });
         this.form_Pass = this.fbPass.group({
-            passwordhistory: [null, Validators.compose([Validators.required])],
-            passwordchange: passwordchange,
-            confirmPasswordchange: confirmPasswordchange,
+            oldPassword: [null, Validators.compose([Validators.required])],
+            newPassword: passwordchange,
+            confirmNewPassword: confirmPasswordchange,
         })
 
         const token: string = this.appService.getCookie(tokenName);
@@ -207,10 +209,19 @@ export class ProfileEditComponent implements OnInit {
 
     onSubmit_Pass() {
         const token: string = this.appService.getCookie(tokenName);
-        const user: IUsers = this.form_Pass.value;
-        delete this.form_Pass.value.confirmPasswordchange;
-        this.profileManagementService.updateUserPassword(user, token).subscribe((res: IUsers) => {
-            console.log(this.form_Pass.value);
+        delete this.form_Pass.value.confirmNewPassword;
+        this.profileManagementService.updateUserPassword(this.form_Pass.value, token).subscribe((res: any) => {
+            if(res.success) {
+                this.updatePasswordSuccessTimeout = !this.updatePasswordSuccessTimeout;
+                setTimeout(() => {
+                    this.updatePasswordSuccessTimeout = !this.updatePasswordSuccessTimeout;
+                }, 5000);
+            } else {
+                this.updatePasswordFailTimeout = !this.updatePasswordFailTimeout;
+                setTimeout(() => {
+                    this.updatePasswordFailTimeout = !this.updatePasswordFailTimeout;
+                }, 5000)
+            }
         });
     }
 

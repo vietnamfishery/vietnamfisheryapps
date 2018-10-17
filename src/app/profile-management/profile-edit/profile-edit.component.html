@@ -43,7 +43,7 @@
               <mat-form-field class="p-1">
                 <mat-select placeholder="Tỉnh / Thành phố" [formControl]="form.controls['province']">
                   <mat-option >None</mat-option>
-                  <mat-option *ngFor="let pro of province" [value]="pro.provinceid">{{ pro.name }}</mat-option>
+                  <mat-option *ngFor="let pro of province" [value]="pro ? pro.provinceid : null">{{ pro ? pro.name : null }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <small *ngIf="form.controls['province'].hasError('required') && form.controls['province'].touched" class="mat-text-warn">Bạn
@@ -52,7 +52,7 @@
               <mat-form-field class="p-1">
                 <mat-select placeholder="Quận / Huyện" [formControl]="form.controls['district']" (click)="loadDistrict(form.value.province)">
                   <mat-option >None</mat-option>
-                  <mat-option *ngFor="let dis of district" [value]="dis.districtid">{{ dis.name }}</mat-option>
+                  <mat-option *ngFor="let dis of district" [value]="dis ? dis.districtid : null">{{ dis ? dis.name : null }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <small *ngIf="form.controls['district'].hasError('required') && form.controls['district'].touched" class="mat-text-warn">Bạn
@@ -61,7 +61,7 @@
               <mat-form-field class="p-1">
                 <mat-select placeholder="Xã / Thị Trấn" [formControl]="form.controls['town']" (click)="loadTown(form.value.district)">
                   <mat-option>None</mat-option>
-                  <mat-option *ngFor="let w of ward" [value]="w.wardid">{{ w.name }}</mat-option>                  
+                  <mat-option *ngFor="let w of ward" [value]=" w ? w.wardid : null">{{ w ? w.name : null }}</mat-option>                  
                 </mat-select>
               </mat-form-field>
               <small *ngIf="form.controls['town'].hasError('required') && form.controls['town'].touched" class="mat-text-warn">Bạn
@@ -134,28 +134,30 @@
             <form [formGroup]="form_Pass" (ngSubmit)="onSubmit_Pass()" fxLayout="column" fxFlexOffset="15" fxFlex="70">
 
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Mật khẩu cũ" type="password" [formControl]="form_Pass.controls['passwordhistory']"
+                <input matInput placeholder="Mật khẩu cũ" type="password" [formControl]="form_Pass.controls['oldPassword']"
                   autocomplete="off">
               </mat-form-field>
-              <small *ngIf="form_Pass.controls['passwordhistory'].hasError('required') && form_Pass.controls['passwordhistory'].touched"
+              <small *ngIf="form_Pass.controls['oldPassword'].hasError('required') && form_Pass.controls['oldPassword'].touched"
                 class="mat-text-warn">Mật khẩu cũ thay đổi không được để trống.</small>
 
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Mật khẩu thay đổi" type="password" [formControl]="form_Pass.controls['passwordchange']"
+                <input matInput placeholder="Mật khẩu thay đổi" type="password" [formControl]="form_Pass.controls['newPassword']"
                   autocomplete="off">
               </mat-form-field>
-              <small *ngIf="form_Pass.controls['passwordchange'].hasError('required') && form_Pass.controls['passwordchange'].touched"
+              <small *ngIf="form_Pass.controls['newPassword'].hasError('required') && form_Pass.controls['newPassword'].touched"
                 class="mat-text-warn">Mật khẩu thay đổi không được để trống.</small>
               <mat-form-field class="mb-1">
-                <input matInput placeholder="Xác nhận mật khẩu thay đổi" type="password" [formControl]="form_Pass.controls['confirmPasswordchange']"
+                <input matInput placeholder="Xác nhận mật khẩu thay đổi" type="password" [formControl]="form_Pass.controls['confirmNewPassword']"
                   autocomplete="off">
               </mat-form-field>
-              <small *ngIf="form_Pass.controls['confirmPasswordchange'].hasError('required') && form_Pass.controls['confirmPasswordchange'].touched"
+              <small *ngIf="form_Pass.controls['confirmNewPassword'].hasError('required') && form_Pass.controls['confirmNewPassword'].touched"
                 class="mat-text-warn">Mật khẩu xác nhận không được để trống.</small>
-              <small *ngIf="form_Pass.controls['confirmPasswordchange'].errors?.equalTo" class="mat-text-warn">Mật khẩu xác
+              <small *ngIf="form_Pass.controls['confirmNewPassword'].errors?.equalTo" class="mat-text-warn">Mật khẩu xác
                 nhận
                 chưa đúng.</small>
               <hr>
+              <mat-card class="mat-red-700" *ngIf="updatePasswordFailTimeout"><div style="height: 20px;">Cập nhật lỗi, vui lòng thử lại sau!</div></mat-card>
+              <mat-card class="mat-green-700" *ngIf="updatePasswordSuccessTimeout"><div style="height: 20px;">Cập nhật thành công! Vui lòng đợi...</div></mat-card>
               <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
                 <button mat-raised-button color="primary" class="btn-block" [disabled]="!form_Pass.valid" type="submit">Lưu</button>
                 <button mat-raised-button color="warn" routerLink="/thong-tin-ca-nhan">Huỷ</button>
