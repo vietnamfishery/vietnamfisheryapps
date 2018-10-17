@@ -7,5 +7,11 @@ export enum actionUserServices {
     DELETE = 'delete',
     USERINFO = 'getUserInfo',
     CHANGEUSERPASSWORD = 'updateUserPassword',
-    UPLOAD_IMAGE = 'uploadImage'
+    UPLOAD_IMAGE = 'uploadImage',
+}
+
+export enum ActionServer { 
+    GET = 'select', 
+    INSERT = 'insert', 
+    UPDATE = 'update' 
 }

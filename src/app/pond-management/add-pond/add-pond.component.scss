@@ -33,5 +33,52 @@
 }
 
 agm-map {
-    height: 250px;
+    height: 400px;
 }
+
+
+label {
+    .imgLoading {
+      width: auto;
+      height: 360px;
+    }
+    cursor: pointer;
+  }
+  
+  #lable{
+    background: rgba(0, 0, 0, 0.75);
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 360px;
+    z-index: 1000;
+  //   display: block;
+  
+    hr{
+        border:0;
+        margin:0;
+        width:4%;
+        height:4%;
+        position:absolute;
+        border-radius:50%;
+        animation:spin 2s ease infinite;
+      }
+  
+      div{
+      margin: 46%;
+      }
+  }
+  
+  #lable :first-child{background:rgba(60, 186, 84, 1);animation-delay:-1.5s}
+  #lable :nth-child(2){background:rgba(244, 194, 13, 1);animation-delay:-1s}
+  #lable :nth-child(3){background: rgba(219, 50, 54, 1);animation-delay:-0.5s}
+  #lable :last-child{background: rgba(72, 133, 237, 1)}
+  
+  @keyframes spin{
+      0%,100%{transform:translate(0)}
+      25%{transform:translate(160%)}
+      50%{transform:translate(160%, 160%)}
+      75%{transform:translate(0, 160%)}
+  }

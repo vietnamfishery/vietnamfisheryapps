@@ -101,7 +101,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatProgressBarModule,
     FlexLayoutModule,
     BidiModule,
-    AgmCoreModule.forRoot({ apiKey: 'YOURAPIKEY' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDdRw3FWa-aducrcuof3jHJ61BW_9kGe9c' }),
     PerfectScrollbarModule
   ],
   providers: [AppService],
