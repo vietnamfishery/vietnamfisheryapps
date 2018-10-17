@@ -13,7 +13,6 @@ import { AgmCoreModule } from '@agm/core';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { ProfileManagementService } from './profile-management.service';
 import { FileNamePipe } from './file-name.pipe';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
@@ -34,7 +33,6 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     FileUploadModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    LazyLoadImageModule,
     ProfileManagementRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDdRw3FWa-aducrcuof3jHJ61BW_9kGe9c'
