@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
+import { PondManagementService } from '../pond-management.service';
 
 interface marker {
   lat: number;
@@ -24,10 +25,10 @@ interface marker {
 export class DetailPondComponent implements OnInit {
 
   public form: FormGroup;
-
   constructor(
     private fb: FormBuilder,
-    private adapter: DateAdapter<any>
+    private adapter: DateAdapter<any>,
+    private pondManagementService: PondManagementService
   ) { }
 
   ngOnInit() {
@@ -38,10 +39,10 @@ export class DetailPondComponent implements OnInit {
       ponddepth: [null, Validators.compose([Validators.required])],
       pondstatus: [null, Validators.compose([Validators.required])]
     });
+    this.form.disable();
   }
 
   zoom: number = 10;
-  // title: string = 'Địa chỉ trên bản đồ';
   lat: number = 10.03082457630006;
   lng: number = 105.76896160840988;
 
@@ -71,5 +72,15 @@ export class DetailPondComponent implements OnInit {
       draggable: true
     }
   ]
+
+  @ViewChild("name") nameField: ElementRef;
+  editName(): void {
+    this.nameField.nativeElement.focus();
+  }
+  
+  changeEdit() {
+    this.form.enable();
+    this.editName();
+  }
 
 }
