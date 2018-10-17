@@ -12,10 +12,11 @@
             <div fxLayout="row">
               <div fxFlex="45" class="text-xs-center text">
                 <h1 class="ma-0"><b>{{ userInfo.lastname || '' }}</b>&nbsp;<b>{{ userInfo.firstname || '' }}</b></h1>
-                <p class="mt-xs mb-xs" *ngIf="userInfo && bday != null">{{ bday || '' }}</p>
-                <p class="mt-xs mb-xs" *ngIf="userInfo && userInfo.war != null"><small>{{ userInfo.war.name || '' }},
-                    {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></p>
-                <p class="mt-xs mb-xs"><small>{{ userInfo.email || '' }}</small></p>
+                <p><span class="mt-xs mb-xs text-label">Ngày sinh:</span><span class="mt-xs mb-xs" ><small> {{ bday || 'Chưa cập nhật' }}</small></span></p>
+                <p><span class="mt-xs mb-xs text-label">SĐT:</span><small> {{ userInfo.phone || 'Chưa cập nhật' }}</small></p>
+                <p *ngIf="userInfo && userInfo.war != null && userInfo.dis != null && userInfo.pro != null"><span class="mt-xs mb-xs text-label">Địa chỉ:</span><span class="mt-xs mb-xs"><small> {{ userInfo.war.name || '' }},
+                  {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></span></p>
+                <p><span class="mt-xs mb-xs text-label">Email:</span><span class="mt-xs mb-xs"><small> {{ userInfo.email || 'Chưa cập nhật' }}</small></span></p>
                 <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700">Cập
                   nhật</button>
               </div>
@@ -25,9 +26,9 @@
                 <figure>
                   <div class="text-xs-center">
                     <img src={{userInfo.images||null}} alt="" class="radius-circle img-responsive" width="128" height="128">
-                    <div class="text-md mt10">{{ userInfo.username || '' }}</div>
+                    <div class="text-lg mt10 text-username">{{ userInfo.username || '' }}</div>
                   </div>
-                  <div class="text-xs-center"><small>{{ userInfo.phone || '' }}</small></div>
+                  <!-- <div class="text-xs-center"><small>{{ userInfo.phone || '' }}</small></div> -->
                 </figure>
               </div>
             </div>
@@ -52,9 +53,9 @@
     </div>
     <mat-card *ngIf="userInfo.district && userInfo.town">
       <mat-card-content>
-          <h2 class="title-maps"> {{ title }}</h2>
-          <hr class="hr">
-          <br>
+        <h2 class="title-maps"> {{ title }}</h2>
+        <hr class="hr">
+        <br>
         <agm-map [latitude]="lat" [longitude]="lng">
 
           <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"

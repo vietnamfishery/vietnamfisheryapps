@@ -25,11 +25,11 @@
     <div class="pb-1">
       <mat-checkbox (change)="options.dir = (options.dir == 'rtl' ? 'ltr' : 'rtl'); sendOptions()">RTL</mat-checkbox>
     </div>
-    <div class="pb-0">
+    <!-- <div class="pb-0">
       <mat-select placeholder="Language" class="mt-1" [(ngModel)]="currentLang" #langSelect="ngModel" (ngModelChange)="translate.use(currentLang)">
         <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</mat-option>
       </mat-select>
-   </div>
+   </div> -->
   </mat-card-content>
 </mat-card>
 <!-- /Demo Purposes Only -->
