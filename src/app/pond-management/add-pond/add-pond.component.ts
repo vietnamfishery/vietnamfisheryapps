@@ -56,7 +56,7 @@ export class AddPondComponent implements OnInit {
       createCost: [null, Validators.compose([Validators.required])],
       pondLatitude: [null, Validators.compose([])],
       pondLongitude: [null, Validators.compose([])],
-      image: [null, Validators.compose([])],
+      images: [null, Validators.compose([])],
     });
   }
 

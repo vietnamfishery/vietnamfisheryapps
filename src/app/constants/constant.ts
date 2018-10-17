@@ -11,7 +11,8 @@ export enum actionUserServices {
 }
 
 export enum ActionServer { 
-    GET = 'select', 
-    INSERT = 'insert', 
-    UPDATE = 'update' 
+    GET = 'select',
+    GETAUTH = 'selectAuth',
+    INSERT = 'insert',
+    UPDATE = 'update'
 }
