@@ -105,20 +105,17 @@ export class ProfileManagementComponent implements OnInit {
                 // this.userInfo[`long`] = null;
                 this.lat = this.getlocation(res.war.location || res.dis.location).lat;
                 this.lng = this.getlocation(res.war.location || res.dis.location).long;
+                this.profileManagementService.loadImage(res.images).subscribe(data => {
+                    if(data) {
+                        this.imageLink = (data as any).data;
+                    }
+                })
             }else {
                 return {
                     lat: undefined,
                     long: undefined
                 }
-            }
-            this.markers.push(maker);
-            this.lat = this.getlocation(res.war.location || res.dis.location).lat;
-            this.lng = this.getlocation(res.war.location || res.dis.location).long;
-            this.profileManagementService.loadImage(res.images).subscribe(data => {
-                if(data) {
-                    this.imageLink = (data as any).data;
-                }
-            })
+            }            
         });
     }
 
