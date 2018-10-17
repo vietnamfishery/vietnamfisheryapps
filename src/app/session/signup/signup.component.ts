@@ -38,7 +38,6 @@ export class SignupComponent implements OnInit {
     delete this.form.value.confirmPassword;
     console.log(this.form);
     const user: IUsers = this.form.value;
-    console.log(res);
     this.sessionService.register(user).subscribe(res => {
       if(res.username){
         this.form.reset();
