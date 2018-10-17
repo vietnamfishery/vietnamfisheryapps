@@ -13,7 +13,7 @@
       <div>
         <form [formGroup]="form" style="font-size:20px" (ngSubmit)="onSubmit()">
           <mat-card-content fxLayout="column">
-            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
                 <input matInput placeholder="Họ" type="text" [formControl]="form.controls['lastname']" required
@@ -24,7 +24,7 @@
                   autocomplete="off">
               </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <div fxFlex="100">
                 <small *ngIf="form.controls['lastname'].hasError('required') && form.controls['lastname'].touched"
@@ -44,7 +44,7 @@
             </mat-form-field>
             <small *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched" class="mat-text-warn">Tên
               tài khoản không được để trống.</small>
-            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
                 <input matInput name="password" type="password" placeholder="Mật khẩu" [formControl]="form.controls['password']"
@@ -55,7 +55,7 @@
                   autocomplete="off">
               </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <div fxFlex="100">
                 <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched"

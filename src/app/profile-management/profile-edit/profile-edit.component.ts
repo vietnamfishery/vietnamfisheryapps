@@ -206,8 +206,12 @@ export class ProfileEditComponent implements OnInit {
     }
 
     onSubmit_Pass() {
+        const token: string = this.appService.getCookie(tokenName);
+        const user: IUsers = this.form_Pass.value;
         delete this.form_Pass.value.confirmPasswordchange;
-        console.log(this.form_Pass.value)
+        this.profileManagementService.updateUserPassword(user, token).subscribe((res: IUsers) => {
+            console.log(this.form_Pass.value);
+        });
     }
 
     getImage(): any {

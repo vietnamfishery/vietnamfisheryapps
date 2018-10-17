@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { api_url, api_port } from '../constants/api';
+import { Router } from '@angular/router';
 // import { headers } from '../constants/http';
 
 const host = api_url + ':' + api_port + '/api';
@@ -13,7 +14,8 @@ headers.append('Content-Type', 'multipart/form-data');
 export class PondManagementService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
 
   }

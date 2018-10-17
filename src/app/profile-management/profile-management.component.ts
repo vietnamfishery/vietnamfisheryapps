@@ -32,24 +32,24 @@ export class ProfileManagementComponent implements OnInit {
     };
 
     zoom: number = 10;
-    title: string = 'ĐỊA CHỈ TRÊN BẢN ĐỒ';
+    title: string = 'Vị Trí Trên Bản Đồ';
     lat: number = 10.036344152103853;
     lng: number = 105.78569861415724;
 
     getlocation(str) {
-        if(str){
-          var lat = str.split(', ')[0].slice(0, -1);
-          var long = str.split(', ')[1].slice(0, -1);
-          return {
-            lat: (lat.split(" ")[0] - 0) + (lat.split(" ")[1] / 60) + (lat.split(" ")[2] / 3600),
-            long: (long.split(" ")[0] - 0) + (long.split(" ")[1] / 60) + (long.split(" ")[2] / 3600)
-          }
+        if (str) {
+            var lat = str.split(', ')[0].slice(0, -1);
+            var long = str.split(', ')[1].slice(0, -1);
+            return {
+                lat: (lat.split(" ")[0] - 0) + (lat.split(" ")[1] / 60) + (lat.split(" ")[2] / 3600),
+                long: (long.split(" ")[0] - 0) + (long.split(" ")[1] / 60) + (long.split(" ")[2] / 3600)
+            }
         }
         return {
-          lat: undefined,
-          long: undefined
+            lat: undefined,
+            long: undefined
         }
-      }
+    }
 
     // thong tin user
     private userInfo: IUsers = {
@@ -92,12 +92,24 @@ export class ProfileManagementComponent implements OnInit {
         const token: string = this.appService.getCookie(tokenName);
         this.profileManagementService.getUserInfo(token).subscribe((res: any) => {
             this.userInfo = res;
-            this.bday = moment(res.birthday).format(`DD - MM - YYYY`);
-            const maker: any= {
-                lat: this.getlocation(res.war.location || res.dis.location).lat,
-                lng: this.getlocation(res.war.location || res.dis.location).long,
-                label: res.lastname + " " + res.firstname,
-                draggable: false
+            this.bday = res.birthday ? moment(res.birthday).format(`DD - MM - YYYY`) : null;
+            if (res.district || res.town) {
+                const maker: any = {
+                    lat: this.getlocation(res.war.location || res.dis.location).lat,
+                    lng: this.getlocation(res.war.location || res.dis.location).long,
+                    label: res.lastname + " " + res.firstname,
+                    draggable: false
+                }
+                this.markers.push(maker);
+                // this.userInfo[`lat`] = null;
+                // this.userInfo[`long`] = null;
+                this.lat = this.getlocation(res.war.location || res.dis.location).lat;
+                this.lng = this.getlocation(res.war.location || res.dis.location).long;
+            }else {
+                return {
+                    lat: undefined,
+                    long: undefined
+                }
             }
             this.markers.push(maker);
             this.lat = this.getlocation(res.war.location || res.dis.location).lat;

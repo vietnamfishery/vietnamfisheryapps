@@ -21,7 +21,7 @@
   font-weight: 500;
 }
 agm-map {
-  height: 500px;
+  height: 450px;
 }
 
 .img-responsive {
@@ -44,4 +44,23 @@ agm-map {
   width: 360px;
   height: 360px;
   z-index: 1000;
+}
+
+
+.title-maps {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.hr {
+  color: #e2e2e2;
+  border: 0.8px solid #e2e2e2;
+}
+
+.text-username {
+  font-weight: 500;
+}
+
+.text-label {
+  font-weight: 550;
 }
