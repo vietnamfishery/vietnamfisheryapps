@@ -15,7 +15,7 @@
                 <p class="mt-xs mb-xs" *ngIf="userInfo && bday != null">{{ bday || '' }}</p>
                 <p class="mt-xs mb-xs" *ngIf="userInfo && userInfo.war != null"><small>{{ userInfo.war.name || '' }}, {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></p>
                 <p class="mt-xs mb-xs"><small>{{ userInfo.email || '' }}</small></p>
-                <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700" (click)="dsklfjbgsdjkbfjhsdb()">Cập
+                <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700">Cập
                   nhật</button>
               </div>
               <div fxFlex="10" fxLayoutAlign="center center">
@@ -23,7 +23,8 @@
               <div fxFlex="45">
                 <figure>
                   <div class="text-xs-center">
-                    <img src={{userInfo.images||null}} alt="" class="radius-circle img-responsive" width="128" height="128">
+                    <div class="imgLoading img-responsive" mat-card-image [ngStyle]="getImage()">
+                    </div>
                     <div class="text-md mt10">{{ userInfo.username || '' }}</div>
                   </div>
                   <div class="text-xs-center"><small>{{ userInfo.phone || '' }}</small></div>

@@ -36,9 +36,7 @@ export class ProfileManagementService {
 			})
 		}
 		const fd = new FormData();
-		const file: File = <File>user.files
-		const { lastname, firstname, birthday, email, phone, province, district, town } = user;
-		fd.append('image', file, file.name);
+		const { lastname, firstname, birthday, email, phone, province, district, town, images } = user;
 		fd.append('lastname', lastname);
 		fd.append('firstname', firstname);
 		fd.append('birthday', birthday);
@@ -47,6 +45,7 @@ export class ProfileManagementService {
 		fd.append('province', province);
 		fd.append('district', district);
 		fd.append('town', town);
+		fd.append('images', images);
 		fd.append('action', actionUserServices.UPDATEMYPROFILE);
 		return this.http.post(host + '/user/updateUser', fd, h);
 		// fd.append('image', file, file.name);
@@ -70,5 +69,22 @@ export class ProfileManagementService {
 		// fd.append('password', passwordchange);
 		fd.append('action', actionUserServices.CHANGEUSERPASSWORD);
 		return this.http.post(host + '/user/updateUserPassword', fd, h);
+	}
+
+	loadImage(id: string){
+		return this.http.get(host + '/getFile/image/' + id);
+	}
+
+	uploadImage(file: File, token: string): Observable<any> {
+		const h: any = {
+			headers: new HttpHeaders({
+				'Access-Control-Allow-Origin': '*',
+				'Authorization': token
+			})
+		}
+		const fd = new FormData();
+		fd.append('image', file, file.name);
+		fd.append('action', actionUserServices.UPLOAD_IMAGE);
+		return this.http.post(host + '/user/updateUser', fd, h);
 	}
 }

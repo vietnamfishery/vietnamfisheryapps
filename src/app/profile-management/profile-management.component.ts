@@ -18,6 +18,7 @@ interface marker {
     styleUrls: ['./profile-management.component.scss']
 })
 export class ProfileManagementComponent implements OnInit {
+    imageLink: string = '';
 
     pieChartColors: any[] = [{
         backgroundColor: ['#f44336', '#3f51b5', '#ffeb3b', '#4caf50', '#2196f']
@@ -99,11 +100,13 @@ export class ProfileManagementComponent implements OnInit {
                 draggable: false
             }
             this.markers.push(maker);
-            // this.userInfo[`lat`] = null;
-            // this.userInfo[`long`] = null;
             this.lat = this.getlocation(res.war.location || res.dis.location).lat;
             this.lng = this.getlocation(res.war.location || res.dis.location).long;
-            console.log(this.userInfo);
+            this.profileManagementService.loadImage(res.images).subscribe(data => {
+                if(data) {
+                    this.imageLink = (data as any).data;
+                }
+            })
         });
     }
 
@@ -112,4 +115,13 @@ export class ProfileManagementComponent implements OnInit {
         // console.log(`clicked the marker: ${label || index}`);
     }
     
+    getImage(): any {
+        let styles = {
+            'background-image': `url("${ this.imageLink || "https://via.placeholder.com/360x360" }")`,
+            'background-repeat': `no-repeat`,
+            'background-size': `cover`,
+            'background-position': 'center'
+        };
+        return styles;
+    }
 }

@@ -28,3 +28,20 @@ agm-map {
   background-position: center;
   overflow: hidden;
 }
+.imgLoading {
+  width: 128px !important;
+  height: 128px;
+  border-radius: 50% !important;
+  margin: auto !important;
+}
+
+#lable{
+  background: rgba(0, 0, 0, 0.75);
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 360px;
+  height: 360px;
+  z-index: 1000;
+}

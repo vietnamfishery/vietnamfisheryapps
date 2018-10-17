@@ -76,7 +76,7 @@
               <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Địa
                 chỉ email không hợp lệ.</small>
 
-              <div fxFlex="100" class="p-1">
+              <!-- <div fxFlex="100" class="p-1">
                 <h4 class="subtitle" style=" color: #aa9e9e">Thay đổi ảnh đại diện</h4>
                 <button mat-flat-button class="mat-green-700" type="button">
                   <mat-icon>face</mat-icon>
@@ -86,8 +86,40 @@
                 </button>&nbsp;
                 <span>{{ selectedFile | async }}</span>
                 <input id="fileToUpload" type="file" [formControl]="form.controls['image']" hidden (change)="onFileChange($event)">
-              </div>
-              <hr>
+              </div> -->
+              <mat-card class="example-card">
+                <mat-card-header class="mr-t-5">
+                  <mat-card-title>
+                    <button mat-flat-button class="mat-green-700" type="button">
+                      <mat-icon>cloud_upload</mat-icon>&nbsp;
+                      <label for="fileToUpload">
+                        Tải ảnh lên
+                      </label>
+                    </button>
+                  </mat-card-title>
+                  <mat-card-subtitle>
+                      <span class="mat-red-700" *ngIf="timeOut">{{ errorFile | async }}</span>
+                      <input id="fileToUpload" type="file" hidden (change)="onFileChange($event)">
+                  </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <label for="fileToUpload">
+                    <!-- <img mat-card-image src={{imageLink}} alt="" title="Nhấn để tải ảnh lên" width="50%" height="50%"> -->
+                    <div class="imgLoading" mat-card-image title="Nhấn để tải ảnh lên" [ngStyle]="getImage()">
+                      <div id="lable" *ngIf="preloader">
+                        <div>
+                          <hr/><hr/><hr/><hr/>
+                        </div>
+                      </div>
+                    </div>
+                  </label>
+                </mat-card-content>
+              </mat-card>
+              <br>
+              <mat-card class="mat-red-700" *ngIf="updateErrorTimeout"><div style="height: 20px;">Cập nhật lỗi, vui lòng thử lại sau!</div></mat-card>
+              <br>
+              <mat-card class="mat-green-700" *ngIf="updateSuccessTimeout"><div style="height: 20px;">Cập nhật thành công! Vui lòng đợi...</div></mat-card>
+              <br>
               <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
                 <button mat-raised-button color="primary" class="btn-block" [disabled]="!form.valid" type="submit">Lưu</button>
                 <button mat-raised-button color="warn" routerLink="/thong-tin-ca-nhan">Huỷ</button>

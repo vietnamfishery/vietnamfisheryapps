@@ -6,5 +6,6 @@ export enum actionUserServices {
     UPDATEMYPROFILE = 'updateMyProfile',
     DELETE = 'delete',
     USERINFO = 'getUserInfo',
-    CHANGEUSERPASSWORD = 'updateUserPassword'
+    CHANGEUSERPASSWORD = 'updateUserPassword',
+    UPLOAD_IMAGE = 'uploadImage'
 }

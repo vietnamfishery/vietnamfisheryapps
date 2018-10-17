@@ -12,6 +12,7 @@ import { distanceInWordsToNow } from 'date-fns';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { sortBy } from 'lodash';
+import { Router } from '@angular/router';
 
 const passwordchange = new FormControl('', Validators.required);
 const confirmPasswordchange = new FormControl('', CustomValidators.equalTo(passwordchange));
@@ -27,43 +28,43 @@ const confirmPasswordchange = new FormControl('', CustomValidators.equalTo(passw
     ],
 })
 export class ProfileEditComponent implements OnInit {
-
     public form: FormGroup;
     public form_Pass: FormGroup;
-    private selectedFile: Promise<string> | null = null;
+    private errorFile: Promise<string> | null = null;
+    private updateErrorTimeout: boolean = false;
+    private updateSuccessTimeout: boolean = false;
+    timeOut: boolean = false;
 
     // for select field of form
-    province: any[];
-    district: any[];
-    ward: any[];
+    province: any[] = [];
+    district: any[] = [];
+    ward: any[] = [];
+    preloader: boolean = false;
 
+    imageLink: string = '';
+    
     minDate = new Date(1940, 0, 1);
     maxDate = new Date();
 
     sortedOptions: Observable<any[]>;
 
+    imgSource: string;
     constructor(
         private fb: FormBuilder,
         private fbPass: FormBuilder,
         private cd: ChangeDetectorRef,
         private appService: AppService,
+		private router: Router,
         private adapter: DateAdapter<any>,
         private profileManagementService: ProfileManagementService
     ) {
         this.appService.getProvince().subscribe(pro => {
             this.province = this._sorter(pro, 'name');
         });
-
-        // this.appService.getDistrict().subscribe(dis => {
-        //     this.district = this._sorter(dis, 'name');
-        // });
-
-        // this.appService.getWard().subscribe(ward => {
-        //     this.ward = this._sorter(ward, 'name');
-        // });
     }
 
     ngOnInit() {
+        this.preloader = !this.preloader;
         this.form = this.fb.group({
             lastname: [null, Validators.compose([Validators.required])],
             firstname: [null, Validators.compose([Validators.required])],
@@ -80,16 +81,18 @@ export class ProfileEditComponent implements OnInit {
             town: [{
                 value: -1
             }, Validators.compose([Validators.required])],
-            files: [null, Validators.compose([])],
-            image: [null, Validators.compose([])],
+            images: [null, Validators.compose([])],
         });
         this.form_Pass = this.fbPass.group({
             passwordhistory: [null, Validators.compose([Validators.required])],
             passwordchange: passwordchange,
             confirmPasswordchange: confirmPasswordchange,
         })
+
         const token: string = this.appService.getCookie(tokenName);
         this.profileManagementService.getUserInfo(token).subscribe((val: IUsers) => {
+            this.district.push((val as any).dis);
+            this.ward.push((val as any).war);
             this.form.patchValue({
                 lastname: val.lastname,
                 firstname: val.firstname,
@@ -99,21 +102,51 @@ export class ProfileEditComponent implements OnInit {
                 province: val.province,
                 district: val.district,
                 town: val.town,
+                images: val.images
             });
+            this.imgSource = val.images;
+            this.profileManagementService.loadImage(val.images).subscribe(data => {
+                if(data) {
+                    this.preloader = !this.preloader;
+                    this.imageLink = (data as any).data;
+                }
+            })
         })
     }
 
     onFileChange(event) {
+        this.preloader = true;
+        const token: string = this.appService.getCookie(tokenName);
         if (event.target.files && event.target.files.length) {
             const [files]: File[] = event.target.files;
-            this.form.patchValue({
-                files
-            });
             this.cd.markForCheck();
+            if(this.checkFile(files.type)){
+                this.profileManagementService.uploadImage(files, token).subscribe((res: any) => {
+                    this.profileManagementService.loadImage(res.fileId).subscribe(data => {
+                        if(data) {
+                            this.imageLink = (data as any).data;
+                            this.preloader = !this.preloader;
+                        }
+                    });
+                    this.imgSource = res.fileId;
+                    console.log(res);
+                })
+            } else {
+                this.timeOut = !this.timeOut;
+                this.errorFile = Promise.resolve("Hình ảnh không được cho phép, vui lòng thử lại!")
+                setTimeout(() =>{
+                    this.timeOut = !this.timeOut;
+                }, 5000);
+                this.preloader = !this.preloader;
+            }
         }
-        this.selectedFile = new Promise((resolve, reject) => {
-            resolve(this.form.value.image.split('\\')[this.form.value.image.split('\\').length - 1].toString())
-        });
+    }
+
+    checkFile(fileType: string): boolean {
+        if(fileType.split('/')[0] === 'image'){
+            return true;
+        }
+        return false;
     }
 
     provinceChange() {
@@ -144,10 +177,6 @@ export class ProfileEditComponent implements OnInit {
         this.adapter.setLocale('vi');
     }
 
-    displayFn(obj: any): string {
-        return obj.name;
-    }
-
     private _sorter(arr: Array<any>, name: string): Array<any> {
         return sortBy(arr, [
             (element) => {
@@ -158,14 +187,36 @@ export class ProfileEditComponent implements OnInit {
 
     onSubmit_info() {
         const token: string = this.appService.getCookie(tokenName);
-        // console.log(this.form.value);
-        this.profileManagementService.updateUserInfo(this.form.value, token).subscribe((res: IUsers) => {
-            console.log(res);
+        this.form.patchValue({
+            images: this.imgSource
+        })
+        this.profileManagementService.updateUserInfo(this.form.value, token).subscribe((res: any) => {
+            if(res.success) {
+                this.updateSuccessTimeout = !this.updateSuccessTimeout;
+                setTimeout(() => {
+                    this.router.navigate(['thong-tin-ca-nhan']);
+                }, 1000);
+            } else {
+                this.updateErrorTimeout = !this.updateErrorTimeout;
+                setTimeout(() => {
+                    this.updateErrorTimeout = !this.updateErrorTimeout;
+                }, 5000);
+            }
         })
     }
 
     onSubmit_Pass() {
         delete this.form_Pass.value.confirmPasswordchange;
         console.log(this.form_Pass.value)
+    }
+
+    getImage(): any {
+        let styles = {
+            'background-image': `url("${ this.imageLink || "https://via.placeholder.com/360x360" }")`,
+            'background-repeat': `no-repeat`,
+            'background-size': `cover`,
+            'background-position': 'center'
+        };
+        return styles;
     }
 }

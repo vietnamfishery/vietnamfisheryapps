@@ -30,3 +30,63 @@ $mat-toolbar-height-mobile-landscape: 48px !default;
     margin-top: -($mat-toolbar-height-mobile-landscape);
   }
 }
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.mr-t-5 {
+  margin-top: 5px !important;
+}
+
+
+label {
+  .imgLoading {
+    width: 360px;
+    height: 360px;
+  }
+  cursor: pointer;
+}
+
+#lable{
+  background: rgba(0, 0, 0, 0.75);
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 360px;
+  height: 360px;
+  z-index: 1000;
+//   display: block;
+
+  hr{
+	  border:0;
+	  margin:0;
+	  width:4%;
+	  height:4%;
+	  position:absolute;
+	  border-radius:50%;
+	  animation:spin 2s ease infinite;
+	}
+
+	div{
+    margin: 46%;
+	}
+}
+
+#lable :first-child{background:rgba(60, 186, 84, 1);animation-delay:-1.5s}
+#lable :nth-child(2){background:rgba(244, 194, 13, 1);animation-delay:-1s}
+#lable :nth-child(3){background: rgba(219, 50, 54, 1);animation-delay:-0.5s}
+#lable :last-child{background: rgba(72, 133, 237, 1)}
+
+@keyframes spin{
+	0%,100%{transform:translate(0)}
+	25%{transform:translate(160%)}
+	50%{transform:translate(160%, 160%)}
+	75%{transform:translate(0, 160%)}
+}
