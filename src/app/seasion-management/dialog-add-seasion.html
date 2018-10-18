@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         <div class="text-xs-center pb-1">
             <h2 class="mat-text-muted">THÊM VỤ NUÔI</h2>
             <div class="pb-1">
@@ -9,17 +9,17 @@
         <div fxLayout="column" fxLayoutAlign="space-around">
             <div class="pb-1">
                 <mat-form-field style="width: 100%">
-                    <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pond']">
+                    <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']">
                         <mat-option>None</mat-option>
-                        <mat-option value="option1">Ao 1</mat-option>
-                        <mat-option value="option2">Ao 2</mat-option>
-                        <mat-option value="option3">Ao 3</mat-option>
-                        <mat-option value="option3">Ao 4</mat-option>
-                        <mat-option value="option3">Ao 5</mat-option>
+                        <mat-option value="0">Ao 1</mat-option>
+                        <mat-option value="1">Ao 2</mat-option>
+                        <mat-option value="2">Ao 3</mat-option>
+                        <mat-option value="3">Ao 4</mat-option>
+                        <mat-option value="4">Ao 5</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
-            <small *ngIf="form.controls['pond'].hasError('required') && form.controls['pond'].touched" class="mat-text-warn">Chưa
+            <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
                 chọn ao nuôi.</small>
             <div class="pb-1">
                 <mat-form-field style="width: 100%">
@@ -30,12 +30,12 @@
                 class="mat-text-warn">Tên vụ nuôi không được để trống.</small>
             <div class="pb-1">
                 <mat-form-field>
-                    <input matInput [matDatepicker]="dom" placeholder="Ngày tạo vụ nuôi" [formControl]="form.controls['season_date']"
+                    <input matInput [matDatepicker]="dom" placeholder="Ngày tạo vụ nuôi" [formControl]="form.controls['createdDate']"
                         required autocomplete="off">
                     <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
                     <mat-datepicker #dom></mat-datepicker>
                 </mat-form-field>
-                <small *ngIf="form.controls['season_date'].hasError('required') && form.controls['season_date'].touched"
+                <small *ngIf="form.controls['createdDate'].hasError('required') && form.controls['createdDate'].touched"
                     class="mat-text-warn">Ngày tạo vụ nuôi không được để trống.</small>
             </div>
         </div>

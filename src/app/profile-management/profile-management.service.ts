@@ -48,12 +48,6 @@ export class ProfileManagementService {
 		fd.append('images', images);
 		fd.append('action', actionUserServices.UPDATEMYPROFILE);
 		return this.http.post(host + '/user/updateUser', fd, h);
-		// fd.append('image', file, file.name);
-		// fd.append('pond', pond);
-		// fd.append('pondArea', pondarea);
-		// fd.append('pondDepth', ponddepth);
-		// fd.append('pondStatus', pondstatus);
-		// console.log(file);
 	}
 
 	updateUserPassword(data: any, token: string): Observable<any>{

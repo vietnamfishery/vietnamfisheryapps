@@ -7,7 +7,7 @@
     </a>
   </mat-toolbar>
   <div fxLayout="row">
-    <mat-sidenav-container class="background-none shadow-none">
+    <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
       <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
         <hr>
 
@@ -19,6 +19,9 @@
             </div>
             <div class="pb-1">
               <mat-radio-button value="2">Ao trống</mat-radio-button>
+            </div>
+            <div class="pb-1">
+              <mat-radio-button value="3">Nâng cấp</mat-radio-button>
             </div>
           </mat-radio-group>
         </div>
@@ -52,17 +55,18 @@
         <div class="zoom" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
           <mat-card>
             <div fxLayout="row">
-              <div routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url(../../assets/images/ponds/'+ pond.id +'.jpg)'}"
+              <div routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="media-grid compact bg-cover" [ngStyle]="getImage()"
                 fxFlex="40">
                 <figure>
-                  <div class="product-badge" *ngIf="pond.status === 'empty'"><span>Trống</span></div>
+                  <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
+                  <div class="product-badge" *ngIf="pond.status === 3 "><span>Sửa</span></div>
                 </figure>
               </div>
               <div class="pa-1" fxFlex>
                 <div fxLayout="column">
                   <div fxLayout="row">
                     <div fxFlex>
-                      <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond.name }}</h4>
+                      <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond['pondName'] }}</h4>
                     </div>
                     <a (click)="openDialogAddRole()" matTooltip="Giao quyền quản lý" matTooltipPosition="above" style="margin-right:5px">
                       <mat-icon>library_add</mat-icon>
@@ -79,7 +83,7 @@
                     <span> {{ pond.price }} vụ</span>
                   </div>
                   <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
-                    <span>22/06/1996</span>
+                    <span>{{ pond.pondCreatedDate }}</span>
                   </div>
                 </div>
               </div>

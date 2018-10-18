@@ -7,6 +7,7 @@ import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, Mat
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SeasionManagementService } from './seasion-management.service';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SeasionManagementComponent,
     DialogAddSeasion
   ],
-  bootstrap: [SeasionManagementComponent]
+  bootstrap: [SeasionManagementComponent],
+  providers: [SeasionManagementService],
 })
 export class SeasionManagementModule { }

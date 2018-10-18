@@ -49,5 +49,20 @@ export class PondManagementService {
     }
     // data[`action`] = ActionServer.INSERT;
     return this.http.post(host + '/ponds/add', data, h);
-  }
+	}
+	
+	public getAllPond(token: string):  Observable<any>{
+		const h: any = {
+			headers: new HttpHeaders({
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		}
+		return this.http.get<any>(host + '/ponds/gets', h);
+	}
+
+	// public test():  Observable<any>{
+	// 	return this.http.get(host + '/user/test');
+	// }
 }

@@ -9,6 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../constants/format-date';
+import { SeasionManagementService } from './seasion-management.service';
+import { AppService } from '../app.service';
+import { tokenName } from '../../environments';
 
 export interface DialogData {
   animal: string;
@@ -34,13 +37,14 @@ export class SeasionManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  animal: string;
+  // animal: string;
   name: string;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private adapter: DateAdapter<any>
+    private adapter: DateAdapter<any>,
+    private seasionManagementService: SeasionManagementService
   ) { }
 
 
@@ -62,6 +66,11 @@ export class SeasionManagementComponent implements OnInit {
 
 }
 
+
+
+// ////////////////////////////////////////////////////////////////////////
+
+
 @Component({
   selector: 'dialog-add-seasion',
   templateUrl: './dialog-add-seasion.html',
@@ -78,14 +87,26 @@ export class DialogAddSeasion {
   constructor(
     public dialogRef: MatDialogRef<DialogAddSeasion>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private appService: AppService,
+    private seasionManagementService: SeasionManagementService
+
     ) { }
 
     ngOnInit() {
       this.form = this.fb.group({
         seasonName: [null, Validators.compose([Validators.required])],
-        pond: [null, Validators.compose([Validators.required])],
-        season_date: [null, Validators.compose([Validators.required])],
+        pondName: [null, Validators.compose([Validators.required])],
+        createdDate: [null, Validators.compose([Validators.required])],
       });
+    }
+
+    onSubmit(){
+      const token: string = this.appService.getCookie(tokenName);
+      console.log(this.form.value);
+
+      // this.seasionManagementService.addseason(this.form.value, token).subscribe((res) => {
+
+      // });
     }
 }

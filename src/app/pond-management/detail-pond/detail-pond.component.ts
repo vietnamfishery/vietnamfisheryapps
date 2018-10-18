@@ -59,9 +59,9 @@ export class DetailPondComponent implements OnInit {
   lat: number = 10.03082457630006;
   lng: number = 105.76896160840988;
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
-  }
+  // clickedMarker(label: string, index: number) {
+  //   console.log(`clicked the marker: ${label || index}`)
+  // }
 
   // mapClicked($event: any) {
   //   this.markers.push({
