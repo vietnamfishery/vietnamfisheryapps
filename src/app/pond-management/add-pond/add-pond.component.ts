@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from '../pond-management.service';
@@ -7,6 +6,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from '../../../environments';
+import { Router } from '@angular/router';
 
 interface marker {
   lat: number;
@@ -32,6 +32,9 @@ export class AddPondComponent implements OnInit {
   private errorFile: Promise<string> | null = null;
   preloader: boolean = false;
   timeOut: boolean = false;
+  
+  ErrorTimeout: boolean = false;
+  SuccessTimeout: boolean = false;
   imgSource: string;
 
 
@@ -40,6 +43,7 @@ export class AddPondComponent implements OnInit {
     private fb: FormBuilder,
     private pondManagementService: PondManagementService,
     private cd: ChangeDetectorRef,
+		private router: Router,
     private appService: AppService,
     private adapter: DateAdapter<any>
   ) { }
@@ -112,14 +116,22 @@ export class AddPondComponent implements OnInit {
     this.form.patchValue({
       images: this.imgSource
     })
-    console.log(this.form.value);
-    // this.pondManagementService.addpond(this.form.value, token).subscribe((res) => {
-    //   if (res.success) {
-    //     console.log(res);
-    //   } else {
-
-    //   }
-    // });
+    this.pondManagementService.addpond(this.form.value, token).subscribe((res) => {
+      if(res.success) {
+        this.SuccessTimeout = !this.SuccessTimeout;
+        this.form.reset();
+        setTimeout(() => {
+          this.SuccessTimeout = !this.SuccessTimeout;
+          this.router.navigate(['quan-ly-ao'])
+        }, 5000);
+      } else {
+        this.ErrorTimeout = !this.ErrorTimeout;
+        this.form.reset();
+        setTimeout(() => {
+          this.ErrorTimeout = !this.ErrorTimeout;
+        }, 5000);
+      }
+    });
   }
 
   onFileChange(event) {
@@ -137,7 +149,6 @@ export class AddPondComponent implements OnInit {
             }
           });
           this.imgSource = res.fileId;
-          console.log(res);
         })
       } else {
         this.timeOut = !this.timeOut;
@@ -150,4 +161,7 @@ export class AddPondComponent implements OnInit {
     }
   }
 
+  vietnamese() {
+    this.adapter.setLocale('vn');
+  }
 }

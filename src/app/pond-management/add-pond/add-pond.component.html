@@ -21,10 +21,10 @@
               ao không được để trống.</small>
             <mat-form-field>
               <mat-label>Ngày tạo ao</mat-label>
-              <input matInput [matDatepicker]="dom" placeholder="Chọn một ngày" [formControl]="form.controls['pondCreatedDate']"
+              <input matInput [matDatepicker]="pondCreatedDate" placeholder="Chọn một ngày" [formControl]="form.controls['pondCreatedDate']"
                 required autocomplete="off">
-              <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
-              <mat-datepicker #dom></mat-datepicker>
+              <mat-datepicker-toggle matSuffix [for]="pondCreatedDate"></mat-datepicker-toggle>
+              <mat-datepicker #pondCreatedDate></mat-datepicker>
             </mat-form-field>
             <small *ngIf="form.controls['pondCreatedDate'].hasError('required') && form.controls['pondCreatedDate'].touched"
               class="mat-text-warn">Ngày
@@ -35,9 +35,9 @@
                 <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['pondStatus']"
                   required>
                   <mat-option>None</mat-option>
-                  <mat-option value="option1">Ao trống</mat-option>
-                  <mat-option value="option2">Đang nuôi</mat-option>
-                  <mat-option value="option3">Đang nâng cấp</mat-option>
+                  <mat-option value={{0}}>Ao trống</mat-option>
+                  <mat-option value={{1}}>Đang nuôi</mat-option>
+                  <mat-option value={{2}}>Đang nâng cấp</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="100">
@@ -125,6 +125,9 @@
                 </mat-card-content>
                 <br>
               </mat-card>
+              <mat-card class="mat-red-700" *ngIf="ErrorTimeout"><div style="height: 20px;">Cập nhật lỗi, vui lòng thử lại sau!</div></mat-card>
+              <br>
+              <mat-card class="mat-green-700" *ngIf="SuccessTimeout"><div style="height: 20px;">Cập nhật thành công! Vui lòng đợi...</div></mat-card>
             </div>
           </mat-card-content>
           <hr>

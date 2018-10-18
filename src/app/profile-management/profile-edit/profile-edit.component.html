@@ -26,10 +26,10 @@
 
               <mat-form-field class="p-1">
                 <mat-label>Ngày sinh</mat-label>
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="dom" placeholder="Chọn một ngày"
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="birthday" placeholder="Chọn một ngày"
                   autocomplete="off" [formControl]="form.controls['birthday']">
-                <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
-                <mat-datepicker #dom></mat-datepicker>
+                <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+                <mat-datepicker #birthday></mat-datepicker>
               </mat-form-field>
               <small *ngIf="form.controls['birthday'].hasError('required') && form.controls['birthday'].touched" class="mat-text-warn">Ngày
                 sinh không được để trống.</small>
@@ -76,17 +76,6 @@
               <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Địa
                 chỉ email không hợp lệ.</small>
 
-              <!-- <div fxFlex="100" class="p-1">
-                <h4 class="subtitle" style=" color: #aa9e9e">Thay đổi ảnh đại diện</h4>
-                <button mat-flat-button class="mat-green-700" type="button">
-                  <mat-icon>face</mat-icon>
-                  <label for="fileToUpload">
-                    Tải ảnh lên
-                  </label>
-                </button>&nbsp;
-                <span>{{ selectedFile | async }}</span>
-                <input id="fileToUpload" type="file" [formControl]="form.controls['image']" hidden (change)="onFileChange($event)">
-              </div> -->
               <mat-card class="example-card">
                 <mat-card-header class="mr-t-5">
                   <mat-card-title>

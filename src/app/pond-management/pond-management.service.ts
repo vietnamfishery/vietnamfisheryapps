@@ -47,7 +47,7 @@ export class PondManagementService {
 				'Authorization': token
 			})
     }
-    data[`action`] = ActionServer.INSERT;
-    return this.http.post(host + '/addpond', data, h);
+    // data[`action`] = ActionServer.INSERT;
+    return this.http.post(host + '/ponds/add', data, h);
   }
 }

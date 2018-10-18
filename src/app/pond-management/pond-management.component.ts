@@ -26,7 +26,7 @@ export class PondManagementComponent implements OnInit {
     public dialog: MatDialog,
     private pondManagementService: PondManagementService
   ) {
-    for (this.num; this.num <= 15; this.num += 1) {
+    for (this.num; this.num <= 12; this.num += 1) {
       this.addProducts(this.num);
     }
   }
