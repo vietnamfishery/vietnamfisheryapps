@@ -6,6 +6,9 @@ import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { PondManagementService } from '../pond-management.service';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from '../../../environments';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 interface marker {
   lat: number;
@@ -30,14 +33,20 @@ export class DetailPondComponent implements OnInit {
   preloader: boolean = false;
   timeOut: boolean = false;
   imgSource: string;
-  public form: FormGroup;
+  form: FormGroup;
+  pond: Observable<any>;
+  pondId: any;
+  token: string;
   constructor(
     private fb: FormBuilder,
     private adapter: DateAdapter<any>,
     private pondManagementService: PondManagementService,
     private cd: ChangeDetectorRef,
-    private appService: AppService
-  ) { }
+    private appService: AppService,
+    private route: ActivatedRoute
+  ) {
+    this.token = this.appService.getCookie(tokenName);
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -53,6 +62,13 @@ export class DetailPondComponent implements OnInit {
       imageDisable: [null, Validators.compose([])],
     });
     this.form.disable();
+    this.pond = this.route.paramMap.pipe(
+      switchMap(params => {
+        this.pondId = params.get('pondId');
+        return this.pondManagementService.getPondById(this.pondId, this.token);
+      })
+    )
+    this.pond.subscribe();
   }
 
   zoom: number = 10;

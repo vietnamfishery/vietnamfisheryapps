@@ -10,7 +10,7 @@ const routes: Routes = [
     component: PondManagementComponent
   },
   { path: 'them-ao-nuoi', component: AddPondComponent },
-  { path: 'chi-tiet-ao-nuoi', component: DetailPondComponent }
+  { path: 'chi-tiet-ao-nuoi/:pondId', component: DetailPondComponent }
 ];
 
 @NgModule({

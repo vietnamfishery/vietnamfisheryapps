@@ -8,11 +8,7 @@ import { actionUserServices, ActionServer } from '../constants';
 // import { headers } from '../constants/http';
 
 const host = api_url + ':' + api_port + '/api';
-const headers = new  HttpHeaders();
-headers.append('Content-Type', 'multipart/form-data');
-@Injectable({
-  providedIn: 'root'
-})
+
 export class PondManagementService {
 
   constructor(
@@ -51,18 +47,22 @@ export class PondManagementService {
     return this.http.post(host + '/ponds/add', data, h);
 	}
 	
-	public getAllPond(token: string):  Observable<any>{
-		const h: any = {
+	public getAllPond(token: string): Observable<any>{
+		
+		return this.http.get<any>(host + '/ponds/gets', this.setHeader(token));
+	}
+
+	public getPondById(id: string, token): Observable<any> {
+		return this.http.get(host)
+	}
+
+	private setHeader(token: string): any {
+		return {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json',
 				'Authorization': token
 			})
 		}
-		return this.http.get<any>(host + '/ponds/gets', h);
 	}
-
-	// public test():  Observable<any>{
-	// 	return this.http.get(host + '/user/test');
-	// }
 }

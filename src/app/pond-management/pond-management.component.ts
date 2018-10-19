@@ -28,55 +28,13 @@ export class PondManagementComponent implements OnInit {
   animal: string;
   name: string;
   imgSource: string = '';
-
+  preloader: boolean = false;
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private pondManagementService: PondManagementService,
     private appService: AppService
-  ) {
-    // for (this.num; this.num <= 12; this.num += 1) {
-    //   this.addProducts(this.num);
-    // }
-  }
-
-  // thong tin pond
-  // private ponds: IPonds = {
-  //   pondId: null,
-  //   pondUUId: '',
-  //   userId: null,
-  //   pondName: '',
-  //   pondArea: null,
-  //   pondDepth: null,
-  //   createCost: null,
-  //   status: null,
-  //   images: '',
-  //   pondLatitude: null,
-  //   pondLongitude: null,
-  //   createdBy:'',
-  //   createdDate: new Date(),
-  //   updatedBy: '',
-  //   updatedDate: new Date(),
-  //   isDeleted: null
-  // };
-
-  // addProducts(i) {
-  //   this.ponds.push({
-  //     id: i,
-  //     price: (Math.random() * (0 - 10) + 10).toFixed(0),
-  //     status: ['', '', '3', '0'][Math.floor(Math.random() * 4)],
-  //     discount: (Math.random() * (0.00 - 10.00) + 10.00).toFixed(2),
-  //     name: [
-  //       'Ao số 1',
-  //       'Ao số 2',
-  //       'Ao số 3',
-  //       'Ao số 4',
-  //       'Ao số 5',
-  //       'Ao số 6',
-  //       'Ao số 7',
-  //       'Ao số 8'][Math.floor(Math.random() * 8)]
-  //   });
-  // }
+  ) {}
 
   isOver(): boolean {
     return window.matchMedia(`(max-width: 960px)`).matches;
@@ -95,37 +53,21 @@ export class PondManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.preloader = !this.preloader;
     const token: string = this.appService.getCookie(tokenName);
-    // this.pondManagementService.test().subscribe(e => {
-    //   console.log(e)
-    // })
     this.pondManagementService.getAllPond(token).subscribe((res: any) => {
       this.ponds = res.ponds.map((element: any) => {
         return {
           status: element.status,
           pondName: element.pondName,
-          pondCreatedDate: moment(element.pondCreatedDate).format(`DD - MM - YYYY`)
+          pondCreatedDate: moment(element.pondCreatedDate).format(`DD - MM - YYYY`),
+          images: element.images,
+          pondId: element.pondId
         }
       })
-      this.imgSource = res.images;
-      this.pondManagementService.loadImage(res.images).subscribe(data => {
-        console.log(res);
-        if (data) {
-          this.imageLink = (data as any).data;
-        }
-      })
-    });
+      this.preloader = !this.preloader;
+  });
   }
-  getImage(): any {
-    let styles = {
-      'background-image': `url("${this.imageLink || "https://via.placeholder.com/360x360"}")`,
-      'background-repeat': `no-repeat`,
-      'background-size': `cover`,
-      'background-position': 'center'
-    };
-    return styles;
-  }
-
 }
 
 // ///////////////////////////////////////////////////////

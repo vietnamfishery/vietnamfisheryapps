@@ -6,6 +6,7 @@
       <mat-icon>library_add</mat-icon>
     </a>
   </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="warn"></mat-progress-bar>
   <div fxLayout="row">
     <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
       <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
@@ -55,8 +56,7 @@
         <div class="zoom" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
           <mat-card>
             <div fxLayout="row">
-              <div routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="media-grid compact bg-cover" [ngStyle]="getImage()"
-                fxFlex="40">
+              <div [routerLink]="['quan-ly-ao/chi-tiet-ao-nuoi',{pondId: pond.pondId}]" class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url('+ pond.images +')'}" fxFlex="40">
                 <figure>
                   <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
                   <div class="product-badge" *ngIf="pond.status === 3 "><span>Sửa</span></div>
@@ -71,7 +71,7 @@
                     <a (click)="openDialogAddRole()" matTooltip="Giao quyền quản lý" matTooltipPosition="above" style="margin-right:5px">
                       <mat-icon>library_add</mat-icon>
                     </a>
-                    <a routerLink="/quan-ly-ao/chi-tiet-ao-nuoi" class="pointer" matTooltip="Chi tiết ao nuôi"
+                    <a [routerLink]="['/quan-ly-ao/chi-tiet-ao-nuoi', pond.pondId ]"  class="pointer" matTooltip="Chi tiết ao nuôi"
                       matTooltipPosition="above">
                       <mat-icon>library_books</mat-icon>
                     </a>
