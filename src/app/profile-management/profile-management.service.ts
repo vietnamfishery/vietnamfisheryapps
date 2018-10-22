@@ -25,7 +25,7 @@ export class ProfileManagementService {
 			})
 		}
 
-		return this.http.get(host + '/user/info', h);
+		return this.http.get(host + '/user/get', h);
 	}
 
 	updateUserInfo(user: any, token: string): Observable<any> {

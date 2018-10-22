@@ -38,10 +38,10 @@ export class SigninComponent implements OnInit {
 		this.sessionService.signin(this.form.value).subscribe(res => {
 			if (this.sessionService.isLoggedIn) {
 				if (this.form.value.keepLogin) {
-					this.appService.setCookie('vietnamfishery', 'vietnamfishery%' + res.token, 365);
+					this.appService.setCookie('vietnamfishery', res.token, 365);
 					this.appService.setCookie(isLogin, res.success.toString(), 365);
 				} else {
-					this.appService.setCookie('vietnamfishery', 'vietnamfishery%' + res.token, 0);
+					this.appService.setCookie('vietnamfishery', res.token, 0);
 					this.appService.setCookie(isLogin, res.success.toString(), 0);
 				}
 				let redirect: string = this.sessionService.redirectUrl ? this.sessionService.redirectUrl : '/';
