@@ -33,8 +33,14 @@
       </mat-form-field>
       <div fxFlex="100">
         <span><small>Ngày thả nuôi</small></span><br>
-        <mat-checkbox class="mr-2">Tăng dần</mat-checkbox>
-        <mat-checkbox>Giảm dần</mat-checkbox>
+        <mat-radio-group>
+          <div>
+            <mat-radio-button value="0" class="mr-2">Tăng dần</mat-radio-button>
+          </div>
+          <div class="mr-top-5">
+            <mat-radio-button value="1">Giảm dần</mat-radio-button>
+          </div>
+        </mat-radio-group>
       </div>
     </div>
   </div>

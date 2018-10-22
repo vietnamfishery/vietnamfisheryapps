@@ -8,7 +8,7 @@ import { VeterinaryManagementComponent } from './veterinary-management/veterinar
 import { FoodsManagementComponent } from './foods-management/foods-management.component';
 import { MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatTabsModule, MatCheckboxModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { BreedManagementComponent } from './breed-management/breed-management.component';
 import { ImportManagementComponent } from './import-management/import-management.component';
@@ -35,6 +35,7 @@ import { ChangePriceManagementComponent } from './change-price-management/change
     MatNativeDateModule,
     MatTabsModule,
     MatCheckboxModule,
+    ReactiveFormsModule,
     StorageManagementRoutingModule
   ],
   declarations: [

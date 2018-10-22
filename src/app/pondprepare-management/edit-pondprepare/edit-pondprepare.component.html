@@ -11,14 +11,28 @@
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
       fxFlexOffset.md="15" fxFlex.md="70">
       <div>
-        <form [formGroup]="form" style="font-size:20px">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" style="font-size:20px">
           <mat-card-content fxLayout="column">
-            <mat-form-field>
-              <input matInput readonly placeholder="Ao nuôi" type="text">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput readonly placeholder="Vụ nuôi" type="text">
-            </mat-form-field>
+              <mat-form-field>
+                  <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']">
+                    <mat-option>None</mat-option>
+                    <mat-option value="option1">Ao nuôi 1</mat-option>
+                    <mat-option value="option2">Ao nuôi 2</mat-option>
+                    <mat-option value="option3">Ao nuôi 3</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
+                  chọn ao nuôi.</small>
+                <mat-form-field>
+                  <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']">
+                    <mat-option>None</mat-option>
+                    <mat-option value="option1">Vụ nuôi 1</mat-option>
+                    <mat-option value="option2">Vụ nuôi 2</mat-option>
+                    <mat-option value="option3">Vụ nuôi 3</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched" class="mat-text-warn">Chưa
+                  chọn vụ nuôi.</small>
             <mat-form-field>
               <input matInput placeholder="Tên công việc" type="text" [formControl]="form.controls['pondprepareName']">
             </mat-form-field>

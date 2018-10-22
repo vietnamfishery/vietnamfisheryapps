@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { WasteManagementRoutingModule } from './waste-management-routing.module';
 import { WasteManagementComponent } from './waste-management.component';
-import { MatToolbarModule, MatCardModule, MatIconModule, MatTooltipModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatExpansionModule, MatSidenavModule, MatCheckboxModule } from '@angular/material';
+import { MatToolbarModule, MatCardModule, MatIconModule, MatTooltipModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatExpansionModule, MatSidenavModule, MatCheckboxModule, MatRadioModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -28,6 +28,7 @@ import { WasteAddComponent } from './waste-add/waste-add.component';
     MatExpansionModule,
     MatSidenavModule,
     MatCheckboxModule,
+    MatRadioModule,
     WasteManagementRoutingModule
   ],
   declarations: [WasteManagementComponent, WasteEditComponent, WasteAddComponent]

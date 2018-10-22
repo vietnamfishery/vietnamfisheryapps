@@ -1,16 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { PondprepareManagementService } from './pondprepare-management.service';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS_DATE } from './../constants/format-date';
 
 @Component({
   selector: 'app-pondprepare-management',
   templateUrl: './pondprepare-management.component.html',
-  styleUrls: ['./pondprepare-management.component.scss']
+  styleUrls: ['./pondprepare-management.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN'}
+  ],
 })
 export class PondprepareManagementComponent implements OnInit {
 
   ponds: any[] = [];
   num = 1;
 
-  constructor() {
+  constructor(
+    private pondprepareManagementService: PondprepareManagementService
+  ) {
     for (this.num; this.num <= 15; this.num += 1) {
       this.addProducts(this.num);
     }

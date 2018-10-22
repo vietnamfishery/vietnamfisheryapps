@@ -44,12 +44,14 @@
               <hr>
               <div class="pa-1">
                 <h3 class="mt-1">Sắp xếp theo ngày</h3>
-                <div class="pb-1">
-                  <mat-checkbox>Tăng dần</mat-checkbox>
-                </div>
-                <div class="pb-1">
-                  <mat-checkbox>Giảm dần</mat-checkbox>
-                </div>
+                <mat-radio-group>
+                    <div class="pb-1">
+                      <mat-radio-button value="1">Tăng dần</mat-radio-button>
+                    </div>
+                    <div class="pb-1">
+                      <mat-radio-button value="2">Giảm dần</mat-radio-button>
+                    </div>
+                  </mat-radio-group>
               </div>
               <hr>
               <div class="pa-1">
@@ -137,6 +139,30 @@
               <mat-panel-title>
                 <mat-icon>spa</mat-icon>
                 <b class="title-waste">Chất thải</b>
+              </mat-panel-title>
+              <mat-panel-description>
+                <div fxFlex></div>
+                <div fxLayout="row" fxFLex="end center">
+                  <b>19-09-2018</b>
+                </div>
+              </mat-panel-description>
+              <hr>
+            </mat-expansion-panel-header>
+            <p><b>Ao nuôi:</b> Ao số 2</p>
+            <p><b>Vụ nuôi:</b> Vụ nuôi 8</p>
+            <p><b>Số lượng:</b> 22</p>
+            <p><b>Người xử lý:</b> Phong</p>
+            <p><b>Phương pháp xử lý:</b> Xử lý theo quy định bảo vệ môi trường</p>
+            <hr><br>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button mat-raised-button color="warn" routerLink="/quan-ly-chat-thai/sua-thong-tin-chat-thai">Sửa</button>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>warning</mat-icon>
+                <b class="title-waste">Khác</b>
               </mat-panel-title>
               <mat-panel-description>
                 <div fxFlex></div>

@@ -1,13 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { PeriodicElement } from '../models/PeriodicElement';
 import { ELEMENT_DATA } from '../constants/table-data';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS_DATE } from './../constants/format-date';
 
 @Component({
   selector: 'app-stocking-management',
   templateUrl: './stocking-management.component.html',
-  styleUrls: ['./stocking-management.component.scss']
+  styleUrls: ['./stocking-management.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN'}
+  ]
 })
 export class StockingManagementComponent implements OnInit {
 

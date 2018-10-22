@@ -38,6 +38,11 @@
     margin-top: 15px;
 }
 
+.mr-top-5{
+  margin-top: 5px;
+}
+
+
 :host {
     margin-left: -5px;
     margin-right: -5px;
@@ -60,4 +65,8 @@ h3 {
 
 table {
   width: 100%;
+}
+
+.pad-2 {
+  padding: 0 5px;
 }

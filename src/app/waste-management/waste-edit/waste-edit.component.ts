@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-waste-edit',
@@ -13,7 +13,17 @@ export class WasteEditComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      pondName: [null, Validators.compose([Validators.required])],
+      seasonName: [null, Validators.compose([Validators.required])],
+      card: [null, Validators.compose([Validators.required])],
+      quantity: [null, Validators.compose([Validators.required])],
+      solutions: [null, Validators.compose([])],
+      employee: [null, Validators.compose([])]
     });
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
   }
 
 }

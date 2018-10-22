@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { StockingManagementRoutingModule } from './stocking-management-routing.module';
 import { StockingManagementComponent } from './stocking-management.component';
-import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatCheckboxModule, MatTableModule, MatSortModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatCheckboxModule, MatTableModule, MatSortModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatRadioModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddStockingComponent } from './add-stocking/add-stocking.component';
 import { EditStockingComponent } from './edit-stocking/edit-stocking.component';
 
@@ -31,8 +31,13 @@ import { EditStockingComponent } from './edit-stocking/edit-stocking.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatRadioModule,
     StockingManagementRoutingModule
   ],
-  declarations: [StockingManagementComponent, AddStockingComponent, EditStockingComponent]
+  declarations: [StockingManagementComponent, AddStockingComponent, EditStockingComponent],
+  providers:[
+    
+  ]
 })
 export class StockingManagementModule { }

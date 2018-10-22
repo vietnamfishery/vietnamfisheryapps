@@ -99,6 +99,13 @@ export class DialogAddSeasion {
         pondName: [null, Validators.compose([Validators.required])],
         createdDate: [null, Validators.compose([Validators.required])],
       });
+
+      const token: string = this.appService.getCookie(tokenName);
+      this.seasionManagementService.getSeason(token).subscribe((res: any) => {
+        if(res){
+          console.log(res);
+        }
+      });
     }
 
     onSubmit(){
