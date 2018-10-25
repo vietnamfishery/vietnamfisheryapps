@@ -7,7 +7,7 @@
             </div>
         </div>
         <div fxLayout="column" fxLayoutAlign="space-around">
-            <div class="pb-1">
+            <!-- <div class="pb-1">
                 <mat-form-field style="width: 100%">
                     <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']">
                         <mat-option>None</mat-option>
@@ -20,7 +20,7 @@
                 </mat-form-field>
             </div>
             <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
-                chọn ao nuôi.</small>
+                chọn ao nuôi.</small> -->
             <div class="pb-1">
                 <mat-form-field style="width: 100%">
                     <input matInput placeholder="Tên vụ nuôi" type="text" [formControl]="form.controls['seasonName']" autocomplete="off" required>
@@ -28,7 +28,7 @@
             </div>
             <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
                 class="mat-text-warn">Tên vụ nuôi không được để trống.</small>
-            <div class="pb-1">
+            <!-- <div class="pb-1">
                 <mat-form-field>
                     <input matInput [matDatepicker]="createdDate" placeholder="Ngày tạo vụ nuôi" [formControl]="form.controls['createdDate']"
                         required autocomplete="off">
@@ -37,7 +37,7 @@
                 </mat-form-field>
                 <small *ngIf="form.controls['createdDate'].hasError('required') && form.controls['createdDate'].touched"
                     class="mat-text-warn">Ngày tạo vụ nuôi không được để trống.</small>
-            </div>
+            </div> -->
         </div>
         <br>
         <div class="pb-1">

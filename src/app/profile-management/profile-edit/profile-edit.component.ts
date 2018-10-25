@@ -93,8 +93,8 @@ export class ProfileEditComponent implements OnInit {
 
         const token: string = this.appService.getCookie(tokenName);
         this.profileManagementService.getUserInfoWithUpdate(token).subscribe((val: IUsers) => {
-            this.district.push((val as any).dis);
-            this.ward.push((val as any).war);
+            this.district.push((val as any).districts);
+            this.ward.push((val as any).wards);
             this.form.patchValue({
                 lastname: val.lastname,
                 firstname: val.firstname,
@@ -147,9 +147,9 @@ export class ProfileEditComponent implements OnInit {
 
     onSubmit_info() {
         const token: string = this.appService.getCookie(tokenName);
-        this.form.patchValue({
-            images: this.imgSource
-        })
+        // this.form.patchValue({
+        //     images: this.imgSource
+        // })
         this.profileManagementService.updateUserInfo(this.form.value, token).subscribe((res: any) => {
             if(res.success) {
                 this.updateSuccessTimeout = !this.updateSuccessTimeout;
@@ -170,6 +170,7 @@ export class ProfileEditComponent implements OnInit {
         delete this.form_Pass.value.confirmNewPassword;
         this.profileManagementService.updateUserPassword(this.form_Pass.value, token).subscribe((res: any) => {
             if(res.success) {
+                this.form_Pass.reset();
                 this.updatePasswordSuccessTimeout = !this.updatePasswordSuccessTimeout;
                 setTimeout(() => {
                     this.updatePasswordSuccessTimeout = !this.updatePasswordSuccessTimeout;

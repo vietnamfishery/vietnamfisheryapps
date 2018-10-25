@@ -54,7 +54,7 @@ export class ProfileManagementService {
 			})
 		}
 		const fd = new FormData();
-		const { lastname, firstname, birthday, email, phone, province, district, town, images } = user;
+		const { lastname, firstname, birthday, email, phone, province, district, town } = user;
 		fd.append('lastname', lastname);
 		fd.append('firstname', firstname);
 		fd.append('birthday', birthday);
@@ -63,9 +63,7 @@ export class ProfileManagementService {
 		fd.append('province', province);
 		fd.append('district', district);
 		fd.append('town', town);
-		fd.append('images', images);
-		fd.append('action', actionUserServices.UPDATEMYPROFILE);
-		return this.http.post(host + '/user/updateUser', fd, h);
+		return this.http.put(host + '/user/update', fd, h);
 	}
 
 	updateUserPassword(data: any, token: string): Observable<any>{
@@ -76,7 +74,7 @@ export class ProfileManagementService {
 			})
 		}
 		data[`action`] = actionUserServices.CHANGEUSERPASSWORD;
-		return this.http.post(host + '/user/updateUserPassword', data, h);
+		return this.http.put(host + '/user/update/password', data, h);
 	}
 
 	loadImage(id: string){

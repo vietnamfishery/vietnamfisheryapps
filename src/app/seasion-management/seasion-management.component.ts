@@ -2,8 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { PeriodicElement } from '../models/PeriodicElement';
-import { ELEMENT_DATA } from '../constants/table-data';
+import { ISeason } from '../models/season';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
@@ -12,6 +11,7 @@ import { MY_FORMATS_DATE } from '../constants/format-date';
 import { SeasionManagementService } from './seasion-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
+import { from } from 'rxjs';
 
 export interface DialogData {
   animal: string;
@@ -30,14 +30,13 @@ export interface DialogData {
   ],
 })
 export class SeasionManagementComponent implements OnInit {
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  ELEMENT_DATA: ISeason[] = []
+  displayedColumns: string[] = ['seasonName', 'status'];
+  dataSource = new MatTableDataSource<ISeason>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  // animal: string;
   name: string;
 
   constructor(
@@ -63,10 +62,11 @@ export class SeasionManagementComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
     const token: string = this.appService.getCookie(tokenName);
       this.seasionManagementService.getSeason(token).subscribe((res: any) => {
-        if(res){
-          console.log(res);
+        if(res.success == true){
+          this.dataSource = res.season;
         }
       });
   }
@@ -96,24 +96,25 @@ export class DialogAddSeasion {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private fb: FormBuilder,
     private appService: AppService,
-    private seasionManagementService: SeasionManagementService
-
+    private seasionManagementService: SeasionManagementService,
+    private router: Router
     ) { }
 
     ngOnInit() {
       this.form = this.fb.group({
         seasonName: [null, Validators.compose([Validators.required])],
-        pondName: [null, Validators.compose([Validators.required])],
-        createdDate: [null, Validators.compose([Validators.required])],
+        // pondName: [null, Validators.compose([Validators.required])],
+        // createdDate: [null, Validators.compose([Validators.required])],
       });
     }
 
     onSubmit(){
       const token: string = this.appService.getCookie(tokenName);
-      console.log(this.form.value);
-
-      // this.seasionManagementService.addseason(this.form.value, token).subscribe((res) => {
-
-      // });
+      this.seasionManagementService.addseason(this.form.value, token).subscribe((res) => {
+        if(res.success) {
+          this.dialogRef.close();
+          // this.router.navigate(['/']);
+        }
+      });
     }
 }

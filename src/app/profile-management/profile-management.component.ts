@@ -85,7 +85,30 @@ export class ProfileManagementComponent implements OnInit {
                 if(data) {
                     this.imageLink = (data as any).data;
                 }
-            });       
+            });
+            if (res.district || res.town) {
+                const maker: any = {
+                    lat: this.getlocation(res.wards.location || res.districts.location).lat,
+                    lng: this.getlocation(res.wards.location || res.districts.location).long,
+                    label: res.lastname + " " + res.firstname,
+                    draggable: false
+                }
+                this.markers.push(maker);
+                // this.userInfo[`lat`] = null;
+                // this.userInfo[`long`] = null;
+                this.lat = this.getlocation(res.wards.location || res.districts.location).lat;
+                this.lng = this.getlocation(res.wards.location || res.districts.location).long;
+                this.profileManagementService.loadImage(res.images).subscribe(data => {
+                    if(data) {
+                        this.imageLink = (data as any).data;
+                    }
+                })
+            }else {
+                return {
+                    lat: undefined,
+                    long: undefined
+                }
+            }       
         });
     }
 

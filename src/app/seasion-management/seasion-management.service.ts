@@ -28,6 +28,17 @@ export class SeasionManagementService {
 			})
 		}
 		return this.http.get<any>(host + '/seasons/gets', h);
+	}
+	
+	public getSeasonById(seasonId: number, token: string): Observable<any> {
+    const h: any = {
+			headers: new HttpHeaders({
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		}
+		return this.http.get<any>(host + '/seasons/get/' + seasonId, h);
   }
 
   public addseason(data: any, token: string): Observable<any> {
@@ -38,6 +49,6 @@ export class SeasionManagementService {
 				'Authorization': token
 			})
     }
-    return this.http.post(host + '/season/add', data, h);
+    return this.http.post(host + '/seasons/add', data, h);
 	}
 }
