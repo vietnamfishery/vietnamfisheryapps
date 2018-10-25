@@ -92,7 +92,7 @@ export class ProfileEditComponent implements OnInit {
         })
 
         const token: string = this.appService.getCookie(tokenName);
-        this.profileManagementService.getUserInfo(token).subscribe((val: IUsers) => {
+        this.profileManagementService.getUserInfoWithUpdate(token).subscribe((val: IUsers) => {
             this.district.push((val as any).dis);
             this.ward.push((val as any).war);
             this.form.patchValue({
@@ -106,49 +106,7 @@ export class ProfileEditComponent implements OnInit {
                 town: val.town,
                 images: val.images
             });
-            this.imgSource = val.images;
-            this.profileManagementService.loadImage(val.images).subscribe(data => {
-                if(data) {
-                    this.preloader = !this.preloader;
-                    this.imageLink = (data as any).data;
-                }
-            })
         })
-    }
-
-    onFileChange(event) {
-        this.preloader = true;
-        const token: string = this.appService.getCookie(tokenName);
-        if (event.target.files && event.target.files.length) {
-            const [files]: File[] = event.target.files;
-            this.cd.markForCheck();
-            if(this.checkFile(files.type)){
-                this.profileManagementService.uploadImage(files, token).subscribe((res: any) => {
-                    this.profileManagementService.loadImage(res.fileId).subscribe(data => {
-                        if(data) {
-                            this.imageLink = (data as any).data;
-                            this.preloader = !this.preloader;
-                        }
-                    });
-                    this.imgSource = res.fileId;
-                    console.log(res);
-                })
-            } else {
-                this.timeOut = !this.timeOut;
-                this.errorFile = Promise.resolve("Hình ảnh không được cho phép, vui lòng thử lại!")
-                setTimeout(() =>{
-                    this.timeOut = !this.timeOut;
-                }, 5000);
-                this.preloader = !this.preloader;
-            }
-        }
-    }
-
-    checkFile(fileType: string): boolean {
-        if(fileType.split('/')[0] === 'image'){
-            return true;
-        }
-        return false;
     }
 
     provinceChange() {

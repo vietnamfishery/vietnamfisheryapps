@@ -28,8 +28,9 @@
               <div fxFlex="45">
                 <figure>
                   <div class="text-xs-center">
-                    <div class="imgLoading img-responsive" mat-card-image [ngStyle]="getImage()">
-                    </div>
+                    <label for="fileToUpload">
+                      <div class="imgLoading img-responsive" mat-card-image [ngStyle]="getImage()" title="Nhấn để cập nhật ảnh"></div>
+                    </label>
                     <figcaption>
                       <p style="margin-top:5px">
                         <a type="button">

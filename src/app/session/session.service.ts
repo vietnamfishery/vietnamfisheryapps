@@ -21,14 +21,12 @@ export class SessionService {
   ) { }
 
   public register(user: IUsers): Observable<any> {
-    user[`action`] = actionUserServices.REGISTER;
     return this.http.post(host + '/user/register', user, headers.APP_JSON);
   }
 
   public signin(user: any): Observable<any> {
-    user[`action`] = actionUserServices.LOGIN;
     return this.http.post(host + '/user/login', user).pipe(
-      delay(1000),
+      // delay(500),
       tap(val => {
         this.isLoggedIn = val.success
       }));

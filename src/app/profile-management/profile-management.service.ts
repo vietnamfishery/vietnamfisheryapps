@@ -28,6 +28,24 @@ export class ProfileManagementService {
 		return this.http.get(host + '/user/get', h);
 	}
 
+	/**
+	 * Hàm này dùng để get info truyền lên form nếu dùng hàm getUserInfo ở trên
+	 * thì api sẽ gọi thêm Google Drive API nặng và lâu nên tách ra thêm một hàm
+	 * bên dưới để chỉ load thông tin từ Nodejs API thôi cho nhẹ
+	 * @param token
+	 */
+	getUserInfoWithUpdate(token: string): Observable<any> {
+		const h: any = {
+			headers: new HttpHeaders({
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		}
+
+		return this.http.get(host + '/user/getWithUpdate', h);
+	}
+
 	updateUserInfo(user: any, token: string): Observable<any> {
 		const h: any = {
 			headers: new HttpHeaders({
@@ -74,7 +92,6 @@ export class ProfileManagementService {
 		}
 		const fd = new FormData();
 		fd.append('image', file, file.name);
-		fd.append('action', actionUserServices.UPLOAD_IMAGE);
-		return this.http.post(host + '/user/updateUser', fd, h);
+		return this.http.put(host + '/user/update', fd, h);
 	}
 }

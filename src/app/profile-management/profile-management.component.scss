@@ -64,3 +64,7 @@ agm-map {
 .text-label {
   font-weight: 550;
 }
+
+label[for=fileToUpload] {
+  cursor: pointer;
+}
