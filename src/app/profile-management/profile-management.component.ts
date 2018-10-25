@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProfileManagementService } from './profile-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
@@ -19,6 +19,10 @@ interface marker {
 })
 export class ProfileManagementComponent implements OnInit {
     imageLink: string = '';
+    preloader: boolean = false;
+    private errorFile: Promise<string> | null = null;
+    imgSource: string;
+    timeOut: boolean = false;
 
     pieChartColors: any[] = [{
         backgroundColor: ['#f44336', '#3f51b5', '#ffeb3b', '#4caf50', '#2196f']
@@ -84,7 +88,8 @@ export class ProfileManagementComponent implements OnInit {
 
     constructor(
         private profileManagementService: ProfileManagementService,
-        private appService: AppService
+        private appService: AppService,
+        private cd: ChangeDetectorRef
     ) {
     }
 
@@ -124,6 +129,41 @@ export class ProfileManagementComponent implements OnInit {
         // console.log(`clicked the marker: ${label || index}`);
     }
     
+    onFileChange(event) {
+        this.preloader = true;
+        const token: string = this.appService.getCookie(tokenName);
+        if (event.target.files && event.target.files.length) {
+            const [files]: File[] = event.target.files;
+            this.cd.markForCheck();
+            if(this.checkFile(files.type)){
+                this.profileManagementService.uploadImage(files, token).subscribe((res: any) => {
+                    this.profileManagementService.loadImage(res.fileId).subscribe(data => {
+                        if(data) {
+                            this.imageLink = (data as any).data;
+                            this.preloader = !this.preloader;
+                        }
+                    });
+                    this.imgSource = res.fileId;
+                    console.log(res);
+                })
+            } else {
+                this.timeOut = !this.timeOut;
+                this.errorFile = Promise.resolve("Hình ảnh không hợp lệ");
+                setTimeout(() =>{
+                    this.timeOut = !this.timeOut;
+                }, 2000);
+                this.preloader = !this.preloader;
+            }
+        }
+    }
+
+    checkFile(fileType: string): boolean {
+        if(fileType.split('/')[0] === 'image'){
+            return true;
+        }
+        return false;
+    }
+
     getImage(): any {
         let styles = {
             'background-image': `url("${ this.imageLink || "https://via.placeholder.com/360x360" }")`,

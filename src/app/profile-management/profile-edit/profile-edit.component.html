@@ -76,7 +76,7 @@
               <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="mat-text-warn">Địa
                 chỉ email không hợp lệ.</small>
 
-              <mat-card class="example-card">
+              <!-- <mat-card class="example-card">
                 <mat-card-header class="mr-t-5">
                   <mat-card-title>
                     <button mat-flat-button class="mat-green-700" type="button">
@@ -93,7 +93,6 @@
                 </mat-card-header>
                 <mat-card-content>
                   <label for="fileToUpload">
-                    <!-- <img mat-card-image src={{imageLink}} alt="" title="Nhấn để tải ảnh lên" width="50%" height="50%"> -->
                     <div class="imgLoading" mat-card-image title="Nhấn để tải ảnh lên" [ngStyle]="getImage()">
                       <div id="lable" *ngIf="preloader">
                         <div>
@@ -103,7 +102,7 @@
                     </div>
                   </label>
                 </mat-card-content>
-              </mat-card>
+              </mat-card> -->
               <br>
               <mat-card class="mat-red-700" *ngIf="updateErrorTimeout"><div style="height: 20px;">Cập nhật lỗi, vui lòng thử lại sau!</div></mat-card>
               <br>

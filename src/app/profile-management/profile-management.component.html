@@ -12,11 +12,14 @@
             <div fxLayout="row">
               <div fxFlex="45" class="text-xs-center text">
                 <h1 class="ma-0"><b>{{ userInfo.lastname || '' }}</b>&nbsp;<b>{{ userInfo.firstname || '' }}</b></h1>
-                <p><span class="mt-xs mb-xs text-label">Ngày sinh:</span><span class="mt-xs mb-xs" ><small> {{ bday || 'Chưa cập nhật' }}</small></span></p>
+                <p><span class="mt-xs mb-xs text-label">Ngày sinh:</span><span class="mt-xs mb-xs"><small> {{ bday ||
+                      'Chưa cập nhật' }}</small></span></p>
                 <p><span class="mt-xs mb-xs text-label">SĐT:</span><small> {{ userInfo.phone || 'Chưa cập nhật' }}</small></p>
-                <p *ngIf="userInfo && userInfo.war != null && userInfo.dis != null && userInfo.pro != null"><span class="mt-xs mb-xs text-label">Địa chỉ:</span><span class="mt-xs mb-xs"><small> {{ userInfo.war.name || '' }},
-                  {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></span></p>
-                <p><span class="mt-xs mb-xs text-label">Email:</span><span class="mt-xs mb-xs"><small> {{ userInfo.email || 'Chưa cập nhật' }}</small></span></p>
+                <p *ngIf="userInfo && userInfo.war != null && userInfo.dis != null && userInfo.pro != null"><span class="mt-xs mb-xs text-label">Địa
+                    chỉ:</span><span class="mt-xs mb-xs"><small> {{ userInfo.war.name || '' }},
+                      {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></span></p>
+                <p><span class="mt-xs mb-xs text-label">Email:</span><span class="mt-xs mb-xs"><small> {{
+                      userInfo.email || 'Chưa cập nhật' }}</small></span></p>
                 <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700">Cập
                   nhật</button>
               </div>
@@ -27,8 +30,20 @@
                   <div class="text-xs-center">
                     <div class="imgLoading img-responsive" mat-card-image [ngStyle]="getImage()">
                     </div>
+                    <figcaption>
+                      <p style="margin-top:5px">
+                        <a type="button">
+                          <label for="fileToUpload">
+                            <mat-icon>recent_actors</mat-icon>
+                          </label>
+                          <br>
+                          <small class="mat-text-warn" *ngIf="timeOut">{{ errorFile | async }}</small>
+                          <input id="fileToUpload" type="file" hidden (change)="onFileChange($event)">
+                        </a>
+                      </p>
+                      <div class="text-lg mt10 text-username ">{{ userInfo.username || '' }}</div>
+                    </figcaption>
                     <br>
-                    <div class="text-lg mt10 text-username ">{{ userInfo.username || '' }}</div>
                   </div>
                   <!-- <div class="text-xs-center"><small>{{ userInfo.phone || '' }}</small></div> -->
                 </figure>

@@ -44,6 +44,7 @@ export class SeasionManagementComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private adapter: DateAdapter<any>,
+    private appService: AppService,
     private seasionManagementService: SeasionManagementService
   ) { }
 
@@ -62,6 +63,12 @@ export class SeasionManagementComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    const token: string = this.appService.getCookie(tokenName);
+      this.seasionManagementService.getSeason(token).subscribe((res: any) => {
+        if(res){
+          console.log(res);
+        }
+      });
   }
 
 }
@@ -98,13 +105,6 @@ export class DialogAddSeasion {
         seasonName: [null, Validators.compose([Validators.required])],
         pondName: [null, Validators.compose([Validators.required])],
         createdDate: [null, Validators.compose([Validators.required])],
-      });
-
-      const token: string = this.appService.getCookie(tokenName);
-      this.seasionManagementService.getSeason(token).subscribe((res: any) => {
-        if(res){
-          console.log(res);
-        }
       });
     }
 
