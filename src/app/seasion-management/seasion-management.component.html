@@ -7,7 +7,8 @@
     </a>
   </mat-toolbar>
   <div fxLayout="row">
-    <div fxFlexOffset="3" fxFlex="94" fxLayout.sm="column" fxFlexOffset.sm="30" fxFlex.sm="40" fxLayout.xs="column" fxFlexOffset.xs="10" fxFlex.xs="80" class="mr-top">
+    <div fxFlexOffset="3" fxFlex="94" fxLayout.sm="column" fxFlexOffset.sm="30" fxFlex.sm="40" fxLayout.xs="column"
+      fxFlexOffset.xs="10" fxFlex.xs="80" class="mr-top">
       <mat-form-field>
         <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
           <mat-option>None</mat-option>
@@ -25,14 +26,37 @@
 
         <ng-container matColumnDef="seasonName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên vụ</th>
-          <td mat-cell *matCellDef="let season">{{ season.seasonName }}</td>
+          <td mat-cell *matCellDef="let season">
+            <span *ngIf="!isEdit" class="ssname">{{ season.seasonName }}</span>
+            <form [formGroup]="form" (ngSubmit)="onSubmit(season.seasonId)">
+              <mat-form-field fxFlex="100" *ngIf="isEdit">
+                <input matInput placeholder="Tên vụ" type="text" required autocomplete="off" [formControl]="form.controls['seasonName']" >
+              </mat-form-field>
+            </form>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Trạng thái</th>
           <td mat-cell *matCellDef="let season">
-            <span *ngIf="season.status == 0">Trong vụ</span>
-            <span *ngIf="season.status == 1">Hết vụ</span>
+              <mat-slide-toggle (click)="hjsgdjhsfdjhfs($event)"
+              class="example-margin"
+              [color]="color"
+              [checked]="checked"
+              [disabled]="disabled">
+            Slide me!
+          </mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Thao tác</th>
+          <td mat-cell *matCellDef="let season">
+              <mat-chip-list>
+                  <mat-chip color="primary" selected (click)="editAction()">Sửa</mat-chip>
+              </mat-chip-list>
+            <!-- <button mat-flat-button color="primary">Cập nhật vụ</button>&nbsp;&nbsp;
+            <a mat-flat-button color="warn">Thêm ao vào vụ</a> -->
           </td>
         </ng-container>
 

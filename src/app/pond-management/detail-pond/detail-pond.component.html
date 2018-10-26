@@ -11,11 +11,11 @@
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
       fxFlexOffset.md="15" fxFlex.md="70">
       <div>
-        <form [formGroup]="form" style="font-size:20px">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" style="font-size:20px">
           <mat-card-content fxLayout="column">
             <mat-form-field>
               <input #name matInput placeholder="Tên ao nuôi" type="text" [formControl]="form.controls['pondName']" required
-                autocomplete="off" value="ao 1">
+                autocomplete="off">
             </mat-form-field>
             <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Tên
               ao không được để trống.</small>
@@ -32,7 +32,7 @@
               <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['pondStatus']"
+                <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['status']"
                   required>
                   <mat-option>None</mat-option>
                   <mat-option value="0">Ao trống</mat-option>
@@ -41,14 +41,14 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Chi phí tạo ao" type="text" [formControl]="form.controls['createCost']"
+                <input matInput placeholder="Chi phí tạo ao (vnđ)" type="text" [formControl]="form.controls['createCost']"
                   required autocomplete="off">
               </mat-form-field>
             </div>
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <div fxFlex="100">
-                <small *ngIf="form.controls['pondStatus'].hasError('required') && form.controls['pondStatus'].touched"
+                <small *ngIf="form.controls['status'].hasError('required') && form.controls['status'].touched"
                   class="mat-text-warn">Cần cho biết trạng thái của ao.</small>
               </div>
               <div fxFlex="100">
@@ -60,11 +60,11 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Diện tích ao" type="number" [formControl]="form.controls['pondArea']"
+                <input matInput placeholder="Diện tích ao (m2)" type="number" [formControl]="form.controls['pondArea']"
                   required autocomplete="off">
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ sâu của ao" type="number" [formControl]="form.controls['pondDepth']"
+                <input matInput placeholder="Độ sâu của ao (m)" type="number" [formControl]="form.controls['pondDepth']"
                   required autocomplete="off">
               </mat-form-field>
             </div>
@@ -82,22 +82,8 @@
               </div>
             </div>
             <br>
-            <!-- <h4 class="subtitle" style=" color: #aa9e9e">Ảnh của ao</h4> -->
-            <!-- <mat-card fxLayout="row">
-              <div fxFlexOffset="5" fxFlex="90">
-                <br>
-                <div class="media-grid compact bg-cover">
-                  <img src="/assets/images/ponds/10.jpg" alt="img-pond" class="img-pond-detail-style">
-                </div>
-              </div>
-            </mat-card>
-            <br>
             <div>
-              <h5 class="subtitle" style=" color: #aa9e9e">Sửa ảnh cho ao</h5>
-              <input type="file" multiple /><br />
-            </div><br> -->
-            <div>
-              <agm-map [latitude]="lat" [longitude]="lng"  [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+              <agm-map [latitude]="lat" [longitude]="lng"  [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)">
                 <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
                   [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
                 </agm-marker>
@@ -145,7 +131,7 @@
           <hr>
           <mat-card-actions>
             <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button class="mat-green-700" type="button" (click)="changeEdit()">Sửa</button>
+              <button mat-raised-button name="edit_btn" class="mat-green-700" type="button" (click)="changeEdit()">Sửa</button>
               <button mat-raised-button type="submit" color="primary" class="btn-block" [disabled]="!form.valid">Lưu</button>
               <button mat-raised-button color="warn" routerLink="/quan-ly-ao">Huỷ</button>
             </div>

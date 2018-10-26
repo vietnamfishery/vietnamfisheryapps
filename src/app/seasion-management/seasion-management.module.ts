@@ -8,7 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SeasionManagementService } from './seasion-management.service';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +29,7 @@ import { SeasionManagementService } from './seasion-management.service';
     MatPaginatorModule,
     MatSortModule,
     FormsModule,
+    MatSlideToggleModule,
     ReactiveFormsModule,
     MatDatepickerModule,
     MatChipsModule,

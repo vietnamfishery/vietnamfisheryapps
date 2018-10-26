@@ -24,7 +24,7 @@ interface marker {
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
-    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN'}
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
   ],
 })
 export class DetailPondComponent implements OnInit {
@@ -50,11 +50,12 @@ export class DetailPondComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      pondId: [null],
       pondName: [null, Validators.compose([Validators.required])],
       pondCreatedDate: [null, Validators.compose([Validators.required])],
       pondArea: [null, Validators.compose([Validators.required])],
       pondDepth: [null, Validators.compose([Validators.required])],
-      pondStatus: [null, Validators.compose([Validators.required])],
+      status: [null, Validators.compose([Validators.required])],
       createCost: [null, Validators.compose([Validators.required])],
       pondLatitude: [null, Validators.compose([])],
       pondLongitude: [null, Validators.compose([])],
@@ -69,6 +70,28 @@ export class DetailPondComponent implements OnInit {
       })
     )
     this.pond.subscribe();
+    this.pondManagementService.getPondById(this.pondId, this.token).subscribe((val: any) => {
+      const pond = val.pond;
+      const maker: any = {
+        lat: pond.pondLatitude,
+        lng: pond.pondLongitude,
+        label: pond.pondName,
+        draggable: false
+      }
+      this.markers.push(maker);
+      this.lat = pond.pondLatitude;
+      this.lng = pond.pondLongitude;
+      this.form.patchValue({
+        pondName: pond.pondName,
+        pondCreatedDate: pond.pondCreatedDate,
+        pondArea: pond.pondArea,
+        pondDepth: pond.pondDepth,
+        createCost: pond.createCost,
+        pondLatitude: pond.pondLatitude,
+        pondLongitude: pond.pondLongitude,
+        status: pond.status + '',
+      });
+    });
   }
 
   zoom: number = 10;
@@ -79,34 +102,42 @@ export class DetailPondComponent implements OnInit {
   //   console.log(`clicked the marker: ${label || index}`)
   // }
 
-  // mapClicked($event: any) {
-  //   this.markers.push({
-  //     lat: $event.coords.lat,
-  //     lng: $event.coords.lng,
-  //     draggable: true
-  //   });
-  //   console.log($event);
-  // }
-  
-  markerDragEnd(m: marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
-  }
 
-
-  markers: marker[] = [
-    {
-      lat: 10.03082457630006,
-      lng: 105.76896160840988,
-      label: 'Vo Hoai Phong',
-      draggable: true
+  mapClicked($event: any) {
+    if(this.markers.length < 1){
+      this.markers.push({
+        lat: $event.coords.lat,
+        lng: $event.coords.lng,
+        draggable: false
+      });
     }
-  ]
+    else {
+      this.markers.pop();
+      this.markers.push({
+        lat: $event.coords.lat,
+        lng: $event.coords.lng,
+        draggable: false
+      });
+    }
+    this.form.patchValue({
+      pondLatitude: $event.coords.lat,
+      pondLongitude: $event.coords.lng
+    });
+    console.log($event);
+  }
+  
+  markers: marker[] = []
+
+  // markerDragEnd(m: marker, $event: MouseEvent) {
+  //   console.log('dragEnd', m, $event);
+  // }
+
 
   @ViewChild("name") nameField: ElementRef;
   editName(): void {
     this.nameField.nativeElement.focus();
   }
-  
+
   changeEdit() {
     this.form.enable();
     this.editName();
@@ -155,6 +186,21 @@ export class DetailPondComponent implements OnInit {
         this.preloader = !this.preloader;
       }
     }
+  }
+
+  onSubmit() {
+    this.form.patchValue({
+      pondId: this.pondId
+    });
+    this.pondManagementService.updatePond(this.form.value, this.token).subscribe((res) => {
+      if(res.success){
+        console.log("cập nhật thành công");
+      }else {
+        console.log("cập nhật thất bại");
+      }
+    })
+    console.log(this.form.value);
+
   }
 
 }
