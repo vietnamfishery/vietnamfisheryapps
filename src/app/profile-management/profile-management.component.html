@@ -15,9 +15,9 @@
                 <p><span class="mt-xs mb-xs text-label">Ngày sinh:</span><span class="mt-xs mb-xs"><small> {{ bday ||
                       'Chưa cập nhật' }}</small></span></p>
                 <p><span class="mt-xs mb-xs text-label">SĐT:</span><small> {{ userInfo.phone || 'Chưa cập nhật' }}</small></p>
-                <p *ngIf="userInfo && userInfo.war != null && userInfo.dis != null && userInfo.pro != null"><span class="mt-xs mb-xs text-label">Địa
-                    chỉ:</span><span class="mt-xs mb-xs"><small> {{ userInfo.war.name || '' }},
-                      {{ userInfo.dis.name || '' }}, {{ userInfo.pro.name || '' }}</small></span></p>
+                <p *ngIf="userInfo && userInfo.wards != null && userInfo.districts != null && userInfo.provinces != null"><span class="mt-xs mb-xs text-label">Địa
+                    chỉ:</span><span class="mt-xs mb-xs"><small> {{ userInfo.wards.name || '' }},
+                      {{ userInfo.districts.name || '' }}, {{ userInfo.provinces.name || '' }}</small></span></p>
                 <p><span class="mt-xs mb-xs text-label">Email:</span><span class="mt-xs mb-xs"><small> {{
                       userInfo.email || 'Chưa cập nhật' }}</small></span></p>
                 <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700">Cập
@@ -46,7 +46,6 @@
                     </figcaption>
                     <br>
                   </div>
-                  <!-- <div class="text-xs-center"><small>{{ userInfo.phone || '' }}</small></div> -->
                 </figure>
               </div>
             </div>
@@ -81,7 +80,7 @@
 
             <agm-info-window>
               <strong>{{ userInfo.lastname || '' }} {{ userInfo.firstname || '' }}</strong><br>
-              <span>{{ userInfo.war.name || '' }}, {{ userInfo.dis.name || '' }} {{ userInfo.pro.name || '' }}</span>
+              <span>{{ userInfo.wards.name || '' }}, {{ userInfo.districts.name || '' }}, {{ userInfo.provinces.name || '' }}</span>
             </agm-info-window>
 
           </agm-marker>

@@ -32,7 +32,7 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['pondStatus']"
+                <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['status']"
                   required>
                   <mat-option>None</mat-option>
                   <mat-option value={{0}}>Ao trống</mat-option>
@@ -41,14 +41,14 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Chi phí tạo ao" type="text" [formControl]="form.controls['createCost']"
+                <input matInput placeholder="Chi phí tạo ao (vnđ)" type="number" [formControl]="form.controls['createCost']"
                   required autocomplete="off">
               </mat-form-field>
             </div>
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <div fxFlex="100">
-                <small *ngIf="form.controls['pondStatus'].hasError('required') && form.controls['pondStatus'].touched"
+                <small *ngIf="form.controls['status'].hasError('required') && form.controls['status'].touched"
                   class="mat-text-warn">Cần cho biết trạng thái của ao.</small>
               </div>
               <div fxFlex="100">
@@ -59,11 +59,11 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Diện tích ao" type="number" [formControl]="form.controls['pondArea']"
+                <input matInput placeholder="Diện tích ao (m2)" type="number" [formControl]="form.controls['pondArea']"
                   required autocomplete="off">
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ sâu của ao" type="number" [formControl]="form.controls['pondDepth']"
+                <input matInput placeholder="Độ sâu của ao (m)" type="number" [formControl]="form.controls['pondDepth']"
                   required autocomplete="off">
               </mat-form-field>
             </div>
@@ -125,9 +125,9 @@
                 </mat-card-content>
                 <br>
               </mat-card>
-              <mat-card class="mat-red-700" *ngIf="ErrorTimeout"><div style="height: 20px;">Cập nhật lỗi, vui lòng thử lại sau!</div></mat-card>
+              <mat-card class="mat-red-700" *ngIf="ErrorTimeout"><div style="height: 20px;">Thêm ao lỗi, vui lòng thử lại sau!</div></mat-card>
               <br>
-              <mat-card class="mat-green-700" *ngIf="SuccessTimeout"><div style="height: 20px;">Cập nhật thành công! Vui lòng đợi...</div></mat-card>
+              <mat-card class="mat-green-700" *ngIf="SuccessTimeout"><div style="height: 20px;">Thêm ao thành công! Vui lòng đợi...</div></mat-card>
             </div>
           </mat-card-content>
           <hr>

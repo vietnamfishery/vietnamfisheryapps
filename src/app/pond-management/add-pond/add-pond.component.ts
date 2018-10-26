@@ -56,7 +56,7 @@ export class AddPondComponent implements OnInit {
       pondCreatedDate: [null, Validators.compose([Validators.required])],
       pondArea: [null, Validators.compose([Validators.required])],
       pondDepth: [null, Validators.compose([Validators.required])],
-      pondStatus: [null, Validators.compose([Validators.required])],
+      status: [null, Validators.compose([Validators.required])],
       createCost: [null, Validators.compose([Validators.required])],
       pondLatitude: [null, Validators.compose([])],
       pondLongitude: [null, Validators.compose([])],
@@ -113,10 +113,11 @@ export class AddPondComponent implements OnInit {
 
   onSubmit() {
     const token: string = this.appService.getCookie(tokenName);
-    this.form.patchValue({
-      images: this.imgSource
-    })
+    // this.form.patchValue({
+    //   images: this.imgSource
+    // })
     this.pondManagementService.addpond(this.form.value, token).subscribe((res) => {
+      console.log(this.form.value);
       if(res.success) {
         this.SuccessTimeout = !this.SuccessTimeout;
         this.form.reset();

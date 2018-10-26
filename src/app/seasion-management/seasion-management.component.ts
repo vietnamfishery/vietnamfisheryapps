@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, ContentChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { PeriodicElement } from '../models/PeriodicElement';
-import { ELEMENT_DATA } from '../constants/table-data';
+import { ISeason } from '../models/season';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
@@ -13,6 +12,7 @@ import { SeasionManagementService } from './seasion-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
 import { from } from 'rxjs';
+import * as $ from 'jquery';
 
 export interface DialogData {
   animal: string;
@@ -27,18 +27,22 @@ export interface DialogData {
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
-    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN'}
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
   ],
 })
 export class SeasionManagementComponent implements OnInit {
   ELEMENT_DATA: ISeason[] = []
-  displayedColumns: string[] = ['seasonName', 'status'];
+  displayedColumns: string[] = ['seasonName', 'status', 'action'];
   dataSource = new MatTableDataSource<ISeason>(this.ELEMENT_DATA);
-
+  color = 'accent';
+  checked = false;
+  disabled = false;
+  isEdit = false;
+  public form: FormGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ContentChild('ssname') span: ElementRef;
 
-  // animal: string;
   name: string;
 
   constructor(
@@ -46,9 +50,13 @@ export class SeasionManagementComponent implements OnInit {
     public dialog: MatDialog,
     private adapter: DateAdapter<any>,
     private appService: AppService,
+    private fb: FormBuilder,
     private seasionManagementService: SeasionManagementService
   ) { }
 
+  ngAfterContentInit() {
+    console.log(this.span);
+  }
 
   openDialogAddSeasion(): void {
     const dialogRef = this.dialog.open(DialogAddSeasion, {
@@ -62,17 +70,35 @@ export class SeasionManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('.ssname').click((e) => {
+      console.log(e);
+    })
+    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
+    this.form = this.fb.group({
+      seasonName: [null, Validators.compose([Validators.required])],
+      status: [null, Validators.compose([Validators.required])]
+    })
     const token: string = this.appService.getCookie(tokenName);
-      this.seasionManagementService.getSeason(token).subscribe((res: any) => {
-        if(res.success == true){
-          this.dataSource = res.season;
-        }
-      });
+    this.seasionManagementService.getSeason(token).subscribe((res: any) => {
+      if (res.success == true) {
+        this.dataSource = res.season;
+      }
+    });
   }
 
+  onSubmit() {
+    console.log(this.form.value);
+  }
+
+  editAction() {
+    this.isEdit = !this.isEdit;
+  }
+
+  hjsgdjhsfdjhfs(e) {
+    console.log(e);
+  }
 }
 
 
@@ -86,11 +112,10 @@ export class SeasionManagementComponent implements OnInit {
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
-    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN'}
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
   ],
 })
 export class DialogAddSeasion {
-  // selected = 'option2';
   public form: FormGroup;
 
   constructor(
@@ -100,33 +125,23 @@ export class DialogAddSeasion {
     private appService: AppService,
     private seasionManagementService: SeasionManagementService,
     private router: Router
-    ) { }
+  ) { }
 
-    ngOnInit() {
-      this.form = this.fb.group({
-        seasonName: [null, Validators.compose([Validators.required])],
-        // pondName: [null, Validators.compose([Validators.required])],
-        // createdDate: [null, Validators.compose([Validators.required])],
-      });
-    }
+  ngOnInit() {
+    this.form = this.fb.group({
+      seasonName: [null, Validators.compose([Validators.required])],
+      // pondName: [null, Validators.compose([Validators.required])],
+      // createdDate: [null, Validators.compose([Validators.required])],
+    });
+  }
 
-    onSubmit(){
-      const token: string = this.appService.getCookie(tokenName);
-      this.seasionManagementService.addseason(this.form.value, token).subscribe((res) => {
-        if(res.success) {
-          this.dialogRef.close();
-          // this.router.navigate(['/']);
-        }
-      });
-    }
-}
-
-    onSubmit(){
-      const token: string = this.appService.getCookie(tokenName);
-      console.log(this.form.value);
-
-      // this.seasionManagementService.addseason(this.form.value, token).subscribe((res) => {
-
-      // });
-    }
+  onSubmit() {
+    const token: string = this.appService.getCookie(tokenName);
+    this.seasionManagementService.addseason(this.form.value, token).subscribe((res) => {
+      if (res.success) {
+        this.dialogRef.close();
+        // this.router.navigate(['/']);
+      }
+    });
+  }
 }
