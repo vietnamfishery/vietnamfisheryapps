@@ -64,11 +64,16 @@ export class SeasionManagementComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     const token: string = this.appService.getCookie(tokenName);
-      this.seasionManagementService.getSeason(token).subscribe((res: any) => {
-        if(res){
-          console.log(res);
-        }
-      });
+      // this.seasionManagementService.getSeason(token).subscribe((res: any) => {
+      //   if(res){
+      //     console.log(res);
+      //   }
+      // });
+  }
+
+  hjbhsd(e) {
+    e.classList.add('hidden');
+    console.log(e);
   }
 
 }
