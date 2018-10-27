@@ -11,8 +11,6 @@ import { MY_FORMATS_DATE } from '../constants/format-date';
 import { SeasionManagementService } from './seasion-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
-import { from } from 'rxjs';
-import * as $ from 'jquery';
 
 export interface DialogData {
   animal: string;
@@ -32,7 +30,7 @@ export interface DialogData {
 })
 export class SeasionManagementComponent implements OnInit {
   ELEMENT_DATA: ISeason[] = []
-  displayedColumns: string[] = ['seasonName', 'status', 'action'];
+  displayedColumns: string[] = ['seasonName', 'status'];
   dataSource = new MatTableDataSource<ISeason>(this.ELEMENT_DATA);
   color = 'accent';
   checked = false;
@@ -54,10 +52,6 @@ export class SeasionManagementComponent implements OnInit {
     private seasionManagementService: SeasionManagementService
   ) { }
 
-  ngAfterContentInit() {
-    console.log(this.span);
-  }
-
   openDialogAddSeasion(): void {
     const dialogRef = this.dialog.open(DialogAddSeasion, {
       width: '260px',
@@ -70,9 +64,6 @@ export class SeasionManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    $('.ssname').click((e) => {
-      console.log(e);
-    })
     
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -92,12 +83,22 @@ export class SeasionManagementComponent implements OnInit {
     console.log(this.form.value);
   }
 
-  editAction() {
-    this.isEdit = !this.isEdit;
+  cancel(span, form) {
+    span.classList.remove('hidden');
+    form.classList.add('hidden');
   }
-
-  hjsgdjhsfdjhfs(e) {
-    console.log(e);
+  
+  toUpdate(id,ssn) {
+    console.log(id);
+    console.log(ssn.value);
+  }
+  
+  toEdit(span, form, seasonName) {
+    this.form.patchValue({
+      seasonName: seasonName.value
+    });
+    span.classList.add('hidden');
+    form.classList.remove('hidden');
   }
 }
 
