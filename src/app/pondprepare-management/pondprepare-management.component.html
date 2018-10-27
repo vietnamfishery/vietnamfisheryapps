@@ -12,19 +12,19 @@
         <hr>
         <div class="pa-1" fxLayout="column">
           <mat-form-field fxFlex="100">
-            <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Ao 1</mat-option>
-              <mat-option value="option2">Ao 2</mat-option>
-              <mat-option value="option3">Ao 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field fxFlex="100">
             <mat-select [(value)]="selected" placeholder="Tên vụ nuôi">
               <mat-option>None</mat-option>
               <mat-option value="option1">Vụ nuôi 1</mat-option>
               <mat-option value="option2">Vụ nuôi 2</mat-option>
               <mat-option value="option3">Vụ nuôi 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field fxFlex="100">
+            <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Ao 1</mat-option>
+              <mat-option value="option2">Ao 2</mat-option>
+              <mat-option value="option3">Ao 3</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -106,7 +106,8 @@
                 <br>
                 <div fxLayout="row">
                   <b fxFlex="100">Thêm chi phí phát sinh</b>
-                  <a routerLink="/quan-ly-chuan-bi-ao/them-chi-phi-phat-sinh" matTooltip="Thêm chi phí phát sinh" matTooltipPosition="above">
+                  <a routerLink="/quan-ly-chuan-bi-ao/them-chi-phi-phat-sinh" matTooltip="Thêm chi phí phát sinh"
+                    matTooltipPosition="above">
                     <mat-icon>library_add</mat-icon>
                   </a>
                 </div>

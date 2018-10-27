@@ -17,38 +17,31 @@ export class SeasionManagementService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) { }
-
-  public getSeason(token: string): Observable<any> {
-    const h: any = {
+	) { }
+	
+	private setHeader(token: string): any {
+		return {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json',
 				'Authorization': token
 			})
 		}
-		return this.http.get<any>(host + '/seasons/gets', h);
+	}
+
+  public getSeason(token: string): Observable<any> {
+		return this.http.get<any>(host + '/seasons/gets', this.setHeader(token));
 	}
 	
 	public getSeasonById(seasonId: number, token: string): Observable<any> {
-    const h: any = {
-			headers: new HttpHeaders({
-				'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'application/json',
-				'Authorization': token
-			})
-		}
-		return this.http.get<any>(host + '/seasons/get/' + seasonId, h);
+		return this.http.get<any>(host + '/seasons/get/' + seasonId, this.setHeader(token));
   }
 
   public addseason(data: any, token: string): Observable<any> {
-    const h: any = {
-			headers: new HttpHeaders({
-				'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'application/json',
-				'Authorization': token
-			})
-    }
-    return this.http.post(host + '/seasons/add', data, h);
+    return this.http.post(host + '/seasons/add', data, this.setHeader(token));
+	}
+
+	public updateseason(data: any, token: string): Observable<any> {
+		return this.http.put(host + '/seasons/update', data, this.setHeader(token));
 	}
 }
