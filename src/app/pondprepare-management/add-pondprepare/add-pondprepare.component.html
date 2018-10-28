@@ -10,9 +10,11 @@
   <div fxLayout="row">
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
       fxFlexOffset.md="15" fxFlex.md="70">
-      <div>
-        <form [formGroup]="form" style="font-size:20px">
-          <mat-card-content fxLayout="column">
+      <br>
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="form">
+          <form [formGroup]="form" fxLayout="column">
+            <ng-template matStepLabel>Thông tin</ng-template>
             <mat-form-field>
               <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
                 required>
@@ -24,7 +26,7 @@
             </mat-form-field>
             <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
               class="mat-text-warn">Chưa
-              chọn vụ nuôi.</small>
+              chọn vụ nuôi.</small><br>
             <mat-form-field>
               <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']" required>
                 <mat-option>None</mat-option>
@@ -34,7 +36,7 @@
               </mat-select>
             </mat-form-field>
             <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
-              chọn ao nuôi.</small>
+              chọn ao nuôi.</small><br>
             <mat-form-field>
               <input matInput placeholder="Tên công việc" type="text" [formControl]="form.controls['pondprepareName']"
                 autocomplete="off" required>
@@ -42,12 +44,18 @@
             <small *ngIf="form.controls['pondprepareName'].hasError('required') && form.controls['pondprepareName'].touched"
               class="mat-text-warn">Tên
               công việc không được trống.</small>
-            <small *ngIf="form.controls['createdDate'].hasError('required') && form.controls['createdDate'].touched"
-              class="mat-text-warn">Ngày chuẩn bị không được trống.</small>
-            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button mat-button matStepperNext class="mat-green-700">Tiếp theo</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="form_material">
+          <form [formGroup]="form_material">
+            <ng-template matStepLabel>Cơ sở vật chất</ng-template>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <mat-select [(value)]="selected" placeholder="Nguyên, vật liệu" [formControl]="form.controls['materialName']"
+                <mat-select [(value)]="selected" placeholder="Nguyên, vật liệu" [formControl]="form_material.controls['materialName']"
                   required>
                   <mat-option>None</mat-option>
                   <mat-option value="option1">Thuốc diệt rong</mat-option>
@@ -56,32 +64,33 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Số lượng" type="number" [formControl]="form.controls['quantity']"
+                <input matInput placeholder="Số lượng" type="number" [formControl]="form_material.controls['quantity']"
                   autocomplete="off" required>
               </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <div fxFlex="100">
-                <small *ngIf="form.controls['materialName'].hasError('required') && form.controls['materialName'].touched"
+                <small *ngIf="form_material.controls['materialName'].hasError('required') && form_material.controls['materialName'].touched"
                   class="mat-text-warn">Nguyên, vật liệu không được trống.</small>
               </div>
               <div fxFlex="100">
-                <small *ngIf="form.controls['quantity'].hasError('required') && form.controls['quantity'].touched"
+                <small *ngIf="form_material.controls['quantity'].hasError('required') && form_material.controls['quantity'].touched"
                   class="mat-text-warn">Số
                   lượng không được trống.</small>
               </div>
             </div>
-          </mat-card-content>
-          <hr>
-          <mat-card-actions>
-            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Thêm</button>
-              <button mat-raised-button color="warn" routerLink="/quan-ly-chuan-bi-ao">Huỷ</button>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button mat-raised-button type="submit" class="mat-green-700">Tiếp tục thêm</button>
             </div>
-          </mat-card-actions>
-        </form>
-      </div>
+            <br>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <!-- <button mat-raised-button matStepperPrevious style="margin-right:5px" color="warn">Trước</button> -->
+              <button mat-raised-button type="submit" color="primary">Xong</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
     </div>
   </div>
 

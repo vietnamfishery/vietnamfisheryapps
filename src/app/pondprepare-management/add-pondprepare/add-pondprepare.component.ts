@@ -18,9 +18,13 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 export class AddPondprepareComponent implements OnInit {
 
   public form: FormGroup;
+  public form_material: FormGroup;
+  isLinear = true;
+
 
   constructor(
     private fb: FormBuilder,
+    private fb_material: FormBuilder,
     private pondprepareManagementService: PondprepareManagementService
   ) { }
 
@@ -28,11 +32,20 @@ export class AddPondprepareComponent implements OnInit {
     this.form = this.fb.group({
       pondName: [null, Validators.compose([Validators.required])],
       seasonName: [null, Validators.compose([Validators.required])],
-      pondprepareName: [null, Validators.compose([Validators.required])],
+      pondprepareName: [null, Validators.compose([Validators.required])]
+    });
+    this.form_material = this.fb_material.group({
       materialName: [null, Validators.compose([Validators.required])],
-      quantity: [null, Validators.compose([Validators.required])],
-      createdDate: [null, Validators.compose([Validators.required])],
+      quantity: [null, Validators.compose([Validators.required])]
+    });
+    this.onChangeForm();
+  }
+  
+  onChangeForm = () => {
+    this.form.valueChanges.subscribe(() => {
+      if(this.form.valid){
+        this.isLinear = !this.isLinear;
+      }
     });
   }
-
 }

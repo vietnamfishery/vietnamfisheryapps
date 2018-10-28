@@ -14,6 +14,17 @@
         <form [formGroup]="form" (ngSubmit)=(onSubmit()) style="font-size:20px">
           <mat-card-content fxLayout="column">
             <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
+                required>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Vụ nuôi 1</mat-option>
+                <mat-option value="option2">Vụ nuôi 2</mat-option>
+                <mat-option value="option3">Vụ nuôi 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
+              class="mat-text-warn">Chưa chọn vụ nuôi.</small>
+            <mat-form-field>
               <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']" required>
                 <mat-option>None</mat-option>
                 <mat-option value="option1">Ao nuôi 1</mat-option>
@@ -24,19 +35,8 @@
             <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
               chọn ao nuôi.</small>
             <mat-form-field>
-              <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
-                required>
-                <mat-option>None</mat-option>
-                <mat-option value="option1">Vụ nuôi 1</mat-option>
-                <mat-option value="option2">Vụ nuôi 2</mat-option>
-                <mat-option value="option3">Vụ nuôi 3</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
-              class="mat-text-warn">Chưa
-              chọn vụ nuôi.</small>
-            <mat-form-field>
-              <input matInput [matDatepicker]="createdDate" placeholder="Ngày thả nuôi" [formControl]="form.controls['createdDate']" autocomplete="off" required>
+              <input matInput [matDatepicker]="createdDate" placeholder="Ngày thả nuôi" [formControl]="form.controls['createdDate']"
+                autocomplete="off" required>
               <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
               <mat-datepicker #createdDate></mat-datepicker>
             </mat-form-field>
@@ -68,17 +68,19 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ pH ban đầu" type="number" [formControl]="form.controls['phFirst']" autocomplete="off" required>
+                <input matInput placeholder="Độ pH ban đầu" type="number" [formControl]="form.controls['phFirst']"
+                  autocomplete="off" required>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ mặn ban đầu" type="number" [formControl]="form.controls['salinityFIRST']" autocomplete="off" required>
+                <input matInput placeholder="Độ mặn ban đầu" type="number" [formControl]="form.controls['salinityFIRST']"
+                  autocomplete="off" required>
               </mat-form-field>
             </div>
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <div fxFlex="100">
-                <small *ngIf="form.controls['phFirst'].hasError('required') && form.controls['phFirst'].touched"
-                  class="mat-text-warn">pH ban đầu không được trống.</small>
+                <small *ngIf="form.controls['phFirst'].hasError('required') && form.controls['phFirst'].touched" class="mat-text-warn">pH
+                  ban đầu không được trống.</small>
               </div>
               <div fxFlex="100">
                 <small *ngIf="form.controls['salinityFIRST'].hasError('required') && form.controls['salinityFIRST'].touched"
@@ -86,14 +88,16 @@
               </div>
             </div>
             <mat-form-field>
-              <mat-select [(value)]="selected" placeholder="Tên giống thả nuôi" [formControl]="form.controls['breedType']" required>
+              <mat-select [(value)]="selected" placeholder="Tên giống thả nuôi" [formControl]="form.controls['breedType']"
+                required>
                 <mat-option>None</mat-option>
                 <mat-option value="option1">Tôm càng</mat-option>
                 <mat-option value="option2">Tôm sú</mat-option>
                 <mat-option value="option3">Tôm thẻ chân trắng</mat-option>
               </mat-select>
             </mat-form-field>
-              <small *ngIf="form.controls['breedType'].hasError('required') && form.controls['breedType'].touched" class="mat-text-warn">Chưa chọn loài nuôi.</small>
+            <small *ngIf="form.controls['breedType'].hasError('required') && form.controls['breedType'].touched" class="mat-text-warn">Chưa
+              chọn loài nuôi.</small>
           </mat-card-content>
           <hr>
           <mat-card-actions>
