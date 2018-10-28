@@ -30,16 +30,24 @@ export interface DialogData {
 })
 export class SeasionManagementComponent implements OnInit {
   ELEMENT_DATA: ISeason[] = []
-  displayedColumns: string[] = ['seasonName', 'status'];
+  displayedColumns: string[] = ['seasonName', 'status', 'action'];
   dataSource = new MatTableDataSource<ISeason>(this.ELEMENT_DATA);
   color = 'accent';
   checked = false;
   disabled = false;
   isEdit = false;
+  preloader: boolean = false;
+
   public form: FormGroup;
+  seasonName: string;
+  seasonStatus: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ContentChild('ssname') span: ElementRef;
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   name: string;
 
@@ -64,10 +72,11 @@ export class SeasionManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.preloader = !this.preloader;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form = this.fb.group({
+      seasonId: [null],
       seasonName: [null, Validators.compose([Validators.required])],
       status: [null, Validators.compose([Validators.required])]
     })
@@ -75,31 +84,47 @@ export class SeasionManagementComponent implements OnInit {
     this.seasionManagementService.getSeason(token).subscribe((res: any) => {
       if (res.success == true) {
         this.dataSource = res.season;
+      } else {
+
       }
+      this.preloader = !this.preloader;
+
     });
   }
+    
+onSubmit(seasonId, seasonName) {
+  const data = { seasonId, seasonName: seasonName.value }
+  console.log(data);
+  const token: string = this.appService.getCookie(tokenName);
+  this.seasionManagementService.updateseason(data, token).subscribe((res) => {
+    if (res.success) {
+      this.seasionManagementService.getSeason(token).subscribe((res: any) => {
+        if (res.success == true) {
+          this.dataSource = res.season;
+        }
+      });
+      console.log("thành công");
+    } else {
+      console.log('thất bại');
+    }
+  })
+}
 
-  onSubmit() {
-    console.log(this.form.value);
-  }
+cancel(span, form) {
+  span.classList.remove('hidden');
+  form.classList.add('hidden');
+}
 
-  cancel(span, form) {
-    span.classList.remove('hidden');
-    form.classList.add('hidden');
-  }
-  
-  toUpdate(id,ssn) {
-    console.log(id);
-    console.log(ssn.value);
-  }
-  
-  toEdit(span, form, seasonName) {
-    this.form.patchValue({
-      seasonName: seasonName.value
-    });
-    span.classList.add('hidden');
-    form.classList.remove('hidden');
-  }
+// toUpdate(id,ssn) {
+//   console.log(id);
+//   console.log(ssn.value);
+// }
+
+toEdit(span, form, seasonName) {
+  this.seasonName = seasonName.value;
+  span.classList.add('hidden');
+  form.classList.remove('hidden');
+}
 }
 
 
@@ -130,9 +155,7 @@ export class DialogAddSeasion {
 
   ngOnInit() {
     this.form = this.fb.group({
-      seasonName: [null, Validators.compose([Validators.required])],
-      // pondName: [null, Validators.compose([Validators.required])],
-      // createdDate: [null, Validators.compose([Validators.required])],
+      seasonName: [null, Validators.compose([Validators.required])]
     });
   }
 

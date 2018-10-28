@@ -14,16 +14,6 @@
         <form [formGroup]="form" style="font-size:20px">
           <mat-card-content fxLayout="column">
             <mat-form-field>
-              <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']" required>
-                <mat-option>None</mat-option>
-                <mat-option value="option1">Ao nuôi 1</mat-option>
-                <mat-option value="option2">Ao nuôi 2</mat-option>
-                <mat-option value="option3">Ao nuôi 3</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
-              chọn ao nuôi.</small>
-            <mat-form-field>
               <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
                 required>
                 <mat-option>None</mat-option>
@@ -36,18 +26,22 @@
               class="mat-text-warn">Chưa
               chọn vụ nuôi.</small>
             <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']" required>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Ao nuôi 1</mat-option>
+                <mat-option value="option2">Ao nuôi 2</mat-option>
+                <mat-option value="option3">Ao nuôi 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
+              chọn ao nuôi.</small>
+            <mat-form-field>
               <input matInput placeholder="Tên công việc" type="text" [formControl]="form.controls['pondprepareName']"
                 autocomplete="off" required>
             </mat-form-field>
             <small *ngIf="form.controls['pondprepareName'].hasError('required') && form.controls['pondprepareName'].touched"
               class="mat-text-warn">Tên
               công việc không được trống.</small>
-            <mat-form-field>
-              <input matInput [matDatepicker]="createdDate" placeholder="Ngày chuẩn bị" [formControl]="form.controls['createdDate']"
-                required autocomplete="off">
-              <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
-              <mat-datepicker #createdDate></mat-datepicker>
-            </mat-form-field>
             <small *ngIf="form.controls['createdDate'].hasError('required') && form.controls['createdDate'].touched"
               class="mat-text-warn">Ngày chuẩn bị không được trống.</small>
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"

@@ -6,7 +6,8 @@
       <mat-icon>library_add</mat-icon>
     </a>
   </mat-toolbar>
-  <div fxLayout="row">
+  <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
+  <!-- <div fxLayout="row">
     <div fxFlexOffset="3" fxFlex="94" fxLayout.sm="column" fxFlexOffset.sm="30" fxFlex.sm="40" fxLayout.xs="column"
       fxFlexOffset.xs="10" fxFlex.xs="80" class="mr-top">
       <mat-form-field>
@@ -19,24 +20,31 @@
       </mat-form-field>
     </div>
   </div>
-  <br>
+  <br> -->
   <div fxLayout="row" fxFlex="100">
     <div class="mat-elevation-z8 mr-top" matSort fxFlex="100">
+      <br>
+      <div fxLayout="row" fxLayoutAlign="end center" style="margin-left:10px">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Lọc" autocomplete="off">
+        </mat-form-field>
+      </div>
       <table mat-table [dataSource]="dataSource">
 
         <ng-container matColumnDef="seasonName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên vụ</th>
           <td mat-cell *matCellDef="let season" (dblclick)="toEdit(spanName, formhidden, ssn)" title="Nháy đôi vào để sửa tên vụ">
             <span #spanName class="not-select">{{ season.seasonName }}</span>
-            <form [formGroup]="form" #formhidden class="hidden" (ngSubmit)="onSubmit(season.seasonId)">
+            <form #formhidden class="hidden" (ngSubmit)="onSubmit(season.seasonId, ssn)">
               <mat-form-field>
                 <input matInput #ssn placeholder="Tên vụ" type="text" required autocomplete="off" [formControl]="form.controls['seasonName']"
                   value={{season.seasonName}}>
 
-                <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Gửi" (click)="toUpdate(season.seasonId,ssn)" type="submit">
+                <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Gửi" type="submit">
                   <mat-icon>send</mat-icon>
                 </button>
-                <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Hủy" (click)="cancel(spanName, formhidden)" type="button">
+                <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Hủy" (click)="cancel(spanName, formhidden)"
+                  type="button">
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-form-field>
@@ -47,25 +55,30 @@
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Trạng thái</th>
           <td mat-cell *matCellDef="let season">
-            <mat-slide-toggle
-              class="example-margin"
-              [color]="color"
-              [checked]="checked"
+            <mat-slide-toggle *ngIf="season.status == 0" class="example-margin" [color]="color" [checked]="true"
               [disabled]="disabled">
+            </mat-slide-toggle>
+            <mat-slide-toggle *ngIf="season.status == 1" class="example-margin" [color]="color" [checked]="checked"
+              [disabled]="true">
             </mat-slide-toggle>
           </td>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="action">
+        <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Thao tác</th>
           <td mat-cell *matCellDef="let season">
-              <mat-chip-list>
-                  <mat-chip color="warn" selected (click)="editAction(spanName, formhidden)">Sửa</mat-chip>
-              </mat-chip-list>
-            <button mat-flat-button color="primary">Cập nhật vụ</button>&nbsp;&nbsp;
-            <a mat-flat-button color="warn">Thêm ao vào vụ</a>
+            <mat-chip-list>
+              <mat-chip color="primary" selected [routerLink]="['/quan-ly-vu-nuoi/danh-sach-ao-nuoi-cua-vu', season.seasonId ]"
+                matTooltip="Danh sách ao của vụ nuôi" matTooltipPosition="left">
+                <mat-icon>art_track</mat-icon>
+              </mat-chip>
+              <mat-chip class="mat-green-700" selected *ngIf="season.status == 0" [routerLink]="['/quan-ly-vu-nuoi/them-ao-nuoi-vao-vu', season.seasonId ]"
+                matTooltip="Thêm ao vào vụ nuôi" matTooltipPosition="right">
+                <mat-icon>add_circle_outline</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
           </td>
-        </ng-container> -->
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

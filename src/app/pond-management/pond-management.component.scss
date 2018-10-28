@@ -54,6 +54,26 @@
   font-weight: 700;
 }
 
+.product-badge-maintenance {
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  border-top: 30px solid #388e3c;
+  border-bottom: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-left: 30px solid #388e3c;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  span {
+    position: absolute;
+    transform: rotate(-45deg);
+    top: -18px;
+    left: -25px;
+    white-space: nowrap;
+  }
+}
+
 
 #lable{
   // background: rgba(255, 255, 255, 0);
