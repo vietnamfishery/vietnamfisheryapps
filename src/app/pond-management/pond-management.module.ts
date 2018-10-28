@@ -14,7 +14,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DetailPondComponent } from './detail-pond/detail-pond.component';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { PondManagementService } from './pond-management.service';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +39,7 @@ import { PondManagementService } from './pond-management.service';
     MatProgressBarModule,
     NgxDatatableModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBV-uHTqX6aH5_16ZmLa9uv16Op_R4t-1Y'
     }),
@@ -53,7 +54,7 @@ import { PondManagementService } from './pond-management.service';
     AddPondComponent,
     DetailPondComponent,
   ],
-  providers:[
+  providers: [
     PondManagementService
   ],
   bootstrap: [PondManagementComponent]

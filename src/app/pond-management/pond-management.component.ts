@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from './pond-management.service';
@@ -32,6 +32,7 @@ export class PondManagementComponent implements OnInit {
   constructor(
     private router: Router,
     public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     private pondManagementService: PondManagementService,
     private appService: AppService
   ) {}
@@ -56,15 +57,22 @@ export class PondManagementComponent implements OnInit {
     this.preloader = !this.preloader;
     const token: string = this.appService.getCookie(tokenName);
     this.pondManagementService.getAllPond(token).subscribe((res: any) => {
-      this.ponds = res.ponds.map((element: any) => {
-        return {
-          status: element.status,
-          pondName: element.pondName,
-          pondCreatedDate: moment(element.pondCreatedDate).format(`DD - MM - YYYY`),
-          images: element.images,
-          pondId: element.pondId
-        }
-      })
+      if(res.success) {
+        this.ponds = res.ponds.map((element: any) => {
+          return {
+            status: element.status,
+            pondName: element.pondName,
+            pondCreatedDate: moment(element.pondCreatedDate).format(`DD - MM - YYYY`),
+            images: element.images,
+            pondId: element.pondId
+          }
+        })
+      } else {
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "right"
+        });
+      }
       this.preloader = !this.preloader;
   });
   }
