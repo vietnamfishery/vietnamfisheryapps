@@ -9,6 +9,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SeasionManagementService } from './seasion-management.service';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ListPondsComponent } from './list-ponds/list-ponds.component';
+import { AddPondsComponent } from './add-ponds/add-ponds.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,7 +41,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   entryComponents: [SeasionManagementComponent, DialogAddSeasion],
   declarations: [
     SeasionManagementComponent,
-    DialogAddSeasion
+    DialogAddSeasion,
+    ListPondsComponent,
+    AddPondsComponent
   ],
   bootstrap: [SeasionManagementComponent],
   providers: [SeasionManagementService],

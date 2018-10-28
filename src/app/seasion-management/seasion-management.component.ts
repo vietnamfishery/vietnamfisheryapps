@@ -45,6 +45,10 @@ export class SeasionManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ContentChild('ssname') span: ElementRef;
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   name: string;
 
   constructor(
@@ -87,44 +91,40 @@ export class SeasionManagementComponent implements OnInit {
 
     });
   }
+    
+onSubmit(seasonId, seasonName) {
+  const data = { seasonId, seasonName: seasonName.value }
+  console.log(data);
+  const token: string = this.appService.getCookie(tokenName);
+  this.seasionManagementService.updateseason(data, token).subscribe((res) => {
+    if (res.success) {
+      this.seasionManagementService.getSeason(token).subscribe((res: any) => {
+        if (res.success == true) {
+          this.dataSource = res.season;
+        }
+      });
+      console.log("thành công");
+    } else {
+      console.log('thất bại');
+    }
+  })
+}
 
-  onSubmit(seasonId, seasonName) {    
-    const data = {seasonId, seasonName: seasonName.value}
-    console.log(data);
-    const token: string = this.appService.getCookie(tokenName);
-    this.seasionManagementService.updateseason(data, token).subscribe((res) => {
-      if(res.success){
-        this.seasionManagementService.getSeason(token).subscribe((res: any) => {
-          if (res.success == true) {
-            this.dataSource = res.season;
-          }
-        });
-        console.log("thành công");
-      } else {
-        console.log('thất bại');
-      }
-    })
-  }
+cancel(span, form) {
+  span.classList.remove('hidden');
+  form.classList.add('hidden');
+}
 
-  cancel(span, form) {
-    span.classList.remove('hidden');
-    form.classList.add('hidden');
-  }
-  
-  // toUpdate(id,ssn) {
-  //   console.log(id);
-  //   console.log(ssn.value);
-  // }
-  
-  toEdit(span, form, seasonName) {
-    this.seasonName = seasonName.value;
-    span.classList.add('hidden');
-    form.classList.remove('hidden');
-  }
+// toUpdate(id,ssn) {
+//   console.log(id);
+//   console.log(ssn.value);
+// }
 
-  listponds(seasonId) {
-    console.log(seasonId);
-  }
+toEdit(span, form, seasonName) {
+  this.seasonName = seasonName.value;
+  span.classList.add('hidden');
+  form.classList.remove('hidden');
+}
 }
 
 
