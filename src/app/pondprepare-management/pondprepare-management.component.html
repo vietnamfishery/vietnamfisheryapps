@@ -81,21 +81,21 @@
                 <br>
                 <div fxLayout="column">
                   <div fxLayout="row">
-                      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="max-height:50%">
+                      <table mat-table [(dataSource)]="pondprepares.details" class="mat-elevation-z8" style="max-height:50%">
                         
                           <ng-container matColumnDef="Nguyên vật liệu sử dụng">
                             <th mat-header-cell *matHeaderCellDef>Nguyên vật liệu sử dụng </th>
-                            <td mat-cell *matCellDef="let element"> {{element.pondPrepareId}} </td>
+                            <td mat-cell *matCellDef="let element"> {{ element.material.itemName }} </td>
                           </ng-container>
                         
                           <ng-container matColumnDef="Số lượng">
                             <th mat-header-cell *matHeaderCellDef> Số lượng </th>
-                            <td mat-cell *matCellDef="let element">  </td>
+                            <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
                           </ng-container>
                         
                           <ng-container matColumnDef="Chi phí">
                             <th mat-header-cell *matHeaderCellDef> Chi phí </th>
-                            <td mat-cell *matCellDef="let element">  </td>
+                            <td mat-cell *matCellDef="let element">{{ element.quantity * element.material.unitPrice | currency:'VND' }}</td>
                           </ng-container>
                         
                         
