@@ -9,7 +9,8 @@
             "type": "chrome",
             "request": "launch",
             "name": "VNF Angular",
-            "url": "http://172.16.130.197:4200/",
+            // "url": "http://172.16.130.197:4200/",
+            "url": "http://localhost:4200/",
             "webRoot": "${workspaceFolder}"
         }
     ]

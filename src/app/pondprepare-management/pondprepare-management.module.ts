@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PondprepareManagementRoutingModule } from './pondprepare-management-routing.module';
 import { PondprepareManagementComponent } from './pondprepare-management.component';
-import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatSidenavModule, MatSliderModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatAutocompleteModule, MatRadioModule, MatStepperModule } from '@angular/material';
+import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatSidenavModule, MatSliderModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatAutocompleteModule, MatRadioModule, MatStepperModule, MatTableModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddPondprepareComponent } from './add-pondprepare/add-pondprepare.component';
@@ -37,6 +37,7 @@ import { PondprepareManagementService } from './pondprepare-management.service';
     MatAutocompleteModule,
     MatRadioModule,
     MatStepperModule,
+    MatTableModule,
     PondprepareManagementRoutingModule
   ],
   declarations: [PondprepareManagementComponent, AddPondprepareComponent, EditPondprepareComponent, AddcostPondprepareComponent, EditcostPondprepareComponent],

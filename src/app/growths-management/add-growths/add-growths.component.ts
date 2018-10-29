@@ -39,4 +39,7 @@ export class AddGrowthsComponent implements OnInit {
     this.adapter.setLocale('vi');
   }
 
+  onSubmit() {
+    console.log(this.form.value);
+  }
 }

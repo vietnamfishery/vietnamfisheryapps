@@ -16,7 +16,7 @@ const routes: Routes = [
     component: AddPondprepareComponent
   },
   {
-    path: 'sua-chi-tiet-chuan-bi-ao',
+    path: 'sua-chi-tiet-chuan-bi-ao/:pondPrepareId',
     component: EditPondprepareComponent
   },
   {

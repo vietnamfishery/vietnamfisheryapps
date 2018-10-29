@@ -11,7 +11,7 @@
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
       fxFlexOffset.md="15" fxFlex.md="70">
       <div>
-        <form [formGroup]="form" style="font-size:20px">
+        <form [formGroup]="form" (ngSubmit)=(onSubmit()) style="font-size:20px">
           <mat-card-content fxLayout="column">
             <mat-form-field fxFlex="100">
               <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
@@ -86,7 +86,7 @@
           <hr>
           <mat-card-actions>
             <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button type="submit" class="mat-green-700" [disabled]="!form.valid">Thêm</button>
+              <button mat-raised-button type="submit" class="mat-green-700" [disabled]="!form.valid"git >Thêm</button>
               <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-tang-truong">Huỷ</button>
             </div>
           </mat-card-actions>

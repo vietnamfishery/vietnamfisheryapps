@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-detail-growths',
@@ -15,14 +16,29 @@ import { MY_FORMATS_DATE } from '../../constants/format-date';
 })
 export class EditDetailGrowthsComponent implements OnInit {
 
+  public form: FormGroup;
+  
   constructor(
-    private adapter: DateAdapter<any>
+    private adapter: DateAdapter<any>,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      pondName: [null, Validators.compose([Validators.required])],
+      seasonName: [null, Validators.compose([Validators.required])],
+      averageDensity: [null, Validators.compose([Validators.required])],
+      averageMass: [null, Validators.compose([Validators.required])],
+      speedOdGrowth: [null, Validators.compose([Validators.required])],
+      livingRatio: [null, Validators.compose([Validators.required])]
+    });
   }
 
   vietnamese() {
     this.adapter.setLocale('vi');
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
   }
 }

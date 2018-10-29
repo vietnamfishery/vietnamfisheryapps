@@ -11,20 +11,11 @@
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
       fxFlexOffset.md="15" fxFlex.md="70">
       <div>
-        <form style="font-size:20px">
+        <form [formGroup]="form" (ngSubmit)=(onSubmit()) style="font-size:20px">
           <mat-card-content fxLayout="column">
             <mat-form-field fxFlex="100">
-              <mat-select [(value)]="selected" placeholder="Ao nuôi">
-                <mat-option>None</mat-option>
-                <mat-option value="option1">Ao 1</mat-option>
-                <mat-option value="option2">Ao 2</mat-option>
-                <mat-option value="option3">Ao 3</mat-option>
-                <mat-option value="option3">Ao 4</mat-option>
-                <mat-option value="option3">Ao 5</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field fxFlex="100">
-              <mat-select [(value)]="selected" placeholder="Vụ nuôi">
+              <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
+                required>
                 <mat-option>None</mat-option>
                 <mat-option value="option1">Vụ nuôi 1</mat-option>
                 <mat-option value="option2">Vụ nuôi 2</mat-option>
@@ -33,35 +24,71 @@
                 <mat-option value="option3">Vụ nuôi 5</mat-option>
               </mat-select>
             </mat-form-field>
+            <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
+              class="mat-text-warn">Chưa chọn vụ nuôi.</small>
             <mat-form-field fxFlex="100">
-              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="dom" placeholder="Ngày theo dõi tăng trưởng"
-                autocomplete="off">
-              <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
-              <mat-datepicker #dom></mat-datepicker>
+              <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']" required>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Ao 1</mat-option>
+                <mat-option value="option2">Ao 2</mat-option>
+                <mat-option value="option3">Ao 3</mat-option>
+                <mat-option value="option3">Ao 4</mat-option>
+                <mat-option value="option3">Ao 5</mat-option>
+              </mat-select>
             </mat-form-field>
-            <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="10px"
+            <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
+              chọn ao nuôi.</small>
+            <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Mật độ trung bình" type="text" autocomplete="off" required>
+                <input matInput placeholder="Mật độ trung bình" type="number" autocomplete="off" [formControl]="form.controls['averageDensity']"
+                  required>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Sản lượng trung bình" type="text" autocomplete="off" required>
+                <input matInput placeholder="Sản lượng trung bình" type="number" autocomplete="off" [formControl]="form.controls['averageMass']"
+                  required>
               </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="5px"
+
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                <small *ngIf="form.controls['averageDensity'].hasError('required') && form.controls['averageDensity'].touched"
+                  class="mat-text-warn">Mật độ trung bình thả không được trống.</small>
+              </div>
+              <div fxFlex="100">
+                <small *ngIf="form.controls['averageMass'].hasError('required') && form.controls['averageMass'].touched"
+                  class="mat-text-warn">Sản lượng trung bình không được trống.</small>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Tốc độ tăng trưởng" type="text" autocomplete="off" required>
+                <input matInput placeholder="Tốc độ tăng trưởng" type="number" autocomplete="off" [formControl]="form.controls['speedOdGrowth']"
+                  required>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Tỉ lệ sống" type="text" autocomplete="off" required>
+                <input matInput placeholder="Tỉ lệ sống" type="number" autocomplete="off" [formControl]="form.controls['livingRatio']"
+                  required>
               </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                <small *ngIf="form.controls['speedOdGrowth'].hasError('required') && form.controls['speedOdGrowth'].touched"
+                  class="mat-text-warn">Tốc độ tăng trưởng không được trống.</small>
+              </div>
+              <div fxFlex="100">
+                <small *ngIf="form.controls['livingRatio'].hasError('required') && form.controls['livingRatio'].touched"
+                  class="mat-text-warn">Tỉ lệ sống không được trống.</small>
+              </div>
             </div>
           </mat-card-content>
           <hr>
           <mat-card-actions>
             <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-              <button mat-raised-button type="submit" class="mat-green-700">Thêm</button>
+              <button mat-raised-button type="submit" class="mat-green-700" [disabled]="!form.valid">Lưu</button>
               <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-tang-truong">Huỷ</button>
             </div>
           </mat-card-actions>
