@@ -38,7 +38,7 @@ import { IMaterialPondprepare } from '../models/materialPondprepare';
 
 export class PondprepareManagementComponent implements OnInit {
   displayedColumns: string[] = ['Nguyên vật liệu sử dụng', 'Số lượng', 'Chi phí'];
-
+  preloader = false;
   pondprepare: any[] = [];
   constructor(
     private pondprepareManagementService: PondprepareManagementService,
