@@ -37,6 +37,7 @@ import { IMaterialPondprepare } from '../models/materialPondprepare';
 
 
 export class PondprepareManagementComponent implements OnInit {
+  preloader: boolean = false;
   ELEMENT_DATA: IMaterialPondprepare[] = []
   displayedColumns: string[] = ['Nguyên vật liệu sử dụng', 'Số lượng', 'Chi phí'];
   dataSource = new MatTableDataSource<IMaterialPondprepare>(this.ELEMENT_DATA);
@@ -75,6 +76,7 @@ export class PondprepareManagementComponent implements OnInit {
   // }
 
   ngOnInit() {
+    this.preloader = !this.preloader;
     const token: string = this.appService.getCookie(tokenName);
     this.pondprepareManagementService.getPondPrepareAll(token).subscribe((res) => {
       if(res.success) {
@@ -93,6 +95,7 @@ export class PondprepareManagementComponent implements OnInit {
       } else {
         console.log('Lỗi get pondprepare');
       }
+      this.preloader = !this.preloader;
     });
   }
 
