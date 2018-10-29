@@ -64,4 +64,14 @@ export class AppService {
 			})
     });
   }
+
+  public setHeader(token: string): any {
+		return {
+			headers: new HttpHeaders({
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		}
+	}
 }

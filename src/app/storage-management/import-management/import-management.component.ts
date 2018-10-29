@@ -1,9 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { foods } from '../../constants/select-data';
+import { foods, units } from '../../constants/select-data';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { StorageManagementService } from '../storage-management.service';
+import { AppService } from 'src/app/app.service';
+import { tokenName } from '../../../environments';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { IStorage } from 'src/app/models';
+
+// export interface User {
+//   name: string;
+// }
 
 @Component({
   selector: 'app-import-management',
@@ -16,17 +26,22 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   ],
 })
 export class ImportManagementComponent implements OnInit {
-
-  public form_storage: FormGroup;
+	form: FormGroup;
   foods = foods;
-  selectedValue: string;
-
+  units = units;
+  selectedType: string;
+  selectedUnit: string;
+  token: any;
   minDate = new Date(2000, 0, 1);
   maxDate = new Date(2020, 0, 1);
 
+  storage: IStorage[];
+  filteredOptions: Observable<IStorage[]>;
   constructor(
     private adapter: DateAdapter<any>,
-    private fb_storage: FormBuilder
+    private fb: FormBuilder,
+    private storageManagementService: StorageManagementService,
+    private appService: AppService
   ) { }
 
   vietnamese() {
@@ -34,18 +49,46 @@ export class ImportManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.form_storage = this.fb_storage.group({
-    //   couponType: [null, Validators.compose([Validators.required])],
-    //   couponName: [null, Validators.compose([Validators.required])],
-    //   unitType: [null, Validators.compose([Validators.required])],
-    //   quantity: [null, Validators.compose([Validators.required])],
-    //   totalCost: [null, Validators.compose([Validators.required])],
-    //   lotNumber: [null, Validators.compose([])],
-    //   dom: [null, Validators.compose([Validators.required])],
-    //   ed: [null, Validators.compose([Validators.required])],
-    //   provider: [null, Validators.compose([Validators.required])],
-    //   note: [null, Validators.compose([])],
-    // });
+    this.token = this.appService.getCookie(tokenName);
+    this.createForm();
+    this.storageManagementService.getStorageWithUser(this.token).subscribe((res: any) => {
+      this.storage = res.storage;
+      this.filteredOptions = this.form.controls.productName.valueChanges
+        .pipe(
+          startWith<string | any>(''),
+          map(value => {
+            return typeof value === 'string' ? value : value.productName;
+          }),
+          map(name => name ? this._filter(name) : this.storage.slice())
+        );
+    });
   }
 
+  createForm() {
+    this.form = this.fb.group({
+      type: [null,  Validators.compose([Validators.required])],
+      productName: [null,  Validators.compose([Validators.required])],
+      quantity: [null,  Validators.compose([Validators.required])],
+      unit: [null,  Validators.compose([Validators.required])],
+      unitPrice: [null,  Validators.compose([Validators.required])],
+      provider: [null,  Validators.compose([Validators.required])],
+      providerAddress: [null,  Validators.compose([Validators.required])],
+      descriptions: [null,  Validators.compose([Validators.required])],
+    });
+  }
+  
+  displayFn(storage?: any): string | undefined {
+    console.log(storage);
+    return storage ? storage.productName : undefined;
+  }
+
+  private _filter(name: string): IStorage[] {
+    const filterValue = name.toLowerCase();
+
+    return this.storage.filter(option => option.productName.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  onSubmit(){
+    console.log(this.form.value);
+  }
 }

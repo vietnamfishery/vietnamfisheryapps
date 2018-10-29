@@ -6,7 +6,7 @@ import { StorageManagementComponent } from './storage-management.component';
 import { MaterialManagementComponent } from './material-management/material-management.component';
 import { VeterinaryManagementComponent } from './veterinary-management/veterinary-management.component';
 import { FoodsManagementComponent } from './foods-management/foods-management.component';
-import { MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatTabsModule, MatCheckboxModule } from '@angular/material';
+import { MatAutocompleteModule, MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatTabsModule, MatCheckboxModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
@@ -14,6 +14,7 @@ import { BreedManagementComponent } from './breed-management/breed-management.co
 import { ImportManagementComponent } from './import-management/import-management.component';
 import { CouponManagementComponent } from './coupon-management/coupon-management.component';
 import { ChangePriceManagementComponent } from './change-price-management/change-price-management.component';
+import { StorageManagementService } from './storage-management.service';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ChangePriceManagementComponent } from './change-price-management/change
     MatButtonModule,
     FlexLayoutModule,
     MatTableModule,
+    MatAutocompleteModule,
     MatSortModule,
     FormsModule,
     MatPaginatorModule,
@@ -43,6 +45,9 @@ import { ChangePriceManagementComponent } from './change-price-management/change
     MaterialManagementComponent, 
     VeterinaryManagementComponent, 
     FoodsManagementComponent, BreedManagementComponent, ImportManagementComponent, CouponManagementComponent, ChangePriceManagementComponent
+  ],
+  providers: [
+    StorageManagementService
   ]
 })
 export class StorageManagementModule { }

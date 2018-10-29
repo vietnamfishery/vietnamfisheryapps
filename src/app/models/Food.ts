@@ -1,4 +1,4 @@
 export interface Food {
-    value: string;
+    value: number;
     viewValue: string;
 }

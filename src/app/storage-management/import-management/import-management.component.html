@@ -4,82 +4,68 @@
   </div>
   <hr>
   <div class="row">
-    <mat-tab-group mat-stretch-tabs class="pd-bottom-20" selectedIndex="1" backgroundColor="primary" color="accent">
+    <mat-tab-group mat-stretch-tabs class="pd-bottom-20" selectedIndex="0" backgroundColor="primary" color="accent">
       <mat-tab label="NHẬP KHO">
         <div class="mr-top-10">
-          <form>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div fxLayout="row">
               <div fxLayout="column" fxLayoutGap="5px" fxFlex="50" fxFlexOffset="25" fxFlex.md="60" fxFlexOffset.md="20"
                 fxFlex.sm="80" fxFlexOffset.sm="10" fxFlex.xs="90" fxFlexOffset.xs="5">
                 <mat-form-field>
-                  <mat-select placeholder="Loại" required [(ngModel)]="selectedValue" name="type">
+                  <mat-select placeholder="Loại" required [(ngModel)]="selectedType" name="type" [formControl]="form.controls['type']">
                     <mat-option *ngFor="let food of foods" [value]="food.value">
                       {{food.viewValue}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
 
-                <mat-form-field>
-                  <mat-label>Tên vật phẩm</mat-label>
-                  <input matInput placeholder="Tên vật phẩm" value="" required>
-                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Assignee" aria-label="Assignee" matInput [formControl]="form.controls['productName']" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option.productName}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
 
                 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
                   <mat-form-field fxFlex="50" fxFlex.xs="100">
                     <mat-label>Số lượng</mat-label>
-                    <input matInput placeholder="Số lượng" value="" required>
+                    <input matInput placeholder="Số lượng" value="" required autocomplete="off" [formControl]="form.controls['quantity']">
                   </mat-form-field>
                   <mat-form-field fxFlex="50" fxFlex.xs="100">
-                    <mat-select placeholder="Đơn vị tính" required [(ngModel)]="selectedValue" name="unit">
-                      <mat-option *ngFor="let food of foods" [value]="food.value">
-                        {{food.viewValue}}
+                    <mat-select placeholder="Đơn vị tính" required [(ngModel)]="selectedUnit" name="unit"  [formControl]="form.controls['unit']">
+                      <mat-option *ngFor="let unit of units" [value]="unit.value">
+                        {{unit.viewValue}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
 
                 <mat-form-field>
-                  <mat-label>Tổng giá</mat-label>
-                  <input matInput placeholder="Tổng giá nhập" value="" required>
+                  <mat-label>Giá/Đơn vị tính</mat-label>
+                  <input matInput placeholder="Giá trên một đơn vị tính" value="" required autocomplete="off"  [formControl]="form.controls['unitPrice']">
                 </mat-form-field>
-
-                <mat-form-field>
-                  <mat-label>Số lô</mat-label>
-                  <input matInput placeholder="Số lô" value="">
-                </mat-form-field>
-
-                <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
-                  <mat-form-field fxFlex="50" fxFlex.xs="100">
-                    <mat-label>Ngày sản xuất</mat-label>
-                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="dom" placeholder="Chọn một ngày"
-                      required>
-                    <mat-datepicker-toggle matSuffix [for]="dom"></mat-datepicker-toggle>
-                    <mat-datepicker #dom></mat-datepicker>
-                  </mat-form-field>
-                  <mat-form-field fxFlex="50" fxFlex.xs="100">
-                    <mat-label>Hạn sử dụng</mat-label>
-                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="ed" placeholder="Chọn một ngày"
-                      required>
-                    <mat-datepicker-toggle matSuffix [for]="ed"></mat-datepicker-toggle>
-                    <mat-datepicker #ed></mat-datepicker>
-                  </mat-form-field>
-                </div>
 
                 <mat-form-field>
                   <mat-label>Nhà cung cấp</mat-label>
-                  <input matInput placeholder="Nhà cung cấp" value="" required>
+                  <input matInput placeholder="Nhà cung cấp" value="" required autocomplete="off" [formControl]="form.controls['provider']">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Địa chỉ nhà cung cấp</mat-label>
+                  <input matInput placeholder="Địa chỉ nhà cung cấp" value="" required autocomplete="off" [formControl]="form.controls['providerAddress']">
                 </mat-form-field>
 
                 <mat-form-field>
                   <mat-label>Ghi chú</mat-label>
-                  <textarea matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..."></textarea>
+                  <textarea matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..." [formControl]="form.controls['descriptions']"></textarea>
                 </mat-form-field>
 
                 <div fxLayout="row" fxLayoutAlign="end center">
-                  <button mat-raised-button class="mat-green-700">Thêm</button>
-                  <button mat-raised-button>Huỷ</button>
+                  <button mat-raised-button class="mat-green-700" type="submit">Thêm</button>
+                  <button mat-raised-button class="mat-red-700">Huỷ</button>
                 </div>
-
               </div>
             </div>
           </form>
