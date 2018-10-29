@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PondprepareManagementRoutingModule } from './pondprepare-management-routing.module';
 import { PondprepareManagementComponent } from './pondprepare-management.component';
-import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatSidenavModule, MatSliderModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatAutocompleteModule, MatRadioModule, MatStepperModule, MatTableModule, MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatSnackBarModule, MatChipsModule, MatTabsModule, MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatSidenavModule, MatSliderModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatExpansionModule, MatAutocompleteModule, MatRadioModule, MatStepperModule, MatTableModule, MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddPondprepareComponent } from './add-pondprepare/add-pondprepare.component';
@@ -24,14 +24,17 @@ import { PondprepareManagementService } from './pondprepare-management.service';
     MatListModule,
     MatSliderModule,
     MatSidenavModule,
+    MatChipsModule,
     FormsModule,
     FlexLayoutModule,
     MatExpansionModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+    MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,

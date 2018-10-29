@@ -37,7 +37,7 @@
             <span #spanName class="not-select">{{ season.seasonName }}</span>
             <form #formhidden class="hidden" (ngSubmit)="onSubmit(season.seasonId, ssn)">
               <mat-form-field>
-                <input matInput #ssn placeholder="Tên vụ" type="text" required autocomplete="off" [formControl]="form.controls['seasonName']"
+                <input matInput #ssn type="text" required autocomplete="off" [formControl]="form.controls['seasonName']"
                   value={{season.seasonName}}>
 
                 <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Gửi" type="submit">
