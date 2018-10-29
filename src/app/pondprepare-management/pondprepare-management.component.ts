@@ -46,6 +46,7 @@ export class PondprepareManagementComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.preloader = !this.preloader;
     const token: string = this.appService.getCookie(tokenName);
     this.pondprepareManagementService.getPondPrepareAll(token).subscribe((res) => {
       // console.log(res);
@@ -63,6 +64,7 @@ export class PondprepareManagementComponent implements OnInit {
       } else {
         console.log('Lỗi get pondprepare');
       }
+      this.preloader = !this.preloader;
     });
   }
 
