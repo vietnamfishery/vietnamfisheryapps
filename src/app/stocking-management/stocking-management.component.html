@@ -39,8 +39,15 @@
       </div>
     </div>
   </div>
+  <br>
   <div fxLayout="row">
     <div class="mat-elevation-z8 mr-top" matSort fxFlex="100">
+      <br>
+      <div fxLayout="row" fxLayoutAlign="end center" style="margin-left:10px">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Lọc" autocomplete="off">
+        </mat-form-field>
+      </div>
       <table mat-table [dataSource]="dataSource">
 
         <!-- Position Column -->
