@@ -6,7 +6,7 @@ import { StorageManagementComponent } from './storage-management.component';
 import { MaterialManagementComponent } from './material-management/material-management.component';
 import { VeterinaryManagementComponent } from './veterinary-management/veterinary-management.component';
 import { FoodsManagementComponent } from './foods-management/foods-management.component';
-import { MatAutocompleteModule, MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatTabsModule, MatCheckboxModule } from '@angular/material';
+import { MatListModule, MatDividerModule, MatAutocompleteModule, MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTooltipModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatTabsModule, MatCheckboxModule, MatSnackBarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
@@ -22,9 +22,11 @@ import { StorageManagementService } from './storage-management.service';
     MatIconModule,
     MatToolbarModule,
     MatCardModule,
+    MatListModule,
     MatButtonModule,
     FlexLayoutModule,
     MatTableModule,
+    MatDividerModule,
     MatAutocompleteModule,
     MatSortModule,
     FormsModule,
@@ -32,6 +34,7 @@ import { StorageManagementService } from './storage-management.service';
     MatTooltipModule,
     StoreModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,

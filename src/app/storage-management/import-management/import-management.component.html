@@ -6,74 +6,73 @@
   <div class="row">
     <mat-tab-group mat-stretch-tabs class="pd-bottom-20" selectedIndex="0" backgroundColor="primary" color="accent">
       <mat-tab label="NHẬP KHO">
-        <div class="mr-top-10">
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div fxLayout="row">
-              <div fxLayout="column" fxLayoutGap="5px" fxFlex="50" fxFlexOffset="25" fxFlex.md="60" fxFlexOffset.md="20"
-                fxFlex.sm="80" fxFlexOffset.sm="10" fxFlex.xs="90" fxFlexOffset.xs="5">
-                <mat-form-field>
-                  <mat-select placeholder="Loại" required [(ngModel)]="selectedType" name="type" [formControl]="form.controls['type']">
-                    <mat-option *ngFor="let food of foods" [value]="food.value">
-                      {{food.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="example-full-width">
-                    <input type="text" placeholder="Assignee" aria-label="Assignee" matInput [formControl]="form.controls['productName']" [matAutocomplete]="auto">
+        <mat-card *ngFor="let formStorage of arrFormStorage">
+          <form [formGroup]="formStorage.form" (ngSubmit)="onSubmit(tvp.value, u.value, sl.value, gdv.value, ncc.value, dcncc.value, mt.value)" (click)="changeFilteredOptions(formStorage.position)">
+            <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
+              <div fxLayout="column" fxFlex="50">
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                  <mat-form-field fxFlex="48" fxFlexOffset="1">
+                    <input type="text" placeholder="Tên Vật Phẩm" aria-label="Tên Vật Phẩm" matInput [formControl]="formStorage.form.controls['product']" #tvp [matAutocomplete]="auto" required>
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                         {{option.productName}}
                       </mat-option>
                     </mat-autocomplete>
                   </mat-form-field>
-
-                <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
-                  <mat-form-field fxFlex="50" fxFlex.xs="100">
-                    <mat-label>Số lượng</mat-label>
-                    <input matInput placeholder="Số lượng" value="" required autocomplete="off" [formControl]="form.controls['quantity']">
-                  </mat-form-field>
-                  <mat-form-field fxFlex="50" fxFlex.xs="100">
-                    <mat-select placeholder="Đơn vị tính" required [(ngModel)]="selectedUnit" name="unit"  [formControl]="form.controls['unit']">
+                  <mat-form-field fxFlex="48" fxFlexOffset="1">
+                    <mat-select placeholder="Đơn vị tính" required value="u.value" #u name="unit" [formControl]="formStorage.form.controls['unit']">
+                      <mat-option>None</mat-option>
                       <mat-option *ngFor="let unit of units" [value]="unit.value">
                         {{unit.viewValue}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-
-                <mat-form-field>
-                  <mat-label>Giá/Đơn vị tính</mat-label>
-                  <input matInput placeholder="Giá trên một đơn vị tính" value="" required autocomplete="off"  [formControl]="form.controls['unitPrice']">
-                </mat-form-field>
-
-                <mat-form-field>
-                  <mat-label>Nhà cung cấp</mat-label>
-                  <input matInput placeholder="Nhà cung cấp" value="" required autocomplete="off" [formControl]="form.controls['provider']">
-                </mat-form-field>
-
-                <mat-form-field>
-                  <mat-label>Địa chỉ nhà cung cấp</mat-label>
-                  <input matInput placeholder="Địa chỉ nhà cung cấp" value="" required autocomplete="off" [formControl]="form.controls['providerAddress']">
-                </mat-form-field>
-
-                <mat-form-field>
-                  <mat-label>Ghi chú</mat-label>
-                  <textarea matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..." [formControl]="form.controls['descriptions']"></textarea>
-                </mat-form-field>
-
-                <div fxLayout="row" fxLayoutAlign="end center">
-                  <button mat-raised-button class="mat-green-700" type="submit">Thêm</button>
-                  <button mat-raised-button class="mat-red-700">Huỷ</button>
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                  <mat-form-field fxFlex="48" fxFlexOffset="1">
+                    <mat-label>Số lượng</mat-label>
+                    <input matInput placeholder="Số lượng" value="" #sl required autocomplete="off" [formControl]="formStorage.form.controls['quantity']">
+                  </mat-form-field>
+                  <mat-form-field fxFlex="48" fxFlexOffset="1">
+                    <mat-label>Giá/Đơn vị tính</mat-label>
+                    <input matInput placeholder="Giá trên một đơn vị tính" #gdv value="" required autocomplete="off" [formControl]="formStorage.form.controls['unitPrice']">
+                  </mat-form-field>
                 </div>
               </div>
+              <div fxLayout="column" fxFlex="50">
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                  <mat-form-field fxFlex="48" fxFlexOffset="1">
+                    <mat-label>Nhà cung cấp</mat-label>
+                    <input matInput placeholder="Nhà cung cấp" value="" #ncc required autocomplete="off" [formControl]="formStorage.form.controls['provider']">
+                  </mat-form-field>
+                  &nbsp;
+                  <mat-form-field fxFlex="48" fxFlexOffset="1">
+                    <mat-label>Địa chỉ nhà cung cấp</mat-label>
+                    <input matInput placeholder="Địa chỉ nhà cung cấp" value="" required autocomplete="off" #dcncc [formControl]="formStorage.form.controls['providerAddress']">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                  <mat-form-field fxFlex="98" fxFlexOffset="1">
+                    <mat-label>Mô tả</mat-label>
+                    <textarea #mt rows="3" matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..." [formControl]="formStorage.form.controls['descriptions']"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
             </div>
+            <button type="submit" hidden class="mat-green-700">
+            </button>
           </form>
-        </div>
+        </mat-card>
+        <button mat-button type="button" matTooltip="Nhấn để thêm một sản phẩm" class="mat-pink-700" (click)="addForm()">
+          <mat-icon>add</mat-icon>
+        </button>
+        
       </mat-tab>
       <mat-tab label="NHẬP GIỐNG">
         <div class="mr-top-10">
           <form>
+          <!-- <form [formGroup]="formBreed" (ngSubmit)="onSubmit()"> -->
             <div fxLayout="row">
               <div fxLayout="column" fxLayoutGap="5px" fxFlex="50" fxFlexOffset="25" fxFlex.md="60" fxFlexOffset.md="20"
                 fxFlex.sm="80" fxFlexOffset.sm="10" fxFlex.xs="90" fxFlexOffset.xs="5">

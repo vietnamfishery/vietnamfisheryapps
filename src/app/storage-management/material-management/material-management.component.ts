@@ -9,6 +9,7 @@ import { ELEMENT_DATA } from '../../constants/table-data';
   styleUrls: ['./material-management.component.scss']
 })
 export class MaterialManagementComponent implements OnInit {
+  type: string = 'co-so-vat-chat';
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 

@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'co-so-vat-chat', component: MaterialManagementComponent },
       { path: 'thuoc-va-duoc-pham', component: VeterinaryManagementComponent },
       { path: 'giong-nuoi', component: BreedManagementComponent },
-      { path: 'nhap-kho', component: ImportManagementComponent }
+      { path: 'nhap-kho/:type', component: ImportManagementComponent }
     ]
   },
   {

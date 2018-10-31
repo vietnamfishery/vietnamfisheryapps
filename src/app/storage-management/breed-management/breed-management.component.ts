@@ -10,6 +10,7 @@ import { ELEMENT_DATA } from '../../constants/table-data';
   styleUrls: ['./breed-management.component.scss']
 })
 export class BreedManagementComponent implements OnInit {
+  type: string = 'giong-nuoi';
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);

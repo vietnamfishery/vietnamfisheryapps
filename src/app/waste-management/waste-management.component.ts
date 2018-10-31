@@ -9,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class WasteManagementComponent implements OnInit {
 
   panelOpenState = false;
-
   constructor() {
     
   }
   
-  step = 0;
+  step = -1;
 
   setStep(index: number) {
     this.step = index;

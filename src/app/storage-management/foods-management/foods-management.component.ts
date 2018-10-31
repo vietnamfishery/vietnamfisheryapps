@@ -9,6 +9,7 @@ import { ELEMENT_DATA } from '../../constants/table-data';
   styleUrls: ['./foods-management.component.scss']
 })
 export class FoodsManagementComponent implements OnInit {
+  type: string = 'thuc-an';
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 

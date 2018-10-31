@@ -9,6 +9,7 @@ import { ELEMENT_DATA } from '../../constants/table-data';
   styleUrls: ['./veterinary-management.component.scss']
 })
 export class VeterinaryManagementComponent implements OnInit {
+  type: string = 'thuoc-va-duoc-pham';
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 

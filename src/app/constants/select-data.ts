@@ -9,7 +9,8 @@ export const foods: Food[] = [
 export const units: any[] = [
     { value: 0, viewValue: 'Bao' },
     { value: 1, viewValue: 'Chai' },
-    { value: 2, viewValue: 'Kg' },
-    { value: 3, viewValue: 'Thùng' },
-    { value: 4, viewValue: 'Vĩ' },
+    { value: 2, viewValue: 'Cái' },
+    { value: 3, viewValue: 'Kg' },
+    { value: 4, viewValue: 'Thùng' },
+    { value: 5, viewValue: 'Vĩ' },
 ]

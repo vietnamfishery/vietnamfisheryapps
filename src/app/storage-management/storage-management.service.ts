@@ -19,4 +19,8 @@ export class StorageManagementService {
   getStorageWithUser(token: any): Observable<any> {
     return this.http.get(host + '/storages/gets', this.appService.setHeader(token));
   }
+
+  addStorage(token: any, data: any): Observable<any> {
+    return this.http.post(host + '/storages/add', data, this.appService.setHeader(token))
+  }
 }
