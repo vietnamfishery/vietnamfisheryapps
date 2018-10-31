@@ -37,32 +37,7 @@ export class ImportManagementComponent implements OnInit {
   minDate = new Date(2000, 0, 1);
   maxDate = new Date(2020, 0, 1);
 
-  storage: IStorage[] = [
-    {
-      descriptions: 'Vôi sống',
-      productName: 'Vôi sống',
-      quantityStorages: 200,
-      unit: 0
-    },
-    {
-      descriptions: 'Thức ăn Biotic',
-      productName: 'Thức ăn Biotic',
-      quantityStorages: 150,
-      unit: 0
-    },
-    {
-      descriptions: 'Thuốc diệt rong',
-      productName: 'Thuốc diệt rong',
-      quantityStorages: 30,
-      unit: 1
-    },
-    {
-      descriptions: 'Thuốc kháng sinh',
-      productName: 'Thuốc kháng sinh',
-      quantityStorages: 150,
-      unit: 1
-    },
-  ];
+  storage: IStorage[] = [];
   filteredOptions: Observable<IStorage[]>;
   constructor(
     private adapter: DateAdapter<any>,
@@ -89,7 +64,7 @@ export class ImportManagementComponent implements OnInit {
      */
     this.token = this.appService.getCookie(tokenName);
     this.storageManagementService.getStorageWithUser(this.token).subscribe((res: any) => {
-      // this.storage = res.storage;
+      this.storage = res.storages;
     });
     this.filteredOptions = this.arrFormStorage[0].form.controls.product.valueChanges
       .pipe(
