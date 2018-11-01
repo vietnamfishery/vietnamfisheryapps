@@ -4,3 +4,4 @@ export * from './ponds';
 export * from './season';
 export * from './storages';
 export * from './users';
+export * from './breed';

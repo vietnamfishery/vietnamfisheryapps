@@ -1,38 +1,19 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-    <form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="text-xs-center pb-1">
-            <h2 class="mat-text-muted">THÊM QUẢN LÝ</h2>
+            <h2 class="mat-text-muted">CHỈNH SỬA PHÂN QUYỀN</h2>
+            <h3>{{ name }}</h3>
             <hr>
         </div>
         <div fxLayout="column" fxLayoutAlign="space-around">
             <div class="pb-1">
                 <mat-form-field fxFlex="100">
-                    <mat-select [(value)]="selected" placeholder="Quyền quản lý">
-                        <mat-option>None</mat-option>
-                        <mat-option value="option1">Quản lý kho</mat-option>
-                        <mat-option value="option2">Quản lý ao</mat-option>
+                    <mat-select placeholder="Quyền quản lý" [formControl]="form.controls['roles']">
+                        <mat-option class="mat-option-rolepond" *ngFor="let roles of rolesList" [value]="roles.value">
+                        {{roles.label}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
-            <div class="pb-1">
-                <mat-form-field fxFlex="100">
-                    <mat-select placeholder="Ao nuôi" multiple>
-                        <mat-option class="mat-option-rolepond" *ngFor="let pond of pondList" [value]="pond">{{pond}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="pb-1">
-                <mat-form-field fxFlex="100">
-                    <mat-select [(value)]="selected" placeholder="Tên người quản lý">
-                        <mat-option>None</mat-option>
-                        <mat-option value="option1">Tran Ba Long</mat-option>
-                        <mat-option value="option2">Ngo Dang</mat-option>
-                        <mat-option value="option3">Van Hiep</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="pt-1 pb-1 text-xs-right">
-                <a style="font-weight:450; color: #3f51b5">Thêm tài khoản?</a>
             </div>
         </div>
         <div class="pb-1">

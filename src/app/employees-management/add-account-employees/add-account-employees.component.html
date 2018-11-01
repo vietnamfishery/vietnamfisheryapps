@@ -70,8 +70,10 @@
               </div>
             </div>
             <mat-form-field fxFlex="100">
-              <mat-select placeholder="Quyền quản lý" multiple [formControl]="form.controls['roles']">
-                <mat-option class="mat-option-rolepond" *ngFor="let roles of rolesList" [value]="roles">{{roles}}</mat-option>
+              <mat-select placeholder="Quyền quản lý" [formControl]="form.controls['roles']">
+                <mat-option class="mat-option-rolepond" *ngFor="let roles of rolesList" [value]="roles.value">
+                  {{roles.label}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
             <small *ngIf="form.controls['roles'].hasError('required') && form.controls['roles'].touched" class="mat-text-warn">Bạn
