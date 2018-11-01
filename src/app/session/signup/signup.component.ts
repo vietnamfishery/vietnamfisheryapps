@@ -1,4 +1,4 @@
-import { IUsers } from '../../models/users';
+import { Users } from '../../models/users';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     delete this.form.value.confirmPassword;
     console.log(this.form);
-    const user: IUsers = this.form.value;
+    const user: Users = this.form.value;
     this.sessionService.register(user).subscribe(res => {
       if(res.username){
         this.form.reset();

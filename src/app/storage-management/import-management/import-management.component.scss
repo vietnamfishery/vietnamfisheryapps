@@ -61,3 +61,22 @@
 .mr-5{
   margin: 5px;
 }
+
+.animation {
+  animation-name: hiddenButton;
+  animation-duration: 0.75s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes hiddenButton {
+  100% {box-shadow: 0px 0px 200px; opacity: 0; display: none;}
+}
+
+/* Standard syntax */
+@keyframes hiddenButton {
+  100% {box-shadow: 0px 0px 200px; opacity: 0; display: none;}
+}
+
+.hidden {
+  display: none;
+}

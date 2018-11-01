@@ -3,7 +3,7 @@ import { api_url, api_port } from './../constants/api';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IUsers } from '../models/users';
+import { Users } from '../models/users';
 import { actionUserServices } from '../constants';
 import { delay, tap } from 'rxjs/operators';
 
@@ -20,7 +20,7 @@ export class SessionService {
     private http: HttpClient
   ) { }
 
-  public register(user: IUsers): Observable<any> {
+  public register(user: Users): Observable<any> {
     return this.http.post(host + '/user/register', user, headers.APP_JSON);
   }
 

@@ -57,6 +57,7 @@ export class PondManagementComponent implements OnInit {
     this.preloader = !this.preloader;
     const token: string = this.appService.getCookie(tokenName);
     this.pondManagementService.getAllPond(token).subscribe((res: any) => {
+      console.log(res);
       if(res.success) {
         this.ponds = res.ponds.map((element: any) => {
           return {

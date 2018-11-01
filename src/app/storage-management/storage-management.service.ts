@@ -20,7 +20,15 @@ export class StorageManagementService {
     return this.http.get(host + '/storages/gets', this.appService.setHeader(token));
   }
 
+  getBreedWithUser(token: any): Observable<any> {
+    return this.http.get(host + '/breeds/gets', this.appService.setHeader(token));
+  }
+
   addStorage(token: any, data: any): Observable<any> {
     return this.http.post(host + '/storages/add', data, this.appService.setHeader(token))
+  }
+
+  addBreed(token: string, data: any): Observable<any> {
+    return this.http.post(host + '/breeds/add', data, this.appService.setHeader(token))
   }
 }

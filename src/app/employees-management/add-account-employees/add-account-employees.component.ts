@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { IUsers } from '../../models/users';
+import { Users } from '../../models/users';
 import { EmployeesManagementService } from '../employees-management.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { AppService } from '../../app.service';
+import { tokenName } from '../../../environments';
 
 
 const password = new FormControl('', Validators.required);
@@ -16,18 +19,31 @@ const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
 })
 export class AddAccountEmployeesComponent implements OnInit {
 
+  token: any;
   public form: FormGroup;
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private appService: AppService,
+    public snackBar: MatSnackBar,
     private employeesManagementService: EmployeesManagementService
   ) { }
 
   // select option
-  rolesList: string[] = ['Toàn quyền', 'Quản lý ao nuôi', 'Quản lý kho'];
+  rolesList: any[] = [
+    {
+      value: 1,
+      label: 'Quản lý ao nuôi'
+    },
+    {
+      value: 2,
+      label: 'Quản lý kho'
+    }
+  ];
   
 
   ngOnInit() {
+    this.token = this.appService.getCookie(tokenName);
     this.form = this.fb.group({
       firstname: [null, Validators.compose([Validators.required])],
       lastname: [null, Validators.compose([Validators.required])],
@@ -41,18 +57,18 @@ export class AddAccountEmployeesComponent implements OnInit {
   
   onSubmit() {
     delete this.form.value.confirmPassword;
-    const user: IUsers = this.form.value;
-    user['action'] = 'register-employees';
-    console.log(this.form.value);
-
-    this.employeesManagementService.register_employees(user).subscribe(res => {
-      if(res.username){
+    const user: Users = this.form.value;
+    this.employeesManagementService.register_employees(user, this.token).subscribe(res => {
+      if(res.success){
         this.form.reset();
-        this.router.navigate( ['/session/signin'] );
+        this.router.navigate( ['/quan-ly-phan-quyen'] );
       }else{
-        console.log(res);
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "right",
+          verticalPosition: 'bottom'
+        });
       }
     });
-
   }
 } 

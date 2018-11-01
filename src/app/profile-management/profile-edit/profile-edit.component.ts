@@ -6,7 +6,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { ProfileManagementService } from '../profile-management.service';
 import { AppService } from '../../../app/app.service';
-import { IUsers } from '../../models/users';
+import { Users } from '../../models/users';
 import { tokenName } from '../../../environments';
 import { distanceInWordsToNow } from 'date-fns';
 import { Observable } from 'rxjs';
@@ -92,7 +92,7 @@ export class ProfileEditComponent implements OnInit {
         })
 
         const token: string = this.appService.getCookie(tokenName);
-        this.profileManagementService.getUserInfoWithUpdate(token).subscribe((val: IUsers) => {
+        this.profileManagementService.getUserInfoWithUpdate(token).subscribe((val: Users) => {
             this.district.push((val as any).districts);
             this.ward.push((val as any).wards);
             this.form.patchValue({

@@ -1,7 +1,7 @@
 <mat-card fxLayout="column">
   <mat-toolbar color="primary" class="table-header" fxLayout="row">
     <h1 class="mat-headline center-align" fxFlex='100'>Quản lý phân quyền</h1>
-    <a mat-flat-button color="white" (click)="openDialogAddRoleManagement()" matTooltip="Thêm mới quyền"
+    <a mat-flat-button color="white" (click)="openDialogAddRoleEmpManagement()" matTooltip="Thêm mới quyền"
       matTooltipPosition="above" style="margin-right: 5px;">
       <mat-icon>group_add</mat-icon>
     </a>
@@ -39,27 +39,27 @@
         <table mat-table [dataSource]="dataSource">
 
           <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Họ Và Tên</th>
+            <td mat-cell *matCellDef="let element">{{ element.lastname }} {{ element.firstname }}</td>
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          <ng-container matColumnDef="roles">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Quyền</th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.role.roles === 1">Quản lý ao</span>
+              <span *ngIf="element.role.roles === 2">Quản lý kho</span>
+            </td>
           </ng-container>
 
           <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-          </ng-container>
-
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-button (click)="openDialogAddRoleManagement(element.role.rolesId)">Đổi quyền</button>
+              <button mat-button (click)="deletedRole(element.role.rolesId)">Xóa quyền</button>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
