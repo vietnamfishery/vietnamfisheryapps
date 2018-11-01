@@ -1,0 +1,74 @@
+<mat-card fxLayout="column">
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">THÔNG TIN TĂNG TRƯỞNG</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Chỉnh sửa tiết thông tin tăng trưởng</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form [formGroup]="form" (ngSubmit)=(onSubmit()) style="font-size:20px">
+          <mat-card-content fxLayout="column">
+            <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Mật độ trung bình (con/m2)" type="number" autocomplete="off" [formControl]="form.controls['averageDensity']"
+                  required>
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Sản lượng trung bình (g/con)" type="number" autocomplete="off" [formControl]="form.controls['averageMass']"
+                  required>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                <small *ngIf="form.controls['averageDensity'].hasError('required') && form.controls['averageDensity'].touched"
+                  class="mat-text-warn">Mật độ trung bình thả không được trống.</small>
+              </div>
+              <div fxFlex="100">
+                <small *ngIf="form.controls['averageMass'].hasError('required') && form.controls['averageMass'].touched"
+                  class="mat-text-warn">Sản lượng trung bình không được trống.</small>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Tốc độ tăng trưởng (%)" type="number" autocomplete="off" [formControl]="form.controls['speedOdGrowth']"
+                  required>
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Tỉ lệ sống (%)" type="number" autocomplete="off" [formControl]="form.controls['livingRatio']"
+                  required>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                <small *ngIf="form.controls['speedOdGrowth'].hasError('required') && form.controls['speedOdGrowth'].touched"
+                  class="mat-text-warn">Tốc độ tăng trưởng không được trống.</small>
+              </div>
+              <div fxFlex="100">
+                <small *ngIf="form.controls['livingRatio'].hasError('required') && form.controls['livingRatio'].touched"
+                  class="mat-text-warn">Tỉ lệ sống không được trống.</small>
+              </div>
+            </div>
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
+              <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Lưu</button>
+              <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-tang-truong">Huỷ</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,94 @@
+<mat-card fxLayout="column">
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">THÊM THÔNG TIN THU HOẠCH</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi tiết thông tin thu hoạch của bạn</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form [formGroup]="form" (ngSubmit)=(onSubmit()) style="font-size:20px">
+          <mat-card-content fxLayout="column">
+            <mat-form-field fxFlex="100">
+              <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
+                required>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Vụ nuôi 1</mat-option>
+                <mat-option value="option2">Vụ nuôi 2</mat-option>
+                <mat-option value="option3">Vụ nuôi 3</mat-option>
+                <mat-option value="option3">Vụ nuôi 4</mat-option>
+                <mat-option value="option3">Vụ nuôi 5</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
+              class="mat-text-warn">Chưa chọn vụ nuôi.</small>
+
+            <mat-form-field fxFlex="100">
+              <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']" required>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Ao 1</mat-option>
+                <mat-option value="option2">Ao 2</mat-option>
+                <mat-option value="option3">Ao 3</mat-option>
+                <mat-option value="option3">Ao 4</mat-option>
+                <mat-option value="option3">Ao 5</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
+              chọn ao nuôi.</small>
+
+            <mat-form-field fxFlex="100">
+              <input matInput placeholder="Tên thu hoạch" type="text" [formControl]="form.controls['harvestName']" autocomplete="off" required>
+            </mat-form-field>
+            <small *ngIf="form.controls['harvestName'].hasError('required') && form.controls['harvestName'].touched" class="mat-text-warn">Tên thu hoạch không được để trống.</small>
+
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Tên loài thu hoạch" [formControl]="form.controls['breedName']" required>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Tôm thẻ</mat-option>
+                <mat-option value="option2">Tôm sú</mat-option>
+                <mat-option value="option3">Cua biển</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['breedName'].hasError('required') && form.controls['breedName'].touched" class="mat-text-warn">Chưa
+                chọn loài thu hoạch.</small>
+
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Số lượng (kg)" type="number" [formControl]="form.controls['quantity']" autocomplete="off" required>
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Giá đơn vị (vnđ)" type="number" [formControl]="form.controls['unitPrice']" autocomplete="off" required>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                <small *ngIf="form.controls['quantity'].hasError('required') && form.controls['quantity'].touched"
+                  class="mat-text-warn">Số lượng thu hoạch không được trống.</small>
+              </div>
+              <div fxFlex="100">
+                <small *ngIf="form.controls['unitPrice'].hasError('required') && form.controls['unitPrice'].touched"
+                  class="mat-text-warn">Giá đơn vị không được trống.</small>
+              </div>
+            </div>
+
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
+              <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Thêm</button>
+              <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-thu-hoach">Huỷ</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

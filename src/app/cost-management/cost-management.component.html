@@ -1,0 +1,57 @@
+<mat-card fxLayout="column" fxLayoutGap="20px">
+    <mat-toolbar color="primary" class="table-header" fxLayout="row">
+        <h2 class="mat-headline" fxFlex='100'>Quản lý chi phí</h2>
+    </mat-toolbar>
+    <mat-card-content fxLayout="column">
+        <div fxLayout="row wrap">
+            <div fxFlex.gt-sm="33.33%" fxFlex="100">
+                <a routerLink="/quan-ly-chi-phi/chi-phi-chuan-bi-ao" fxFlex="100" routerLinkActive="active">
+                    <mat-card>
+                        <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+                            Chi phí chuẩn bị ao &nbsp;
+                            <span fxFlex></span>
+                            <span class="font-weight-bold mat-text-primary">-458,90</span>
+                        </mat-card-subtitle>
+                        <mat-card-content>
+                            <canvas height="200" baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels"
+                                [options]="barChartOptions" [colors]="chartColors" [legend]="barChartLegend"
+                                [chartType]="barChartType"></canvas>
+                        </mat-card-content>
+                    </mat-card>
+                </a>
+            </div>
+            <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100">
+                <a routerLink="/quan-ly-chi-phi/chi-phi-cham-soc" fxFlex="100" routerLinkActive="active">
+                    <mat-card>
+                        <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+                            Chi phí chuẩn chăm sóc &nbsp;
+                            <span fxFlex></span>
+                            <span class="font-weight-bold mat-text-warn">-46,68</span>
+                        </mat-card-subtitle>
+                        <mat-card-content>
+                            <canvas height="200" baseChart class="chart" [datasets]="ComboChartData" [labels]="comboChartLabels"
+                                [options]="ComboChartOptions" [colors]="chartColors" [legend]="comboChartLegend"
+                                [chartType]="barChartType"></canvas>
+                        </mat-card-content>
+                    </mat-card>
+                </a>
+            </div>
+            <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100">
+                <a routerLink="/quan-ly-chi-phi/thu-hoach" fxFlex="100" routerLinkActive="active">
+                    <mat-card>
+                        <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+                            Thu hoạch &nbsp;
+                            <span fxFlex></span>
+                            <span class="font-weight-bold mat-text-accent">+2,50%</span>
+                        </mat-card-subtitle>
+                        <mat-card-content>
+                            <canvas height="200" baseChart class="chart" [datasets]="bubbleChartData" [labels]="comboChartLabels"
+                                [options]="ComboChartOptions" [legend]="comboChartLegend" [chartType]="bubbleChartType"></canvas>
+                        </mat-card-content>
+                    </mat-card>
+                </a>
+            </div>
+        </div>
+    </mat-card-content>
+    <router-outlet></router-outlet>
+</mat-card>

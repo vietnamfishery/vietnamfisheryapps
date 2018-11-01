@@ -23,7 +23,7 @@ $config: mat-typography-config();
 
 @font-face {
     font-family: 'Quicksand-Bold';
-    src: url(assets/fonts/quicksand/Quicksand-Bold.otf);
+    src: url('/assets/fonts/quicksand/Quicksand-Bold.otf');
     // font-weight: bold;
 }
 

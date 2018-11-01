@@ -20,3 +20,51 @@
   text-align: center;
   font-weight: 500;
 }
+agm-map {
+  height: 450px;
+}
+
+.img-responsive {
+  background-position: center;
+  overflow: hidden;
+}
+.imgLoading {
+  width: 128px !important;
+  height: 128px;
+  border-radius: 50% !important;
+  margin: auto !important;
+}
+
+#lable{
+  background: rgba(0, 0, 0, 0.75);
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 360px;
+  height: 360px;
+  z-index: 1000;
+}
+
+
+.title-maps {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.hr {
+  color: #e2e2e2;
+  border: 0.8px solid #e2e2e2;
+}
+
+.text-username {
+  font-weight: 500;
+}
+
+.text-label {
+  font-weight: 550;
+}
+
+label[for=fileToUpload] {
+  cursor: pointer;
+}

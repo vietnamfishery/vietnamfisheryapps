@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { MatIconModule, MatCardModule, MatInputModule, MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SessionService } from './session.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     SessionRoutingModule
   ],
-  declarations: [ErrorComponent, ForgotComponent, LockscreenComponent, NotFoundComponent, SigninComponent, SignupComponent]
+  declarations: [ErrorComponent, ForgotComponent, LockscreenComponent, NotFoundComponent, SigninComponent, SignupComponent],
+  providers:[
+    SessionService
+  ]
 })
 export class SessionModule { }

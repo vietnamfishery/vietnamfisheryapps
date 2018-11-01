@@ -48,3 +48,68 @@
 .pointer{
   cursor: pointer;
 }
+
+.zoom:hover {
+  transform: scale(1.001);
+  font-weight: 700;
+}
+
+.product-badge-maintenance {
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  border-top: 30px solid #388e3c;
+  border-bottom: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-left: 30px solid #388e3c;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  span {
+    position: absolute;
+    transform: rotate(-45deg);
+    top: -18px;
+    left: -25px;
+    white-space: nowrap;
+  }
+}
+
+
+#lable{
+  // background: rgba(255, 255, 255, 0);
+  background: rgba(0, 0, 0, 0);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  div{
+	  border: 0;
+	  margin: 0;
+	  width: 1em;
+	  height: 1em;
+	  position: absolute;
+	  border-radius: 50%;
+    animation:spin 2s ease infinite;
+    left: 50%;
+    top: 1em;
+    transform: translate(-50%,-50%);
+	}
+
+	// div{
+  //   margin: 1em auto;
+	// }
+}
+
+#lable :first-child{background:rgba(60, 186, 84, 1);animation-delay:-1.5s}
+#lable :nth-child(2){background:rgba(244, 194, 13, 1);animation-delay:-1s}
+#lable :nth-child(3){background: rgba(219, 50, 54, 1);animation-delay:-0.5s}
+#lable :last-child{background: rgba(72, 133, 237, 1)}
+
+@keyframes spin{
+	0%,100%{transform:translate(0)}
+	25%{transform:translate(160%)}
+	50%{transform:translate(160%, 160%)}
+	75%{transform:translate(0, 160%)}
+}

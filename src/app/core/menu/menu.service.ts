@@ -21,12 +21,12 @@ export interface Menu {
 }
 
 const MENUITEMS: Array<Menu> = [
-  {
-    state: '/',
-    name: 'HOME',
-    type: 'link',
-    icon: 'explore'
-  },
+  // {
+  //   state: '/',
+  //   name: 'Trang chủ',
+  //   type: 'link',
+  //   icon: 'explore'
+  // },
   {
     state: 'ghi-nhat-ky',
     name: 'Ghi nhật ký',
@@ -45,172 +45,71 @@ const MENUITEMS: Array<Menu> = [
     type: 'link',
     icon: 'view_carousel'
   },
-  // {
-  //   state: 'quan-ly-chat-thai',
-  //   name: 'Quản lý chất thải',
-  //   type: 'link',
-  //   icon: 'delete_sweep'
-  // },
   {
-    state: 'apps',
-    name: 'APPS',
-    type: 'sub',
-    icon: 'apps',
-    badge: [
-      {type: 'red', value: '5'}
-    ],
-    children: [
-      {state: 'calendar', name: 'CALENDAR'},
-      {state: 'media', name: 'MEDIA'},
-      {state: 'messages', name: 'MESSAGES'},
-      {state: 'social', name: 'SOCIAL'},
-      {state: 'chat', name: 'CHAT'}
-    ]
-  },
-  {
-    state: 'widgets',
-    name: 'WIDGETS',
+    state: 'quan-ly-chuan-bi-ao',
+    name: 'Quản lý chuẩn bị ao',
     type: 'link',
-    icon: 'photo'
+    icon: 'gavel'
   },
   {
-    state: 'material',
-    name: 'MATERIAL',
-    type: 'sub',
-    icon: 'equalizer',
-    badge: [
-      {type: 'purple', value: '10'}
-    ],
-    children: [
-      {state: 'autocomplete', name: 'AUTOCOMPLETE'},
-      {state: 'button', name: 'BUTTON'},
-      {state: 'button-toggle', name: 'BUTTONTOGGLE'},
-      {state: 'card', name: 'CARDS'},
-      {state: 'checkbox', name: 'CHECKBOX'},
-      {state: 'chips', name: 'CHIPS'},
-      {state: 'datepicker', name: 'DATEPICKER'},
-      {state: 'dialog', name: 'DIALOG'},
-      {state: 'drawer', name: 'DRAWER'},
-      {state: 'expansion', name: 'EXPANSION'},
-      {state: 'grid-list', name: 'GRID'},
-      {state: 'input', name: 'INPUT'},
-      {state: 'list', name: 'LISTS'},
-      {state: 'menu', name: 'MENU'},
-      {state: 'progress-bar', name: 'PROGRESSBAR'},
-      {state: 'progress-spinner', name: 'PROGRESSSPINNER'},
-      {state: 'radio', name: 'RADIO'},
-      {state: 'ripple', name: 'RIPPLE'},
-      {state: 'select', name: 'SELECT'},
-      {state: 'slide-toggle', name: 'SLIDETOGGLE'},
-      {state: 'slider', name: 'SLIDER'},
-      {state: 'snack-bar', name: 'SNACKBAR'},
-      {state: 'stepper', name: 'STEPPER'},
-      {state: 'table', name: 'TABLE'},
-      {state: 'tabs', name: 'TABS'},
-      {state: 'toolbar', name: 'TOOLBAR'},
-      {state: 'tooltip', name: 'TOOLTIP'},
-      {state: 'typography', name: 'TYPOGRAPHY'}
-    ]
-  },
-  {
-    state: 'forms',
-    name: 'FORMS',
-    type: 'sub',
-    icon: 'looks_3',
-    children: [
-      // {state: 'editor', name: 'EDITOR'},
-      {state: 'validation', name: 'VALIDATION'},
-      {state: 'upload', name: 'UPLOAD'}
-    ]
-  },
-  {
-    state: 'tables',
-    name: 'DATATABLE',
-    type: 'sub',
-    icon: 'format_line_spacing',
-    badge: [
-      {type: 'blue-grey', value: '8'
-      }
-    ],
-    children: [
-      {state: 'fullscreen', name: 'FULLSCREEN'},
-      {state: 'editing', name: 'EDITING'},
-      {state: 'filter', name: 'FILTER'},
-      {state: 'paging', name: 'PAGING'},
-      {state: 'sorting', name: 'SORTING'},
-      {state: 'pinning', name: 'PINNING'},
-      {state: 'selection', name: 'SELECTION'},
-    ]
-  },
-  {
-    state: 'ecommerce',
-    name: 'ECOMMERCE',
-    type: 'sub',
-    icon: 'looks_3',
-    badge: [
-      {type: 'red', value: 'new'
-      }
-    ],
-    children: [
-      {state: 'products', name: 'PRODUCTS'},
-      {state: 'compact', name: 'COMPACT'},
-      {state: 'detail', name: 'DETAIL'},
-    ]
-  },
-  {
-    state: 'taskboard',
-    name: 'TASKBOARD',
+    state: 'quan-ly-tha-nuoi',
+    name: 'Quản lý thả nuôi',
     type: 'link',
-    icon: 'view_column',
+    icon: 'pan_tool'
   },
   {
-    state: 'charts',
-    name: 'CHARTS',
+    state: 'quan-ly-tang-truong',
+    name: 'Quản lý tăng trưởng',
     type: 'link',
-    icon: 'show_chart',
+    icon: 'timeline'
   },
   {
-    state: 'maps',
-    name: 'MAPS',
-    type: 'sub',
-    icon: 'navigation',
-    children: [
-      {state: 'google', name: 'GOOGLE'},
-      {state: 'leaflet', name: 'LEAFLET'}
-    ]
-  },
-  {
-    state: 'dragndrop',
-    name: 'DND',
+    state: 'quan-ly-thu-hoach',
+    name: 'Quản lý thu hoạch',
     type: 'link',
-    icon: 'show_chart',
+    icon: 'attach_money'
   },
   {
-    state: 'pages',
-    name: 'PAGES',
+    state: 'quan-ly-chat-thai',
+    name: 'Quản lý chất thải',
+    type: 'link',
+    icon: 'delete_sweep'
+  },
+  {
+    state: 'quan-ly-kho',
+    name: 'Quản lý kho',
     type: 'sub',
-    icon: 'pages',
+    icon: 'business',
     children: [
-      {state: 'invoice', name: 'INVOICE'},
-      {state: 'timeline', name: 'TIMELINE'},
-      {state: 'user', name: 'USER'},
-      {state: 'blank', name: 'BLANK'},
-      {state: 'pricing', name: 'PRICING'},
+      {state: 'thuc-an', name: 'Thức ăn'},
+      {state: 'co-so-vat-chat', name: 'Cơ sở vật chất'},
+      {state: 'thuoc-va-duoc-pham', name: 'Thuốc và Dược phẩm'},
+      {state: 'giong-nuoi', name: 'Giống nuôi'}
+      // {state: 'nhap-kho', name: 'Nhập kho'}
     ]
   },
   {
-    state: 'session',
-    name: 'SESSION',
+    state: 'quan-ly-chi-phi',
+    name: 'Quản lý chi phí',
     type: 'sub',
-    icon: 'face',
+    icon: 'style',
     children: [
-      {state: '404', name: '404'},
-      {state: 'error', name: 'ERROR'},
-      {state: 'signin', name: 'SIGNIN'},
-      {state: 'signup', name: 'SIGNUP'},
-      {state: 'forgot', name: 'FORGOT'},
-      {state: 'lockscreen', name: 'LOCKSCREEN'},
+      {state: 'chi-phi-chuan-bi-ao', name: 'Chi phí chuẩn bị ao'},
+      {state: 'chi-phi-cham-soc', name: 'Chi phí chăm sóc'},
+      {state: 'thu-hoach', name: 'Thu hoạch'},
     ]
+  },
+  {
+    state: 'quan-ly-phan-quyen',
+    name: 'Quản lý phân quyền',
+    type: 'link',
+    icon: 'record_voice_over'
+  },
+  {
+    state: 'quan-ly-nhan-vien',
+    name: 'Quản lý nhân viên',
+    type: 'link',
+    icon: 'assignment_ind'
   }
 ];
 

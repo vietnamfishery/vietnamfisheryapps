@@ -38,7 +38,7 @@ export class AdminLayoutComponent implements OnInit {
     private router: Router,
     zone: NgZone
   ) {
-    this.mediaMatcher.addListener(mql => zone.run(() => {
+    this.mediaMatcher.addListener((mql: any) => zone.run(() => {
       this.mediaMatcher = mql;
     }));
   }

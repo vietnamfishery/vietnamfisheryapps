@@ -3,9 +3,14 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig, MatDialog, MatTableData
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
-import { colors } from '../contants/colors';
-import { ELEMENT_DATA } from '../contants/table-data';
-
+import { colors } from '../constants/colors';
+import { ELEMENT_DATA } from '../constants/table-data';
+import { DiaryService } from './diary.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as Actions from '../stores/actions/auth.actions';
+import { AuthState } from '../stores/states/auth.state';
+import { Router } from '@angular/router';
 /**
  * define for table ::start::
  */
@@ -136,7 +141,18 @@ export class DiaryComponent implements OnInit {
    * Table define ::end::
    */
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    private store: Store<AuthState>,
+    private router: Router,
+    public dialog: MatDialog,
+    private diaryService: DiaryService
+    ) {
+      // this.store.select('auth').subscribe(res => {
+      //   if(!res) {
+      //     this.router.navigate(['/session/signin']);
+      //   }
+      // })
+    }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -188,4 +204,10 @@ export class DiaryComponent implements OnInit {
     });
     this.refresh.next();
   }
+
+  addDiary(value){
+    if(value === 'prepare'){
+      this.diaryService.addPondPreapre(value);
+    }
+  } 
 }

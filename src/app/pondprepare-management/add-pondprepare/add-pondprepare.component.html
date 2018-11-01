@@ -1,0 +1,223 @@
+<mat-card fxLayout="column">
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">THÔNG TIN CHUẨN BỊ AO</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi tiết thông tin chuẩn bị ao của bạn</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row" class="mr-b-5">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <br>
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" [selectedIndex]="openedTab">
+        <mat-tab label="Thông tin vụ">
+          <div fxFlex="row" fxFlex="60" fxFlexOffset="20" class="mr-b-5">
+            <form [formGroup]="form" fxLayout="column">
+              <mat-form-field>
+                <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
+                  required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Vụ nuôi 1</mat-option>
+                  <mat-option value="option2">Vụ nuôi 2</mat-option>
+                  <mat-option value="option3">Vụ nuôi 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
+                class="mat-text-warn">Chưa
+                chọn vụ nuôi.</small><br>
+              <mat-form-field>
+                <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']"
+                  required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Ao nuôi 1</mat-option>
+                  <mat-option value="option2">Ao nuôi 2</mat-option>
+                  <mat-option value="option3">Ao nuôi 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
+                chọn ao nuôi.</small><br>
+              <mat-form-field>
+                <input matInput placeholder="Tên công việc" type="text" [formControl]="form.controls['pondprepareName']"
+                  autocomplete="off" required>
+              </mat-form-field>
+              <small *ngIf="form.controls['pondprepareName'].hasError('required') && form.controls['pondprepareName'].touched"
+                class="mat-text-warn">Tên
+                công việc không được trống.</small>
+              <div fxLayout="row" fxLayoutAlign="end center">
+                <button mat-button class="mat-green-700">Tiếp theo</button>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+        <mat-tab label="Cơ sở vật chất" class="">
+          <!-- <mat-tab label="Cơ sở vật chất" [(disabled)]="form.invalid"> -->
+          <!-- <div fxFlex="row" fxFlex="60" fxFlexOffset="20" class="mr-b-5">
+            <form [formGroup]="form_material">
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+                fxLayoutGap.xs="0">
+                <mat-form-field fxFlex="100">
+                  <mat-select [(value)]="selected" placeholder="Nguyên, vật liệu" [formControl]="form_material.controls['materialName']"
+                    required>
+                    <mat-option>None</mat-option>
+                    <mat-option value="option1">Thuốc diệt rong</mat-option>
+                    <mat-option value="option2">Vôi tôi</mat-option>
+                    <mat-option value="option3">Komix</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="100">
+                  <input matInput placeholder="Số lượng" type="number" [formControl]="form_material.controls['quantity']"
+                    autocomplete="off" required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+                fxLayoutGap.xs="0">
+                <div fxFlex="100">
+                  <small *ngIf="form_material.controls['materialName'].hasError('required') && form_material.controls['materialName'].touched"
+                    class="mat-text-warn">Nguyên, vật liệu không được trống.</small>
+                </div>
+                <div fxFlex="100">
+                  <small *ngIf="form_material.controls['quantity'].hasError('required') && form_material.controls['quantity'].touched"
+                    class="mat-text-warn">Số
+                    lượng không được trống.</small>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="end center">
+                <button mat-raised-button type="submit" class="mat-green-700">Tiếp tục thêm</button>
+              </div>
+              <br>
+              <div fxLayout="row" fxLayoutAlign="end center">
+                <button mat-raised-button style="margin-right:5px" color="warn">Trước</button>
+                <button mat-raised-button type="submit" color="primary">Xong</button>
+              </div>
+            </form>
+          </div> -->
+          <div fxFlex="row" fxFlex="80" fxFlexOffset="10" class="mr-t-15 mr-b-5">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tên Cơ Sở Vật Chất</th>
+                  <th>Số Lượng</th>
+                  <th>Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let f of arrayMaterial">
+                  <td>
+                    <form (ngSubmit)="onSubmit(itemName, quantity)">
+                      <mat-form-field>
+                        <input #itemName matInput type="text" autocomplete="off" value="" required>
+                      </mat-form-field>
+                    </form>
+                  </td>
+                  <td>
+                    <form (ngSubmit)="onSubmit(itemName, quantity)">
+                      <mat-form-field>
+                        <input #quantity matInput type="text" autocomplete="off" value="" required>
+                      </mat-form-field>
+                      <button hidden type="submit"></button>
+                    </form>
+                  </td>
+                  <td>
+                    <!-- <form [formGroup]="formMaterial" (ngSubmit)="onSubmit()"> -->
+                      <mat-chip-list>
+                        <mat-chip color="primary" matTooltip="Thêm" matTooltipPosition="above" (click)="onSubmit(itemName, quantity)">
+                          <mat-icon>send</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                    <!-- </form> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button mat-button class="mat-green-700" (click)="addMaterial()">
+              <mat-icon>add</mat-icon>              
+            </button>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <!-- <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="form">
+          <form [formGroup]="form" fxLayout="column">
+            <ng-template matStepLabel>Thông tin</ng-template>
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Vụ nuôi" [formControl]="form.controls['seasonName']"
+                required>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Vụ nuôi 1</mat-option>
+                <mat-option value="option2">Vụ nuôi 2</mat-option>
+                <mat-option value="option3">Vụ nuôi 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['seasonName'].hasError('required') && form.controls['seasonName'].touched"
+              class="mat-text-warn">Chưa
+              chọn vụ nuôi.</small><br>
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondName']" required>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Ao nuôi 1</mat-option>
+                <mat-option value="option2">Ao nuôi 2</mat-option>
+                <mat-option value="option3">Ao nuôi 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['pondName'].hasError('required') && form.controls['pondName'].touched" class="mat-text-warn">Chưa
+              chọn ao nuôi.</small><br>
+            <mat-form-field>
+              <input matInput placeholder="Tên công việc" type="text" [formControl]="form.controls['pondprepareName']"
+                autocomplete="off" required>
+            </mat-form-field>
+            <small *ngIf="form.controls['pondprepareName'].hasError('required') && form.controls['pondprepareName'].touched"
+              class="mat-text-warn">Tên
+              công việc không được trống.</small>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button mat-button matStepperNext class="mat-green-700">Tiếp theo</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="form_material">
+          <form [formGroup]="form_material">
+            <ng-template matStepLabel>Cơ sở vật chất</ng-template>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <mat-select [(value)]="selected" placeholder="Nguyên, vật liệu" [formControl]="form_material.controls['materialName']"
+                  required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Thuốc diệt rong</mat-option>
+                  <mat-option value="option2">Vôi tôi</mat-option>
+                  <mat-option value="option3">Komix</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Số lượng" type="number" [formControl]="form_material.controls['quantity']"
+                  autocomplete="off" required>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                <small *ngIf="form_material.controls['materialName'].hasError('required') && form_material.controls['materialName'].touched"
+                  class="mat-text-warn">Nguyên, vật liệu không được trống.</small>
+              </div>
+              <div fxFlex="100">
+                <small *ngIf="form_material.controls['quantity'].hasError('required') && form_material.controls['quantity'].touched"
+                  class="mat-text-warn">Số
+                  lượng không được trống.</small>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button mat-raised-button type="submit" class="mat-green-700">Tiếp tục thêm</button>
+            </div>
+            <br>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button mat-raised-button matStepperPrevious style="margin-right:5px" color="warn">Trước</button>
+              <button mat-raised-button type="submit" color="primary">Xong</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper> -->
+    </div>
+  </div>
+
+</mat-card>

@@ -1,6 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PondManagementService } from './pond-management.service';
+import { AppService } from '../app.service';
+import { tokenName } from '../../environments';
+import { IPonds } from '../models/ponds';
+import * as moment from 'moment';
+
 
 export interface DialogData {
   animal: string;
@@ -13,47 +20,31 @@ export interface DialogData {
   styleUrls: ['./pond-management.component.scss']
 })
 export class PondManagementComponent implements OnInit {
+  imageLink: string = '';
+  pondCreatedDate: string;
   ponds: any[] = [];
-  num = 1;
+  // num = 1;
 
   animal: string;
   name: string;
-
+  imgSource: string = '';
+  preloader: boolean = false;
   constructor(
     private router: Router,
-    public dialog: MatDialog
-  ) {
-    for (this.num; this.num <= 15; this.num += 1) {
-      this.addProducts(this.num);
-    }
-  }
-
-  addProducts(i) {
-    this.ponds.push({
-      id: i,
-      price: (Math.random() * (0 - 10) + 10).toFixed(0),
-      status: ['', '', '', 'empty'][Math.floor(Math.random() * 4)],
-      discount: (Math.random() * (0.00 - 10.00) + 10.00).toFixed(2),
-      name: [
-        'Ao số 1',
-        'Ao số 2',
-        'Ao số 3',
-        'Ao số 4',
-        'Ao số 5',
-        'Ao số 6',
-        'Ao số 7',
-        'Ao số 8'][Math.floor(Math.random() * 8)]
-    });
-  }
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
+    private pondManagementService: PondManagementService,
+    private appService: AppService
+  ) {}
 
   isOver(): boolean {
     return window.matchMedia(`(max-width: 960px)`).matches;
   }
 
-  openDialogAdd(): void {
-    const dialogRef = this.dialog.open(DialogAddPond, {
+  openDialogAddRole(): void {
+    const dialogRef = this.dialog.open(DialogAddRole, {
       width: '260px',
-      data: {name: this.name, animal: this.animal}
+      data: { name: this.name, animal: this.animal }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -63,18 +54,50 @@ export class PondManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.preloader = !this.preloader;
+    const token: string = this.appService.getCookie(tokenName);
+    this.pondManagementService.getAllPond(token).subscribe((res: any) => {
+      console.log(res);
+      if(res.success) {
+        this.ponds = res.ponds.map((element: any) => {
+          return {
+            status: element.status,
+            pondName: element.pondName,
+            pondCreatedDate: moment(element.pondCreatedDate).format(`DD - MM - YYYY`),
+            images: element.images,
+            pondId: element.pondId
+          }
+        })
+      } else {
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "right"
+        });
+      }
+      this.preloader = !this.preloader;
+  });
   }
-
 }
 
+// ///////////////////////////////////////////////////////
+
 @Component({
-  selector: 'dialog-add-pond',
-  templateUrl: './dialog-add-pond.html',
+  selector: 'dialog-add-roles',
+  templateUrl: './dialog-add-roles.html',
 })
-export class DialogAddPond {
+export class DialogAddRole {
+  public form: FormGroup;
   constructor(
-    public dialogRef: MatDialogRef<DialogAddPond>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    public dialogRef: MatDialogRef<DialogAddRole>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private fb: FormBuilder
+  ) { }
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      user_roles: [null, Validators.compose([Validators.required])]
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

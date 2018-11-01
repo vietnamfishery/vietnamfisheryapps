@@ -1,0 +1,70 @@
+<mat-card fxLayout="column" fxLayoutGap="20px">
+    <mat-toolbar color="primary" class="table-header" fxLayout="row">
+        <h2 class="mat-headline" fxFlex='100'>Quản lý kho</h2>
+        <a mat-flat-button routerLink="/quan-ly-kho/lich-su-nhap-kho" color="white" matTooltip="Xem lịch sử nhập kho"
+            matTooltipPosition="above" style="margin-right: 5px;">
+            <mat-icon>store</mat-icon>
+        </a>
+        <a mat-flat-button routerLink="/quan-ly-kho/bien-dong-gia" color="white" matTooltip="Xem biến động giá"
+            matTooltipPosition="above" style="margin-right: 2px;">
+            <mat-icon>swap_vertical_circle</mat-icon>
+        </a>
+    </mat-toolbar>
+    <mat-card-content fxLayout="column">
+        <div fxLayout="row" fxLayout.xs="column">
+            <a routerLink="/quan-ly-kho/thuc-an" fxFlex="100" routerLinkActive="active">
+                <mat-card class="card-widget mat-teal active">
+                    <div mat-card-widget>
+                        <div mat-card-float-icon>
+                            <mat-icon>local_offer</mat-icon>
+                        </div>
+                        <div class="pl-0">
+                            <h2 mat-card-widget-title>103</h2>
+                            <p>Thức ăn</p>
+                        </div>
+                    </div>
+                </mat-card>
+            </a>
+            <a routerLink="/quan-ly-kho/co-so-vat-chat" fxFlex="100" routerLinkActive="active">
+                <mat-card class="card-widget mat-purple active">
+                    <div mat-card-widget>
+                        <div mat-card-float-icon>
+                            <mat-icon>phone</mat-icon>
+                        </div>
+                        <div class="pl-0">
+                            <h2 mat-card-widget-title>230</h2>
+                            <p>Cơ sở vật chất</p>
+                        </div>
+                    </div>
+                </mat-card>
+            </a>
+            <a routerLink="/quan-ly-kho/thuoc-va-duoc-pham" fxFlex="100" routerLinkActive="active">
+                <mat-card class="card-widget mat-light-blue-800 active">
+                    <div mat-card-widget>
+                        <div mat-card-float-icon>
+                            <mat-icon>notifications</mat-icon>
+                        </div>
+                        <div class="pl-0">
+                            <h2 mat-card-widget-title>323</h2>
+                            <p>Thuốc và dược phẩm</p>
+                        </div>
+                    </div>
+                </mat-card>
+            </a>
+            <a routerLink="/quan-ly-kho/giong-nuoi" fxFlex="100" routerLinkActive="active">
+                <mat-card class="card-widget mat-indigo active">
+                    <div mat-card-widget>
+                        <div mat-card-float-icon>
+                            <mat-icon>bug_report</mat-icon>
+                        </div>
+                        <div class="pl-0">
+                            <h2 mat-card-widget-title>420</h2>
+                            <p>Giống</p>
+                        </div>
+                    </div>
+                </mat-card>
+            </a>
+        </div>
+    </mat-card-content>
+    <router-outlet></router-outlet>
+</mat-card>

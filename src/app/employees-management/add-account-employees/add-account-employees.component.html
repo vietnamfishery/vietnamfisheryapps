@@ -1,0 +1,94 @@
+<mat-card fxLayout="column">
+  <div color="primary" class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">TÀI KHOẢN</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi tiết thông tin cho tài khoản bạn muốn thêm</h4>
+    </mat-card-subtitle>
+  </div>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form [formGroup]="form" style="font-size:20px" (ngSubmit)="onSubmit()">
+          <mat-card-content fxLayout="column">
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Họ" type="text" [formControl]="form.controls['lastname']" required
+                  autocomplete="off">
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Tên" type="text" [formControl]="form.controls['firstname']" required
+                  autocomplete="off">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                <small *ngIf="form.controls['lastname'].hasError('required') && form.controls['lastname'].touched"
+                  class="mat-text-warn">Họ
+                  của bạn không được để trống.</small>
+              </div>
+              <div fxFlex="100">
+                <small *ngIf="form.controls['firstname'].hasError('required') && form.controls['firstname'].touched"
+                  class="mat-text-warn">Tên
+                  của bạn không được để trống.</small>
+              </div>
+            </div>
+
+            <mat-form-field>
+              <input matInput name="username" placeholder="Tên đăng nhập" type="text" [formControl]="form.controls['username']"
+                required autocomplete="off">
+            </mat-form-field>
+            <small *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched" class="mat-text-warn">Tên
+              tài khoản không được để trống.</small>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput name="password" type="password" placeholder="Mật khẩu" [formControl]="form.controls['password']"
+                  required autocomplete="off">
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput name="repassword" type="password" placeholder="Mật khẩu xác nhận" [formControl]="form.controls['confirmPassword']"
+                  autocomplete="off">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <div fxFlex="100">
+                <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched"
+                  class="mat-text-warn">Mật
+                  khẩu không được để trống.</small>
+              </div>
+              <div fxFlex="100">
+                <small *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched"
+                  class="mat-text-warn">Mật khẩu xác nhận không được để trống.</small>
+                <small *ngIf="form.controls['confirmPassword'].errors?.equalTo" class="mat-text-warn">Mật khẩu xác nhận
+                  chưa đúng.</small>
+              </div>
+            </div>
+            <mat-form-field fxFlex="100">
+              <mat-select placeholder="Quyền quản lý" [formControl]="form.controls['roles']">
+                <mat-option class="mat-option-rolepond" *ngFor="let roles of rolesList" [value]="roles.value">
+                  {{roles.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['roles'].hasError('required') && form.controls['roles'].touched" class="mat-text-warn">Bạn
+              chưa chọn quyền.</small>
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" class="pad">
+              <button mat-raised-button color="primary" class="btn-block" type="submit" [disabled]="!form.valid">Thêm</button>
+              <button mat-raised-button color="warn" routerLink="/quan-ly-nhan-vien">Huỷ</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</mat-card>
