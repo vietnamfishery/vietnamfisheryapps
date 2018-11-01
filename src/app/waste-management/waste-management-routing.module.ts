@@ -10,7 +10,7 @@ const routes: Routes = [
     component: WasteManagementComponent
   },
   {
-    path: 'sua-thong-tin-chat-thai',
+    path: 'sua-thong-tin-chat-thai/:diedFisheryId',
     component: WasteEditComponent
   },
   {

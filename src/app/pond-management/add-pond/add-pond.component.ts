@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from '../pond-management.service';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { AppService } from 'src/app/app.service';
@@ -32,20 +32,19 @@ export class AddPondComponent implements OnInit {
   private errorFile: Promise<string> | null = null;
   preloader: boolean = false;
   timeOut: boolean = false;
-  
-  ErrorTimeout: boolean = false;
-  SuccessTimeout: boolean = false;
+
+  // ErrorTimeout: boolean = false;
+  // SuccessTimeout: boolean = false;
   imgSource: string;
 
-
-  // selected = 'option1';
   constructor(
     private fb: FormBuilder,
     private pondManagementService: PondManagementService,
     private cd: ChangeDetectorRef,
-		private router: Router,
+    private router: Router,
     private appService: AppService,
-    private adapter: DateAdapter<any>
+    private adapter: DateAdapter<any>,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -68,9 +67,8 @@ export class AddPondComponent implements OnInit {
   lat: number = 10.81693812610545;
   lng: number = 106.54678354919656;
 
-
   mapClicked($event: any) {
-    if(this.markers.length < 1){
+    if (this.markers.length < 1) {
       this.markers.push({
         lat: $event.coords.lat,
         lng: $event.coords.lng,
@@ -92,7 +90,7 @@ export class AddPondComponent implements OnInit {
     console.log($event);
   }
 
-  markers: Array<marker> = [ ]
+  markers: Array<marker> = []
 
   checkFile(fileType: string): boolean {
     if (fileType.split('/')[0] === 'image') {
@@ -118,19 +116,30 @@ export class AddPondComponent implements OnInit {
     // })
     this.pondManagementService.addpond(this.form.value, token).subscribe((res) => {
       console.log(this.form.value);
-      if(res.success) {
-        this.SuccessTimeout = !this.SuccessTimeout;
+      if (res.success) {
+        // this.SuccessTimeout = !this.SuccessTimeout;
+        // setTimeout(() => {
+        //   this.SuccessTimeout = !this.SuccessTimeout;
+        //   this.router.navigate(['quan-ly-ao'])
+        // }, 5000);
         this.form.reset();
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 3000,
+          horizontalPosition: "right"
+        });
         setTimeout(() => {
-          this.SuccessTimeout = !this.SuccessTimeout;
-          this.router.navigate(['quan-ly-ao'])
-        }, 5000);
+          this.router.navigate(['quan-ly-ao']);
+        }, 3200);
       } else {
-        this.ErrorTimeout = !this.ErrorTimeout;
+        // this.ErrorTimeout = !this.ErrorTimeout;
+        // setTimeout(() => {
+        //   this.ErrorTimeout = !this.ErrorTimeout;
+        // }, 5000);
         this.form.reset();
-        setTimeout(() => {
-          this.ErrorTimeout = !this.ErrorTimeout;
-        }, 5000);
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 3000,
+          horizontalPosition: "right"
+        });
       }
     });
   }

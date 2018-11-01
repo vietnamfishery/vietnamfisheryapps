@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, ContentChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSort, MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { ISeason } from '../models/season';
@@ -57,7 +57,8 @@ export class SeasionManagementComponent implements OnInit {
     private adapter: DateAdapter<any>,
     private appService: AppService,
     private fb: FormBuilder,
-    private seasionManagementService: SeasionManagementService
+    private seasionManagementService: SeasionManagementService,
+    public snackBar: MatSnackBar
   ) { }
 
   openDialogAddSeasion(): void {
@@ -85,7 +86,7 @@ export class SeasionManagementComponent implements OnInit {
       if (res.success == true) {
         this.dataSource = res.season;
       } else {
-
+        
       }
       this.preloader = !this.preloader;
 
@@ -103,9 +104,15 @@ onSubmit(seasonId, seasonName) {
           this.dataSource = res.season;
         }
       });
-      console.log("thành công");
+      this.snackBar.open(res.message, 'Đóng', {
+        duration: 2500,
+        horizontalPosition: "right"
+      });
     } else {
-      console.log('thất bại');
+      this.snackBar.open(res.message, 'Đóng', {
+        duration: 2500,
+        horizontalPosition: "right"
+      });
     }
   })
 }
@@ -150,7 +157,8 @@ export class DialogAddSeasion {
     private fb: FormBuilder,
     private appService: AppService,
     private seasionManagementService: SeasionManagementService,
-    private router: Router
+    private router: Router,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -164,7 +172,16 @@ export class DialogAddSeasion {
     this.seasionManagementService.addseason(this.form.value, token).subscribe((res) => {
       if (res.success) {
         this.dialogRef.close();
-        // this.router.navigate(['/']);
+        this.router.navigate(['/quan-ly-vu-nuoi']);
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "right"
+        });
+      } else {
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "right"
+        });
       }
     });
   }

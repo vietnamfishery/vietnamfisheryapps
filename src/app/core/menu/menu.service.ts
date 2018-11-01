@@ -64,6 +64,18 @@ const MENUITEMS: Array<Menu> = [
     icon: 'timeline'
   },
   {
+    state: 'quan-ly-thu-hoach',
+    name: 'Quản lý thu hoạch',
+    type: 'link',
+    icon: 'attach_money'
+  },
+  {
+    state: 'quan-ly-chat-thai',
+    name: 'Quản lý chất thải',
+    type: 'link',
+    icon: 'delete_sweep'
+  },
+  {
     state: 'quan-ly-kho',
     name: 'Quản lý kho',
     type: 'sub',
@@ -75,12 +87,6 @@ const MENUITEMS: Array<Menu> = [
       {state: 'giong-nuoi', name: 'Giống nuôi'}
       // {state: 'nhap-kho', name: 'Nhập kho'}
     ]
-  },
-  {
-    state: 'quan-ly-thu-hoach',
-    name: 'Quản lý thu hoạch',
-    type: 'link',
-    icon: 'attach_money'
   },
   {
     state: 'quan-ly-chi-phi',
@@ -104,13 +110,7 @@ const MENUITEMS: Array<Menu> = [
     name: 'Quản lý nhân viên',
     type: 'link',
     icon: 'assignment_ind'
-  },
-  {
-    state: 'quan-ly-chat-thai',
-    name: 'Quản lý chất thải',
-    type: 'link',
-    icon: 'delete_sweep'
-  },
+  }
 ];
 
 @Injectable(

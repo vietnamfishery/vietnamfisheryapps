@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SeasionManagementRoutingModule } from './seasion-management-routing.module';
 import { SeasionManagementComponent, DialogAddSeasion } from './seasion-management.component';
-import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatDialogModule, MatInputModule, MatSidenavModule, MatCheckboxModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDatepickerModule, MatChipsModule, MatProgressBarModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatDialogModule, MatInputModule, MatSidenavModule, MatCheckboxModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDatepickerModule, MatChipsModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +36,7 @@ import { AddPondsComponent } from './add-ponds/add-ponds.component';
     MatDatepickerModule,
     MatChipsModule,
     MatProgressBarModule,
+    MatSnackBarModule,
     SeasionManagementRoutingModule
   ],
   entryComponents: [SeasionManagementComponent, DialogAddSeasion],
@@ -46,6 +47,6 @@ import { AddPondsComponent } from './add-ponds/add-ponds.component';
     AddPondsComponent
   ],
   bootstrap: [SeasionManagementComponent],
-  providers: [SeasionManagementService],
+  providers: [SeasionManagementService]
 })
 export class SeasionManagementModule { }

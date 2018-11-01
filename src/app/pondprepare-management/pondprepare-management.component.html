@@ -86,17 +86,17 @@
                   <div fxLayout="row">
                       <table mat-table [(dataSource)]="pondprepares.details">
                         
-                          <ng-container matColumnDef="Nguyên vật liệu sử dụng">
+                          <ng-container matColumnDef="Material">
                             <th mat-header-cell *matHeaderCellDef>Nguyên vật liệu sử dụng </th>
                             <td mat-cell *matCellDef="let element"> {{ element.material.itemName }} </td>
                           </ng-container>
                         
-                          <ng-container matColumnDef="Số lượng">
+                          <ng-container matColumnDef="quantity">
                             <th mat-header-cell *matHeaderCellDef> Số lượng </th>
                             <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
                           </ng-container>
                         
-                          <ng-container matColumnDef="Chi phí">
+                          <ng-container matColumnDef="price">
                             <th mat-header-cell *matHeaderCellDef> Chi phí </th>
                             <td mat-cell *matCellDef="let element">{{ element.quantity * element.material.unitPrice | currency:'VND' }}</td>
                           </ng-container>

@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HarvestManagementRoutingModule } from './harvest-management-routing.module';
-import { HarvestManagementComponent, DialogAddHarvest } from './harvest-management.component';
-import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSidenavModule, MatSliderModule, MatListModule, MatButtonToggleModule, MatTabsModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { HarvestManagementComponent } from './harvest-management.component';
+import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSidenavModule, MatSliderModule, MatListModule, MatButtonToggleModule, MatTabsModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatSnackBarModule, MatProgressBarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AdddetailHarvestComponent } from './adddetail-harvest/adddetail-harvest.component';
 import { EditDetailHarvestComponent } from './edit-detail-harvest/edit-detail-harvest.component';
+import { HarvestManagementService } from './harvest-management.service';
 
 @NgModule({
   imports: [
@@ -34,10 +35,15 @@ import { EditDetailHarvestComponent } from './edit-detail-harvest/edit-detail-ha
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
     HarvestManagementRoutingModule
   ],
-  entryComponents: [HarvestManagementComponent, DialogAddHarvest],
-  declarations: [HarvestManagementComponent, DialogAddHarvest, AdddetailHarvestComponent, EditDetailHarvestComponent],
-  bootstrap: [HarvestManagementComponent]
+  entryComponents: [HarvestManagementComponent],
+  declarations: [HarvestManagementComponent, AdddetailHarvestComponent, EditDetailHarvestComponent],
+  bootstrap: [HarvestManagementComponent],
+  providers:[
+    HarvestManagementService
+  ]
 })
 export class HarvestManagementModule { }

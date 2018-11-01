@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { WasteManagementRoutingModule } from './waste-management-routing.module';
 import { WasteManagementComponent } from './waste-management.component';
-import { MatToolbarModule, MatCardModule, MatIconModule, MatTooltipModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatExpansionModule, MatSidenavModule, MatCheckboxModule, MatRadioModule } from '@angular/material';
+import { MatToolbarModule, MatCardModule, MatIconModule, MatTooltipModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatExpansionModule, MatSidenavModule, MatCheckboxModule, MatRadioModule, MatSnackBarModule, MatProgressBarModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { WasteEditComponent } from './waste-edit/waste-edit.component';
 import { WasteAddComponent } from './waste-add/waste-add.component';
+import { WasteManagementService } from './waste-management.service';
 
 @NgModule({
   imports: [
@@ -29,8 +30,11 @@ import { WasteAddComponent } from './waste-add/waste-add.component';
     MatSidenavModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
     WasteManagementRoutingModule
   ],
-  declarations: [WasteManagementComponent, WasteEditComponent, WasteAddComponent]
+  declarations: [WasteManagementComponent, WasteEditComponent, WasteAddComponent],
+  providers: [WasteManagementService]
 })
 export class WasteManagementModule { }

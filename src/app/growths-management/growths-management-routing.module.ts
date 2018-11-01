@@ -14,7 +14,7 @@ const routes: Routes = [
     component: AddGrowthsComponent
   },
   {
-    path: 'chinh-sua-thong-tin-tang-truong',
+    path: 'chinh-sua-thong-tin-tang-truong/:growthId',
     component: EditDetailGrowthsComponent
   }
 ];
