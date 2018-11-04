@@ -6,7 +6,7 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard, AuthGuarded } from '../auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,16 +19,19 @@ const routes: Routes = [
       component: ErrorComponent
     }, {
       path: 'forgot',
-      component: ForgotComponent
+      component: ForgotComponent,
+      canActivate: [AuthGuarded]
     }, {
       path: 'lockscreen',
       component: LockscreenComponent
     }, {
       path: 'signin',
-      component: SigninComponent
+      component: SigninComponent,
+      canActivate: [AuthGuarded]
     }, {
       path: 'signup',
-      component: SignupComponent
+      component: SignupComponent,
+      canActivate: [AuthGuarded]
     }]
   }
 ];

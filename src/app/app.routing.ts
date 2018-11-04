@@ -50,7 +50,7 @@ export const AppRoutes: Routes = [
 				loadChildren: './role-management/role-management.module#RoleManagementModule'
 			},
 			{
-				path: 'quan-ly-nhan-vien',
+				path: 'quan-ly-phan-quyen-ao',
 				loadChildren: './employees-management/employees-management.module#EmployeesManagementModule'
 			},
 			{

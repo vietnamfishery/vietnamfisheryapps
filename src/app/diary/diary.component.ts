@@ -8,8 +8,8 @@ import { ELEMENT_DATA } from '../constants/table-data';
 import { DiaryService } from './diary.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as Actions from '../stores/actions/auth.actions';
-import { AuthState } from '../stores/states/auth.state';
+import * as Actions from '../rootStores/actions';
+import { AuthorizationState } from '../rootStores/models';
 import { Router } from '@angular/router';
 /**
  * define for table ::start::
@@ -142,7 +142,7 @@ export class DiaryComponent implements OnInit {
    */
 
   constructor(
-    private store: Store<AuthState>,
+    private store: Store<AuthorizationState>,
     private router: Router,
     public dialog: MatDialog,
     private diaryService: DiaryService

@@ -111,17 +111,9 @@ export class AddPondComponent implements OnInit {
 
   onSubmit() {
     const token: string = this.appService.getCookie(tokenName);
-    // this.form.patchValue({
-    //   images: this.imgSource
-    // })
-    this.pondManagementService.addpond(this.form.value, token).subscribe((res) => {
+    this.pondManagementService.addPond(this.form.value, token).subscribe((res) => {
       console.log(this.form.value);
       if (res.success) {
-        // this.SuccessTimeout = !this.SuccessTimeout;
-        // setTimeout(() => {
-        //   this.SuccessTimeout = !this.SuccessTimeout;
-        //   this.router.navigate(['quan-ly-ao'])
-        // }, 5000);
         this.form.reset();
         this.snackBar.open(res.message, 'Đóng', {
           duration: 3000,
@@ -131,10 +123,6 @@ export class AddPondComponent implements OnInit {
           this.router.navigate(['quan-ly-ao']);
         }, 3200);
       } else {
-        // this.ErrorTimeout = !this.ErrorTimeout;
-        // setTimeout(() => {
-        //   this.ErrorTimeout = !this.ErrorTimeout;
-        // }, 5000);
         this.form.reset();
         this.snackBar.open(res.message, 'Đóng', {
           duration: 3000,

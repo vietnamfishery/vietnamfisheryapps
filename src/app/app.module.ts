@@ -21,7 +21,6 @@ import {
   MatSelectModule,
   MatProgressBarModule
 } from '@angular/material';
-import { isLogin } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 
@@ -46,7 +45,7 @@ import {
   AccordionDirective
 } from './core';
 import { StoreModule } from '@ngrx/store';
-import { authReducer } from './stores/auth.store';
+import { authorizationReducer } from './rootStores/';
 import { AppService } from './app.service';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -81,10 +80,10 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     StoreModule.forRoot({
-      auth: authReducer
+      authorization: authorizationReducer
     }),
     StoreDevtoolsModule.instrument({
-      maxAge: 10
+      maxAge: false
     }),
     LoadingBarRouterModule,
     MatSidenavModule,

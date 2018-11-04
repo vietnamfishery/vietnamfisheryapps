@@ -106,8 +106,8 @@ const MENUITEMS: Array<Menu> = [
     icon: 'record_voice_over'
   },
   {
-    state: 'quan-ly-nhan-vien',
-    name: 'Quản lý nhân viên',
+    state: 'quan-ly-phan-quyen-ao',
+    name: 'Quản lý phân quyền ao',
     type: 'link',
     icon: 'assignment_ind'
   }

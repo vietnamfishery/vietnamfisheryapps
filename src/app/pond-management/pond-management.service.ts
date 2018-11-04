@@ -37,7 +37,7 @@ export class PondManagementService {
 		return this.http.post(host + '/user/updateUser', fd, h);
 	}
 
-	public addpond(data: any, token: string): Observable<any> {
+	public addPond(data: any, token: string): Observable<any> {
 		const h: any = {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',

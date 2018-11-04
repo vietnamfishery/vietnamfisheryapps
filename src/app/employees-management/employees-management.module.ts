@@ -9,6 +9,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAccountEmployeesComponent } from './add-account-employees/add-account-employees.component';
 import { EmployeesManagementService } from './employees-management.service';
+import { DialogChangePondComponent } from './dialogChangePond.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { EmployeesManagementService } from './employees-management.service';
   providers:[
     EmployeesManagementService
   ],
-  declarations: [EmployeesManagementComponent, AddAccountEmployeesComponent]
+  entryComponents: [EmployeesManagementComponent, DialogChangePondComponent],
+  declarations: [EmployeesManagementComponent, DialogChangePondComponent, AddAccountEmployeesComponent]
 })
 export class EmployeesManagementModule { }

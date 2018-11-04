@@ -26,6 +26,10 @@ export class EmployeesManagementService {
     return this.http.get(host + '/user/gets/employees', this.appService.setHeader(token));
   }
 
+  public getEmployeePondRoles(token: string): Observable<any> {
+    return this.http.get(host + '/ponds/gets/employees', this.appService.setHeader(token));
+  }
+
   public getEmployeeById(token: string, rolesId: number): Observable<any> {
     return this.http.get(host + '/user/get/employee', {
 			headers: new HttpHeaders({
