@@ -58,7 +58,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động </th>
             <td mat-cell *matCellDef="let element">
               <button mat-button (click)="openDialogAddRoleManagement(element.role.rolesId)">Đổi quyền</button>
-              <button mat-button (click)="deletedRole(element.role.rolesId)">Xóa quyền</button>
+              <button mat-button (click)="deletedRole(element.userId,element.role.roles)">Xóa quyền</button>
             </td>
           </ng-container>
 

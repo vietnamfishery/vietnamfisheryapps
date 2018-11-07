@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { api_url, api_port } from '../constants/api';
 import { Router } from '@angular/router';
-import { actionUserServices, ActionServer } from '../constants';
-// import { headers } from '../constants/http';
+import { actionUserServices } from '../constants';
+import { AppService } from '../app.service';
 
 const host = api_url + ':' + api_port + '/api';
 @Injectable({
@@ -15,58 +15,85 @@ export class PondManagementService {
 
 	constructor(
 		private http: HttpClient,
-		private router: Router
+		private router: Router,
+		private appService: AppService
 	) {
 
 	}
 
-	loadImage(id: string) {
+	public loadImage(id: string) {
 		return this.http.get(host + '/getFile/image/' + id);
 	}
 
-	uploadImage(file: File, token: string): Observable<any> {
-		const h: any = {
-			headers: new HttpHeaders({
-				'Access-Control-Allow-Origin': '*',
-				'Authorization': token
-			})
-		}
+	public uploadImage(file: File, token: string): Observable<any> {
 		const fd = new FormData();
 		fd.append('image', file, file.name);
 		fd.append('action', actionUserServices.UPLOAD_IMAGE);
-		return this.http.post(host + '/user/updateUser', fd, h);
+
+		return this.http.post(host + '/user/updateUser', fd, this.appService.setHeader(token));
 	}
 
 	public addPond(data: any, token: string): Observable<any> {
-		const h: any = {
+		const fd = new FormData();
+		fd.append('images', data.images, data.images.name);
+		fd.append('pondName', data.pondName);
+		fd.append('pondCreatedDate', data.pondCreatedDate);
+		fd.append('pondArea', data.pondArea);
+		fd.append('pondDepth', data.pondDepth);
+		fd.append('createCost', data.createCost);
+		fd.append('pondLatitude', data.pondLatitude);
+		fd.append('pondLongitude', data.pondLongitude);
+		fd.append('status', data.status);
+		return this.http.post(host + '/ponds/add', fd, {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'application/json',
 				'Authorization': token
 			})
-		}
-		return this.http.post(host + '/ponds/add', data, h);
+		});
+	}
+
+	public getBase64(file) {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = error => reject(error);
+		});
 	}
 
 	public getAllPond(token: string): Observable<any> {
-		return this.http.get<any>(host + '/ponds/gets', this.setHeader(token));
+		return this.http.get<any>(host + '/ponds/gets', this.appService.setHeader(token));
 	}
 
-	public getPondById(id: string, token): Observable<any> {
-		return this.http.get(host + '/ponds/get/'+ id, this.setHeader(token));
+	public getPondByUUId(UUid: string, token): Observable<any> {
+		return this.http.get(host + '/ponds/get/' + UUid, this.appService.setHeader(token));
 	}
 
 	public updatePond(data: any, token): Observable<any> {
-		return this.http.put(host + '/ponds/update', data, this.setHeader(token));
-	}
-
-	private setHeader(token: string): any {
-		return {
+		const fd = new FormData();
+		fd.append('images', data.images, data.images.name);
+		fd.append('pondUUId', data.pondUUId);
+		fd.append('pondName', data.pondName);
+		fd.append('pondCreatedDate', data.pondCreatedDate);
+		fd.append('pondArea', data.pondArea);
+		fd.append('pondDepth', data.pondDepth);
+		fd.append('createCost', data.createCost);
+		fd.append('pondLatitude', data.pondLatitude);
+		fd.append('pondLongitude', data.pondLongitude);
+		fd.append('status', data.status);
+		return this.http.put(host + '/ponds/update', fd, {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'application/json',
 				'Authorization': token
 			})
-		}
+		});
+	}
+
+	public getEmployeePond(token: string): Observable<any> {
+		return this.http.get<any>(host + '/user/roles/gets/employees/pond', this.appService.setHeader(token));
+	}
+
+	public addPondUserRole(data: any, token: string): Observable<any> {
+		return this.http.post<any>(host + '/pondUserRoles/add', data, this.appService.setHeader(token));
 	}
 }

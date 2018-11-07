@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { ProfileManagementService } from '../profile-management.service';
@@ -33,8 +33,6 @@ export class ProfileEditComponent implements OnInit {
     private errorFile: Promise<string> | null = null;
     private updateErrorTimeout: boolean = false;
     private updateSuccessTimeout: boolean = false;
-    private updatePasswordFailTimeout: boolean = false;
-    private updatePasswordSuccessTimeout: boolean = false;
     timeOut: boolean = false;
 
     // for select field of form
@@ -44,7 +42,7 @@ export class ProfileEditComponent implements OnInit {
     preloader: boolean = false;
 
     imageLink: string = '';
-    
+
     minDate = new Date(1940, 0, 1);
     maxDate = new Date();
 
@@ -55,8 +53,9 @@ export class ProfileEditComponent implements OnInit {
         private fb: FormBuilder,
         private fbPass: FormBuilder,
         private cd: ChangeDetectorRef,
+        public snackBar: MatSnackBar,
         private appService: AppService,
-		private router: Router,
+        private router: Router,
         private adapter: DateAdapter<any>,
         private profileManagementService: ProfileManagementService
     ) {
@@ -67,6 +66,27 @@ export class ProfileEditComponent implements OnInit {
 
     ngOnInit() {
         this.preloader = !this.preloader;
+        this.createFormInfo();
+        this.createFormPass();
+        const token: string = this.appService.getCookie(tokenName);
+        this.profileManagementService.getUserInfoWithUpdate(token).subscribe((val: Users) => {
+            this.district.push((val as any).districts);
+            this.ward.push((val as any).wards);
+            this.form.patchValue({
+                lastname: val.lastname,
+                firstname: val.firstname,
+                birthday: val.birthday,
+                email: val.email,
+                phone: val.phone,
+                province: val.province,
+                district: val.district,
+                town: val.town,
+                images: val.images
+            });
+        })
+    }
+
+    createFormInfo = () => {
         this.form = this.fb.group({
             lastname: [null, Validators.compose([Validators.required])],
             firstname: [null, Validators.compose([Validators.required])],
@@ -85,27 +105,13 @@ export class ProfileEditComponent implements OnInit {
             }, Validators.compose([Validators.required])],
             images: [null, Validators.compose([])],
         });
+    }
+
+    createFormPass = () => {
         this.form_Pass = this.fbPass.group({
             oldPassword: [null, Validators.compose([Validators.required])],
             newPassword: passwordchange,
             confirmNewPassword: confirmPasswordchange,
-        })
-
-        const token: string = this.appService.getCookie(tokenName);
-        this.profileManagementService.getUserInfoWithUpdate(token).subscribe((val: Users) => {
-            this.district.push((val as any).districts);
-            this.ward.push((val as any).wards);
-            this.form.patchValue({
-                lastname: val.lastname,
-                firstname: val.firstname,
-                birthday: val.birthday,
-                email: val.email,
-                phone: val.phone,
-                province: val.province,
-                district: val.district,
-                town: val.town,
-                images: val.images
-            });
         })
     }
 
@@ -151,7 +157,7 @@ export class ProfileEditComponent implements OnInit {
         //     images: this.imgSource
         // })
         this.profileManagementService.updateUserInfo(this.form.value, token).subscribe((res: any) => {
-            if(res.success) {
+            if (res.success) {
                 this.updateSuccessTimeout = !this.updateSuccessTimeout;
                 setTimeout(() => {
                     this.router.navigate(['thong-tin-ca-nhan']);
@@ -169,24 +175,27 @@ export class ProfileEditComponent implements OnInit {
         const token: string = this.appService.getCookie(tokenName);
         delete this.form_Pass.value.confirmNewPassword;
         this.profileManagementService.updateUserPassword(this.form_Pass.value, token).subscribe((res: any) => {
-            if(res.success) {
-                this.form_Pass.reset();
-                this.updatePasswordSuccessTimeout = !this.updatePasswordSuccessTimeout;
+            if (res.success) {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "right"
+                });
                 setTimeout(() => {
-                    this.updatePasswordSuccessTimeout = !this.updatePasswordSuccessTimeout;
-                }, 5000);
+                    this.form_Pass.reset();
+                    this.router.navigate(['thong-tin-ca-nhan']);
+                }, 500);
             } else {
-                this.updatePasswordFailTimeout = !this.updatePasswordFailTimeout;
-                setTimeout(() => {
-                    this.updatePasswordFailTimeout = !this.updatePasswordFailTimeout;
-                }, 5000)
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "right"
+                });
             }
         });
     }
 
     getImage(): any {
         let styles = {
-            'background-image': `url("${ this.imageLink || "https://via.placeholder.com/360x360" }")`,
+            'background-image': `url("${this.imageLink || "https://via.placeholder.com/360x360"}")`,
             'background-repeat': `no-repeat`,
             'background-size': `cover`,
             'background-position': 'center'

@@ -50,7 +50,7 @@ export class SeasionManagementComponent implements OnInit {
   }
 
   name: string;
-
+  token: string;
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -59,7 +59,9 @@ export class SeasionManagementComponent implements OnInit {
     private fb: FormBuilder,
     private seasionManagementService: SeasionManagementService,
     public snackBar: MatSnackBar
-  ) { }
+  ) {
+    this.token = this.appService.getCookie(tokenName);
+  }
 
   openDialogAddSeasion(): void {
     const dialogRef = this.dialog.open(DialogAddSeasion, {
@@ -68,7 +70,7 @@ export class SeasionManagementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.reloadTable()
     });
   }
 
@@ -76,62 +78,63 @@ export class SeasionManagementComponent implements OnInit {
     this.preloader = !this.preloader;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.creatForm();
+    this.reloadTable();
+  }
+
+  reloadTable = () => {
+    this.seasionManagementService.getSeason(this.token).subscribe((res: any) => {
+      if (res.success == true) {
+        this.dataSource = res.season;
+      } else {
+
+      }
+      this.preloader = !this.preloader;
+    });
+  }
+
+  creatForm = () => {
     this.form = this.fb.group({
       seasonId: [null],
       seasonName: [null, Validators.compose([Validators.required])],
       status: [null, Validators.compose([Validators.required])]
-    })
-    const token: string = this.appService.getCookie(tokenName);
-    this.seasionManagementService.getSeason(token).subscribe((res: any) => {
-      if (res.success == true) {
-        this.dataSource = res.season;
-      } else {
-        
-      }
-      this.preloader = !this.preloader;
-
     });
   }
-    
-onSubmit(seasonId, seasonName) {
-  const data = { seasonId, seasonName: seasonName.value }
-  console.log(data);
-  const token: string = this.appService.getCookie(tokenName);
-  this.seasionManagementService.updateseason(data, token).subscribe((res) => {
-    if (res.success) {
-      this.seasionManagementService.getSeason(token).subscribe((res: any) => {
-        if (res.success == true) {
-          this.dataSource = res.season;
-        }
-      });
-      this.snackBar.open(res.message, 'Đóng', {
-        duration: 2500,
-        horizontalPosition: "right"
-      });
-    } else {
-      this.snackBar.open(res.message, 'Đóng', {
-        duration: 2500,
-        horizontalPosition: "right"
-      });
-    }
-  })
-}
 
-cancel(span, form) {
-  span.classList.remove('hidden');
-  form.classList.add('hidden');
-}
+  onSubmit(seasonId, seasonName) {
+    const data = { seasonId, seasonName: seasonName.value }
+    const token: string = this.appService.getCookie(tokenName);
+    this.seasionManagementService.updateseason(data, token).subscribe((res) => {
+      if (res.success) {
+        this.seasionManagementService.getSeason(token).subscribe((res: any) => {
+          if (res.success == true) {
+            this.dataSource = res.season;
+          }
+        });
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "right"
+        });
+      } else {
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "center",
+          verticalPosition: "top"
+        });
+      }
+    })
+  }
 
-// toUpdate(id,ssn) {
-//   console.log(id);
-//   console.log(ssn.value);
-// }
+  cancel(span, form) {
+    span.classList.remove('hidden');
+    form.classList.add('hidden');
+  }
 
-toEdit(span, form, seasonName) {
-  this.seasonName = seasonName.value;
-  span.classList.add('hidden');
-  form.classList.remove('hidden');
-}
+  toEdit(span, form, seasonName) {
+    this.seasonName = seasonName.value;
+    span.classList.add('hidden');
+    form.classList.remove('hidden');
+  }
 }
 
 

@@ -41,15 +41,12 @@ export class DialogAddRoleEmpManagement implements OnInit {
 
     ngOnInit() {
       this.createForm();
-      this.employeesManagementService.getEmployee(this.token).subscribe((res: any) => {
-        const arrayResult: any[] = [];
-        for(let element of (res.employees as any[])){
-          arrayResult.push({
-            name: element.lastname + ' ' + element.firstname,
-            userId: element.userId
-          })
-        }
-        this.arrEmployee = arrayResult;
+      this.toLoad();
+    }
+
+    toLoad = () => {
+      this.employeesManagementService.getEmployeesWithoutIsDeleted(this.token).subscribe((res: any) => {
+        this.arrEmployee = res.employees;
       })
     }
 
@@ -66,7 +63,11 @@ export class DialogAddRoleEmpManagement implements OnInit {
 
   onSubmit() {
     if(this.form.valid){
-      this.employeesManagementService.addOnlyRolesEmployee(this.token, this.form.value).subscribe((res: any) => {
+      const data: any = {
+        isDeleted: 0,
+        ...this.form.value
+      }
+      this.employeesManagementService.upsertUserRole(data, this.token).subscribe((res: any) => {
         if(res.success) {
           this.dialogRef.close();
           this.snackBar.open(res.message, 'Đóng', {

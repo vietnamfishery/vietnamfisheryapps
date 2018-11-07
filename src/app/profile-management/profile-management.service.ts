@@ -24,7 +24,6 @@ export class ProfileManagementService {
 				'Authorization': token
 			})
 		}
-
 		return this.http.get(host + '/user/get', h);
 	}
 

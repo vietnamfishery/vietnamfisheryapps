@@ -1,13 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
+import { Component, OnInit, } from '@angular/core';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from './pond-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
-import { IPonds } from '../models/ponds';
 import * as moment from 'moment';
-
+import { DialogAddRole } from './dialog-add-role.component';
+import * as jwtDecode from 'jwt-decode';
 
 export interface DialogData {
   animal: string;
@@ -29,45 +28,38 @@ export class PondManagementComponent implements OnInit {
   name: string;
   imgSource: string = '';
   preloader: boolean = false;
+  token: string;
+  isBoss: boolean;
   constructor(
     private router: Router,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private pondManagementService: PondManagementService,
     private appService: AppService
-  ) {}
-
-  isOver(): boolean {
-    return window.matchMedia(`(max-width: 960px)`).matches;
-  }
-
-  openDialogAddRole(): void {
-    const dialogRef = this.dialog.open(DialogAddRole, {
-      width: '260px',
-      data: { name: this.name, animal: this.animal }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+  ) {
+    this.token = this.appService.getCookie(tokenName);
+    this.isBoss = (jwtDecode(this.token) as any).createdBy === null;
   }
 
   ngOnInit() {
     this.preloader = !this.preloader;
-    const token: string = this.appService.getCookie(tokenName);
-    this.pondManagementService.getAllPond(token).subscribe((res: any) => {
-      console.log(res);
-      if(res.success) {
+    this.reloadPond();
+  }
+
+  reloadPond = () => {
+    this.pondManagementService.getAllPond(this.token).subscribe((res: any) => {
+      if (res.success) {
         this.ponds = res.ponds.map((element: any) => {
           return {
+            pondUUId: element.pondUUId,
             status: element.status,
             pondName: element.pondName,
             pondCreatedDate: moment(element.pondCreatedDate).format(`DD - MM - YYYY`),
             images: element.images,
-            pondId: element.pondId
+            pondId: element.pondId,
+            employees: element.users
           }
-        })
+        });
       } else {
         this.snackBar.open(res.message, 'Đóng', {
           duration: 2500,
@@ -75,32 +67,22 @@ export class PondManagementComponent implements OnInit {
         });
       }
       this.preloader = !this.preloader;
-  });
-  }
-}
-
-// ///////////////////////////////////////////////////////
-
-@Component({
-  selector: 'dialog-add-roles',
-  templateUrl: './dialog-add-roles.html',
-})
-export class DialogAddRole {
-  public form: FormGroup;
-  constructor(
-    public dialogRef: MatDialogRef<DialogAddRole>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private fb: FormBuilder
-  ) { }
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      user_roles: [null, Validators.compose([Validators.required])]
     });
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  openDialogAddRole(pondId: number): void {
+    const dialogRef = this.dialog.open(DialogAddRole, {
+      width: '260px',
+      data: { pondId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.reloadPond();
+    });
   }
 
+
+  isOver(): boolean {
+    return window.matchMedia(`(max-width: 960px)`).matches;
+  }
 }

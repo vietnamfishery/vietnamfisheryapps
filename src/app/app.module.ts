@@ -19,7 +19,8 @@ import {
   MatListModule,
   MatSlideToggleModule,
   MatSelectModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -95,6 +96,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatTabsModule,
     MatListModule,
+    MatSnackBarModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatProgressBarModule,

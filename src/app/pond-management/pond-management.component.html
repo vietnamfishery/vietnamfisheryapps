@@ -1,7 +1,7 @@
 <mat-card fxLayout="column">
   <mat-toolbar color="primary" class="table-header" fxLayout="row">
     <h1 class="mat-headline center-align" fxFlex='100'>Quản lý ao nuôi</h1>
-    <a mat-flat-button color="white" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao" matTooltipPosition="above"
+    <a mat-flat-button color="white" *ngIf="isBoss" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao" matTooltipPosition="above"
       fxFlex style="margin-right: 10px">
       <mat-icon>library_add</mat-icon>
     </a>
@@ -56,7 +56,7 @@
         <div class="zoom" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
           <mat-card>
             <div fxLayout="row">
-              <div [routerLink]="['/quan-ly-ao/chi-tiet-ao-nuoi', pond.pondId ]" class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url('+ pond.images +')'}" fxFlex="40">
+              <div [routerLink]="['/quan-ly-ao/chi-tiet-ao-nuoi', pond.pondUUId ]" class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url('+ pond.images +')'}" fxFlex="40">
                 <figure>
                   <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
                   <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
@@ -68,16 +68,19 @@
                     <div fxFlex>
                       <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond['pondName'] }}</h4>
                     </div>
-                    <a (click)="openDialogAddRole()" matTooltip="Giao quyền quản lý" matTooltipPosition="above" style="margin-right:5px">
+                    <a *ngIf="isBoss" (click)="openDialogAddRole(pond.pondId)" matTooltip="Giao quyền quản lý" matTooltipPosition="above" style="margin-right:5px">
                       <mat-icon>library_add</mat-icon>
                     </a>
-                    <a [routerLink]="['/quan-ly-ao/chi-tiet-ao-nuoi', pond.pondId ]"  class="pointer" matTooltip="Chi tiết ao nuôi"
+                    <a [routerLink]="['/quan-ly-ao/chi-tiet-ao-nuoi', pond.pondUUId ]"  class="pointer" matTooltip="Chi tiết ao nuôi"
                       matTooltipPosition="above">
                       <mat-icon>library_books</mat-icon>
                     </a>
                   </div>
-                  <div class="mat-text-accent text-xl" *ngIf="pond.name === 'Ao số 4'">
-                    <span><small>Tran Ba Long Nguyen</small></span>
+                  <div class="mat-text-warn text-xl" *ngIf="pond.employees == 0">
+                    <span><small>Ao chưa có nhân viên quản lý</small></span>
+                  </div>
+                  <div class="mat-text-accent text-xl" *ngFor="let empl of pond.employees">
+                    <span><small>{{ empl.lastname }} {{ empl.firstname }}</small></span>
                   </div>
                   <div class="mat-text-primary text-xl">
                     <span> {{ pond.price }} vụ</span>

@@ -26,16 +26,19 @@ interface marker {
   ],
 })
 export class AddPondComponent implements OnInit {
-  private selectedFile: Promise<string> | null = null;
+  private selectedFile: File = null;
   public form: FormGroup;
   imageLink: string = '';
   private errorFile: Promise<string> | null = null;
   preloader: boolean = false;
   timeOut: boolean = false;
 
-  // ErrorTimeout: boolean = false;
-  // SuccessTimeout: boolean = false;
+  zoom: number = 10;
+  lat: number = 10.81693812610545;
+  lng: number = 106.54678354919656;
+
   imgSource: string;
+  markers: Array<marker> = []
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +52,10 @@ export class AddPondComponent implements OnInit {
 
   ngOnInit() {
     this.preloader = !this.preloader;
+    this.createForm();
+  }
 
+  createForm = () => {
     this.form = this.fb.group({
       pondName: [null, Validators.compose([Validators.required])],
       pondCreatedDate: [null, Validators.compose([Validators.required])],
@@ -62,10 +68,6 @@ export class AddPondComponent implements OnInit {
       images: [null, Validators.compose([])],
     });
   }
-
-  zoom: number = 10;
-  lat: number = 10.81693812610545;
-  lng: number = 106.54678354919656;
 
   mapClicked($event: any) {
     if (this.markers.length < 1) {
@@ -90,7 +92,6 @@ export class AddPondComponent implements OnInit {
     console.log($event);
   }
 
-  markers: Array<marker> = []
 
   checkFile(fileType: string): boolean {
     if (fileType.split('/')[0] === 'image') {
@@ -111,17 +112,20 @@ export class AddPondComponent implements OnInit {
 
   onSubmit() {
     const token: string = this.appService.getCookie(tokenName);
-    this.pondManagementService.addPond(this.form.value, token).subscribe((res) => {
-      console.log(this.form.value);
+    const data: any = {
+      ...this.form.value,
+      images: this.selectedFile
+    }
+    this.pondManagementService.addPond(data, token).subscribe((res) => {
       if (res.success) {
-        this.form.reset();
         this.snackBar.open(res.message, 'Đóng', {
           duration: 3000,
           horizontalPosition: "right"
         });
         setTimeout(() => {
+          this.form.reset();
           this.router.navigate(['quan-ly-ao']);
-        }, 3200);
+        }, 500);
       } else {
         this.form.reset();
         this.snackBar.open(res.message, 'Đóng', {
@@ -134,27 +138,20 @@ export class AddPondComponent implements OnInit {
 
   onFileChange(event) {
     this.preloader = true;
-    const token: string = this.appService.getCookie(tokenName);
     if (event.target.files && event.target.files.length) {
       const [files]: File[] = event.target.files;
       this.cd.markForCheck();
       if (this.checkFile(files.type)) {
-        this.pondManagementService.uploadImage(files, token).subscribe((res: any) => {
-          this.pondManagementService.loadImage(res.fileId).subscribe(data => {
-            if (data) {
-              this.imageLink = (data as any).data;
-              this.preloader = !this.preloader;
-            }
-          });
-          this.imgSource = res.fileId;
-        })
+        this.selectedFile = files;
+        this.pondManagementService.getBase64(files).then((base: string) => {
+          this.imageLink = base;
+        });
       } else {
-        this.timeOut = !this.timeOut;
-        this.errorFile = Promise.resolve("Hình ảnh không được cho phép, vui lòng thử lại!")
-        setTimeout(() => {
-          this.timeOut = !this.timeOut;
-        }, 5000);
-        this.preloader = !this.preloader;
+        this.snackBar.open("Hình ảnh không được cho phép, vui lòng thử lại!", 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "center",
+          verticalPosition: 'top'
+        })
       }
     }
   }

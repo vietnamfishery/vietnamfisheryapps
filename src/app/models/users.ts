@@ -1,4 +1,5 @@
 export interface Users {
+    userId?: number;
     userUUId?: string;
     firstname?: string;
     lastname?: string;
@@ -21,7 +22,8 @@ export interface Users {
     createdDate?: Date;
     updatedBy?: string;
     updatedDate?: Date;
-    isDeleted?: number
+    isDeleted?: number;
+    pondsBy?: any[];
 }
 
 export interface Roles {

@@ -36,22 +36,7 @@ export class RoleManagementComponent implements OnInit {
 
   ngOnInit() {
     this.token = this.appService.getCookie(tokenName);
-    this.employeesManagementService.getEmployee(this.token).subscribe((res: any) => {
-      const arrayResult: Users[] = [];
-      for(let element of (res.employees as Users[])){
-        for(let role of element.roles){
-          arrayResult.push({
-            firstname: element.firstname,
-            lastname: element.lastname,
-            role
-          })
-        }
-      }
-      this.ELEMENT_DATA = arrayResult;
-      this.dataSource = new MatTableDataSource<Users>(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    })
+    this.updateTable();
   }
 
   openDialogAddRoleManagement(rolesId): void {
@@ -61,23 +46,7 @@ export class RoleManagementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.employeesManagementService.getEmployee(this.token).subscribe((res: any) => {
-        const arrayResult: Users[] = [];
-        for(let element of (res.employees as Users[])){
-          for(let role of element.roles){
-            arrayResult.push({
-              firstname: element.firstname,
-              lastname: element.lastname,
-              role
-            })
-          }
-        }
-        this.ELEMENT_DATA = arrayResult;
-        this.dataSource = new MatTableDataSource<Users>(this.ELEMENT_DATA);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
+      this.updateTable()
     });
   }
 
@@ -87,6 +56,7 @@ export class RoleManagementComponent implements OnInit {
       for(let element of (res.employees as Users[])){
         for(let role of element.roles){
           arrayResult.push({
+            userId: element.userId,
             firstname: element.firstname,
             lastname: element.lastname,
             role
@@ -107,31 +77,16 @@ export class RoleManagementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.employeesManagementService.getEmployee(this.token).subscribe((res: any) => {
-        const arrayResult: Users[] = [];
-        for(let element of (res.employees as Users[])){
-          for(let role of element.roles){
-            arrayResult.push({
-              firstname: element.firstname,
-              lastname: element.lastname,
-              role
-            })
-          }
-        }
-        this.ELEMENT_DATA = arrayResult;
-        this.dataSource = new MatTableDataSource<Users>(this.ELEMENT_DATA);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
+      this.updateTable()
     });
   }
 
-  deletedRole(rolesId) {
-    this.employeesManagementService.updateRolesEmployee(this.token, {
-      rolesId,
+  deletedRole(userId,roles) {
+    this.employeesManagementService.upsertUserRole({
+      userId,
+      roles,
       isDeleted: 1
-    }).subscribe(res => {
+    }, this.token).subscribe(res => {
       if(res.success) {
         this.snackBar.open('Đã xóa thành công.', 'Đóng', {
           duration: 2500,

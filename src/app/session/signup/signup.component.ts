@@ -4,6 +4,7 @@ import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 import { CustomValidators } from 'ng2-validation';
 import { Router } from '@angular/router';
 import { SessionService } from '../session.service';
+import { MatSnackBar } from '@angular/material';
 
 const password = new FormControl('', Validators.required);
 const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
@@ -19,6 +20,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    public snackBar: MatSnackBar,
     private router: Router,
     private sessionService: SessionService
   ) { }
@@ -36,14 +38,22 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     delete this.form.value.confirmPassword;
-    console.log(this.form);
     const user: Users = this.form.value;
     this.sessionService.register(user).subscribe(res => {
-      if(res.username){
-        this.form.reset();
-        this.router.navigate( ['/session/signin'] );
+      if(res.success){
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "right"
+        });
+        setTimeout(() => {
+          this.form.reset();
+          this.router.navigate( ['/session/signin'] );
+        }, 500)
       }else{
-        console.log(res);
+        this.snackBar.open(res.message, 'Đóng', {
+          duration: 2500,
+          horizontalPosition: "right"
+        });
       }
     });
   }

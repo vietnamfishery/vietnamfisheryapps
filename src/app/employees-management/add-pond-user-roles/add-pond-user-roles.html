@@ -1,17 +1,27 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="text-xs-center pb-1">
-            <h2 class="mat-text-muted">CHỈNH SỬA PHÂN QUYỀN AO</h2>
+            <h2 class="mat-text-muted">THÊM PHÂN QUYỀN AO MỚI CHO NHÂN VIÊN</h2>
             <h3>{{ name }}</h3>
             <hr>
         </div>
         <div fxLayout="column" fxLayoutAlign="space-around">
             <div class="pb-1">
                 <mat-form-field fxFlex="100">
+                    <mat-select placeholder="Ao quản lý" [formControl]="form.controls['userId']">
+                        <mat-option>None</mat-option>
+                        <mat-option class="mat-option-rolepond" *ngFor="let emp of employeeArray" [value]="emp.userId">
+                            {{emp.users.lastname}} {{emp.users.firstname}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="pb-1">
+                <mat-form-field fxFlex="100">
                     <mat-select placeholder="Ao quản lý" [formControl]="form.controls['pondId']">
                         <mat-option>None</mat-option>
-                        <mat-option class="mat-option-rolepond" *ngFor="let pond of pondsList" [value]="pond.pondId">
-                        {{pond.pondName}}
+                        <mat-option class="mat-option-rolepond" *ngFor="let pond of pondArray" [value]="pond.pondId">
+                            {{pond.pondName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

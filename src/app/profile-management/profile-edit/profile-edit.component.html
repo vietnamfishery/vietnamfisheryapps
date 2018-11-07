@@ -144,8 +144,6 @@
                 nhận
                 chưa đúng.</small>
               <hr>
-              <mat-card class="mat-red-700" *ngIf="updatePasswordFailTimeout"><div style="height: 20px;">Cập nhật lỗi, vui lòng thử lại sau!</div></mat-card>
-              <mat-card class="mat-green-700" *ngIf="updatePasswordSuccessTimeout"><div style="height: 20px;">Cập nhật thành công! Vui lòng đợi...</div></mat-card>
               <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
                 <button mat-raised-button color="primary" class="btn-block" [disabled]="!form_Pass.valid" type="submit">Lưu</button>
                 <button mat-raised-button color="warn" routerLink="/thong-tin-ca-nhan">Huỷ</button>
