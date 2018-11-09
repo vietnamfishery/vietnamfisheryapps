@@ -55,6 +55,9 @@ export class ImportManagementComponent implements OnInit {
 		private appService: AppService
 	) {
 		this.token = this.appService.getCookie(tokenName);
+	}
+
+	ngOnInit() {
 		/**
 		 * thuc-an = 0
 		 * co-so-vat-chat = 1
@@ -62,9 +65,6 @@ export class ImportManagementComponent implements OnInit {
 		 * giong-nuoi = 3
 		 */
 		this.type = this.setType((<any>this.route.snapshot.params).type);
-	}
-
-	ngOnInit() {
 		this.storageManagementService.getStorageWithUser(this.token).subscribe((res: any) => {
 			this.storage = res.storages ? res.storages : [];
 			this.storageManagementService.getBreedWithUser(this.token).subscribe((res: any) => {
@@ -93,10 +93,20 @@ export class ImportManagementComponent implements OnInit {
 		this.adapter.setLocale('vn');
 	}
 
-	private _filter(name: string): IStorage[] {
+	private _filterStorage(name: string): IStorage[] {
 		const filterValue = name.toLowerCase();
 
 		return this.storage ? this.storage.filter(option => option.productName.toLowerCase().indexOf(filterValue) === 0) : [];
+	}
+
+	private _filterBreed(name: string): Breed[] {
+		const filterValue = name.toLowerCase();
+
+		return this.breed ? this.breed.filter(option => option.breedName.toLowerCase().indexOf(filterValue) === 0) : [];
+	}
+
+	checkType = () => {
+		console.log(this.type);
 	}
 
 	clearValue() {
@@ -135,7 +145,7 @@ export class ImportManagementComponent implements OnInit {
 				map((value: any) => {
 					return typeof value === 'string' ? value : value.productName;
 				}),
-				map((name: any) => name ? this._filter(name) : this.storage.slice())
+				map((name: any) => name ? this._filterStorage(name) : this.storage.slice())
 			);
 	}
 
@@ -246,7 +256,7 @@ export class ImportManagementComponent implements OnInit {
 				map((value: any) => {
 					return typeof value === 'string' ? value : value.breedName;
 				}),
-				map((name: any) => name ? this._filter(name) : this.breed.slice() )
+				map((name: any) => name ? this._filterBreed(name) : this.breed.slice())
 			);
 	}
 
@@ -312,7 +322,8 @@ export class ImportManagementComponent implements OnInit {
 			if (this.checkFormBreed(e.form.controls.breedName.value, e.form.controls.unit.value, e.form.controls.quantity.value, e.form.controls.unitPrice.value, e.form.controls.loopOfBreed.value, e.form.controls.testingAgency.value, e.form.controls.soldAddress.value)) {
 				if (e.form.valid) {
 					e.form.value['position'] = e.position;
-					data.itemArr.push(e.form.value)
+					data.itemArr.push(e.form.value),
+					ok = true;
 				}
 			} else {
 				break;
