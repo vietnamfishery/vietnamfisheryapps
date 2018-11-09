@@ -14,5 +14,4 @@ export class StorageManagementComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

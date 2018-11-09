@@ -11,6 +11,7 @@ import { MY_FORMATS_DATE } from '../constants/format-date';
 import { SeasionManagementService } from './seasion-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
+import { DialogAddSeasion } from './dialog-add-seasion.component.';
 
 export interface DialogData {
   animal: string;
@@ -45,10 +46,6 @@ export class SeasionManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ContentChild('ssname') span: ElementRef;
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   name: string;
   token: string;
   constructor(
@@ -63,17 +60,6 @@ export class SeasionManagementComponent implements OnInit {
     this.token = this.appService.getCookie(tokenName);
   }
 
-  openDialogAddSeasion(): void {
-    const dialogRef = this.dialog.open(DialogAddSeasion, {
-      width: '260px',
-      data: { name: this.name }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.reloadTable()
-    });
-  }
-
   ngOnInit() {
     this.preloader = !this.preloader;
     this.dataSource.paginator = this.paginator;
@@ -82,10 +68,16 @@ export class SeasionManagementComponent implements OnInit {
     this.reloadTable();
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   reloadTable = () => {
     this.seasionManagementService.getSeason(this.token).subscribe((res: any) => {
       if (res.success == true) {
-        this.dataSource = res.season;
+        this.dataSource = res.seasons;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       } else {
 
       }
@@ -101,6 +93,19 @@ export class SeasionManagementComponent implements OnInit {
     });
   }
 
+  
+
+  openDialogAddSeasion(): void {
+    const dialogRef = this.dialog.open(DialogAddSeasion, {
+      width: '260px',
+      data: { name: this.name }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.reloadTable()
+    });
+  }
+
   onSubmit(seasonId, seasonName) {
     const data = { seasonId, seasonName: seasonName.value }
     const token: string = this.appService.getCookie(tokenName);
@@ -108,7 +113,7 @@ export class SeasionManagementComponent implements OnInit {
       if (res.success) {
         this.seasionManagementService.getSeason(token).subscribe((res: any) => {
           if (res.success == true) {
-            this.dataSource = res.season;
+            this.dataSource = res.seasons;
           }
         });
         this.snackBar.open(res.message, 'Đóng', {
@@ -137,55 +142,3 @@ export class SeasionManagementComponent implements OnInit {
   }
 }
 
-
-
-// ////////////////////////////////////////////////////////////////////////
-
-
-@Component({
-  selector: 'dialog-add-seasion',
-  templateUrl: './dialog-add-seasion.html',
-  providers: [
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
-    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
-  ],
-})
-export class DialogAddSeasion {
-  public form: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogAddSeasion>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private fb: FormBuilder,
-    private appService: AppService,
-    private seasionManagementService: SeasionManagementService,
-    private router: Router,
-    public snackBar: MatSnackBar
-  ) { }
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      seasonName: [null, Validators.compose([Validators.required])]
-    });
-  }
-
-  onSubmit() {
-    const token: string = this.appService.getCookie(tokenName);
-    this.seasionManagementService.addseason(this.form.value, token).subscribe((res) => {
-      if (res.success) {
-        this.dialogRef.close();
-        this.router.navigate(['/quan-ly-vu-nuoi']);
-        this.snackBar.open(res.message, 'Đóng', {
-          duration: 2500,
-          horizontalPosition: "right"
-        });
-      } else {
-        this.snackBar.open(res.message, 'Đóng', {
-          duration: 2500,
-          horizontalPosition: "right"
-        });
-      }
-    });
-  }
-}

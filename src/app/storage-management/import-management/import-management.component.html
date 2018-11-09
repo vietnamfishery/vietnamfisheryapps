@@ -28,7 +28,7 @@
     </div>
     <div *ngIf="type !== 3">
       <mat-card *ngFor="let formStorage of arrFormStorage">
-        <form [formGroup]="formStorage.form" (ngSubmit)="onSubmit(tvp.value, u.value, sl.value, gdv.value, ncc.value, dcncc.value, mt.value)"
+        <form [formGroup]="formStorage.form" (ngSubmit)="onSubmitStorageAll()"
           (click)="changeFilteredOptionStorage(formStorage.position)">
           <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
             <div fxLayout="column" fxFlex="50">
@@ -59,7 +59,7 @@
                 <mat-form-field fxFlex="48" fxFlexOffset="1">
                   <mat-label>Giá/Đơn vị tính</mat-label>
                   <input matInput placeholder="Giá trên một đơn vị tính" #gdv value="" required autocomplete="off"
-                    [formControl]="formStorage.form.controls['unitPrice']">
+                    [formControl]="formStorage.form.controls['unitPrice']" [value]="formStorage.form.controls['unitPrice'].value">
                 </mat-form-field>
               </div>
             </div>
@@ -109,7 +109,7 @@
     </div>
     <div *ngIf="type === 3">
       <mat-card *ngFor="let formBreed of arrFormBreed">
-        <form [formGroup]="formBreed.form" (ngSubmit)="onSubmitBreed(tenGiong.value, donViTinh.value, soLuong.value, giaDonVi.value, vongDoi.value, coQuanKiemDinh.value, diaChiMua.value, moTa.value)"
+        <form [formGroup]="formBreed.form" (ngSubmit)="onSubmitBreedAll()"
           (click)="changeFilteredOptionBreed(formBreed.position)">
           <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
             <div fxLayout="column" fxFlex="50">
