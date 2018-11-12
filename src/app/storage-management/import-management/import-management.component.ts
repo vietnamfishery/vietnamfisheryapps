@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { foods, unitStorages, unitBreed } from '../../constants/select-data';
+import { unitStorages, unitBreed } from '../../constants/select-data';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StorageManagementService } from '../storage-management.service';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from '../../../environments';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { IStorage, Breed } from 'src/app/models';
+import { Storages, Breed } from 'src/app/models';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -41,9 +41,9 @@ export class ImportManagementComponent implements OnInit {
 	minDate = new Date(2000, 0, 1);
 	maxDate = new Date(2020, 0, 1);
 
-	storage: IStorage[] = [];
+	storage: Storages[] = [];
 	breed: Breed[] = [];
-	filteredOptionStorages: Observable<IStorage[]>;
+	filteredOptionStorages: Observable<Storages[]>;
 	filteredOptionBreed: Observable<Breed[]>;
 	constructor(
 		private adapter: DateAdapter<any>,
@@ -65,7 +65,7 @@ export class ImportManagementComponent implements OnInit {
 		 * giong-nuoi = 3
 		 */
 		this.type = this.setType((<any>this.route.snapshot.params).type);
-		this.storageManagementService.getStorageWithUser(this.token).subscribe((res: any) => {
+		this.storageManagementService.getStorageWithUser(this.token, this.type).subscribe((res: any) => {
 			this.storage = res.storages ? res.storages : [];
 			this.storageManagementService.getBreedWithUser(this.token).subscribe((res: any) => {
 			  this.breed = res.breeds ? res.breeds : [];
@@ -93,7 +93,7 @@ export class ImportManagementComponent implements OnInit {
 		this.adapter.setLocale('vn');
 	}
 
-	private _filterStorage(name: string): IStorage[] {
+	private _filterStorage(name: string): Storages[] {
 		const filterValue = name.toLowerCase();
 
 		return this.storage ? this.storage.filter(option => option.productName.toLowerCase().indexOf(filterValue) === 0) : [];

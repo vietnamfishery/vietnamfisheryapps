@@ -42,11 +42,11 @@ export class ListPondsComponent implements OnInit {
     this.season = this.route.paramMap.pipe(
       switchMap(params => {
         this.seasonId = params.get('seasonId');
-        return this.seasionManagementService.getSeasonById(this.seasonId, this.token);
+        return this.seasionManagementService.getPondBySeason(this.seasonId, this.token);
       })
     );
     this.season.subscribe();
-    this.seasionManagementService.getSeasonById(this.seasonId, this.token).subscribe((res: any)=> {
+    this.seasionManagementService.getPondBySeason(this.seasonId, this.token).subscribe((res: any)=> {
       const seasonName = res.season.seasonName;
       this.seasonName = seasonName;
     });

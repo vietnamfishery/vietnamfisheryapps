@@ -9,6 +9,7 @@ import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { tokenName } from '../../../environments';
 import { SelectionModel } from '@angular/cdk/collections';
+import { EmployeesManagementService } from '../../employees-management/employees-management.service';
 
 @Component({
   selector: 'app-add-ponds',
@@ -17,11 +18,11 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class AddPondsComponent implements OnInit {
   season: Observable<any>;
-  seasonId: any;
+  seasonUUId: any;
   token: string;
   seasonName: string;
 
-  displayedColumns: string[] = ['check','position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['check', 'pondName', 'pondArea', 'pondDepth', 'createdCost', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
   
@@ -33,7 +34,8 @@ export class AddPondsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private appService: AppService,
-    private seasionManagementService: SeasionManagementService
+    private seasionManagementService: SeasionManagementService,
+    private employeesManagementService: EmployeesManagementService
   ) {
     this.token = this.appService.getCookie(tokenName);
   }
@@ -43,15 +45,13 @@ export class AddPondsComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.season = this.route.paramMap.pipe(
       switchMap(params => {
-        this.seasonId = params.get('seasonId');
-        return this.seasionManagementService.getSeasonById(this.seasonId, this.token);
+        this.seasonUUId = params.get('seasonUUId');
+        return this.seasionManagementService.getPondBySeason(this.seasonUUId, this.token);
       })
     );
-    this.season.subscribe();
-    this.seasionManagementService.getSeasonById(this.seasonId, this.token).subscribe((res: any)=> {
-      const seasonName = res.season.seasonName;
-      this.seasonName = seasonName;
-    })
+    this.season.subscribe(res => {
+        console.log(res);
+    });
   }
 
   isAllSelected() {

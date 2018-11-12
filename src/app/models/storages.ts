@@ -1,4 +1,4 @@
-export interface IStorage {
+export interface Storages {
     position?: number;
     storageId?: number;
     storageUUId?: string;

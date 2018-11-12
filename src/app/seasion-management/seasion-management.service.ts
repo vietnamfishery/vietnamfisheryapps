@@ -26,8 +26,8 @@ export class SeasionManagementService {
 		return this.http.get<any>(host + '/seasons/gets', this.appService.setHeader(token));
 	}
 	
-	public getSeasonById(seasonId: number, token: string): Observable<any> {
-		return this.http.get<any>(host + '/seasons/get/' + seasonId, this.appService.setHeader(token));
+	public getPondBySeason(seasonUUId: string, token: string): Observable<any> {
+		return this.http.get<any>(host + '/ponds/gets/season/' + seasonUUId, this.appService.setHeader(token));
   }
 
   public addseason(data: any, token: string): Observable<any> {

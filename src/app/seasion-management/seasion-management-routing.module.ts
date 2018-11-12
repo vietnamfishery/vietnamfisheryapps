@@ -10,11 +10,11 @@ const routes: Routes = [
     component: SeasionManagementComponent
   },
   { 
-    path: 'danh-sach-ao-nuoi-cua-vu/:seasonId',
+    path: 'danh-sach-ao-nuoi-cua-vu/:seasonUUId',
     component: ListPondsComponent 
   },
   { 
-    path: 'them-ao-nuoi-vao-vu/:seasonId',
+    path: 'them-ao-nuoi-vao-vu/:seasonUUId',
     component: AddPondsComponent 
   }
 ];

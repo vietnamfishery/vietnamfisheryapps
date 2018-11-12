@@ -1,28 +1,42 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
-import { PeriodicElement } from '../../models/PeriodicElement';
-import { ELEMENT_DATA } from '../../constants/table-data';
+import { MatPaginator, MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
+import { Storages } from 'src/app/models';
+import { StorageManagementService } from '../storage-management.service';
+import { AppService } from 'src/app/app.service';
+import { tokenName } from 'src/environments';
 
 @Component({
-  selector: 'app-veterinary-management',
-  templateUrl: './veterinary-management.component.html',
-  styleUrls: ['./veterinary-management.component.scss']
+    selector: 'app-veterinary-management',
+    templateUrl: './veterinary-management.component.html',
+    styleUrls: ['./veterinary-management.component.scss']
 })
 export class VeterinaryManagementComponent implements OnInit {
-  type: string = 'thuoc-va-duoc-pham';
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    type: string = 'thuoc-va-duoc-pham';
+    ELEMENT_DATA: Storages[] = [];
+    displayedColumns: string[] = ['name', 'quantity', 'unit', 'descriptions'];
+    dataSource = new MatTableDataSource<Storages>(this.ELEMENT_DATA);
+    token: string;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
-  
-  constructor() {
-    window.sessionStorage.setItem('typeStorage', 'veterinaries');
-  }
+    constructor(
+        public snackBar: MatSnackBar,
+        private storageManagementService: StorageManagementService,
+        private appService: AppService
+    ) {
+        this.token = this.appService.getCookie(tokenName);
+    }
 
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+    ngOnInit() {
+        this.loadingData();
+    }
+
+    loadingData = () => {
+        this.storageManagementService.getStorageWithUser(this.token, 2).subscribe((res: any) => {
+            this.dataSource.data = res.storages ? res.storages : [];
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+        })
+    }
 }
