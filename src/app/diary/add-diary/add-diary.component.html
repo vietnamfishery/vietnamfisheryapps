@@ -1,0 +1,33 @@
+<mat-card fxLayout="column">
+    <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>
+            <h2 class="mat-headline center-align">THÊM NHẬT KÝ AO {{ pondName }}</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h4 class="subtitle">Vui lòng hoàn thành mẫu nhập sau.</h4>
+        </mat-card-subtitle>
+    </div>
+    <div fxLayout="rows" class="mr-b-5">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
+            <mat-form-field>
+                <input matInput placeholder="Số lượng hiện tại trong ao - ước tính" [formControl]="form.controls['fisheryQuantity']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Tình trạng vật nuôi" [formControl]="form.controls['healthOfFishery']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Thể tích ao (m3)" [formControl]="form.controls['pondVolume']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Số tôm, cá bị loại thải, chết (con)" [formControl]="form.controls['diedFishery']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput placeholder="Ghi chú" cols="30" [formControl]="form.controls['notes']" rows="7"></textarea>
+            </mat-form-field>
+            <div class="mr-b-5">
+                <button type="submit" mat-button>Thêm</button>
+                <button type="submit" mat-button>Hủy</button>
+            </div>
+        </form>
+    </div>
+</mat-card>

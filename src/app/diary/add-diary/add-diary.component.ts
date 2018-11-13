@@ -1,33 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { tokenName } from 'src/environments';
 import { AppService } from 'src/app/app.service';
+import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
-import { WasteManagementService } from '../waste-management.service';
+import { DiaryService } from '../diary.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
-    selector: 'app-waste-add',
-    templateUrl: './waste-add.component.html',
-    styleUrls: ['./waste-add.component.scss']
+    selector: 'app-add-diary',
+    templateUrl: './add-diary.component.html',
+    styleUrls: ['./add-diary.component.scss']
 })
-export class WasteAddComponent implements OnInit {
-
-    public form: FormGroup;
+export class AddDiaryComponent implements OnInit {
+    pondName: string = '';
+    isLinear = true;
+    form: FormGroup;
     token: string;
     ownerId: number;
     pondUUId: string;
     pond: any;
     constructor(
         private appService: AppService,
+        private fb: FormBuilder,
+        public snackBar: MatSnackBar,
         private route: ActivatedRoute,
         private pondManagementService: PondManagementService,
-        public snackBar: MatSnackBar,
-        private wasteManagementService: WasteManagementService,
-        private fb: FormBuilder
+        private diaryService: DiaryService
     ) {
         this.token = this.appService.getCookie(tokenName);
         const deToken: any = jwtDecode(this.token);
@@ -49,18 +50,18 @@ export class WasteAddComponent implements OnInit {
         this.form = this.fb.group({
             pondId: [null],
             ownerId: [this.ownerId],
-            card: [null, Validators.compose([Validators.required])],
-            quantity: [null, Validators.compose([Validators.required])],
-            solutions: [null, Validators.compose([])],
-            employee: [null, Validators.compose([])]
-        });
+            fisheryQuantity: [null, Validators.compose([Validators.required])],
+            healthOfFishery: [null, Validators.compose([Validators.required])],
+            pondVolume: [null, Validators.compose([Validators.required])],
+            diedFishery: [null, Validators.compose([Validators.required])],
+            notes: [null]
+        })
     }
-
-    onSubmit() {
+    onSubmit = () => {
         this.form.patchValue({
             pondId: this.pond.pondId
-        });
-        this.wasteManagementService.addWaste(this.form.value, this.token).subscribe(res => {
+        })
+        this.diaryService.addDiary(this.form.value, this.token).subscribe(res => {
             if (res.success) {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

@@ -37,7 +37,7 @@ export class SigninComponent implements OnInit {
 	onSubmit() {
 		this.sessionService.signin(this.form.value).subscribe(res => {
 			if(res.success) {
-				const userInfo: any = jwtDecode(res.token);
+                const userInfo: any = jwtDecode(res.token);
 				userInfo[`boss`] = userInfo.boss ? userInfo.boss.length == 0 : false;
 				this.store.dispatch(new Actions.Login(userInfo));
 				if (this.form.value.keepLogin) {

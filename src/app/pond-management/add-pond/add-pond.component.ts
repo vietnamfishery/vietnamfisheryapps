@@ -89,7 +89,6 @@ export class AddPondComponent implements OnInit {
       pondLatitude: $event.coords.lat,
       pondLongitude: $event.coords.lng
     });
-    console.log($event);
   }
 
 

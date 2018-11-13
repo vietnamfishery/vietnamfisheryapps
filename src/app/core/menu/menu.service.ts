@@ -28,7 +28,7 @@ const MENUITEMS: Array<Menu> = [
   //   icon: 'explore'
   // },
   {
-    state: 'ghi-nhat-ky',
+    state: 'nhat-ky',
     name: 'Ghi nhật ký',
     type: 'link',
     icon: 'note_add'

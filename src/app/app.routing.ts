@@ -14,7 +14,7 @@ export const AppRoutes: Routes = [
 				loadChildren: './diary/diary.module#DiaryModule'
 			},
 			{
-				path: 'ghi-nhat-ky',
+				path: 'nhat-ky',
 				loadChildren: './diary/diary.module#DiaryModule'
 			},
 			{

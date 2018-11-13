@@ -9,6 +9,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddStockingComponent } from './add-stocking/add-stocking.component';
 import { EditStockingComponent } from './edit-stocking/edit-stocking.component';
+import { StockingService } from './stocking.service';
 
 @NgModule({
   imports: [
@@ -37,7 +38,7 @@ import { EditStockingComponent } from './edit-stocking/edit-stocking.component';
   ],
   declarations: [StockingManagementComponent, AddStockingComponent, EditStockingComponent],
   providers:[
-    
+    StockingService
   ]
 })
 export class StockingManagementModule { }

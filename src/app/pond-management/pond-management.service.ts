@@ -1,9 +1,7 @@
-import { tokenName } from './../../environments/environment';
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { api_url, api_port } from '../constants/api';
-import { Router } from '@angular/router';
 import { actionUserServices } from '../constants';
 import { AppService } from '../app.service';
 
@@ -15,7 +13,6 @@ export class PondManagementService {
 
 	constructor(
 		private http: HttpClient,
-		private router: Router,
 		private appService: AppService
 	) {
 

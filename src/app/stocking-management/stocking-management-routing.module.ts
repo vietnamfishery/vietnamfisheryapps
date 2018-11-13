@@ -10,7 +10,7 @@ const routes: Routes = [
     component: StockingManagementComponent
   },
   {
-    path: 'them-thong-tin-tha-nuoi',
+    path: 'tha-giong/:pondUUId',
     component: AddStockingComponent
   },
   {

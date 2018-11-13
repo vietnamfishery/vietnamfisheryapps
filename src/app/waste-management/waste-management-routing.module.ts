@@ -14,7 +14,7 @@ const routes: Routes = [
     component: WasteEditComponent
   },
   {
-    path: 'them-thong-tin-chat-thai',
+    path: 'them-thong-tin-chat-thai/:pondUUId',
     component: WasteAddComponent
   }
 ];
