@@ -8,7 +8,7 @@
         <div fxLayout="column" fxLayoutAlign="space-around">
             <div class="pb-1">
                 <mat-form-field fxFlex="100">
-                    <mat-select placeholder="Ao quản lý" [formControl]="form.controls['userId']">
+                    <mat-select placeholder="Người quản lý" [formControl]="form.controls['userId']">
                         <mat-option>None</mat-option>
                         <mat-option class="mat-option-rolepond" *ngFor="let emp of employeeArray" [value]="emp.userId">
                             {{emp.users.lastname}} {{emp.users.firstname}}
