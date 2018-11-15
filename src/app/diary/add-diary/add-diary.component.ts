@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from 'src/environments';
-import * as jwtDecode from 'jwt-decode';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { DiaryService } from '../diary.service';
 import { MatSnackBar } from '@angular/material';
+import * as jwtDecode from 'jwt-decode';
 
 @Component({
     selector: 'app-add-diary',
@@ -15,7 +15,6 @@ import { MatSnackBar } from '@angular/material';
     styleUrls: ['./add-diary.component.scss']
 })
 export class AddDiaryComponent implements OnInit {
-    pondName: string = '';
     isLinear = true;
     form: FormGroup;
     token: string;
@@ -27,6 +26,7 @@ export class AddDiaryComponent implements OnInit {
         private fb: FormBuilder,
         public snackBar: MatSnackBar,
         private route: ActivatedRoute,
+        private router: Router,
         private pondManagementService: PondManagementService,
         private diaryService: DiaryService
     ) {
@@ -67,6 +67,7 @@ export class AddDiaryComponent implements OnInit {
                     duration: 3000,
                     horizontalPosition: "right"
                 });
+                this.cancel();
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -75,5 +76,9 @@ export class AddDiaryComponent implements OnInit {
                 });
             }
         })
+    }
+    
+    cancel() {
+        this.router.navigate(['/nhat-ky']);
     }
 }

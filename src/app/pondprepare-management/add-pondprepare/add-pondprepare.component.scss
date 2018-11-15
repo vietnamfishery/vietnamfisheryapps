@@ -50,3 +50,18 @@
 .mr-t-15 {
     margin-top: 15px;
 }
+
+h5 {
+    text-align: center;
+}
+
+.re-choose {
+    font-style: italic;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.re-choose:active {
+    color: red
+}

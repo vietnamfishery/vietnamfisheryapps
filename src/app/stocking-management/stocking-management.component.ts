@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PeriodicElement } from '../models/PeriodicElement';
-import { ELEMENT_DATA } from '../constants/table-data';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -19,7 +18,7 @@ import { MY_FORMATS_DATE } from './../constants/format-date';
 export class StockingManagementComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<PeriodicElement>([]);
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

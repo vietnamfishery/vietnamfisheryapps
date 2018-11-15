@@ -8,21 +8,24 @@ import { AppService } from '../app.service';
 const host = api_url + ':' + api_port + '/api';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class HarvestManagementService {
 
-  constructor(
-		private appService: AppService,
-    private http: HttpClient,
-		private router: Router
-  ) { }
+    constructor(
+        private appService: AppService,
+        private http: HttpClient,
+        private router: Router
+    ) { }
 
-  public getHarvestAll(token: string): Observable<any> {
-    return this.http.post(host + '/harvest/gets', {
-			seasonId: 15,
-			pondId: 39
-		},this.appService.setHeader(token));
-	}
-  
+    public getHarvestAll(token: string): Observable<any> {
+        return this.http.post(host + '/harvest/gets', {
+            seasonId: 15,
+            pondId: 39
+        }, this.appService.setHeader(token));
+    }
+
+    addHarvest(data: any, token: string): Observable<any> {
+        return this.http.post<any>(host + '/harvests/add', data, this.appService.setHeader(token));
+    }
 }

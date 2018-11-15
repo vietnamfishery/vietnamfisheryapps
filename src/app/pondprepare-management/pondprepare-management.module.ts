@@ -11,43 +11,45 @@ import { EditPondprepareComponent } from './edit-pondprepare/edit-pondprepare.co
 import { AddcostPondprepareComponent } from './addcost-pondprepare/addcost-pondprepare.component';
 import { EditcostPondprepareComponent } from './editcost-pondprepare/editcost-pondprepare.component';
 import { PondprepareManagementService } from './pondprepare-management.service';
+import { ListPondComponent } from './list-pond/list-pond.component';
+import { AddOldPondPrepareComponent } from './add-old-pond-prepare/add-old-pond-prepare.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatListModule,
-    MatSliderModule,
-    MatSidenavModule,
-    MatChipsModule,
-    FormsModule,
-    FlexLayoutModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatSnackBarModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-    MatTabsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatAutocompleteModule,
-    MatRadioModule,
-    MatStepperModule,
-    MatTableModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    PondprepareManagementRoutingModule
-  ],
-  declarations: [PondprepareManagementComponent, AddPondprepareComponent, EditPondprepareComponent, AddcostPondprepareComponent, EditcostPondprepareComponent],
-  providers:[
-    PondprepareManagementService
-  ]
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatListModule,
+        MatSliderModule,
+        MatSidenavModule,
+        MatChipsModule,
+        FormsModule,
+        FlexLayoutModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatSnackBarModule,
+        MatInputModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
+        MatTabsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatAutocompleteModule,
+        MatRadioModule,
+        MatStepperModule,
+        MatTableModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        PondprepareManagementRoutingModule
+    ],
+    declarations: [PondprepareManagementComponent, ListPondComponent, AddPondprepareComponent, EditPondprepareComponent, AddcostPondprepareComponent, EditcostPondprepareComponent, AddOldPondPrepareComponent],
+    providers: [
+        PondprepareManagementService
+    ]
 })
 export class PondprepareManagementModule { }

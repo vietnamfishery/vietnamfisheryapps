@@ -1,0 +1,34 @@
+<mat-card fxLayout="column">
+    <mat-toolbar color="primary" class="table-header" fxLayout="column">
+        <h1 fxLayout="row" fxLayoutAlign="center center" fxFlex="100"><b>THÊM HOẠT ĐỘNG CHO ĂN - {{ (pond ? pond.pondName : '') | uppercase }}</b></h1>
+        <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>Điền thông tin vào mẫu dưới đây và nhấn nút </i><b> Thêm</b></h6>
+    </mat-toolbar>
+    <div fxLayout="rows">
+        <form [formGroup]="form" class="mr" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
+            <mat-form-field>
+                <input matInput placeholder="Tên gợi nhắc lần cho ăn" [formControl]="form.controls['takeCareName']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Khối lượng vật nuôi (ước tính)" [formControl]="form.controls['massOfFishery']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Tỷ lệ cho ăn (%)" [formControl]="form.controls['massOfFishery']" autocomplete="off" required>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="100">
+                <mat-select [(value)]="selected" placeholder="Tên thức ăn" [formControl]="form.controls['storageId']" required>
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let material of storages" [value]="material.storageId">{{ material.productName }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="number" placeholder="Số lượng thức ăn" [formControl]="form.controls ['quantity']" autocomplete="off" required>
+            </mat-form-field>
+            <div class="mr-b-5" fxLayout="row" fxLayoutAlign="end center">
+                <button type="submit" mat-button>Thêm</button>
+                <button type="submit" (click)="cancel()" mat-button>Hủy</button>
+            </div>
+        </form>
+    </div>
+</mat-card>

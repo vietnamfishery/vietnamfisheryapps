@@ -4,88 +4,120 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondprepareManagementService } from '../pondprepare-management.service';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { ELEMENT_DATA } from 'src/environments';
+import { tokenName } from 'src/environments';
+import * as jwtDecode from 'jwt-decode';
+import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
+import { AppService } from 'src/app/app.service';
 
 @Component({
-  selector: 'app-add-pondprepare',
-  templateUrl: './add-pondprepare.component.html',
-  styleUrls: ['./add-pondprepare.component.scss'],
-  providers: [
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
-    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
-  ],
+    selector: 'app-add-pondprepare',
+    templateUrl: './add-pondprepare.component.html',
+    styleUrls: ['./add-pondprepare.component.scss'],
+    providers: [
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+        { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS_DATE },
+        { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
+    ],
 })
 export class AddPondprepareComponent implements OnInit {
 
-  public form: FormGroup;
-  public formMaterial: FormGroup;
-  isLinear = true;
-  openedTab = 2;
-  arrayMaterial = [1];
-  itemName: any = {};
-  quantity: any = {};
-  dataSource = new MatTableDataSource<any>(this.arrayMaterial);
-  displayedColumns: string[] = ['seasonName', 'quantity', 'action'];
-  constructor(
-    private fb: FormBuilder,
-    public snackBar: MatSnackBar,
-    private fb_material: FormBuilder,
-    private pondprepareManagementService: PondprepareManagementService
-  ) { }
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      pondName: [null, Validators.compose([Validators.required])],
-      seasonName: [null, Validators.compose([Validators.required])],
-      pondprepareName: [null, Validators.compose([Validators.required])]
-    });
-    this.formMaterial = this.fb_material.group({
-      itemName: [null, Validators.compose([Validators.required])],
-      quantity: [null, Validators.compose([Validators.required])]
-    });
-    this.onChangeForm();
-  }
-
-  onChangeForm = () => {
-    this.form.valueChanges.subscribe(() => {
-      if (this.form.valid) {
-        this.isLinear = !this.isLinear;
-      }
-    });
-  }
-
-  addMaterial() {
-    this.arrayMaterial.push(1);
-    this.itemName.value = '';
-    this.quantity.value = '';
-  }
-
-  openTab(e) {
-    console.log(e);
-  }
-
-  onSubmit(itemName, quantity) {
-    const reg = new RegExp(/^[^0-9]+$/);
-    if (!itemName.value || !quantity.value) {
-      this.snackBar.open('Bạn chưa nhập đủ thông tin, vui lòng kiểm tra lại, cảm ơn!', 'Đóng', {
-        duration: 2500,
-        horizontalPosition: "center",
-        verticalPosition: 'top'
-      });
-    } else if (reg.test(quantity.value)) {
-      this.snackBar.open('Số lượng phải nhập là số, vui lòng kiểm tra lại, cảm ơn!', 'Đóng', {
-        duration: 2500,
-        horizontalPosition: "center",
-        verticalPosition: 'top'
-      });
+    public form: FormGroup;
+    public formPondPrepare: FormGroup;
+    public formDetailPrepare: FormGroup;
+    public detailsOfPrepare: any[] = [];
+    public showDetailsOfPrepare: any[] = [];
+    isLinear = true;
+    token: string;
+    ownerId: number;
+    type: number = 1;
+    storages: any[] = [];
+    constructor(
+        private appService: AppService,
+        private fb: FormBuilder,
+        private snackBar: MatSnackBar,
+        private pondprepareManagementService: PondprepareManagementService,
+        private storageManagementService: StorageManagementService
+    ) {
+        this.token = this.appService.getCookie(tokenName);
+        const deToken: any = jwtDecode(this.token);
+        this.ownerId = deToken.createdBy == null && deToken.roles.length == 0 ? deToken.userId : deToken.roles[0].bossId;
     }
-  }
 
-  checkNumber(e) {
-    const regNumber = new RegExp(/[^0-9]+$/);
-    if (regNumber.test(e.target.value)) {
-      e.preventDefault()
+    ngOnInit() {
+        this.getStorage();
+        this.createFormPond();
+        this.createFormPondPrepareName();
+        this.createFormDetailPrepare();
     }
-  }
+
+    getStorage() {
+        this.storageManagementService.getStorageWithUser(this.token, this.type).subscribe(res => {
+            if(res.success){
+                this.storages = res.storages;
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+        });
+    }
+
+    createFormPond = () => {
+        this.form = this.fb.group({
+            pondName: [null, Validators.compose([Validators.required])],
+            pondArea: [null, Validators.compose([Validators.required])],
+            pondDepth: [null, Validators.compose([Validators.required])],
+            status: [null, Validators.compose([Validators.required])],
+            createCost: [null, Validators.compose([Validators.required])]
+        });
+    }
+    
+    createFormPondPrepareName = () => {
+        this.formPondPrepare = this.fb.group({
+            pondPrepareName: [null, Validators.compose([Validators.required])]
+        });
+    }
+
+    createFormDetailPrepare = () => {
+        this.formDetailPrepare = this.fb.group({
+            storage: [null, Validators.compose([Validators.required])],
+            quantity: [null, Validators.compose([Validators.required])],
+        });
+    }
+
+    addArray() {
+        const obj: object = {
+            storageId: this.formDetailPrepare.value.storage.storageId,
+            quantity: this.formDetailPrepare.value.quantity
+        }
+        this.detailsOfPrepare.push(obj);
+        this.showDetail();
+    }
+
+    showDetail() {
+        const obj: object = {
+            productName: this.formDetailPrepare.value.storage.productName,
+            quantity: this.formDetailPrepare.value.quantity
+        }
+        this.showDetailsOfPrepare.push(obj);
+    }
+
+    reChoose() {
+        this.detailsOfPrepare = [];
+        this.showDetailsOfPrepare = [];
+    }
+
+    onSubmit() {
+        const obj: object = {
+            ...this.form.value,
+            ...this.formPondPrepare.value,
+            detailsOfPrepare: this.detailsOfPrepare,
+            ownerId: this.ownerId
+        }
+        this.pondprepareManagementService.addNewPrepare(this.token, obj).subscribe(res => {
+            console.log(res);
+        })
+    }
 }

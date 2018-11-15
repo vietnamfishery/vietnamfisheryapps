@@ -11,30 +11,30 @@ import { ChangePriceManagementComponent } from './change-price-management/change
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: StorageManagementComponent,
-    children: [
-      { path: '', component: FoodsManagementComponent },
-      { path: 'thuc-an', component: FoodsManagementComponent },
-      { path: 'co-so-vat-chat', component: MaterialManagementComponent },
-      { path: 'thuoc-va-duoc-pham', component: VeterinaryManagementComponent },
-      { path: 'giong-nuoi', component: BreedManagementComponent },
-      { path: 'nhap-kho/:type', component: ImportManagementComponent }
-    ]
-  },
-  {
-    path: 'lich-su-nhap-kho',
-    component: CouponManagementComponent
-  },
-  {
-    path: 'bien-dong-gia',
-    component: ChangePriceManagementComponent
-  }
+    {
+        path: '',
+        component: StorageManagementComponent,
+        children: [
+            { path: '', component: FoodsManagementComponent },
+            { path: 'thuc-an', component: FoodsManagementComponent },
+            { path: 'co-so-vat-chat', component: MaterialManagementComponent },
+            { path: 'thuoc-va-duoc-pham', component: VeterinaryManagementComponent },
+            { path: 'giong-nuoi', component: BreedManagementComponent },
+            { path: 'nhap-kho/:type', component: ImportManagementComponent }
+        ]
+    },
+    {
+        path: 'lich-su-nhap-kho',
+        component: CouponManagementComponent
+    },
+    {
+        path: 'bien-dong-gia',
+        component: ChangePriceManagementComponent
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class StorageManagementRoutingModule { }

@@ -1,0 +1,1 @@
+1. Biểu đồ nhật ký hàng ngày []

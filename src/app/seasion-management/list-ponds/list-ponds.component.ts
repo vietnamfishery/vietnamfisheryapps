@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PeriodicElement } from '../../models/PeriodicElement';
-import { ELEMENT_DATA } from '../../constants/table-data';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +19,7 @@ export class ListPondsComponent implements OnInit {
   token: string;
   seasonName: string;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<PeriodicElement>([]);
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

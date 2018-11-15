@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PeriodicElement } from '../../models/PeriodicElement';
-import { ELEMENT_DATA } from '../../constants/table-data';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { AppService } from 'src/app/app.service';
 import { SeasionManagementService } from '../seasion-management.service';
@@ -23,7 +22,7 @@ export class AddPondsComponent implements OnInit {
   seasonName: string;
 
   displayedColumns: string[] = ['check', 'pondName', 'pondArea', 'pondDepth', 'createdCost', 'action'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<PeriodicElement>([]);
   selection = new SelectionModel<PeriodicElement>(true, []);
   
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -1,0 +1,23 @@
+<mat-card fxLayout="column">
+    <mat-toolbar color="primary" class="table-header" fxLayout="row">
+      <h1 class="mat-headline center-align" fxFlex="100">Chào mừng {{ lastname }} {{ firstname }}</h1>
+      <a mat-flat-button color="white" *ngIf="isBoss" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao" matTooltipPosition="above"
+        fxFlex style="margin-right: 10px">
+        <mat-icon>library_add</mat-icon>
+      </a>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
+    <div fxLayout="rows">
+        <div fxFlex="40" fxFlexOffset="5">
+            <canvas baseChart
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [chartType]="lineChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+            </canvas>
+            <div fxLayout="row" fxLayoutAlign="center center"><i><b>Biểu đồ </b>Nhật ký hàng ngày</i></div>
+        </div>
+    </div>
+  </mat-card>

@@ -1,12 +1,8 @@
 <mat-card fxLayout="column">
-    <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
-        <mat-card-title>
-            <h2 class="mat-headline center-align">THÊM NHẬT KÝ AO {{ pondName }}</h2>
-        </mat-card-title>
-        <mat-card-subtitle>
-            <h4 class="subtitle">Vui lòng hoàn thành mẫu nhập sau.</h4>
-        </mat-card-subtitle>
-    </div>
+    <mat-toolbar color="primary" class="table-header" fxLayout="column">
+        <h1 fxLayout="row" fxLayoutAlign="center center" fxFlex="100"><b>GHI NHẬT KÝ AO {{ (pond ? pond.pondName : '') | uppercase }}</b></h1>
+        <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>Điền thông tin vào mẫu dưới đây và nhấn nút </i><b> Thêm</b></h6>
+    </mat-toolbar>
     <div fxLayout="rows" class="mr-b-5">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
             <mat-form-field>
@@ -26,7 +22,7 @@
             </mat-form-field>
             <div class="mr-b-5">
                 <button type="submit" mat-button>Thêm</button>
-                <button type="submit" mat-button>Hủy</button>
+                <button type="submit" (click)="cancel()" mat-button>Hủy</button>
             </div>
         </form>
     </div>

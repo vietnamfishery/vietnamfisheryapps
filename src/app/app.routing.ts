@@ -11,7 +11,7 @@ export const AppRoutes: Routes = [
 		children: [
 			{
 				path: '',
-				loadChildren: './diary/diary.module#DiaryModule'
+				loadChildren: './home/home.module#HomeModule'
 			},
 			{
 				path: 'nhat-ky',
@@ -24,6 +24,14 @@ export const AppRoutes: Routes = [
 			{
 				path: 'quan-ly-vu-nuoi',
 				loadChildren: './seasion-management/seasion-management.module#SeasionManagementModule'
+			},
+			{
+				path: 'cho-an',
+				loadChildren: './using-food/using-food.module#UsingFoodModule'
+			},
+			{
+				path: 'su-dung-thuoc-&-duoc-pham',
+				loadChildren: './using-veterinary/using-veterinary.module#UsingVeterinaryModule'
 			},
 			{
 				path: 'quan-ly-kho',

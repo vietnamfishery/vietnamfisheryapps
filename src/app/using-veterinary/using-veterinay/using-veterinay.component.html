@@ -1,0 +1,57 @@
+<mat-card fxLayout="column">
+    <mat-toolbar color="primary" class="table-header" fxLayout="column">
+        <h1 fxLayout="row" fxLayoutAlign="center center" fxFlex="100"><b>THÊM HOẠT ĐỘNG CHO ĂN - {{ (pond ? pond.pondName : '') | uppercase }}</b></h1>
+        <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>Điền thông tin vào mẫu dưới đây và nhấn nút </i><b> Thêm</b></h6>
+    </mat-toolbar>
+    <div fxLayout="rows">
+        <form [formGroup]="form" class="mr" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
+            <mat-form-field>
+                <input matInput placeholder="Tên gợi nhắc lần cho ăn" [formControl] ="form.controls['takeCareName']" autocomplete="off" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Nguyên nhân/triệu chứng" [formControl]="form.controls['causesNSymptoms']" autocomplete="off" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="number" placeholder="Kích cở trung bình" [formControl]="form.controls['averageSize']" autocomplete="off" required>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput type="number" placeholder="Tổng sinh khối" [formControl]="form.controls['totalBiomass']" autocomplete="off" required>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput placeholder="Kết quả điều trị" [formControl]="form.controls['result']" autocomplete="off" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Ngày sớm nhất được thu hoạch</mat-label>
+                <input matInput [matDatepicker]="latestHarvestDate" placeholder="Chọn một ngày" [formControl]="form.controls['latestHarvestDate']" required autocomplete="off">
+                <mat-datepicker-toggle matSuffix [for] ="latestHarvestDate"></mat-datepicker-toggle>
+                <mat-datepicker #latestHarvestDate></mat-datepicker>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput placeholder="Kết quả điều trị" [formControl]="form.controls['mentor']" autocomplete="off" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select [(value)]="selected" placeholder="Tên thuốc - dược phẩm" [formControl]="form.controls['storageId']" required>
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let material of storages" [value] ="material.storageId">{{ material.productName }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="number" placeholder="Số lượng" [formControl]="form.controls ['quantity']"
+                    autocomplete="off" required>
+            </mat-form-field>
+
+            <div class="mr-b-5" fxLayout="row" fxLayoutAlign="end center">
+                <button type="submit" [disabled]="form.invalid" mat-button>Thêm</button>
+                <button type="submit" (click)="cancel()" mat-button>Hủy</button>
+            </div>
+        </form>
+    </div>
+</mat-card>

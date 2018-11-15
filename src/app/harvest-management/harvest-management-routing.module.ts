@@ -6,7 +6,7 @@ import { EditDetailHarvestComponent } from './edit-detail-harvest/edit-detail-ha
 
 const routes: Routes = [
   { path: '', component: HarvestManagementComponent },
-  { path: 'them-chi-tiet-thu-hoach', component: AdddetailHarvestComponent },
+  { path: 'them/:pondUUId', component: AdddetailHarvestComponent },
   { path: 'sua-chi-tiet-thu-hoach', component: EditDetailHarvestComponent }
 ];
 

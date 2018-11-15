@@ -1,178 +1,81 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>   
-    <span fxFlex fxShow="false" fxShow.gt-xs>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+<mat-card fxLayout="column">
+    <mat-toolbar color="primary" class="table-header" fxLayout="column">
+        <h1 fxLayout="row" fxLayoutAlign="center center" fxFlex="100"><b>GHI NHẬT KÝ</b></h1>
+        <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>Chọn một ao cụ thể để ghi nhật ký</i></h6>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
+    <div fxLayout="row">
+        <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
+            <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
+                <hr>
+                <div class="pa-1">
+                    <h3 class="mt-1">Trạng thái</h3>
+                    <mat-radio-group>
+                        <div class="pb-1">
+                            <mat-radio-button value="1">Đang nuôi</mat-radio-button>
+                        </div>
+                        <div class="pb-1">
+                            <mat-radio-button value="2">Ao trống</mat-radio-button>
+                        </div>
+                        <div class="pb-1">
+                            <mat-radio-button value="3">Nâng cấp</mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                </div>
+                <hr>
+                <div class="pa-1">
+                    <h3>Số lượng vụ nuôi</h3>
+                    <mat-radio-group>
+                        <div class="pb-1">
+                            <mat-radio-button value="1">Tăng dần</mat-radio-button>
+                        </div>
+                        <div class="pb-1">
+                            <mat-radio-button value="2">Giảm dần</mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                </div>
+                <hr>
 
-    <div fxShow="false" fxShow.gt-xs>
-      <button mat-button (click)="view = 'month'" [class.active]="view === 'month'">Tháng</button>
-      <button mat-button (click)="view = 'week'" [class.active]="view === 'week'">Tuần</button>
-      <button mat-button (click)="view = 'day'" [class.active]="view === 'day'">Ngày</button>
+                <div class="pa-1">
+                    <button mat-raised-button class="mat-green-700">Lọc</button>
+                </div>
+
+            </mat-sidenav>
+            <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
+                <button (click)="productsnav.toggle()" mat-icon-button>
+                    <mat-icon>short_text</mat-icon>
+                </button>
+                <span class="mr-1 ml-1">Xem theo</span>
+            </mat-toolbar>
+
+            <div fxLayout="row wrap">
+                <div class="zoom mr-3" fxFlex="35%" *ngFor="let pond of ponds">
+                    <mat-card class="pointer" (click)="gotoAdd(pond.pondUUId)">
+                        <div fxLayout="row">
+                            <div class="media-grid compact bg-cover"
+                                [ngStyle]="{'background-image': 'url('+ pond.images +')'}" fxFlex="40">
+                                <figure>
+                                    <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
+                                    <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
+                                </figure>
+                            </div>
+                            <div class="pa-1" fxFlex>
+                                <div fxLayout="column">
+                                    <div fxLayout="row">
+                                        <div fxFlex>
+                                            <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond['pondName'] }}</h4>
+                                        </div>
+                                    </div>
+                                    <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
+                                        <span><b>Ngày tạo: </b>{{ pond.pondCreatedDate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-sidenav-container>
     </div>
-
-    <div fxHide="false" fxHide.gt-xs>
-      <button mat-icon-button (click)="view = 'month'" [class.active]="view === 'month'"><mat-icon>view_module</mat-icon></button>
-      <button mat-icon-button (click)="view = 'week'" [class.active]="view === 'week'"><mat-icon>view_week</mat-icon></button>
-      <button mat-icon-button (click)="view = 'day'" [class.active]="view === 'day'"><mat-icon>view_day</mat-icon></button>
-    </div>
-
-    <span fxFlex fxHide="false" fxHide.gt-xs></span>
-
-    <button mat-icon-button mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"><mat-icon>chevron_left</mat-icon></button>
-    <button mat-icon-button mwlCalendarToday
-        [(viewDate)]="viewDate"><mat-icon>today</mat-icon></button>
-    <button mat-icon-button mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"><mat-icon>chevron_right</mat-icon></button>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<mat-card fxLayout="column" fxLayoutGap="20px">
-  <div [ngSwitch]="view">
-    <mwl-calendar-month-view
-      *ngSwitchCase="'month'"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)">
-    </mwl-calendar-month-view>
-    <mwl-calendar-week-view
-      *ngSwitchCase="'week'"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)">
-    </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="'day'"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)">
-    </mwl-calendar-day-view>
-  </div>
-
-  <div fxLayout="column">
-      <div fxLayout="row">
-        <h2 class="mr-left-5" fxFlex="100">
-          Edit events
-        </h2>
-        <div class="mr-right-5">
-          <button
-            mat-raised-button
-            class="mat-green-700"
-            (click)="addEvent()"
-          >
-            Thêm nhật ký
-          </button>
-        </div>
-      </div>
-      
-      <div class="mat-elevation-z8" fxLayout="column">
-        <table mat-table [dataSource]="dataSource">
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-          </ng-container>
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
-          <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Weight </th>
-            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-          </ng-container>
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Symbol </th>
-            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-
-      <!-- <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Primary color</th>
-            <th>Secondary color</th>
-            <th>Starts at</th>
-            <th>Ends at</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-      
-        <tbody>
-          <tr *ngFor="let event of events; let index = index">
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="event.title"
-                (keyup)="refresh.next()">
-            </td>
-            <td>
-              <input
-                type="color"
-                [(ngModel)]="event.color.primary"
-                (change)="refresh.next()">
-            </td>
-            <td>
-              <input
-                type="color"
-                [(ngModel)]="event.color.secondary"
-                (change)="refresh.next()">
-            </td>
-            <td>
-              <input
-                class="form-control"
-                type="text"
-                mwlFlatpickr
-                [(ngModel)]="event.start"
-                (ngModelChange)="refresh.next()"
-                [altInput]="true"
-                [convertModelValue]="true"
-                [enableTime]="true"
-                dateFormat="Y-m-dTH:i"
-                altFormat="F j, Y H:i"
-                placeholder="Not set">
-            </td>
-            <td>
-              <input
-                class="form-control"
-                type="text"
-                mwlFlatpickr
-                [(ngModel)]="event.end"
-                (ngModelChange)="refresh.next()"
-                [altInput]="true"
-                [convertModelValue]="true"
-                [enableTime]="true"
-                dateFormat="Y-m-dTH:i"
-                altFormat="F j, Y H:i"
-                placeholder="Not set">
-            </td>
-            <td>
-              <button
-                class="btn btn-danger"
-                (click)="events.splice(index, 1); refresh.next()">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
-  </div>
+    <br>
 </mat-card>
-  
-  
