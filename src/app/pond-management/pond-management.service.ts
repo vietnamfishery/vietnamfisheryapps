@@ -99,6 +99,6 @@ export class PondManagementService {
     }
     
     public getPondNotInSeasonAndPond(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/ponds/get/notin/season-and-pond', data, this.appService.setHeader(token));
+        return this.http.post<any>(host + '/ponds/get/notin/seasonAndPond', data, this.appService.setHeader(token));
     }
 }
