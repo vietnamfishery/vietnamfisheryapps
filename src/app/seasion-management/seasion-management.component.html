@@ -7,20 +7,6 @@
     </a>
   </mat-toolbar>
   <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
-  <!-- <div fxLayout="row">
-    <div fxFlexOffset="3" fxFlex="94" fxLayout.sm="column" fxFlexOffset.sm="30" fxFlex.sm="40" fxLayout.xs="column"
-      fxFlexOffset.xs="10" fxFlex.xs="80" class="mr-top">
-      <mat-form-field>
-        <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
-          <mat-option>None</mat-option>
-          <mat-option value="option1">Ao 1</mat-option>
-          <mat-option value="option2">Ao 2</mat-option>
-          <mat-option value="option3">Ao 3</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-  <br> -->
   <div fxLayout="row" fxFlex="100">
     <div class="mat-elevation-z8" matSort fxFlex="100">
       <br>
@@ -68,7 +54,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Thao tác</th>
           <td mat-cell *matCellDef="let season">
             <mat-chip-list>
-              <mat-chip color="primary" selected [routerLink]="['/quan-ly-vu-nuoi/danh-sach-ao-nuoi-cua-vu', season.seasonId ]"
+              <mat-chip color="primary" selected [routerLink]="['/quan-ly-vu-nuoi/danh-sach-ao-nuoi-cua-vu', season.seasonUUId ]"
                 matTooltip="Danh sách ao của vụ nuôi" matTooltipPosition="left">
                 <mat-icon>art_track</mat-icon>
               </mat-chip>

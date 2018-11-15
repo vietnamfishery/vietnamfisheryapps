@@ -6,6 +6,7 @@ import { EmployeesManagementService } from '../employees-management/employees-ma
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PondManagementService } from '../pond-management/pond-management.service';
 
 @Component({
     selector: 'dialog-change-pond',
@@ -22,6 +23,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
       private fb: FormBuilder,
       public snackBar: MatSnackBar,
       private employeesManagementService: EmployeesManagementService,
+      private pondManagementService: PondManagementService,
       @Inject(MAT_DIALOG_DATA) public data: any
     ) {
       this.token = this.appService.getCookie(tokenName);
@@ -29,7 +31,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   
       ngOnInit() {
         this.createForm();
-        this.employeesManagementService.getPondWithoutImages(this.token).subscribe((res: any) => {
+        this.pondManagementService.getPondWithoutImages(this.token).subscribe((res: any) => {
           this.pondsList = res.ponds
         })
       }

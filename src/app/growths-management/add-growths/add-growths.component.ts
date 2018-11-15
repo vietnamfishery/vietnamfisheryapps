@@ -10,6 +10,7 @@ import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import { EmployeesManagementService } from 'src/app/employees-management/employees-management.service';
 import { GrowthsManagementService } from '../growths-management.service';
+import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 
 @Component({
     selector: 'app-add-growths',
@@ -33,8 +34,8 @@ export class AddGrowthsComponent implements OnInit {
         private adapter: DateAdapter<any>,
         private appService: AppService,
         public snackBar: MatSnackBar,
-        private employeesManagementService: EmployeesManagementService,
         private growthsManagementService: GrowthsManagementService,
+        private pondManagementService: PondManagementService,
         private fb: FormBuilder
     ) {
         this.token = this.appService.getCookie(tokenName);
@@ -43,7 +44,7 @@ export class AddGrowthsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.employeesManagementService.getPondWithoutImages(this.token).subscribe(res => {
+        this.pondManagementService.getPondWithoutImages(this.token).subscribe(res => {
             this.ponds = res.ponds;
         })
         this.createForm();

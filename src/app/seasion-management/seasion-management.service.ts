@@ -8,33 +8,45 @@ import { AppService } from '../app.service';
 
 
 const host = api_url + ':' + api_port + '/api';
-const headers = new  HttpHeaders();
+const headers = new HttpHeaders();
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SeasionManagementService {
 
-  constructor(
-		private appService: AppService,
-    private http: HttpClient,
-    private router: Router
-	) { }
+    constructor(
+        private appService: AppService,
+        private http: HttpClient,
+        private router: Router
+    ) { }
 
 
-  public getSeason(token: string): Observable<any> {
-		return this.http.get<any>(host + '/seasons/gets', this.appService.setHeader(token));
-	}
-	
-	public getPondBySeason(seasonUUId: string, token: string): Observable<any> {
-		return this.http.get<any>(host + '/ponds/gets/season/' + seasonUUId, this.appService.setHeader(token));
-  }
+    public getSeason(token: string): Observable<any> {
+        return this.http.get<any>(host + '/seasons/gets', this.appService.setHeader(token));
+    }
 
-  public addseason(data: any, token: string): Observable<any> {
-    return this.http.post(host + '/seasons/add', data, this.appService.setHeader(token));
-	}
+    public getSeasonById(data: any, token: string): Observable<any> {
+        return this.http.post<any>(host + '/seasons/get', data, this.appService.setHeader(token));
+    }
 
-	public updateseason(data: any, token: string): Observable<any> {
-		return this.http.put(host + '/seasons/update', data, this.appService.setHeader(token));
-	}
+    public getPondBySeasonUUId(seasonUUId: string, token: string): Observable<any> {
+        return this.http.get<any>(host + '/ponds/gets/season/' + seasonUUId, this.appService.setHeader(token));
+    }
+    
+    public getSeasonBySeasonUUId(seasonUUId: string, token: string): Observable<any> {
+        return this.http.get<any>(host + '/seasons/get/' + seasonUUId, this.appService.setHeader(token));
+    }
+
+    public addseason(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/seasons/add', data, this.appService.setHeader(token));
+    }
+
+    public updateseason(data: any, token: string): Observable<any> {
+        return this.http.put(host + '/seasons/update', data, this.appService.setHeader(token));
+    }
+    
+    public addSeasonAndPond(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/seasonAndPond/add', data, this.appService.setHeader(token));
+    }
 }
