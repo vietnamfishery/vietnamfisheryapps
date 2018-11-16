@@ -21,8 +21,11 @@ export class SeasionManagementService {
         private router: Router
     ) { }
 
-
-    public getSeason(token: string): Observable<any> {
+    /**
+     * Lấy danh sách ao của người dùng
+     * @param token 
+     */
+    public getSeasonWithOwner(token: string): Observable<any> {
         return this.http.get<any>(host + '/seasons/gets', this.appService.setHeader(token));
     }
 
@@ -30,10 +33,6 @@ export class SeasionManagementService {
         return this.http.post<any>(host + '/seasons/get', data, this.appService.setHeader(token));
     }
 
-    public getPondBySeasonUUId(seasonUUId: string, token: string): Observable<any> {
-        return this.http.get<any>(host + '/ponds/gets/season/' + seasonUUId, this.appService.setHeader(token));
-    }
-    
     public getSeasonBySeasonUUId(seasonUUId: string, token: string): Observable<any> {
         return this.http.get<any>(host + '/seasons/get/' + seasonUUId, this.appService.setHeader(token));
     }
@@ -45,7 +44,7 @@ export class SeasionManagementService {
     public updateseason(data: any, token: string): Observable<any> {
         return this.http.put(host + '/seasons/update', data, this.appService.setHeader(token));
     }
-    
+
     public addSeasonAndPond(data: any, token: string): Observable<any> {
         return this.http.post(host + '/seasonAndPond/add', data, this.appService.setHeader(token));
     }

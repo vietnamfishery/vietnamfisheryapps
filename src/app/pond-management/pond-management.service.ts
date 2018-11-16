@@ -101,4 +101,18 @@ export class PondManagementService {
     public getPondNotInSeasonAndPond(data: any, token: string): Observable<any> {
         return this.http.post<any>(host + '/ponds/get/notin/seasonAndPond', data, this.appService.setHeader(token));
     }
+    
+    /**
+     * Lấy ra danh sách ao của vụ hiện tại
+     * @method POST
+     * @param data {ownerId}
+     * @param token 
+     */
+    public getAllPondWithPresentSeason(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/ponds/gets/ownerSeason', data, this.appService.setHeader(token));
+    }
+
+    public getPondBySeasonUUId(data: any, token: string): Observable<any> {
+        return this.http.post<any>(host + '/ponds/gets/seasonUUId', data, this.appService.setHeader(token));
+    }
 }
