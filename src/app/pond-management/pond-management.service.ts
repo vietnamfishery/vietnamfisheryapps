@@ -111,6 +111,10 @@ export class PondManagementService {
     public getAllPondWithPresentSeason(data: any, token: string): Observable<any> {
         return this.http.post(host + '/ponds/gets/ownerSeason', data, this.appService.setHeader(token));
     }
+    
+    public getAllPondWithPresentSeasonWithImage(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/ponds/gets/ownerSeason/WithImage', data, this.appService.setHeader(token));
+    }
 
     public getPondBySeasonUUId(data: any, token: string): Observable<any> {
         return this.http.post<any>(host + '/ponds/gets/seasonUUId', data, this.appService.setHeader(token));

@@ -3,7 +3,6 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@an
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { GrowthsManagementService } from '../growths-management.service';
 import { switchMap } from 'rxjs/operators';
@@ -41,7 +40,7 @@ export class EditDetailGrowthsComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.fb.group({
-            growthUUId: [null],
+            growthUUId: [this.growthUUId],
             averageDensity: [null, Validators.compose([Validators.required])],
             averageMass: [null, Validators.compose([Validators.required])],
             speedOdGrowth: [null, Validators.compose([Validators.required])],
@@ -57,7 +56,6 @@ export class EditDetailGrowthsComponent implements OnInit {
             })
         ).subscribe(res => {
             if (res.success) {
-                this.growth = res.growth;
                 this.form.patchValue({
                     ...res.growth
                 })
@@ -76,10 +74,6 @@ export class EditDetailGrowthsComponent implements OnInit {
     }
 
     onSubmit() {
-        this.form.patchValue({
-            growthId: this.growthUUId
-        });
-        console.log(this.form.value);
         this.growthsManagementService.updateGrowth(this.form.value, this.token).subscribe((res) => {
             if (res.success) {
                 this.snackBar.open(res.message, 'Đóng', {
@@ -92,8 +86,8 @@ export class EditDetailGrowthsComponent implements OnInit {
                     duration: 2500,
                     horizontalPosition: "right"
                 });
-                this.form.reset();
             }
+            this.form.reset();
         });
     }
 }
