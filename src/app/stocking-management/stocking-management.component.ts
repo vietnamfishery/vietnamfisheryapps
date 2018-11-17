@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PeriodicElement } from '../models/PeriodicElement';
 import { MatSort, MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -12,6 +11,7 @@ import { SeasionManagementService } from '../seasion-management/seasion-manageme
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { Router } from '@angular/router';
 import { StockingService } from './stocking.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-stocking-management',
@@ -24,16 +24,16 @@ import { StockingService } from './stocking.service';
     ]
 })
 export class StockingManagementComponent implements OnInit {
-
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-    dataSource = new MatTableDataSource<PeriodicElement>([]);
+    
+    isBoss: boolean = false;
+    displayedColumns: string[] = this.isBoss ? ['pondName', 'breedName', 'totalQuantity', 'createdDate', 'action'] : ['pondName', 'breedName', 'totalQuantity', 'createdDate'];
+    dataSource = new MatTableDataSource<any>([]);
     form: FormGroup;
 
     stocking: any[] = [];
 
     token: string;
     ownerId: number;
-    isBoss: boolean = false;
     preloader: boolean = false;
 
     seasonPresent: any = {};
@@ -63,43 +63,29 @@ export class StockingManagementComponent implements OnInit {
         if (deToken.userId === this.ownerId) {
             this.isBoss = true;
         }
+        this.displayedColumns = this.isBoss ? ['pondName', 'breedName', 'totalQuantity', 'createdDate', 'action'] : ['pondName', 'breedName', 'totalQuantity', 'createdDate'];
     }
 
     ngOnInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        if(this.isBoss) {
+            this.initBoss();
+        } else {
+            this.initEmployee();
+        }
+    }
+    
+    initBoss() {
         this.createForm();
         this.getSeason();
+    }
 
+    initEmployee() {
+        this.getSeasonEmp();
     }
 
     createForm() {
         this.form = this.fb.group({
-            pond: [null, Validators.compose([Validators.required])],
             season: [this.seasonPresent.seasonId, Validators.compose([Validators.required])],
-        })
-    }
-
-    getAllPondWithSeasonUUId() {
-        this.pondManagementService.getPondBySeasonUUId({
-            seasonUUId: this.seasonPresent.seasonUUId,
-            ownerId: this.ownerId
-        }, this.token).subscribe(res => {
-            if (res.success) {
-                this.ponds = res.ponds;
-                this.initPond = this.ponds[0];
-                this.getStocking();
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-            this.form.patchValue({
-                pond: this.initPond
-            })
-            this.preloader = !this.preloader;
         })
     }
 
@@ -122,16 +108,33 @@ export class StockingManagementComponent implements OnInit {
                         this.router.navigate['/quan-ly-vu-nuoi']
                     }
                 }
-                this.getAllPondWithSeasonUUId();
                 this.form.patchValue({
                     season: this.seasonPresent
                 });
+                this.getStocking();
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
                     horizontalPosition: "center",
                     verticalPosition: 'top'
                 });
+            }
+            this.preloader = !this.preloader;
+        })
+    }
+
+    getSeasonEmp() {
+        this.seasionManagementService.getPresentSeason(this.ownerId, this.token).subscribe(res => {
+            if (res.success) {
+                this.seasons = res.seasons;
+                this.seasonPresent = res.season;
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+                this.router.navigate['/quan-ly-vu-nuoi']
             }
             this.preloader = !this.preloader;
         })
@@ -144,7 +147,7 @@ export class StockingManagementComponent implements OnInit {
         } else {
             this.checkSeasonPresent = true;
         }
-        this.getAllPondWithSeasonUUId();
+        this.getStocking();
     }
 
     changePond(pond: any) {
@@ -155,13 +158,15 @@ export class StockingManagementComponent implements OnInit {
     getStocking() {
         const obj: any = {
             seasonId: this.seasonPresent.seasonId,
-            pondId: this.initPond ? this.initPond.pondId : null,
             ownerId: this.ownerId
         }
         this.stockingService.getStocking(obj, this.token).subscribe(res => {
             if (res.success) {
-                this.stocking = res.stocking;
-                console.log(this.stocking);
+                this.stocking = res.stocking.map(e => {
+                    e['createdDate'] = moment(e[`createdDate`]).format(`DD - MM - YYYY`);
+                    return e;
+                });
+                this.loadTable();
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -171,6 +176,16 @@ export class StockingManagementComponent implements OnInit {
             }
             this.preloader = !this.preloader;
         })
+    }
+
+    loadTable() {
+        this.dataSource.data = this.stocking;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    }
+
+    gotoEdit(stockingDetailUUId: string) {
+        this.router.navigate(['/quan-ly-tha-nuoi/cap-nhat', stockingDetailUUId]);
     }
 
     applyFilter(filterValue: string) {

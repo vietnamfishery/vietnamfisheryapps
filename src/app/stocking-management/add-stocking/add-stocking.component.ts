@@ -3,8 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from './../../constants/format-date';
-import { Observable } from 'rxjs';
-import { startWith, map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { AppService } from 'src/app/app.service';

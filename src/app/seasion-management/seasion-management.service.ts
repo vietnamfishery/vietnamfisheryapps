@@ -28,6 +28,18 @@ export class SeasionManagementService {
     public getSeasonWithOwner(token: string): Observable<any> {
         return this.http.get<any>(host + '/seasons/gets', this.appService.setHeader(token));
     }
+    
+    public getPresentSeason(ownerId: any, token: string): Observable<any> {
+        const headers: any = {
+            headers: new HttpHeaders({
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json',
+                'Authorization': token,
+                'ownerid': ownerId+''
+			})
+        }
+        return this.http.get<any>(host + '/seasons/gets/present', headers);
+    }
 
     public getSeasonById(data: any, token: string): Observable<any> {
         return this.http.post<any>(host + '/seasons/get', data, this.appService.setHeader(token));
