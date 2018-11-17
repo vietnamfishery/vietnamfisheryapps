@@ -18,4 +18,16 @@ export class StockingService {
     addStocking(data: any, token: string): Observable<any> {
         return this.http.post<any>(host + '/stocking/add', data, this.appService.setHeader(token));
     }
+
+    public getStocking(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/stocking/gets', data, this.appService.setHeader(token));
+    }
+
+    public getStockingDetailsByStockingDetailsUUId(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/stocking/get/stockingDetailUUId', data, this.appService.setHeader(token));
+    }
+    
+    public updateStockingDetailsByStockingDetailsUUId(data: any, token: string): Observable<any> {
+        return this.http.put(host + '/stocking/update', data, this.appService.setHeader(token));
+    }
 }

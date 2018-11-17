@@ -1,174 +1,153 @@
 <mat-card fxLayout="column">
-  <mat-toolbar color="primary" class="table-header" fxLayout="row">
-    <h1 class="mat-headline center-align" fxFlex='100'>Quản lý chất thải</h1>
-    <a mat-flat-button color="white" routerLink="/quan-ly-chat-thai/them-thong-tin-chat-thai" matTooltip="Thêm thông tin"
-      matTooltipPosition="above" fxFlex style="margin-right: 10px">
-      <mat-icon>library_add</mat-icon>
-    </a>
-  </mat-toolbar>
-  <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
-  <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column">
-    <div fxLayout="column" fxFlex="25">
-      <div class="pb-1">
-        <form>
-          <mat-card-content fxLayout="column">
-            <div fxLayout="column" fxFlex="100">
-              <mat-form-field fxFlex="100">
-                <mat-select [(value)]="selected" placeholder="Tên vụ nuôi">
-                  <mat-option>None</mat-option>
-                  <mat-option value="option10">Vụ nuôi 1</mat-option>
-                  <mat-option value="option11">Vụ nuôi 2</mat-option>
-                  <mat-option value="option12">Vụ nuôi 3</mat-option>
-                  <mat-option value="option13">Vụ nuôi 4</mat-option>
-                  <mat-option value="option14">Vụ nuôi 5</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field fxFlex="100">
-                <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
-                  <mat-option>None</mat-option>
-                  <mat-option value="option5">Ao 1</mat-option>
-                  <mat-option value="option6">Ao 2</mat-option>
-                  <mat-option value="option7">Ao 3</mat-option>
-                  <mat-option value="option8">Ao 4</mat-option>
-                  <mat-option value="option9">Ao 5</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <hr>
-              <div class="pa-1">
-                <h3 class="mt-1">Sắp xếp theo ngày</h3>
-                <mat-radio-group>
-                  <div class="pb-1">
-                    <mat-radio-button value="1">Tăng dần</mat-radio-button>
-                  </div>
-                  <div class="pb-1">
-                    <mat-radio-button value="2">Giảm dần</mat-radio-button>
-                  </div>
-                </mat-radio-group>
-              </div>
-              <hr>
-              <div class="pa-1">
-                <button mat-raised-button color="primary">Lọc</button>
-              </div>
+    <mat-toolbar color="primary" class="table-header" fxLayout="row">
+        <h1 class="mat-headline center-align" fxFlex='100'>Quản lý chất thải</h1>
+        <a mat-flat-button color="white" routerLink="/quan-ly-chat-thai/danh-sach-ao" matTooltip="Thêm thông tin" *ngIf="checkSeasonPresent"
+            matTooltipPosition="above" fxFlex style="margin-right: 10px">
+            <mat-icon>library_add</mat-icon>
+        </a>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
+    <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column">
+        <div fxLayout="column" fxFlex="25">
+            <div class="pb-1">
+                <form [formGroup]="form">
+                    <div class="pa-1" fxLayout="column">
+                        <mat-form-field fxFlex="100" *ngIf="isBoss">
+                            <mat-select [(value)]="selected" [formControl]="form.controls['season']" placeholder="Tên vụ nuôi">`
+                                <mat-option *ngFor="let season of seasons" [value]="season" (click)="changeSeason(season)">{{
+                                    season.seasonName }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field fxFlex="100">
+                            <mat-select [(value)]="selected2" [formControl]="form.controls['pond']" placeholder="Tên ao nuôi">
+                                <mat-option *ngFor="let p of ponds" [value]="p" (click)="changePond(p)">{{ p.pondName
+                                    }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </form>
             </div>
-          </mat-card-content>
-        </form>
-      </div>
+        </div>
+        <div fxLayout="column" fxFlex="75">
+            <div fxFlexOffset="4">
+                <mat-accordion fxFlexOffset="5" fxFlex="90">
+                    <div *ngFor="let w of wastes">
+                        <mat-expansion-panel *ngIf="w.card === '0'" [expanded]="step === 0" (opened)="setStep(0)"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon>local_gas_station</mat-icon>
+                                    <b class="title-waste">Thuốc hoá học quá sử dụng</b>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <div fxFlex></div>
+                                    <div fxLayout="row" fxFLex="end center">
+                                        <b>{{ w.createdDate }}</b>
+                                    </div>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <p><b>Số lượng:</b> {{ w.quantity }}</p>
+                            <p><b>Người xử lý:</b> {{ w.employee }}</p>
+                            <p><b>Phương pháp xử lý:</b> {{ w.solutions }}</p>
+                            <hr><br>
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/cap-nhat', w.diedFisheryUUId]">Sửa</button>
+                            </div>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel *ngIf="w.card === '1'" [expanded]="step === 1" (opened)="setStep(1)"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon>broken_image</mat-icon>
+                                    <b class="title-waste">Rác</b>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <div fxFlex></div>
+                                    <div fxLayout="row" fxFLex="end center">
+                                        <b>{{ w.createdDate }}</b>
+                                    </div>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <p><b>Số lượng:</b> {{ w.quantity }}</p>
+                            <p><b>Người xử lý:</b> {{ w.employee }}</p>
+                            <p><b>Phương pháp xử lý:</b> {{ w.solutions }}</p>
+                            <hr><br>
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/cap-nhat', w.diedFisheryUUId]">Sửa</button>
+                            </div>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel *ngIf="w.card === '2'" [expanded]="step === 2" (opened)="setStep(2)"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon>whatshot</mat-icon>
+                                    <b class="title-waste">Xác tôm cá</b>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <div fxFlex></div>
+                                    <div fxLayout="row" fxFLex="end center">
+                                        <b>{{ w.createdDate }}</b>
+                                    </div>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <p><b>Số lượng:</b> {{ w.quantity }}</p>
+                            <p><b>Người xử lý:</b> {{ w.employee }}</p>
+                            <p><b>Phương pháp xử lý:</b> {{ w.solutions }}</p>
+                            <hr><br>
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/cap-nhat', w.diedFisheryUUId]">Sửa</button>
+                            </div>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel *ngIf="w.card === '3'" [expanded]="step === 3" (opened)="setStep(3)"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon>spa</mat-icon>
+                                    <b class="title-waste">Chất thải</b>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <div fxFlex></div>
+                                    <div fxLayout="row" fxFLex="end center">
+                                        <b>{{ w.createdDate }}</b>
+                                    </div>
+                                </mat-panel-description>
+                                <hr>
+                            </mat-expansion-panel-header>
+                            <p><b>Số lượng:</b> {{ w.quantity }}</p>
+                            <p><b>Người xử lý:</b> {{ w.employee }}</p>
+                            <p><b>Phương pháp xử lý:</b> {{ w.solutions }}</p>
+                            <hr><br>
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/cap-nhat', w.diedFisheryUUId]">Sửa</button>
+                            </div>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel *ngIf="w.card === '4'" [expanded]="step === 4" (opened)="setStep(4)"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon>warning</mat-icon>
+                                    <b class="title-waste">Khác</b>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <div fxFlex></div>
+                                    <div fxLayout="row" fxFLex="end center">
+                                        <b>{{ w.createdDate }}</b>
+                                    </div>
+                                </mat-panel-description>
+                                <hr>
+                            </mat-expansion-panel-header>
+                            <p><b>Số lượng:</b> {{ w.quantity }}</p>
+                            <p><b>Người xử lý:</b> {{ w.employee || '' }}</p>
+                            <p><b>Phương pháp xử lý:</b> {{ w.solutions || '' }}</p>
+                            <hr><br>
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/cap-nhat', w.diedFisheryUUId]">Sửa</button>
+                            </div>
+                        </mat-expansion-panel>
+                    </div>
+                </mat-accordion>
+            </div>
+        </div>
     </div>
-    <div fxLayout="column" fxFlex="75">
-      <div fxFlexOffset="4">
-        <mat-accordion fxFlexOffset="5" fxFlex="90">
-          <div *ngFor="let w of waste">
-            <mat-expansion-panel *ngIf="w.card === 0" [expanded]="step === 0" (opened)="setStep(0)" (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <mat-icon>local_gas_station</mat-icon>
-                  <b class="title-waste">Thuốc hoá học quá sử dụng</b>
-                </mat-panel-title>
-                <mat-panel-description>
-                  <div fxFlex></div>
-                  <div fxLayout="row" fxFLex="end center">
-                    <b>{{ w.createdDate }}</b>
-                  </div>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p><b>Số lượng:</b> {{ w.quantity }}</p>
-              <p><b>Người xử lý:</b> {{ w.employee }}</p>
-              <p><b>Phương pháp xử lý:</b> {{ w.solutions }}</p>
-              <hr><br>
-              <div fxLayout="row" fxLayoutAlign="end center">
-                <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/sua-thong-tin-chat-thai', w.diedFisheryId]">Sửa</button>
-              </div>
-            </mat-expansion-panel>
-            <mat-expansion-panel *ngIf="w.card === 1" [expanded]="step === 1" (opened)="setStep(1)" (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <mat-icon>broken_image</mat-icon>
-                  <b class="title-waste">Rác</b>
-                </mat-panel-title>
-                <mat-panel-description>
-                  <div fxFlex></div>
-                  <div fxLayout="row" fxFLex="end center">
-                    <b>{{ w.createdDate }}</b>
-                  </div>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p><b>Số lượng:</b> {{ w.quantity }}</p>
-              <p><b>Người xử lý:</b> {{ w.employee }}</p>
-              <p><b>Phương pháp xử lý:</b> {{ w.solutions }}</p>
-              <hr><br>
-              <div fxLayout="row" fxLayoutAlign="end center">
-                  <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/sua-thong-tin-chat-thai', w.diedFisheryId]">Sửa</button>
-              </div>
-            </mat-expansion-panel>
-            <mat-expansion-panel *ngIf="w.card === 2" [expanded]="step === 2" (opened)="setStep(2)" (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <mat-icon>whatshot</mat-icon>
-                  <b class="title-waste">Xác tôm cá</b>
-                </mat-panel-title>
-                <mat-panel-description>
-                  <div fxFlex></div>
-                  <div fxLayout="row" fxFLex="end center">
-                    <b>{{ w.createdDate }}</b>
-                  </div>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p><b>Số lượng:</b> {{ w.quantity }}</p>
-              <p><b>Người xử lý:</b> {{ w.employee }}</p>
-              <p><b>Phương pháp xử lý:</b> {{ w.solutions }}</p>
-              <hr><br>
-              <div fxLayout="row" fxLayoutAlign="end center">
-                  <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/sua-thong-tin-chat-thai', w.diedFisheryId]">Sửa</button>
-              </div>
-            </mat-expansion-panel>
-            <mat-expansion-panel *ngIf="w.card === 3" [expanded]="step === 3" (opened)="setStep(3)" (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <mat-icon>spa</mat-icon>
-                  <b class="title-waste">Chất thải</b>
-                </mat-panel-title>
-                <mat-panel-description>
-                  <div fxFlex></div>
-                  <div fxLayout="row" fxFLex="end center">
-                    <b>{{ w.createdDate }}</b>
-                  </div>
-                </mat-panel-description>
-                <hr>
-              </mat-expansion-panel-header>
-              <p><b>Số lượng:</b> {{ w.quantity }}</p>
-              <p><b>Người xử lý:</b> {{ w.employee }}</p>
-              <p><b>Phương pháp xử lý:</b> {{ w.solutions }}</p>
-              <hr><br>
-              <div fxLayout="row" fxLayoutAlign="end center">
-                  <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/sua-thong-tin-chat-thai', w.diedFisheryId]">Sửa</button>
-              </div>
-            </mat-expansion-panel>
-            <mat-expansion-panel *ngIf="w.card === 4" [expanded]="step === 4" (opened)="setStep(4)" (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <mat-icon>warning</mat-icon>
-                  <b class="title-waste">Khác</b>
-                </mat-panel-title>
-                <mat-panel-description>
-                  <div fxFlex></div>
-                  <div fxLayout="row" fxFLex="end center">
-                    <b>{{ w.createdDate }}</b>
-                  </div>
-                </mat-panel-description>
-                <hr>
-              </mat-expansion-panel-header>
-              <p><b>Số lượng:</b> {{ w.quantity }}</p>
-              <p><b>Người xử lý:</b> {{ w.employee || '' }}</p>
-              <p><b>Phương pháp xử lý:</b> {{ w.solutions || '' }}</p>
-              <hr><br>
-              <div fxLayout="row" fxLayoutAlign="end center">
-                  <button mat-raised-button color="warn" [routerLink]="['/quan-ly-chat-thai/sua-thong-tin-chat-thai', w.diedFisheryId]">Sửa</button>
-              </div>
-            </mat-expansion-panel>
-          </div>
-        </mat-accordion>
-      </div>
-    </div>
-  </div>
-  <div><br></div>
+    <div><br></div>
 </mat-card>

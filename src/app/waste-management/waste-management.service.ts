@@ -28,15 +28,12 @@ export class WasteManagementService {
 		}
 	}
 
-  public getWasteAll(token: string): Observable<any> {
-    return this.http.post(host + '/diedFishery/gets', {
-			seasonId: 15,
-			pondId: 39
-		}, this.appService.setHeader(token));
+  public getAllWaste(data: any, token: string): Observable<any> {
+    return this.http.post(host + '/diedFishery/gets', data, this.appService.setHeader(token));
 	}
 	
-	public getWasteById(id: string, token): Observable<any> {
-		return this.http.get(host + '/diedFishery/get', this.setHeaderId(id, token));
+	public getWasteByWasteUUId(data: any, token): Observable<any> {
+		return this.http.post(host + '/diedFishery/get/diedFisheryUUId', data, this.appService.setHeader(token));
 	}
 
 	public updateWaste(data: any, token):  Observable<any> {

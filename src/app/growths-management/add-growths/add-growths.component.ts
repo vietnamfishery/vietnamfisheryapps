@@ -3,12 +3,9 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@an
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
-import { EmployeesManagementService } from 'src/app/employees-management/employees-management.service';
 import { GrowthsManagementService } from '../growths-management.service';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 
@@ -44,7 +41,11 @@ export class AddGrowthsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.pondManagementService.getPondWithoutImages(this.token).subscribe(res => {
+        const obj: any = {
+            ownerId: this.ownerId,
+            status: 1
+        }
+        this.pondManagementService.getAllPondWithPresentSeason(obj, this.token).subscribe(res => {
             this.ponds = res.ponds;
         })
         this.createForm();

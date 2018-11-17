@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PeriodicElement } from '../../models/PeriodicElement';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from '../../../environments';
 import { SeasionManagementService } from '../seasion-management.service';
+import * as jwtDecode from 'jwt-decode';
+import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 
 @Component({
     selector: 'app-list-ponds',
@@ -21,6 +21,8 @@ export class ListPondsComponent implements OnInit {
     seasonName: string;
     displayedColumns: string[] = ['pondName', 'status'];
     dataSource = new MatTableDataSource<any>([]);
+    ownerId: number;
+    isBoss: boolean = false;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -31,16 +33,25 @@ export class ListPondsComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private appService: AppService,
-        private seasionManagementService: SeasionManagementService
+        private seasionManagementService: SeasionManagementService,
+        private pondManagementService: PondManagementService
     ) {
         this.token = this.appService.getCookie(tokenName);
+        const deToken: any = jwtDecode(this.token);
+        this.ownerId = deToken.createdBy == null && deToken.roles.length == 0 ? deToken.userId : deToken.roles[0].bossId;
+        if(deToken.userId === this.ownerId) {
+            this.isBoss = true;
+        }
     }
 
     ngOnInit() {
         this.route.paramMap.pipe(
             switchMap(params => {
                 this.seasonUUId = params.get('seasonUUId');
-                return this.seasionManagementService.getPondBySeasonUUId(this.seasonUUId, this.token);
+                return this.pondManagementService.getPondBySeasonUUId({
+                    seasonUUId: this.seasonUUId,
+                    ownerId: this.ownerId
+                }, this.token);
             })
         ).subscribe(res => {
             this.ponds = res.ponds;

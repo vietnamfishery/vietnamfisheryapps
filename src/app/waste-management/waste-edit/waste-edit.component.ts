@@ -11,75 +11,81 @@ import { switchMap } from 'rxjs/operators';
 
 
 @Component({
-  selector: 'app-waste-edit',
-  templateUrl: './waste-edit.component.html',
-  styleUrls: ['./waste-edit.component.scss']
+    selector: 'app-waste-edit',
+    templateUrl: './waste-edit.component.html',
+    styleUrls: ['./waste-edit.component.scss']
 })
 export class WasteEditComponent implements OnInit {
 
-  public form: FormGroup;
-  cards = cards;
-  diedFishery: Observable<any>;
-  diedFisheryId: any;
-  token: string;
-  
-  constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    public snackBar: MatSnackBar,
-    private router: Router,
-    private appService: AppService,
-    private wasteManagementService: WasteManagementService,
-  ) { 
-    this.token = this.appService.getCookie(tokenName);
-  }
+    public form: FormGroup;
+    cards = cards;
+    diedFishery: any = {};
+    diedFisheryUUId: any;
+    token: string;
 
-  ngOnInit() {
-    this.form = this.fb.group({
-      diedFisheryId: [null],
-      card: [null, Validators.compose([Validators.required])],
-      quantity: [null, Validators.compose([Validators.required])],
-      solutions: [null, Validators.compose([])],
-      employee: [null, Validators.compose([])]
-    });
-    this.diedFishery = this.route.paramMap.pipe(
-      switchMap(params => {
-        this.diedFisheryId = params.get('diedFisheryId');
-        return this.wasteManagementService.getWasteById(this.diedFisheryId, this.token);
-      })
-    )
-    this.diedFishery.subscribe();
-    this.wasteManagementService.getWasteById(this.diedFisheryId, this.token).subscribe((val) => {
-      const diedFishery = val.diedFishery;
-      this.form.patchValue({
-        card: diedFishery.card,
-        quantity: diedFishery.quantity,
-        solutions: diedFishery.solutions,
-        employee: diedFishery.employee
-      });
-    });
-  }
+    constructor(
+        private fb: FormBuilder,
+        private route: ActivatedRoute,
+        public snackBar: MatSnackBar,
+        private router: Router,
+        private appService: AppService,
+        private wasteManagementService: WasteManagementService,
+    ) {
+        this.token = this.appService.getCookie(tokenName);
+    }
 
-  onSubmit() {
-    this.form.patchValue({
-      diedFisheryId: this.diedFisheryId
-    });
-    this.wasteManagementService.updateWaste(this.form.value, this.token).subscribe((res) => {
-      if (res.success) {
-        this.snackBar.open(res.message, 'Đóng', {
-          duration: 3000,
-          horizontalPosition: "right"
-          // verticalPosition: 'top'
+    ngOnInit() {
+        this.createForm();
+        this.diedFishery = this.route.paramMap.pipe(
+            switchMap(params => {
+                this.diedFisheryUUId = params.get('diedFisheryUUId');
+                return this.wasteManagementService.getWasteByWasteUUId({
+                    diedFisheryUUId: this.diedFisheryUUId
+                }, this.token)
+            })
+        ).subscribe(res => {
+            if (res.success) {
+                res.waste['card'] = res.waste['card'] - 0;
+                this.form.patchValue({
+                    ...res.waste
+                })
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+        })
+    }
+
+    createForm() {
+        this.form = this.fb.group({
+            diedFisheryUUId: [this.diedFisheryUUId],
+            card: [null, Validators.compose([Validators.required])],
+            quantity: [null, Validators.compose([Validators.required])],
+            solutions: [null, Validators.compose([])],
+            employee: [null, Validators.compose([])]
         });
-        this.router.navigate(['/quan-ly-chat-thai']);
-      } else {
-        this.snackBar.open(res.message, 'Đóng', {
-          duration: 2500,
-          horizontalPosition: "right"
+    }
+
+    onSubmit() {
+        this.wasteManagementService.updateWaste(this.form.value, this.token).subscribe((res) => {
+            if (res.success) {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "right"
+                });
+                this.router.navigate(['/quan-ly-chat-thai']);
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+                this.form.reset();
+            }
         });
-        this.form.reset();
-      }
-    });
-  }
+    }
 
 }

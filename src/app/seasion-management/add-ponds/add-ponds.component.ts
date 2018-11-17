@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PeriodicElement } from '../../models/PeriodicElement';
 import { MatSort, MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { AppService } from 'src/app/app.service';
 import { SeasionManagementService } from '../seasion-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { tokenName } from '../../../environments';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
+import * as jwtDecode from 'jwt-decode';
 
 @Component({
     selector: 'app-add-ponds',
@@ -21,7 +20,7 @@ export class AddPondsComponent implements OnInit {
     token: string;
     seasonName: string;
     ponds: any[] = [];
-
+    ownerId: number;
     displayedColumns: string[] = ['check', 'pondName', 'pondArea', 'pondDepth', 'createCost', 'action'];
     dataSource = new MatTableDataSource<any>([]);
     selection = new SelectionModel<any>(true, []);
@@ -39,6 +38,8 @@ export class AddPondsComponent implements OnInit {
         private pondManagementService: PondManagementService
     ) {
         this.token = this.appService.getCookie(tokenName);
+        const deToken: any = jwtDecode(this.token);
+        this.ownerId = deToken.createdBy == null && deToken.roles.length == 0 ? deToken.userId : deToken.roles[0].bossId;
     }
 
     ngOnInit() {
@@ -50,7 +51,8 @@ export class AddPondsComponent implements OnInit {
             switchMap(params => {
                 this.seasonUUId = params.get('seasonUUId');
                 return this.pondManagementService.getPondNotInSeasonAndPond({
-                    seasonUUId: this.seasonUUId
+                    seasonUUId: this.seasonUUId,
+                    ownerId: this.ownerId
                 }, this.token);
             })
         ).subscribe(res => {

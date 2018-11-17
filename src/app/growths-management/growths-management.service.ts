@@ -30,19 +30,16 @@ export class GrowthsManagementService {
     }
 
 
-    public getGrowth(token: string): Observable<any> {
-        return this.http.post(host + '/growth/gets', {
-            seasonId: 15,
-            pondId: 39
-        }, this.appService.setHeader(token));
+    public getGrowth(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/growths/gets', data, this.appService.setHeader(token));
     }
 
-    public getGrowthById(id: string, token): Observable<any> {
-        return this.http.get(host + '/growth/get', this.setHeaderId(id, token));
+    public getGrowthByGrowthUUId(data: any, token): Observable<any> {
+        return this.http.post(host + '/growths/get/growthUUId', data, this.appService.setHeader(token));
     }
 
     public updateGrowth(data: any, token): Observable<any> {
-        return this.http.put(host + '/growth/update', data, this.appService.setHeader(token));
+        return this.http.put(host + '/growths/update', data, this.appService.setHeader(token));
     }
 
     addGrowth(data: any, token: string): Observable<any> {
