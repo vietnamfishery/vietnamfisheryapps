@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
     this.sessionService.register(user).subscribe(res => {
       if(res.success){
         this.snackBar.open(res.message, 'Đóng', {
-          duration: 2500,
+          duration: 3000,
           horizontalPosition: "right"
         });
         setTimeout(() => {
@@ -50,8 +50,9 @@ export class SignupComponent implements OnInit {
           this.router.navigate( ['/session/signin'] );
         }, 500)
       }else{
+        this.form.reset();
         this.snackBar.open(res.message, 'Đóng', {
-          duration: 2500,
+          duration: 3000,
           horizontalPosition: "right"
         });
       }

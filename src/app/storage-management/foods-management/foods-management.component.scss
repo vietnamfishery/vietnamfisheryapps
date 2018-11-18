@@ -9,3 +9,18 @@ h3 {
 table {
   width: 100%;
 }
+
+/* isEdit */
+.hidden {
+	display: none;
+}
+
+.not-select {
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
+}

@@ -14,7 +14,22 @@
     
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên thức ăn</th>
-          <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
+          <td mat-cell *matCellDef="let element" (dblclick)="toEdit(spanName, formhidden, ssn)" title="Nháy đôi vào để sửa tên thức ăn">
+            <span #spanName class="not-select">{{ element.productName }}</span>
+            <form #formhidden class="hidden" (ngSubmit)="onSubmit(element.storageId, ssn)">
+              <mat-form-field>
+                <input matInput #ssn type="text" required autocomplete="off" [formControl]="form.controls['productName']"
+                  value={{element.productName}}>
+                <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Cập nhật" type="submit">
+                  <mat-icon>send</mat-icon>
+                </button>
+                <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Hủy" (click)="cancel(spanName, formhidden)"
+                  type="button">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </form>
+          </td>
         </ng-container>
     
         <ng-container matColumnDef="quantity">

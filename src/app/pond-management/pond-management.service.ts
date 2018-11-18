@@ -32,14 +32,14 @@ export class PondManagementService {
 
     public addPond(data: any, token: string): Observable<any> {
         const fd = new FormData();
-        fd.append('images', data.images, data.images.name);
+        fd.append('images', data.images, data.images ? data.images.name : '');
         fd.append('pondName', data.pondName);
         fd.append('pondCreatedDate', data.pondCreatedDate);
         fd.append('pondArea', data.pondArea);
         fd.append('pondDepth', data.pondDepth);
         fd.append('createCost', data.createCost);
-        fd.append('pondLatitude', data.pondLatitude);
-        fd.append('pondLongitude', data.pondLongitude);
+        fd.append('pondLatitude', data.pondLatitude ? data.pondLatitude : '');
+        fd.append('pondLongitude', data.pondLongitude ? data.pondLongitude : '');
         fd.append('status', data.status);
         return this.http.post(host + '/ponds/add', fd, {
             headers: new HttpHeaders({

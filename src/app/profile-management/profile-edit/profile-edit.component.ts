@@ -158,15 +158,27 @@ export class ProfileEditComponent implements OnInit {
         // })
         this.profileManagementService.updateUserInfo(this.form.value, token).subscribe((res: any) => {
             if (res.success) {
-                this.updateSuccessTimeout = !this.updateSuccessTimeout;
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "right"
+                });
                 setTimeout(() => {
+                    this.form_Pass.reset();
                     this.router.navigate(['thong-tin-ca-nhan']);
-                }, 1000);
+                }, 500);
+                // this.updateSuccessTimeout = !this.updateSuccessTimeout;
+                // setTimeout(() => {
+                //     this.router.navigate(['thong-tin-ca-nhan']);
+                // }, 1000);
             } else {
-                this.updateErrorTimeout = !this.updateErrorTimeout;
-                setTimeout(() => {
-                    this.updateErrorTimeout = !this.updateErrorTimeout;
-                }, 5000);
+                // this.updateErrorTimeout = !this.updateErrorTimeout;
+                // setTimeout(() => {
+                //     this.updateErrorTimeout = !this.updateErrorTimeout;
+                // }, 5000);
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "right"
+                });
             }
         })
     }

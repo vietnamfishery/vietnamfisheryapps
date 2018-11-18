@@ -4,7 +4,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@an
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from './../../constants/format-date';
 import { switchMap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from 'src/environments';
@@ -37,7 +37,9 @@ export class AddStockingComponent implements OnInit {
         public snackBar: MatSnackBar,
         private appService: AppService,
         private fb: FormBuilder,
-        private stockingService: StockingService
+        private stockingService: StockingService,
+        private router: Router
+
     ) {
         this.token = this.appService.getCookie(tokenName);
         const deToken: any = jwtDecode(this.token);
@@ -80,6 +82,7 @@ export class AddStockingComponent implements OnInit {
                     duration: 3000,
                     horizontalPosition: "right"
                 });
+                this.router.navigate(['/quan-ly-tha-nuoi']);
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
