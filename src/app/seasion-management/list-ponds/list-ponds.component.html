@@ -1,6 +1,6 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="row">
-        <h1 class="mat-headline center-align" fxFlex='100'>Các ao của vụ {{ season.seasonName }}</h1>
+        <h1 class="mat-headline center-align" fxFlex='100'>Các ao của vụ nuôi</h1>
         <a mat-flat-button routerLink="/quan-ly-vu-nuoi" color="white" matTooltip="Trở lại" matTooltipPosition="above">
             <mat-icon>reply</mat-icon>
         </a>
@@ -10,7 +10,7 @@
         <div class="mat-elevation-z8" matSort fxFlex="100">
             <br>
             <div fxLayout="row" fxLayoutAlign="center center">
-                <h3><span>{{ seasonName }}</span></h3>
+                <h3><span>{{ season.seasonName }}</span></h3>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center">
                 <mat-form-field>

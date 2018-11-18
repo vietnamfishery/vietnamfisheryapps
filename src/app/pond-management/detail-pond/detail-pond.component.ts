@@ -7,7 +7,7 @@ import { PondManagementService } from '../pond-management.service';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from '../../../environments';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 interface marker {
@@ -51,7 +51,8 @@ export class DetailPondComponent implements OnInit {
     private cd: ChangeDetectorRef,
     public snackBar: MatSnackBar,
     private appService: AppService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.token = this.appService.getCookie(tokenName);
   }
@@ -196,9 +197,19 @@ export class DetailPondComponent implements OnInit {
     }
     this.pondManagementService.updatePond(data, this.token).subscribe((res) => {
       if(res.success){
-        console.log("cập nhật thành công");
+        this.snackBar.open(res.message, 'Đóng', {
+            duration: 3000,
+            horizontalPosition: "right"
+        });
+        setTimeout(() => {
+            this.form.reset();
+            this.router.navigate(['quan-ly-ao']);
+        }, 500);
       }else {
-        console.log("cập nhật thất bại");
+        this.snackBar.open(res.message, 'Đóng', {
+            duration: 3000,
+            horizontalPosition: "right"
+        });
       }
     })
   }

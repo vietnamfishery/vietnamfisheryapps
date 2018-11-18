@@ -29,6 +29,7 @@ export class PondManagementComponent implements OnInit {
     preloader: boolean = false;
     token: string;
     isBoss: boolean;
+    notOwner: boolean = false;
     constructor(
         private router: Router,
         public dialog: MatDialog,
@@ -49,6 +50,13 @@ export class PondManagementComponent implements OnInit {
         
         this.pondManagementService.getAllPond(this.token).subscribe((res: any) => {
             if (res.success) {
+                if (res.ponds.length == 0) {
+                    this.snackBar.open('Bạn chưa có ao nào trong hệ thống', 'Đóng', {
+                        duration: 2500,
+                        horizontalPosition: "right"
+                    });
+                    this.notOwner = !this.notOwner;
+                }
                 this.ponds = res.ponds.map((element: any) => {
                     return {
                         pondUUId: element.pondUUId,

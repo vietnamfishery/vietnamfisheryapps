@@ -21,6 +21,7 @@ export class AddPondsComponent implements OnInit {
     seasonName: string;
     ponds: any[] = [];
     ownerId: number;
+    empty: boolean = false;
     displayedColumns: string[] = ['check', 'pondName', 'pondArea', 'pondDepth', 'createCost', 'action'];
     dataSource = new MatTableDataSource<any>([]);
     selection = new SelectionModel<any>(true, []);

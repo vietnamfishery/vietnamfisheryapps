@@ -115,24 +115,27 @@ export class AddPondComponent implements OnInit {
             ...this.form.value,
             images: this.selectedFile
         }
-        this.pondManagementService.addPond(data, token).subscribe((res) => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-                setTimeout(() => {
+        if(this.checkForm(this.form.controls.createCost.value, this.form.controls.pondArea.value, this.form.controls.pondDepth.value)) {
+            this.pondManagementService.addPond(data, token).subscribe((res) => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    setTimeout(() => {
+                        this.form.reset();
+                        this.router.navigate(['quan-ly-ao']);
+                    }, 500);
+                } else {
                     this.form.reset();
-                    this.router.navigate(['quan-ly-ao']);
-                }, 500);
-            } else {
-                this.form.reset();
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-            }
-        });
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                }
+            });
+        }
+        console.log(this.form.value);
     }
 
     onFileChange(event) {
@@ -145,6 +148,7 @@ export class AddPondComponent implements OnInit {
                 this.pondManagementService.getBase64(files).then((base: string) => {
                     this.imageLink = base;
                 });
+                console.log(files);
             } else {
                 this.snackBar.open("Hình ảnh không được cho phép, vui lòng thử lại!", 'Đóng', {
                     duration: 2500,
@@ -158,4 +162,17 @@ export class AddPondComponent implements OnInit {
     vietnamese() {
         this.adapter.setLocale('vn');
     }
+
+    checkForm(cp, dt, ds) {
+		const reg = new RegExp(/^[0-9]+$/);
+		if (!reg.test(cp) || !reg.test(dt) || !reg.test(ds)) {
+			this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+				duration: 2500,
+				horizontalPosition: "center",
+				verticalPosition: 'top'
+			});
+			return false;
+        }
+        return true; 
+	}
 }

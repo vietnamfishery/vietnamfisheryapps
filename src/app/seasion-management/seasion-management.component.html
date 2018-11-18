@@ -26,7 +26,7 @@
                 <input matInput #ssn type="text" required autocomplete="off" [formControl]="form.controls['seasonName']"
                   value={{season.seasonName}}>
 
-                <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Gửi" type="submit">
+                <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Cập nhật" type="submit">
                   <mat-icon>send</mat-icon>
                 </button>
                 <button mat-button *ngIf="form.value" matSuffix mat-icon-button aria-label="Hủy" (click)="cancel(spanName, formhidden)"

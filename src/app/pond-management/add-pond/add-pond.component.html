@@ -41,7 +41,7 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Chi phí tạo ao (vnđ)" type="number" [formControl]="form.controls['createCost']"
+                <input matInput placeholder="Chi phí tạo ao (vnđ)" #cp type="number" [formControl]="form.controls['createCost']"
                   required autocomplete="off">
               </mat-form-field>
             </div>
@@ -59,11 +59,11 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Diện tích ao (m2)" type="number" [formControl]="form.controls['pondArea']"
+                <input matInput placeholder="Diện tích ao (m2)" #dt type="number" [formControl]="form.controls['pondArea']"
                   required autocomplete="off">
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ sâu của ao (m)" type="number" [formControl]="form.controls['pondDepth']"
+                <input matInput placeholder="Độ sâu của ao (m)" #ds type="number" [formControl]="form.controls['pondDepth']"
                   required autocomplete="off">
               </mat-form-field>
             </div>
