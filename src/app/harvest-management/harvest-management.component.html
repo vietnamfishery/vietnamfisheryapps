@@ -6,84 +6,100 @@
       <mat-icon>library_add</mat-icon>
     </a>
   </mat-toolbar>
-  <div fxLayout="row">
-    <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
-      <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
-        <hr>
-        <div class="pa-1" fxLayout="column">
-          <mat-form-field fxFlex="100">
-            <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Ao 1</mat-option>
-              <mat-option value="option2">Ao 2</mat-option>
-              <mat-option value="option3">Ao 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field fxFlex="100">
-            <mat-select [(value)]="selected" placeholder="Tên vụ nuôi">
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Vụ nuôi 1</mat-option>
-              <mat-option value="option2">Vụ nuôi 2</mat-option>
-              <mat-option value="option3">Vụ nuôi 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <hr>
-        <div class="pa-1">
-          <h3 class="mt-1">Sắp xếp theo ngày</h3>
-          <div class="pb-1">
-            <mat-checkbox>Tăng dần</mat-checkbox>
+  <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
+  <mat-sidenav-container class="background-none shadow-none height">
+      <!-- <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
+          <div class="pl-1 pr-1 pb-1">
+              <h3>Price</h3>
+              <mat-slider value="43"></mat-slider>
           </div>
-          <div class="pb-1">
-            <mat-checkbox>Giảm dần</mat-checkbox>
-          </div>
-        </div>
-        <hr>
+          <hr>
 
-        <div class="pa-1">
-          <button mat-raised-button class="mat-green-700">Lọc</button>
-        </div>
-
-      </mat-sidenav>
-      <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
-        <button (click)="productsnav.toggle()" mat-icon-button>
-          <mat-icon>short_text</mat-icon>
-        </button>
-        <span class="mr-1 ml-1">Xem theo</span>
-      </mat-toolbar>
-      <div fxLayout="row" fxFlex>
-        <br>
-      </div>
-      <div fxLayout="row wrap">
-        <div fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
-          <mat-card>
-            <div fxLayout="row">
-              <div class="pa-1" fxFlex>
-                <div fxLayout="row">
-                  <div fxFlex="100">
-                    <h4 class="ma-0" style="text-transform: uppercase;">{{ pond.name }}</h4>
-                  </div>
-                  <a routerLink="/quan-ly-thu-hoach/sua-chi-tiet-thu-hoach" matTooltip="Sửa" matTooltipPosition="above">
-                    <mat-icon>create</mat-icon>
-                  </a>
-                </div>
-                <div class="text-date" fxLayout="row" fxLayoutAlign="end end">
-                  <span>29-10-2018</span>
-                </div>
-                <hr style="border: 0.5px solid rgb(177, 170, 170)">
-                <br>
-                <div fxLayout="column">
-                  <p><span><b>Loài thu hoạch:</b> Tôm sú</span></p>
-                  <p><span><b>Số lượng:</b> 22</span></p>
-                  <p><span><b>Giá đơn vị:</b> 22,000 vnđ</span></p>
-                  <p><span><b>Tổng thu:</b> 484,000 vnđ</span></p>
-                </div>
+          <div class="pa-1">
+              <h3 class="mt-1">Brand</h3>
+              <div class="pb-1">
+                  <mat-checkbox>Apple</mat-checkbox>
               </div>
-            </div>
-          </mat-card>
-        </div>
+          </div>
+          <hr>
+
+          <div class="pa-1">
+              <h3>Screen Size</h3>
+              <div class="pb-1">
+                  <mat-checkbox>16 GB</mat-checkbox>
+              </div>
+          </div>
+          <hr>
+
+          <div class="pa-1">
+              <h3>OS</h3>
+              <div class="pb-1">
+                  <mat-checkbox>Android</mat-checkbox>
+              </div>
+          </div>
+
+          <div class="pa-1">
+              <button mat-raised-button color="primary">Filter</button>
+          </div>
+
+      </mat-sidenav> -->
+      <div *ngIf="isBoss" class="mr">
+              <form>
+                  <mat-form-field>
+                      <mat-select placeholder="Vụ nuôi" [(ngModel)]="seasonPresent" [ngModelOptions]="{standalone: true}">
+                          <mat-option *ngFor="let s of seasons" [value]="s" (click)="changeSeason(s)">
+                              {{ s.seasonName }}
+                          </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </form>
+          </div>
+          <mat-divider *ngIf="isBoss"></mat-divider>
+      <!-- <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
+          <button (click)="productsnav.toggle()" mat-icon-button>
+              <mat-icon>short_text</mat-icon>
+          </button>
+          <span class="mr-1 ml-1">Filter</span>
+      </mat-toolbar> -->
+
+      <div fxLayout="row wrap">
+          <div fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let pond of ponds">
+              <mat-card>
+                  <div class="media-grid">
+                      <figure>
+                          <div class="product-badge" *ngIf="pond.isFed === '1'" matTooltip="Chưa cho ăn" matTooltipPosition="above" (click)="gotoAdd(pond.pondUUId)"><span>
+                                  <mat-icon>error_outline</mat-icon>
+                              </span></div>
+                          <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
+                          <figcaption>
+                              <p>
+                                  <a href="javascript:;" matTooltip="Cho ăn" (click)="gotoAdd(pond.pondUUId)"
+                                      matTooltipPosition="left">
+                                      <mat-icon>room_service</mat-icon>
+                                  </a>
+                                  <a href="javascript:;" matTooltip="Xem thống kê" matTooltipPosition="left">
+                                      <mat-icon>timeline</mat-icon>
+                                  </a>
+                              </p>
+                          </figcaption>
+                      </figure>
+                  </div>
+                  <mat-card-content>
+                      <div fxLayout="row" fxLayoutAlign="center center">
+                          <div fxFlex>
+                              <p class="ma-0">{{ pond.pondName }}</p>
+                              <p class="ma-0 pa-0 text-md">Tôm</p>
+                          </div>
+                          <div class="mat-text-primary text-xl">
+                              <span class="strikethrough mat-text-muted text-sm">$ 20.3</span>
+                              <!-- <span class="strikethrough mat-text-muted text-sm" *ngIf="product.discounted === 'discounted'">$ 20.3</span> -->
+                              <span> $ 15.2</span>
+                          </div>
+                      </div>
+                  </mat-card-content>
+              </mat-card>
+          </div>
       </div>
-    </mat-sidenav-container>
-  </div>
+  </mat-sidenav-container>
   <br>
 </mat-card>

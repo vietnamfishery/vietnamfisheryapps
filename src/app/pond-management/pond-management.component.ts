@@ -39,13 +39,14 @@ export class PondManagementComponent implements OnInit {
         this.token = this.appService.getCookie(tokenName);
         this.isBoss = (jwtDecode(this.token) as any).createdBy === null;
     }
-
+    
     ngOnInit() {
         this.preloader = !this.preloader;
         this.reloadPond();
     }
 
     reloadPond = () => {
+        
         this.pondManagementService.getAllPond(this.token).subscribe((res: any) => {
             if (res.success) {
                 this.ponds = res.ponds.map((element: any) => {

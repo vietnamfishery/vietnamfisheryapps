@@ -9,6 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DiaryService } from './diary.service';
+import { DiaryAnalysisComponent } from './diary-analysis/diary-analysis.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarDialogComponent } from './diary-analysis/dialog/component';
+
 
 @NgModule({
     imports: [
@@ -32,12 +37,19 @@ import { DiaryService } from './diary.service';
         MatSelectModule,
         MatRadioModule,
         MatProgressBarModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        }),
         NgxDatatableModule,
         ReactiveFormsModule,
         MatSnackBarModule,
         DiaryRoutingModule
     ],
-    declarations: [DiaryComponent, AddDiaryComponent],
+    declarations: [DiaryComponent, AddDiaryComponent, DiaryAnalysisComponent, CalendarDialogComponent],
+    entryComponents: [
+        DiaryComponent, AddDiaryComponent, DiaryAnalysisComponent, CalendarDialogComponent
+    ],
     providers: [
         DiaryService
     ]

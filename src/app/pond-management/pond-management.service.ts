@@ -32,14 +32,14 @@ export class PondManagementService {
 
     public addPond(data: any, token: string): Observable<any> {
         const fd = new FormData();
-        fd.append('images', data.images, data.images.name);
+        fd.append('images', data.images, data.images ? data.images.name : '');
         fd.append('pondName', data.pondName);
         fd.append('pondCreatedDate', data.pondCreatedDate);
         fd.append('pondArea', data.pondArea);
         fd.append('pondDepth', data.pondDepth);
         fd.append('createCost', data.createCost);
-        fd.append('pondLatitude', data.pondLatitude);
-        fd.append('pondLongitude', data.pondLongitude);
+        fd.append('pondLatitude', data.pondLatitude ? data.pondLatitude : '');
+        fd.append('pondLongitude', data.pondLongitude ? data.pondLongitude : '');
         fd.append('status', data.status);
         return this.http.post(host + '/ponds/add', fd, {
             headers: new HttpHeaders({
@@ -118,5 +118,35 @@ export class PondManagementService {
 
     public getPondBySeasonUUId(data: any, token: string): Observable<any> {
         return this.http.post<any>(host + '/ponds/gets/seasonUUId', data, this.appService.setHeader(token));
+    }
+    
+    /**
+     * Get ao theo options
+     * @param options - JSON Object
+     * ```js
+     * {
+     *      image: get ao kèm thêm hình
+     *      isnull: get ao trống
+     *      isnotnull: get ao đang nuôi thả
+     *      isupgrade: get ao đang nâng cấp
+     *      seasonid: get ao đang nâng cấp
+     * }
+     * ```
+     * @param token 
+     */
+    public getPondAdvanced(options: any, token: string): Observable<any> {
+        const headers = {
+            headers: new HttpHeaders({
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json',
+                'Authorization': token,
+                'image': options.image ? options.image + '' : '',
+                'isnull': options.isnull ? options.isnull + '' : '',
+                'isnotnull': options.isnotnull ? options.isnotnull + '' : '',
+                'isupgrade': options.isupgrade ? options.isupgrade + '' : '',
+                'seasonid': options.seasonid ? options.seasonid + '' : ''
+			})
+        }
+        return this.http.get<any>(host + '/ponds/gets/advanced', headers);
     }
 }

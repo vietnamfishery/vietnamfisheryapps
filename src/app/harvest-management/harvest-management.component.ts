@@ -5,6 +5,9 @@ import { HarvestManagementService } from './harvest-management.service';
 import { tokenName } from '../../environments';
 import * as moment from 'moment';
 import { AppService } from '../app.service';
+import { PondManagementService } from '../pond-management/pond-management.service';
+import { SeasionManagementService } from '../seasion-management/seasion-management.service';
+import * as jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-harvest-management',
@@ -13,52 +16,166 @@ import { AppService } from '../app.service';
 })
 export class HarvestManagementComponent implements OnInit {
 
-  preloader: boolean = false;
-  harvest: any[] = [];
-  harvests: any[] = [];
-  num = 1;
+    token: string;
+    ponds: any[] = [];
+    ownerId: number;
+    isBoss: boolean = false;
+    seasons: any[] = [];
+    seasonPresent: any = {};
 
-  constructor(
-    private router: Router,
-    public dialog: MatDialog,
-    private appService: AppService,
-    private harvestManagementService: HarvestManagementService,
-    public snackBar: MatSnackBar
-  ) { 
-    // for (this.num; this.num <= 2; this.num += 1) {
-    //   this.addProducts(this.num);
-    // }
-  }
+    preloader: boolean = false;
 
-  // addProducts(i) {
-  //   this.ponds.push({
-  //     id: i,
-  //     price: (Math.random() * (0 - 10) + 10).toFixed(0),
-  //     status: ['', '', '', 'empty'][Math.floor(Math.random() * 4)],
-  //     discount: (Math.random() * (0.00 - 10.00) + 10.00).toFixed(2),
-  //     name: [
-  //       'Thu hoạch đợt 1',
-  //       'Thu hoạch đợt 2',
-  //       'Thu hoạch đợt 3',
-  //       'Thu hoạch đợt 4',
-  //       'Thu hoạch đợt 5',
-  //       'Thu hoạch đợt 6',
-  //       'Thu hoạch đợt 7',
-  //       'Thu hoạch đợt 8'][Math.floor(Math.random() * 8)]
-  //   });
-  // }
+    realSeasonPresent: any = {};
+    checkSeasonPresent: boolean = true;
 
-  isOver(): boolean {
-    return window.matchMedia(`(max-width: 960px)`).matches;
-  }
-  
-  ngOnInit() {
-    this.preloader = !this.preloader;
-    const token: string = this.appService.getCookie(tokenName);
-    // this.harvestManagementService.getHarvestAll(token).subscribe((res) => {
-    
-    // });
-  }
+    constructor(
+        private pondManagementService: PondManagementService,
+        private seasionManagementService: SeasionManagementService,
+        private router: Router,
+        private appService: AppService,
+        public snackBar: MatSnackBar
+    ) {
+        this.token = this.appService.getCookie(tokenName);
+        const deToken: any = jwtDecode(this.token);
+        this.ownerId = deToken.createdBy == null && deToken.roles.length == 0 ? deToken.userId : deToken.roles[0].bossId;
+        if(deToken.userId === this.ownerId) {
+            this.isBoss = true;
+        }
+    }
+
+    ngOnInit() {
+        if(this.isBoss){
+            this.initBoss();
+        } else {
+            this.initEmp();
+        }
+    }
+
+    initBoss() {
+        this.getSeason();
+    }
+
+    initEmp() {
+        this.getPond();
+    }
+
+    getSeason() {
+        this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
+            if (res.success) {
+                this.seasons = res.seasons;
+                for(let i = 0; i < res.seasons.length;  i++) {
+                    if(res.seasons[i].status === 0) {
+                        this.seasonPresent = res.seasons[i]
+                        this.realSeasonPresent = res.seasons[i]
+                        break;
+                    }
+                    if(i === res.seasons.length - 1){
+                        this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                            duration: 3000,
+                            horizontalPosition: "center",
+                            verticalPosition: 'top'
+                        });
+                        this.router.navigate['/quan-ly-chat-thai']
+                    }
+                }
+                this.getAllPondWithSeasonUUId();
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+        })
+    }
+
+    goto(path) {
+        this.router.navigate([path]);
+    }
+
+    getPond() {
+        this.preloader = !this.preloader;
+        this.pondManagementService.getPondAdvanced({
+            image: true,
+            isnotnull: true
+        },this.token).subscribe(res => {
+            if (res.success) {
+                this.ponds = res.ponds;
+                if(!res.ponds.length) {
+                    this.snackBar.open('Không tìm thấy ao khả dụng.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+            if(this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId){
+                this.checkSeasonPresent = false;
+            } else {
+                this.checkSeasonPresent = true;
+            }
+            this.preloader = !this.preloader;
+        })
+    }
+
+    gotoAdd = (pondUUId: string) => {
+        this.router.navigate(['/cho-an/them', pondUUId]);
+    }
+
+    changeSeason(season: any){
+        this.seasonPresent = season;
+        this.getAllPondWithSeasonUUId();
+    }
+
+    getAllPondWithSeasonUUId() {
+        this.preloader = !this.preloader;
+        this.pondManagementService.getPondAdvanced({
+            image: true,
+            isnotnull: true,
+            seasonid: this.seasonPresent.seasonId
+        }, this.token).subscribe(res => {
+            if (res.success) {
+                this.ponds = res.ponds;
+                if(!res.ponds.length) {
+                    this.snackBar.open('Không tìm thấy ao khả dụng.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+            if(this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId){
+                this.checkSeasonPresent = false;
+            } else {
+                this.checkSeasonPresent = true;
+            }
+            this.preloader = !this.preloader;
+        })
+    }
+
+    isOver(): boolean {
+        return window.matchMedia(`(max-width: 960px)`).matches;
+    }
+
+    isMac(): boolean {
+        let bool = false;
+        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
+            bool = true;
+        }
+        return bool;
+    }
 
 }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DiaryComponent } from './diary.component';
 import { AddDiaryComponent } from './add-diary/add-diary.component';
+import { DiaryAnalysisComponent } from './diary-analysis/diary-analysis.component';
 
 const routes: Routes = [
     {
@@ -9,6 +10,9 @@ const routes: Routes = [
     },
     {
         path: 'them/:pondUUId', component: AddDiaryComponent
+    },
+    {
+        path: 'thong-ke/:pondUUId', component: DiaryAnalysisComponent
     }
 ];
 

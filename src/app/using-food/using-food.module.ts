@@ -7,7 +7,6 @@ import { UsingFoodService } from './using-food.service';
 import { MatIconModule, MatToolbarModule, MatProgressBarModule, MatCardModule, MatTabsModule, MatTooltipModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatSliderModule, MatCheckboxModule, MatSidenavModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatRadioModule, MatSnackBarModule } from '@angular/material';
 import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ListPondComponent } from './list-pond/list-pond.component';
 import { AddUsingFoodComponent } from './add-using-food/add-using-food.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -42,7 +41,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
         MatSnackBarModule,
         UsingFoodRoutingModule
     ],
-    declarations: [UsingFoodComponent, ListPondComponent, AddUsingFoodComponent],
+    declarations: [UsingFoodComponent, AddUsingFoodComponent],
     providers: [
         UsingFoodService
     ]

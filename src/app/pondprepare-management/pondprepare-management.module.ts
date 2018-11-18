@@ -11,8 +11,8 @@ import { EditPondprepareComponent } from './edit-pondprepare/edit-pondprepare.co
 import { AddcostPondprepareComponent } from './addcost-pondprepare/addcost-pondprepare.component';
 import { EditcostPondprepareComponent } from './editcost-pondprepare/editcost-pondprepare.component';
 import { PondprepareManagementService } from './pondprepare-management.service';
-import { ListPondComponent } from './list-pond/list-pond.component';
 import { AddOldPondPrepareComponent } from './add-old-pond-prepare/add-old-pond-prepare.component';
+import { AnalysisPondPrepareComponent } from './analysis-pond-prepare/analysis-pond-prepare.component';
 
 @NgModule({
     imports: [
@@ -47,7 +47,7 @@ import { AddOldPondPrepareComponent } from './add-old-pond-prepare/add-old-pond-
         MatProgressSpinnerModule,
         PondprepareManagementRoutingModule
     ],
-    declarations: [PondprepareManagementComponent, ListPondComponent, AddPondprepareComponent, EditPondprepareComponent, AddcostPondprepareComponent, EditcostPondprepareComponent, AddOldPondPrepareComponent],
+    declarations: [PondprepareManagementComponent, AddPondprepareComponent, EditPondprepareComponent, AddcostPondprepareComponent, EditcostPondprepareComponent, AddOldPondPrepareComponent, AnalysisPondPrepareComponent],
     providers: [
         PondprepareManagementService
     ]

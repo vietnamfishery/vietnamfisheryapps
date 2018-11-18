@@ -79,6 +79,11 @@ export class GrowthsManagementComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
+            if(this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId){
+                this.checkSeasonPresent = false;
+            } else {
+                this.checkSeasonPresent = true;
+            }
             this.form.patchValue({
                 pond: this.initPond
             })
@@ -122,11 +127,6 @@ export class GrowthsManagementComponent implements OnInit {
 
     changeSeason(season: any) {
         this.seasonPresent = season;
-        if(this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId){
-            this.checkSeasonPresent = false;
-        } else {
-            this.checkSeasonPresent = true;
-        }
         this.getAllPondWithSeasonUUId();
     }
     

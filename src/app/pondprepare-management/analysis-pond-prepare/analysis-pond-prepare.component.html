@@ -1,0 +1,167 @@
+<mat-card fxLayout="column">
+    <mat-toolbar color="primary" class="table-header" fxLayout="row">
+        <h1 class="mat-headline center-align" fxFlex='100'>Quản lý chuẩn bị ao</h1>
+        <a mat-flat-button color="white" routerLink="/quan-ly-chuan-bi-ao/them-moi" matTooltip="Thêm một ao mới"
+            matTooltipPosition="above" fxFlex style="margin-right: 10px">
+            <mat-icon>library_add</mat-icon>
+        </a>
+        <button mat-raised-button (click)="goto('/quan-ly-chuan-bi-ao/danh-sach-ao')" color="accent">Thêm</button>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
+    <div fxLayout="row">
+        <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 99.99%;">
+            <!-- <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
+                <hr>
+                <div class="pa-1" fxLayout="column">
+                    <mat-form-field fxFlex="100">
+                        <mat-select [(value)]="selected" placeholder="Tên vụ nuôi">
+                            <mat-option>None</mat-option>
+                            <mat-option value="option1">Vụ nuôi 1</mat-option>
+                            <mat-option value="option2">Vụ nuôi 2</mat-option>
+                            <mat-option value="option3">Vụ nuôi 3</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="100">
+                        <mat-select [(value)]="selected" placeholder="Tên ao nuôi">
+                            <mat-option>None</mat-option>
+                            <mat-option value="option1">Ao 1</mat-option>
+                            <mat-option value="option2">Ao 2</mat-option>
+                            <mat-option value="option3">Ao 3</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <hr>
+                <div class="pa-1">
+                    <h3 class="mt-1">Sắp xếp theo ngày</h3>
+                    <mat-radio-group>
+                        <div class="pb-1">
+                            <mat-radio-button value="1">Tăng dần</mat-radio-button>
+                        </div>
+                        <div class="pb-1">
+                            <mat-radio-button value="2">Giảm dần</mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                </div>
+                <hr>
+
+                <div class="pa-1">
+                    <button mat-raised-button color="primary">Lọc</button>
+                </div>
+
+            </mat-sidenav>
+            <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
+                <button (click)="productsnav.toggle()" mat-icon-button>
+                    <mat-icon>short_text</mat-icon>
+                </button>
+                <span class="mr-1 ml-1">Xem theo</span>
+            </mat-toolbar>
+            <div fxLayout="row" fxFlex>
+                <br>
+            </div> -->
+            <div fxLayout="row wrap">
+                <div fxFlex.gt-md="49.33%" fxFlex.gt-sm="49.33%" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pp of pondPrePares">
+                    <mat-card>
+                        <div fxLayout="row">
+                            <div class="pa-1" fxFlex>
+                                <div fxLayout="row">
+                                    <div fxFlex="100">
+                                        <h4 class="ma-0">{{ pp.pondprepareName | uppercase }}</h4>
+                                    </div>
+                                    <a matTooltip="Sửa" matTooltipPosition="above">
+                                        <mat-icon>create</mat-icon>
+                                    </a>
+                                </div>
+                                <div class="text-date" fxLayout="column">
+                                    <div fxLayout="row">
+                                        <small>Vụ {{ season.seasonName }} - Ao {{ pond.pondName  }}</small>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="end end">
+                                        <span>Ngày chuẩn bị: {{ pp.createdDate | date:'dd - MM - yyyy h:mm' }}</span>
+                                    </div>
+                                </div>
+                                <hr style="border: 0.5px solid rgb(177, 170, 170)">
+                                <br>
+                                <div fxLayout="column">
+                                    <div fxLayout="row">
+                                        <table mat-table [(dataSource)]="pp.details">
+                        
+                                            <ng-container matColumnDef="material">
+                                                <th mat-header-cell *matHeaderCellDef>Nguyên vật liệu sử dụng </th>
+                                                <td mat-cell *matCellDef="let element"> {{ element.storages.productName }} </td>
+                                            </ng-container>
+                                            
+                                            <ng-container matColumnDef="quantity">
+                                                <th mat-header-cell *matHeaderCellDef> Số lượng </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{ element.quantity }}&nbsp;
+                                                    <span *ngIf="element.storages.unit === 0">Bao</span>
+                                                    <span *ngIf="element.storages.unit === 1">Chai</span>
+                                                    <span *ngIf="element.storages.unit === 2">Cái</span>
+                                                    <span *ngIf="element.storages.unit === 3">Kg</span>
+                                                    <span *ngIf="element.storages.unit === 4">Thùng</span>
+                                                    <span *ngIf="element.storages.unit === 5">Vĩ</span>
+                                                </td>
+                                            </ng-container>
+                                            
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                        </table>
+                                        <!-- <div fxLayout="column" fxFlex="53.33">
+                                            <b>Nguyên, vật liệu sử dụng</b>
+                                            <p>Thuốc diệt rong</p>
+                                            <p>Thuốc diệt rong</p>
+                                            <p>Thuốc diệt rong</p>
+                                        </div>
+                                        <div fxLayout="column" fxFlex="23.33">
+                                            <b>Số lượng</b>
+                                            <p>1 chai</p>
+                                            <p>1 chai</p>
+                                            <p>1 chai</p>
+                                        </div>
+                                        <div fxLayout="column" fxFlex="23.33">
+                                            <b>Chi phí</b>
+                                            <p>200 000</p>
+                                            <p>200 000</p>
+                                            <p>200 000</p>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                                <br>
+                                <hr style="border: 0.5px solid rgb(177, 170, 170)">
+                                <br>
+                                <div fxLayout="row">
+                                    <b fxFlex="100">Thêm chi phí phát sinh</b>
+                                    <a href="javascript:;" matTooltip="Thêm chi phí phát sinh"  matTooltipPosition="above" (click)="gotoAdd(pp.pondPrepareUUId)">
+                                        <mat-icon>library_add</mat-icon>
+                                    </a>
+                                </div>
+                                <div fxLayout="row" *ngFor="let inc of pp.incurreds">
+                                    <mat-accordion fxFlex="100">
+                                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <mat-icon style="margin-right:5px" color="warn">new_releases</mat-icon>
+                                                    <b class="title-waste">Chi phí phát sinh {{ inc.incurredName }}</b>
+                                                </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <p><b>Tên chi phí:</b>&nbsp;{{ inc.incurredName }}</p>
+                                            <p><b>Giá trị:</b>&nbsp;{{ inc.value | currency:'VNĐ ' }}</p>
+                                            <p><b>Chịu trách nhiệm:</b>&nbsp;{{ inc.user.lastname }} {{ inc.user.firstname }}</p>
+                                            <p><b>Ghi chú:</b>&nbsp;{{ inc.notes || 'Không có ghi chú.' }}</p>
+                                            <hr><br>
+                                            <div fxLayout="row" fxLayoutAlign="end center">
+                                                <button (click)="gotoEdit(inc.incurredUUId)" mat-raised-button class="mat-green-700">Sửa</button>
+                                            </div>
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                    &nbsp;
+                </div>
+            </div>
+        </mat-sidenav-container>
+    </div>
+</mat-card>

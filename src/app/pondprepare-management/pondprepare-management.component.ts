@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { PondprepareManagementService } from './pondprepare-management.service';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from './../constants/format-date';
 import { tokenName } from '../../environments';
 import { AppService } from '../app.service';
-import * as moment from 'moment';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { Router } from '@angular/router';
+import * as jwtDecode from 'jwt-decode';
+import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 
 @Component({
     selector: 'app-pondprepare-management',
@@ -21,52 +21,161 @@ import { Router } from '@angular/router';
 })
 
 export class PondprepareManagementComponent implements OnInit {
-    displayedColumns: string[] = ['Material', 'quantity', 'price'];
-    preloader = false;
-    pondprepare: any[] = [];
     token: string;
+    ponds: any[] = [];
+    ownerId: number;
+    isBoss: boolean = false;
+    seasons: any[] = [];
+    seasonPresent: any = {};
+
+    preloader: boolean = false;
+
+    realSeasonPresent: any = {};
+    checkSeasonPresent: boolean = true;
+
     constructor(
         private pondManagementService: PondManagementService,
-        private snackBar: MatSnackBar,
+        private seasionManagementService: SeasionManagementService,
         private router: Router,
-        private pondprepareManagementService: PondprepareManagementService,
-        private appService: AppService
+        private appService: AppService,
+        public snackBar: MatSnackBar
     ) {
         this.token = this.appService.getCookie(tokenName);
+        const deToken: any = jwtDecode(this.token);
+        this.ownerId = deToken.createdBy == null && deToken.roles.length == 0 ? deToken.userId : deToken.roles[0].bossId;
+        if(deToken.userId === this.ownerId) {
+            this.isBoss = true;
+        }
     }
 
     ngOnInit() {
+        if(this.isBoss){
+            this.initBoss();
+        } else {
+            this.initEmp();
+        }
+    }
+
+    initBoss() {
+        this.getSeason();
+    }
+
+    initEmp() {
+        this.getPond();
+    }
+
+    getSeason() {
+        this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
+            if (res.success) {
+                this.seasons = res.seasons;
+                for(let i = 0; i < res.seasons.length;  i++) {
+                    if(res.seasons[i].status === 0) {
+                        this.seasonPresent = res.seasons[i]
+                        this.realSeasonPresent = res.seasons[i]
+                        break;
+                    }
+                    if(i === res.seasons.length - 1){
+                        this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                            duration: 3000,
+                            horizontalPosition: "center",
+                            verticalPosition: 'top'
+                        });
+                        this.router.navigate['/quan-ly-chat-thai']
+                    }
+                }
+                this.getAllPondWithSeasonUUId();
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+        })
+    }
+
+    goto(path) {
+        this.router.navigate([path]);
+    }
+
+    getPond() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getAllPond(this.token).subscribe((res) => {
-            // if (res.success) {
-            //     this.pondprepare = res.pondPrepare.map((element: any) => {
-            //         return {
-            //             pondprepareName: element.pondprepareName,
-            //             pondprepareCreatedDate: moment(element.createdDate).format(`DD - MM - YYYY`),
-            //             pondName: element.seasonAndPond.ponds.pondName,
-            //             seasonName: element.seasonAndPond.seasons.seasonName,
-            //             pondPrepareId: element.pondPrepareId,
-            //             details: element.details
-            //         }
-            //     });
-            // } else {
-            //     this.snackBar.open(res.message, 'Đóng', {
-            //         duration: 3000,
-            //         horizontalPosition: "center",
-            //         verticalPosition: 'top'
-            //     });
-            // }
+        this.pondManagementService.getPondAdvanced({
+            image: true
+        },this.token).subscribe(res => {
+            if (res.success) {
+                this.ponds = res.ponds;
+                if(!res.ponds.length) {
+                    this.snackBar.open('Không tìm thấy ao khả dụng.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
             this.preloader = !this.preloader;
-        });
+        })
+    }
+
+    gotoAdd = (pondUUId: string) => {
+        this.router.navigate(['/quan-ly-chuan-bi-ao/them', pondUUId]);
+    }
+
+    gotoAnalysis = (pondUUId: string) => {
+        this.router.navigate(['/quan-ly-chuan-bi-ao/thong-ke', pondUUId, this.seasonPresent.seasonUUId]);
+    }
+
+    changeSeason(season: any){
+        this.seasonPresent = season;
+        this.getAllPondWithSeasonUUId();
+    }
+
+    getAllPondWithSeasonUUId() {
+        this.preloader = !this.preloader;
+        this.pondManagementService.getPondAdvanced({
+            image: true,
+            seasonid: this.seasonPresent.seasonId
+        }, this.token).subscribe(res => {
+            if (res.success) {
+                this.ponds = res.ponds;
+                if(!res.ponds.length) {
+                    this.snackBar.open('Không tìm thấy ao khả dụng.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+            if(this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId){
+                this.checkSeasonPresent = false;
+            } else {
+                this.checkSeasonPresent = true;
+            }
+            this.preloader = !this.preloader;
+        })
     }
 
     isOver(): boolean {
         return window.matchMedia(`(max-width: 960px)`).matches;
     }
 
-    panelOpenState = false;
-
-    goto(path) {
-        this.router.navigate([path]);
+    isMac(): boolean {
+        let bool = false;
+        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
+            bool = true;
+        }
+        return bool;
     }
 }

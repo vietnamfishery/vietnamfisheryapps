@@ -5,8 +5,8 @@ import { AddPondprepareComponent } from './add-pondprepare/add-pondprepare.compo
 import { EditPondprepareComponent } from './edit-pondprepare/edit-pondprepare.component';
 import { AddcostPondprepareComponent } from './addcost-pondprepare/addcost-pondprepare.component';
 import { EditcostPondprepareComponent } from './editcost-pondprepare/editcost-pondprepare.component';
-import { ListPondComponent } from './list-pond/list-pond.component';
 import { AddOldPondPrepareComponent } from './add-old-pond-prepare/add-old-pond-prepare.component';
+import { AnalysisPondPrepareComponent } from './analysis-pond-prepare/analysis-pond-prepare.component';
 
 const routes: Routes = [
     {
@@ -26,16 +26,16 @@ const routes: Routes = [
         component: EditPondprepareComponent
     },
     {
-        path: 'them-chi-phi-phat-sinh',
+        path: 'thong-ke/:pondUUId/:seasonUUId/chi-phi-phat-sinh/them/:pondPrepareUUId',
         component: AddcostPondprepareComponent
     },
     {
-        path: 'sua-chi-phi-phat-sinh',
+        path: 'thong-ke/:pondUUId/:seasonUUId/chi-phi-phat-sinh/cap-nhat/:incurredUUId',
         component: EditcostPondprepareComponent
     },
     {
-        path: 'danh-sach-ao',
-        component: ListPondComponent
+        path: 'thong-ke/:pondUUId/:seasonUUId',
+        component: AnalysisPondPrepareComponent
     }
 ];
 

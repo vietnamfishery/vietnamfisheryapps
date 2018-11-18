@@ -142,11 +142,6 @@ export class StockingManagementComponent implements OnInit {
 
     changeSeason(season: any) {
         this.seasonPresent = season;
-        if (this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId) {
-            this.checkSeasonPresent = false;
-        } else {
-            this.checkSeasonPresent = true;
-        }
         this.getStocking();
     }
 
@@ -173,6 +168,11 @@ export class StockingManagementComponent implements OnInit {
                     horizontalPosition: "center",
                     verticalPosition: 'top'
                 });
+            }
+            if(this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId){
+                this.checkSeasonPresent = false;
+            } else {
+                this.checkSeasonPresent = true;
             }
             this.preloader = !this.preloader;
         })
