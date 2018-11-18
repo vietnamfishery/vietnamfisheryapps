@@ -7,6 +7,7 @@ import { tokenName } from '../../environments';
 import * as moment from 'moment';
 import { DialogAddRole } from './dialog-add-role.component';
 import * as jwtDecode from 'jwt-decode';
+import { async } from 'q';
 
 export interface DialogData {
     animal: string;
@@ -77,6 +78,18 @@ export class PondManagementComponent implements OnInit {
             this.preloader = !this.preloader;
         });
     }
+
+    // countSeasonWithPond = async (pondUUId: string): Promise<any> => {
+    //     console.log(pondUUId);
+    //     return new Promise((resolve, reject) => {
+    //         this.pondManagementService.countSeasonWithPond({
+    //             pondUUId
+    //         }, this.token).subscribe(res => {
+    //             console.log(res);
+    //             return resolve(res)
+    //         })
+    //     })
+    // }
 
     openDialogAddRole(pondId: number): void {
         const dialogRef = this.dialog.open(DialogAddRole, {

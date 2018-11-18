@@ -149,4 +149,8 @@ export class PondManagementService {
         }
         return this.http.get<any>(host + '/ponds/gets/advanced', headers);
     }
+
+    countSeasonWithPond(data: any, token: string): Observable<any> {
+        return this.http.post<any>(host + '/ponds/seasons/count', data, this.appService.setHeader(token));
+    }
 }
