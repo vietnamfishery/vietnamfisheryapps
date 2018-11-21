@@ -1,0 +1,58 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <div class="text-xs-center pb-1">
+        <h2 class="mat-text-muted">NHẬT KÝ SỬ DỤNG THUỐC</h2>
+        <P>{{ data.event.using.createdDate | date:'dd/MM/yyyy - hh:mm:ss a' }}</P>
+        <div class="pb-1">
+            <hr>
+        </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around">
+        <div>
+            <b>Tên gợi nhắc lần sử dụng thuốc: </b>&nbsp;<span>{{ data.event.takeCare.takeCareName }}</span>
+        </div>
+        <div>
+            <b>Nguyên nhân/trịu chứng: </b>&nbsp;<span>{{ data.event.using.causesNSymptoms }}</span>
+        </div>
+        <div>
+            <b>Độ lớn trung bình thủy sản: </b>&nbsp;<span>{{ data.event.using.averageSize }}</span>
+        </div>
+        <div>
+            <b>Tổng sinh khối: </b>&nbsp;<span>{{ data.event.using.totalBiomass }}</span>
+        </div>
+        <div>
+            <b>Số ngày có thể thu hoạch gần nhất: </b>&nbsp;<span>{{ data.event.using.latestHarvestDate }}</span>
+        </div>
+        <div class="pb-1">
+            <hr>
+        </div>
+        <div>
+            <b>Tên thuốc: </b>&nbsp;<span>{{ data.event.using.storages.productName }} -
+                <span *ngIf="data.event.using.storages.unit === 0">Bao</span>
+                <span *ngIf="data.event.using.storages.unit === 1">Chai</span>
+                <span *ngIf="data.event.using.storages.unit === 2">Cái</span>
+                <span *ngIf="data.event.using.storages.unit === 3">Kg</span>
+                <span *ngIf="data.event.using.storages.unit === 4">Thùng</span>
+                <span *ngIf="data.event.using.storages.unit === 5">Vĩ</span>
+            </span>
+        </div>
+        <div>
+            <b>Số lượng thuốc sử dụng: </b>&nbsp;<span>{{ data.event.using.quantity }}</span>
+        </div>
+        <div class="pb-1">
+            <hr>
+        </div>
+        <div>
+            <b>Người hướng dẫn sử dụng thuốc: </b>&nbsp;<span>{{ data.event.using.mentor }}</span>
+        </div>
+        <div>
+            <b>Kết quả:</b>&nbsp;<span>{{ data.event.using.result }}</span>
+        </div>
+        <br>
+        <div class="pb-1">
+            <hr>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-around">
+            <button mat-flat-button [mat-dialog-close]="true" color="warn" (click)="dialogRef.close()">Đóng</button>
+        </div>
+    </div>
+</div>

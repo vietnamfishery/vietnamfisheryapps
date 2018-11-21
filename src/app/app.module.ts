@@ -7,8 +7,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-// import localeVi from '@angular/common/locales/vi';
-// import localeViExtra from '@angular/common/locales/extra/vi';
+import localeVi from '@angular/common/locales/vi';
+import localeViExtra from '@angular/common/locales/extra/vi';
 import {
     MatSidenavModule,
     MatCardModule,
@@ -50,9 +50,9 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { authorizationReducer } from './rootStores/';
 import { AppService } from './app.service';
-// import { registerLocaleData } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 
-// registerLocaleData(localeVi, 'vi', localeViExtra);
+registerLocaleData(localeVi, 'vi', localeViExtra);
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -112,7 +112,7 @@ export function createTranslateLoader(http: HttpClient) {
     ],
     providers: [
         AppService,
-        // { provide: LOCALE_ID, useValue: 'vi' }
+        { provide: LOCALE_ID, useValue: 'vi' }
     ],
     bootstrap: [AppComponent]
 })

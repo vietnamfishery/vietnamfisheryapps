@@ -15,6 +15,6 @@ export class DiaryService {
     ) { }
 
     addDiary(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/PondDiarys/add', data, this.appService.setHeader(token));
+        return this.http.post<any>(host + '/pondDiarys/add', data, this.appService.setHeader(token));
     }
 }

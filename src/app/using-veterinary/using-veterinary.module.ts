@@ -9,27 +9,37 @@ import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { AnalysisUsingVeterinaryComponent } from './analysis-using-veterinary/analysis-using-veterinary.component';
+import { CalendarDialogComponent } from './analysis-using-veterinary/dialog/component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
     imports: [
         CommonModule,
         MatIconModule,
         MatToolbarModule,
+        MatProgressBarModule,
         MatCardModule,
         ChartsModule,
+        FlexLayoutModule,
         MatTabsModule,
         MatTooltipModule,
         MatButtonModule,
         MatButtonToggleModule,
         MatListModule,
+        MatDatepickerModule,
         MatSliderModule,
         MatCheckboxModule,
         MatSidenavModule,
-        MatDatepickerModule,
         FormsModule,
         FlexLayoutModule,
         MatDialogModule,
         MatFormFieldModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        }),
         MatInputModule,
         MatSelectModule,
         MatRadioModule,
@@ -39,6 +49,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
         MatSnackBarModule,
         UsingVeterinaryRoutingModule
     ],
-    declarations: [UsingVeterinaryComponent, UsingVeterinayComponent]
+    declarations: [UsingVeterinaryComponent, UsingVeterinayComponent, AnalysisUsingVeterinaryComponent, CalendarDialogComponent],
+    entryComponents: [CalendarDialogComponent]
 })
 export class UsingVeterinaryModule { }

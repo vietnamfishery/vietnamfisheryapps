@@ -83,7 +83,7 @@ export class AddUsingFoodComponent implements OnInit {
     }
 
     onSubmit() {
-        this.usingFoodService.addUsingFood(this.token, this.form.value).subscribe(res => {
+        this.usingFoodService.addUsingFood(this.form.value, this.token).subscribe(res => {
             if (res.success) {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

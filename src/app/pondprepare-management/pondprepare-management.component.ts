@@ -94,7 +94,7 @@ export class PondprepareManagementComponent implements OnInit {
         })
     }
 
-    goto(path) {
+    goto(path: any) {
         this.router.navigate([path]);
     }
 

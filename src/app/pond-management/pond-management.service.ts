@@ -62,7 +62,7 @@ export class PondManagementService {
         return this.http.get<any>(host + '/ponds/gets', this.appService.setHeader(token));
     }
 
-    public getPondByUUId(UUid: string, token): Observable<any> {
+    public getPondByUUId(UUid: string, token: string): Observable<any> {
         return this.http.get(host + '/ponds/get/' + UUid, this.appService.setHeader(token));
     }
 
@@ -70,7 +70,7 @@ export class PondManagementService {
         return this.http.get(host + '/ponds/gets/withoutImage', this.appService.setHeader(token));
     }
 
-    public updatePond(data: any, token): Observable<any> {
+    public updatePond(data: any, token: string): Observable<any> {
         const fd = new FormData();
         fd.append('images', data.images, data.images.name);
         fd.append('pondUUId', data.pondUUId);

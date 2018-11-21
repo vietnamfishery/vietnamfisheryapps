@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsingVeterinaryComponent } from './using-veterinary.component';
 import { UsingVeterinayComponent } from './using-veterinay/using-veterinay.component';
+import { AnalysisUsingVeterinaryComponent } from './analysis-using-veterinary/analysis-using-veterinary.component';
 
 const routes: Routes = [
     {
@@ -9,6 +10,9 @@ const routes: Routes = [
     },
     {
         path: 'them/:pondUUId', component: UsingVeterinayComponent
+    },
+    {
+        path: 'thong-ke/:pondUUId/:seasonUUId', component: AnalysisUsingVeterinaryComponent
     }
 ];
 

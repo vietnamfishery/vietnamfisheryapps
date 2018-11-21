@@ -25,6 +25,8 @@ export class UsingFoodComponent implements OnInit {
     realSeasonPresent: any = {};
     checkSeasonPresent: boolean = true;
 
+    snp: any = {};
+
     constructor(
         private pondManagementService: PondManagementService,
         private seasionManagementService: SeasionManagementService,
@@ -86,7 +88,7 @@ export class UsingFoodComponent implements OnInit {
         })
     }
 
-    goto(path) {
+    goto(path: string) {
         this.router.navigate([path]);
     }
 
@@ -123,6 +125,10 @@ export class UsingFoodComponent implements OnInit {
 
     gotoAdd = (pondUUId: string) => {
         this.router.navigate(['/cho-an/them', pondUUId]);
+    }
+
+    gotoAnalysis = (pondUUId: string) => {
+        this.router.navigate(['/cho-an/thong-ke', pondUUId, this.seasonPresent.seasonUUId]);
     }
 
     changeSeason(season: any){
