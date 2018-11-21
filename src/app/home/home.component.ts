@@ -14,16 +14,16 @@ export class HomeComponent implements OnInit {
     lastname: string;
     firstname: string;
 
-    public lineChartData: Array<any> = [
-        {data: [1], label: 'Series A'},
+    // public lineChartData: Array<any> = [
+    //     {data: [1], label: 'Series A'},
         // {data: [2, 4, 4, 1, 8.6, 3.2, 0], label: 'Series B'}
-    ];
+    // ];
 
-    public lineChartLabels: Array<any> = ['14/11/2018'];
-    public lineChartType: string = 'line';
+    // public lineChartLabels: Array<any> = ['14/11/2018'];
+    // public lineChartType: string = 'line';
 
     constructor(
-        private appService: AppService,
+        private appService: AppService
     ) {
         this.token = this.appService.getCookie(tokenName);
         const deToken: any = jwtDecode(this.token);
@@ -35,11 +35,11 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
     }
 
-    public chartClicked(e: any): void {
-        console.log(e);
-    }
+    // public chartClicked(e: any): void {
+    //     console.log(e);
+    // }
 
-    public chartHovered(e: any): void {
-        console.log(e);
-    }
+    // public chartHovered(e: any): void {
+    //     console.log(e);
+    // }
 }

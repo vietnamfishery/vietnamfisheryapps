@@ -48,12 +48,12 @@ export class AddStockingComponent implements OnInit {
 
     ngOnInit() {
         this.route.paramMap.pipe(
-        switchMap(params => {
-            this.pondUUId = params.get('pondUUId');
-            return this.pondManagementService.getPondByUUId(this.pondUUId, this.token);
-        })).subscribe(res => {
-            this.pond = res.pond
-        });
+            switchMap(params => {
+                this.pondUUId = params.get('pondUUId');
+                return this.pondManagementService.getPondByUUId(this.pondUUId, this.token);
+            })).subscribe(res => {
+                this.pond = res.pond
+            });
         this.storageManagementService.getBreedWithUser(this.token).subscribe(res => {
             this.breeds = res.breeds ? res.breeds : [];
         });
@@ -72,24 +72,40 @@ export class AddStockingComponent implements OnInit {
         });
     }
 
+    checkForm(slt, pH, salty) {
+        const reg = new RegExp(/^[0-9]+$/);
+        if (!reg.test(slt) || !reg.test(pH) || !reg.test(salty)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
         this.form.patchValue({
             pondId: this.pond.pondId
         });
-        this.stockingService.addStocking(this.form.value, this.token).subscribe(res => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-                this.router.navigate(['/quan-ly-tha-nuoi']);
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-        })
+
+        if (this.checkForm(this.form.controls.stockingQuantity.value, this.form.controls.phFirst.value, this.form.controls.salinityFirst.value)) {
+            this.stockingService.addStocking(this.form.value, this.token).subscribe(res => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    this.router.navigate(['/quan-ly-tha-nuoi']);
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            })
+        }
     }
 }

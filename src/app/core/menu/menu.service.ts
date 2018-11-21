@@ -56,7 +56,7 @@ const MENUITEMS: Array<Menu> = [
         state: 'su-dung-thuoc-&-duoc-pham',
         name: 'Sử dụng thuốc & dược phẩm',
         type: 'link',
-        icon: 'room_service',
+        icon: 'format_color_fill',
         isRole: false
     },
     {
@@ -188,7 +188,7 @@ export class MenuService {
             state: 'su-dung-thuoc-&-duoc-pham',
             name: 'Sử dụng thuốc & dược phẩm',
             type: 'link',
-            icon: 'room_service',
+            icon: 'format_color_fill',
             isRole: this.isBoss || this.isPond
         },
         {

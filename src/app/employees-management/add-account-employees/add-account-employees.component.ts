@@ -60,8 +60,14 @@ export class AddAccountEmployeesComponent implements OnInit {
     const user: Users = this.form.value;
     this.employeesManagementService.register_employees(user, this.token).subscribe(res => {
       if(res.success){
-        this.form.reset();
+        this.snackBar.open(res.message, 'Đóng', {
+            duration: 3000,
+            horizontalPosition: "right"
+        });
+        setTimeout(() => {
+            this.form.reset();
         this.router.navigate( ['/quan-ly-phan-quyen'] );
+        }, 500);
       }else{
         this.snackBar.open(res.message, 'Đóng', {
           duration: 2500,

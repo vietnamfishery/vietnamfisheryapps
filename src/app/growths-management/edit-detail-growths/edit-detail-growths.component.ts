@@ -73,21 +73,36 @@ export class EditDetailGrowthsComponent implements OnInit {
         this.adapter.setLocale('vi');
     }
 
+    checkForm(mdtb, sltb, tdtt, tls) {
+        const reg = new RegExp(/^[0-9]+$/);
+        if (!reg.test(mdtb) || !reg.test(sltb) || !reg.test(tdtt) || !reg.test(tls)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
-        this.growthsManagementService.updateGrowth(this.form.value, this.token).subscribe((res) => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-                this.router.navigate(['/quan-ly-tang-truong']);
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 2500,
-                    horizontalPosition: "right"
-                });
-            }
-            this.form.reset();
-        });
+        if (this.checkForm(this.form.controls.averageDensity.value, this.form.controls.averageMass.value, this.form.controls.speedOdGrowth.value, this.form.controls.livingRatio.value)) {
+            this.growthsManagementService.updateGrowth(this.form.value, this.token).subscribe((res) => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    this.router.navigate(['/quan-ly-tang-truong']);
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 2500,
+                        horizontalPosition: "right"
+                    });
+                }
+                this.form.reset();
+            });
+        }
     }
 }

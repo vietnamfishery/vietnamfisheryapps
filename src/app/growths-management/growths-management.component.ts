@@ -69,6 +69,13 @@ export class GrowthsManagementComponent implements OnInit {
             ownerId: this.ownerId
         }, this.token).subscribe(res => {
             if (res.success) {
+                if(res.ponds.length == 0){
+                    this.snackBar.open('Bạn không có ao nuôi nào trong vụ nuôi vừa chọn', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
                 this.ponds = res.ponds;
                 this.initPond = this.ponds[0];
                 this.getGrowth();

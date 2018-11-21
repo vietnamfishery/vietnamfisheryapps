@@ -2,10 +2,10 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="text-xs-center pb-1">
             <h2 class="mat-text-muted">CHỈNH SỬA PHÂN QUYỀN</h2>
-            <h3>{{ role.users.lastname }} {{ role.users.firstname }}</h3>
+            <h3>{{ lastname }} {{ firstname }}</h3>
             <hr>
         </div>
-        <div fxLayout="column" fxLayoutAlign="space-around">
+        <div fxLayout="column">
             <div class="pb-1">
                 <mat-form-field fxFlex="100">
                     <mat-select placeholder="Quyền quản lý" [formControl]="form.controls['roles']">
@@ -19,9 +19,9 @@
         <div class="pb-1">
             <hr>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-around">
-            <button mat-flat-button class="mat-green-700">Thêm</button>
-            <button mat-flat-button [mat-dialog-close]="true" color="warn">Huỷ</button>
-        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+                <button mat-flat-button type="submit" color="primary" [disabled]="!form.valid" style="margin:5px">Thêm</button>
+                <button mat-flat-button [mat-dialog-close]="true" color="warn">Huỷ</button>
+            </div>
     </form>
 </div>

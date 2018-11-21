@@ -1,7 +1,12 @@
 <mat-card fxLayout="column">
-  <mat-toolbar color="primary" fxLayout="column" fxLayoutAlign="center center">
-    <h1 class="mat-headline center-align">Thêm thông tin chất thải</h1>
-  </mat-toolbar>
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">THÊM THÔNG TIN CHẤT THẢI</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi tiết thông tin chất thải</h4>
+    </mat-card-subtitle>
+  </div>
 
   <div fxLayout="row">
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
@@ -24,7 +29,7 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Số lượng hoặc trọng lượng" type="number" min="1" [formControl]="form.controls['quantity']"
+                <input matInput placeholder="Số lượng hoặc trọng lượng" #sl type="number" min="1" [formControl]="form.controls['quantity']"
                   autocomplete="off" required>
               </mat-form-field>
               <mat-form-field fxFlex="100">

@@ -1,14 +1,14 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="row">
-      <h1 class="mat-headline center-align" fxFlex="100">Chào mừng {{ lastname }} {{ firstname }}</h1>
-      <a mat-flat-button color="white" *ngIf="isBoss" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao" matTooltipPosition="above"
-        fxFlex style="margin-right: 10px">
-        <mat-icon>library_add</mat-icon>
-      </a>
+        <h1 class="mat-headline center-align" fxFlex="100">Chào mừng {{ lastname }} {{ firstname }}</h1>
+        <a mat-flat-button color="white" *ngIf="isBoss" routerLink="/quan-ly-ao/them-ao-nuoi" matTooltip="Thêm mới ao"
+            matTooltipPosition="above" fxFlex style="margin-right: 10px">
+            <mat-icon>library_add</mat-icon>
+        </a>
     </mat-toolbar>
     <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
     <div fxLayout="rows">
-        <div fxFlex="40" fxFlexOffset="5">
+        <!-- <div fxFlex="40" fxFlexOffset="5">
             <canvas baseChart
                     [datasets]="lineChartData"
                     [labels]="lineChartLabels"
@@ -18,6 +18,61 @@
                     (chartClick)="chartClicked($event)">
             </canvas>
             <div fxLayout="row" fxLayoutAlign="center center"><i><b>Biểu đồ </b>Nhật ký hàng ngày</i></div>
+        </div> -->
+        <ng-template matTabLabel>Activity</ng-template>
+        <div class="activity-stream">
+            <mat-card class="shadow-none">
+                <mat-card-header>
+                    <img matCardAvatar src="assets/images/face1.jpg">
+                    <mat-card-title>Received a call from Joel</mat-card-title>
+                    <mat-card-subtitle>Header subtitle</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card class="shadow-none">
+                <mat-card-header>
+                    <img matCardAvatar src="assets/images/avatar.jpg">
+                    <mat-card-title>Header title</mat-card-title>
+                    <mat-card-subtitle>Header subtitle</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce
+                        dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit
+                        amet risus. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo
+                        luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                    <a href="javascript:;" class="mr-1">Like</a>
+                    <a href="javascript:;">Comment</a>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="shadow-none">
+                <mat-card-header>
+                    <img matCardAvatar src="assets/images/face2.jpg">
+                    <mat-card-title>Header title</mat-card-title>
+                    <mat-card-subtitle>Added a photo</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <img src="https://source.unsplash.com/300x150">
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="shadow-none">
+                <mat-card-header>
+                    <img matCardAvatar src="assets/images/face3.jpg">
+                    <mat-card-title>Header title</mat-card-title>
+                    <mat-card-subtitle>Header subtitle</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce
+                        dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit
+                        amet risus. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo
+                        luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="shadow-none">
+                <mat-card-header>
+                    <img matCardAvatar src="assets/images/face4.jpg">
+                    <mat-card-title>Uploaded new file</mat-card-title>
+                    <mat-card-subtitle>Header subtitle</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
         </div>
     </div>
-  </mat-card>
+</mat-card>

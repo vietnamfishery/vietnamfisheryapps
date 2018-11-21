@@ -25,7 +25,7 @@ export class RoleManagementComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 
 	animal: string;
-	name: string;
+    name: string;
 	constructor(
 		private router: Router,
 		private employeesManagementService: EmployeesManagementService,
@@ -36,8 +36,12 @@ export class RoleManagementComponent implements OnInit {
 
 	ngOnInit() {
 		this.token = this.appService.getCookie(tokenName);
-		this.updateTable();
-	}
+        this.updateTable();
+    }
+    
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
 
 	openDialogAddRoleManagement(rolesId): void {
 		const dialogRef = this.dialog.open(DialogAddRoleManagement, {
@@ -64,7 +68,7 @@ export class RoleManagementComponent implements OnInit {
 				}
 			}
 			this.ELEMENT_DATA = arrayResult;
-			this.dataSource = new MatTableDataSource<Users>(this.ELEMENT_DATA);
+            this.dataSource = new MatTableDataSource<Users>(this.ELEMENT_DATA);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
 		})
@@ -118,7 +122,9 @@ export class DialogAddRoleManagement implements OnInit {
 			firstname: '',
 			lastname: ''
 		},
-	};
+    };
+    lastname: string;
+    firstname: string;
 	public form: FormGroup;
 	rolesList: any[] = [
 		{
@@ -149,7 +155,9 @@ export class DialogAddRoleManagement implements OnInit {
 	loadData = () => {
 		this.employeesManagementService.getEmployeeById(this.token, (this.data as any).rolesId).subscribe((res: any) => {
 			if (res.success) {
-				this.role = res.roles;
+                this.role = res.roles;
+                this.lastname = res.roles.rolesUsers.lastname;
+                this.firstname = res.roles.rolesUsers.firstname;
 			} else {
 				this.snackBar.open(res.message, 'Đóng', {
 					duration: 2500,

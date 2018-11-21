@@ -24,11 +24,11 @@
             <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Mật độ trung bình (con/m2)" type="number" autocomplete="off" [formControl]="form.controls['averageDensity']"
+                <input matInput placeholder="Mật độ trung bình (con/m2)" #mdtb type="number" autocomplete="off" [formControl]="form.controls['averageDensity']"
                   required>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Sản lượng trung bình (g/con)" type="number" autocomplete="off" [formControl]="form.controls['averageMass']"
+                <input matInput placeholder="Sản lượng trung bình (g/con)" #sltb type="number" autocomplete="off" [formControl]="form.controls['averageMass']"
                   required>
               </mat-form-field>
             </div>
@@ -48,10 +48,10 @@
             <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Tốc độ tăng trưởng (%)" type="number" autocomplete="off" [formControl]="form.controls['speedOdGrowth']" required>
+                <input matInput placeholder="Tốc độ tăng trưởng (%)" #tdtt type="number" autocomplete="off" [formControl]="form.controls['speedOdGrowth']" required>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Tỉ lệ sống (%)" type="number" autocomplete="off" [formControl]="form.controls['livingRatio']" required>
+                <input matInput placeholder="Tỉ lệ sống (%)" type="number" #tls autocomplete="off" [formControl]="form.controls['livingRatio']" required>
               </mat-form-field>
             </div>
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
