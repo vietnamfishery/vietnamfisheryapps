@@ -1,0 +1,37 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <div class="text-xs-center pb-1">
+        <h2 class="mat-text-muted">NHẬT KÝ CHO ĂN</h2>
+        <P>{{ data.event.using.createdDate | date:'dd/MM/yyyy - hh:mm:ss a' }}</P>
+        <div class="pb-1">
+            <hr>
+        </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around">
+        <div>
+            <b>Tên gợi nhắc lần cho ăn: </b>&nbsp;<span>{{ data.event.takeCare.takeCareName }}</span>
+        </div>
+        <div>
+            <b>Tên thức ăn: </b>&nbsp;<span>{{ data.event.using.storages.productName }} -
+                <span *ngIf="data.event.using.storages.unit === 0">Bao</span>
+                <span *ngIf="data.event.using.storages.unit === 1">Chai</span>
+                <span *ngIf="data.event.using.storages.unit === 2">Cái</span>
+                <span *ngIf="data.event.using.storages.unit === 3">Kg</span>
+                <span *ngIf="data.event.using.storages.unit === 4">Thùng</span>
+                <span *ngIf="data.event.using.storages.unit === 5">Vĩ</span>
+            </span>
+        </div>
+        <div>
+            <b>Số lượng cho ăn: </b>&nbsp;<span>{{ data.event.using.totalFood }}</span>
+        </div>
+        <div>
+            <b>Trọng lượng thủy sản hiện tại: </b>&nbsp;<span>{{ data.event.using.massOfFishery }}</span>
+        </div>
+        <br>
+        <div class="pb-1">
+            <hr>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-around">
+            <button mat-flat-button [mat-dialog-close]="true" color="warn" (click)="dialogRef.close()">Đóng</button>
+        </div>
+    </div>
+</div>

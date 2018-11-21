@@ -15,7 +15,11 @@ export class UsingFoodService {
         private appService: AppService
     ) { }
 
-    addUsingFood = (token: string, data: any): Observable<any> => {
+    addUsingFood = (data: any, token: string): Observable<any> => {
+        return this.http.post(host + '/usingFoods/add', data, this.appService.setHeader(token))
+    }
+
+    getTake(data: any, token: string): Observable<any> {
         return this.http.post(host + '/usingFoods/add', data, this.appService.setHeader(token))
     }
 }

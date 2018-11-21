@@ -163,4 +163,8 @@ export class UsingVeterinaryComponent implements OnInit {
             this.preloader = !this.preloader;
         })
     }
+
+    gotoAnalysis = (pondUUId: string) => {
+        this.router.navigate(['/su-dung-thuoc-&-duoc-pham/thong-ke', pondUUId, this.seasonPresent.seasonUUId]);
+    }
 }

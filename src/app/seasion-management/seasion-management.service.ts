@@ -60,4 +60,8 @@ export class SeasionManagementService {
     public addSeasonAndPond(data: any, token: string): Observable<any> {
         return this.http.post(host + '/seasonAndPond/add', data, this.appService.setHeader(token));
     }
+    
+    public getTakeCare(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/takeCare/gets', data, this.appService.setHeader(token));
+    }
 }
