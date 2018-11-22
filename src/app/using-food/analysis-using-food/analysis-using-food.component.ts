@@ -159,7 +159,10 @@ export class AnalysisUsingFoodComponent implements OnInit {
         const obj: any = {
             pondId: this.pond.pondId,
             seasonId: this.season.seasonId,
-            type: 0
+            type: 0,
+            options: {
+                unitOfTime: 'month'
+            }
         }
         this.seasionManagementService.getTakeCare(obj, this.token).subscribe(res => {
             if(res.takeCare.length == 0) {

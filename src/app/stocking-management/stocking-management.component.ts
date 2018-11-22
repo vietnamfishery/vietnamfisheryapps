@@ -157,12 +157,10 @@ export class StockingManagementComponent implements OnInit {
         }
         this.stockingService.getStocking(obj, this.token).subscribe(res => {
             if (res.success) {
-                this.stocking = res.stocking.map(e => {
-                    e['createdDate'] = moment(e[`createdDate`]).format(`DD - MM - YYYY`);
-                    return e;
-                });
+                this.stocking = res.stocking
                 this.loadTable();
             } else {
+                this.dataSource.data = [];
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
                     horizontalPosition: "center",

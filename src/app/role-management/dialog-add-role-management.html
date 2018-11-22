@@ -2,7 +2,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="text-xs-center pb-1">
             <h2 class="mat-text-muted">CHỈNH SỬA PHÂN QUYỀN</h2>
-            <h3>{{ lastname }} {{ firstname }}</h3>
+            <h3>{{ role.userInfo.lastname }} {{ role.userInfo.firstname }}</h3>
             <hr>
         </div>
         <div fxLayout="column">

@@ -7,7 +7,6 @@ import { tokenName } from '../../environments';
 import * as moment from 'moment';
 import { DialogAddRole } from './dialog-add-role.component';
 import * as jwtDecode from 'jwt-decode';
-import { async } from 'q';
 
 export interface DialogData {
     animal: string;
@@ -23,6 +22,7 @@ export class PondManagementComponent implements OnInit {
     imageLink: string = '';
     pondCreatedDate: string;
     ponds: any[] = [];
+    ownerId: number;
 
     animal: string;
     name: string;
@@ -39,22 +39,26 @@ export class PondManagementComponent implements OnInit {
         private appService: AppService
     ) {
         this.token = this.appService.getCookie(tokenName);
-        this.isBoss = (jwtDecode(this.token) as any).createdBy === null;
+        const deToken: any = jwtDecode(this.token);
+        this.ownerId = deToken.createdBy == null && deToken.roles.length == 0 ? deToken.userId : deToken.roles[0].bossId;
+        if(deToken.userId === this.ownerId) {
+            this.isBoss = true;
+        }
     }
     
     ngOnInit() {
-        this.preloader = !this.preloader;
         this.reloadPond();
     }
 
     reloadPond = () => {
-        
+        this.preloader = !this.preloader;
         this.pondManagementService.getAllPond(this.token).subscribe((res: any) => {
             if (res.success) {
                 if (res.ponds.length == 0) {
                     this.snackBar.open('Bạn chưa có ao nào trong hệ thống', 'Đóng', {
                         duration: 2500,
-                        horizontalPosition: "right"
+                        horizontalPosition: "center",
+                        verticalPosition: "top"
                     });
                     this.notOwner = !this.notOwner;
                 }

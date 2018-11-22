@@ -5,6 +5,7 @@ import { EmployeesManagementService } from '../../employees-management/employees
 import { AppService } from '../../app.service';
 import { tokenName } from '../../../environments';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 
 @Component({
     selector: 'add-pond-user-roles',
@@ -14,6 +15,7 @@ export class AddPondUserRolesComponent implements OnInit {
     employeeArray: any[] = [];
     pondArray: any[] = [];
     token: string;
+    employeeId: number;
     public form: FormGroup;
 
     constructor(
@@ -22,6 +24,7 @@ export class AddPondUserRolesComponent implements OnInit {
         private fb: FormBuilder,
         public snackBar: MatSnackBar,
         private employeesManagementService: EmployeesManagementService,
+        private pondManagementService: PondManagementService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         this.token = this.appService.getCookie(tokenName);
@@ -29,9 +32,61 @@ export class AddPondUserRolesComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
-        this.employeesManagementService.getAllPondAndEmployees(this.token).subscribe((res: any) => {
-            this.employeeArray = res.user.employees;
-            this.pondArray = res.user.ponds;
+        this.getEmp()
+        this.init();
+    }
+    
+    init() {
+        this.pondManagementService.getPondOfBoss(this.token).subscribe(res => {
+            if(res.success) {
+                this.pondArray = res.ponds
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                })
+            }
+        })
+    }
+
+    getEmp() {
+        this.employeesManagementService.getUserManageWithPond(this.token).subscribe((res: any) => {
+            if (res.success) {
+                const arrayResult: any[] = [];
+                if(res.employees.length === 0) {
+                    return this.snackBar.open('Bạn chưa có tài khoản con nào. Chọn chức năng quản lý phân quyền để thêm tài khoản con.', 'Đóng', {
+                        duration: 2500,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+                this.employeeArray = res.employees
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+        })
+    }
+
+    getPond(employeeId: number) {
+        this.pondManagementService.getPondWithUserNotManage({
+            employeeId
+        }, this.token).subscribe(res => {
+            if(res.success) {
+                if(!res.ponds.length) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 2500,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                } else {
+                    this.pondArray = res.ponds
+                }
+            }
         })
     }
 

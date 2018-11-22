@@ -5,10 +5,11 @@
     "ng": "ng",
     "start": "ng serve --host vietnamfishery -o",
     "hp6": "ng serve --host 172.16.193.103",
-    "build": "ng build",
+    "build": "ng build --prod -aot",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {
