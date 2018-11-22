@@ -147,7 +147,6 @@ export class AddPondComponent implements OnInit {
                 this.pondManagementService.getBase64(files).then((base: string) => {
                     this.imageLink = base;
                 });
-                console.log(files);
             } else {
                 this.snackBar.open("Hình ảnh không được cho phép, vui lòng thử lại!", 'Đóng', {
                     duration: 2500,

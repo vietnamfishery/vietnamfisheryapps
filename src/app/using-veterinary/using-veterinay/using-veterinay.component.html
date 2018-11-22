@@ -1,12 +1,16 @@
 <mat-card fxLayout="column">
-    <mat-toolbar color="primary" class="table-header" fxLayout="column">
-        <h1 fxLayout="row" fxLayoutAlign="center center" fxFlex="100"><b>THÊM HOẠT ĐỘNG CHO ĂN - {{ (pond ? pond.pondName : '') | uppercase }}</b></h1>
-        <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>Điền thông tin vào mẫu dưới đây và nhấn nút </i><b> Thêm</b></h6>
-    </mat-toolbar>
+    <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>
+            <h2 class="mat-headline center-align">THÊM HOẠT ĐỘNG SỬ DỤNG THUỐC - {{ (pond ? pond.pondName : '') | uppercase }}</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h4 class="subtitle">Nhập chi tiết thông tin sử dụng thuốc của bạn</h4>
+        </mat-card-subtitle>
+    </div>
     <div fxLayout="rows">
         <form [formGroup]="form" class="mr" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
             <mat-form-field>
-                <input matInput placeholder="Tên gợi nhắc lần cho ăn" [formControl] ="form.controls['takeCareName']" autocomplete="off" required>
+                <input matInput placeholder="Tên gợi nhắc lần sử dụng thuốc" [formControl] ="form.controls['takeCareName']" autocomplete="off" required>
             </mat-form-field>
 
             <mat-form-field>
@@ -26,10 +30,11 @@
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Ngày sớm nhất được thu hoạch</mat-label>
+                <!-- <mat-label>Ngày sớm nhất được thu hoạch</mat-label>
                 <input matInput [matDatepicker]="latestHarvestDate" placeholder="Chọn một ngày" [formControl]="form.controls['latestHarvestDate']" required autocomplete="off">
                 <mat-datepicker-toggle matSuffix [for] ="latestHarvestDate"></mat-datepicker-toggle>
-                <mat-datepicker #latestHarvestDate></mat-datepicker>
+                <mat-datepicker #latestHarvestDate></mat-datepicker> -->
+                <input matInput type="number" placeholder="Số ngày thu hoạch gần nhất" [formControl]="form.controls['latestHarvestDate']" required autocomplete="off">
             </mat-form-field>
             
             <mat-form-field>
@@ -48,9 +53,9 @@
                     autocomplete="off" required>
             </mat-form-field>
 
-            <div class="mr-b-5" fxLayout="row" fxLayoutAlign="end center">
-                <button type="submit" [disabled]="form.invalid" mat-button>Thêm</button>
-                <button type="submit" (click)="cancel()" mat-button>Hủy</button>
+            <div class="mr-b-5" fxLayout="row" fxLayoutAlign="center center">
+                <button mat-raised-button type="submit" color="primary" class="mr-5">Thêm</button>
+                <button mat-raised-button (click)="cancel()" color="warn">Hủy</button>
             </div>
         </form>
     </div>

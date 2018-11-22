@@ -83,6 +83,9 @@ export class AddUsingFoodComponent implements OnInit {
     }
 
     onSubmit() {
+        this.form.patchValue({
+            pondId: this.pond.pondId
+        });
         this.usingFoodService.addUsingFood(this.form.value, this.token).subscribe(res => {
             if (res.success) {
                 this.snackBar.open(res.message, 'Đóng', {

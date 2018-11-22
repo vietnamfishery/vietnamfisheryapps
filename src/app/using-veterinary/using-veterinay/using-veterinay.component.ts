@@ -93,7 +93,24 @@ export class UsingVeterinayComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.form.value);
+        this.form.patchValue({
+            pondId: this.pond.pondId
+        });
+        this.usingVeterinaryService.addUsingVeterinary(this.form.value, this.token).subscribe(res => {
+            if (res.success) {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "right"
+                });
+                this.cancel();
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+        })
     }
 
     cancel() {

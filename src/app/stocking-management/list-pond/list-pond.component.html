@@ -11,7 +11,7 @@
     <div fxLayout="row">
         <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
             <div fxLayout="row wrap">
-                <div class="zoom mr-3" fxFlex="35%" *ngFor="let pond of ponds">
+                <div class="zoom" fxFlex="33.33%" *ngFor="let pond of ponds">
                     <mat-card class="pointer" (click)="gotoAdd(pond.pondUUId)">
                         <div fxLayout="row" style="min-height:150px">
                             <div class="media-grid compact bg-cover"
@@ -30,8 +30,8 @@
                                             <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond['pondName'] }}</h4>
                                         </div>
                                     </div>
-                                    <div style="font-size:14px" fxLayout="row" fxLayoutAlign="center center">
-                                        <span>Ngày tạo ao: {{ pond.pondCreatedDate }}</span>
+                                    <div style="font-size:13px" fxLayout="row" fxLayoutAlign="center center">
+                                        <span> Ngày tạo: {{ pond.pondCreatedDate }}</span>
                                     </div>
                                 </div>
                             </div>

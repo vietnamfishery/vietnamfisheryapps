@@ -84,14 +84,14 @@
                                         </a>
                                     </div>
                                     <div class="mat-text-warn text-xl" *ngIf="pond.employees == 0">
-                                        <span><small>Ao chưa có nhân viên quản lý</small></span>
+                                        <span><small></small></span>
                                     </div>
                                     <div class="mat-text-accent text-xl" *ngFor="let empl of pond.employees">
                                         <span><small>{{ empl.lastname }} {{ empl.firstname }}</small></span>
                                     </div>
-                                    <div class="mat-text-primary text-xl">
+                                    <!-- <div class="mat-text-primary text-xl">
                                         <span> {{ countSeasonWithPond(pond.pondUUId) | async }} vụ</span>
-                                    </div>
+                                    </div> -->
                                     <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
                                         <span>{{ pond.pondCreatedDate }}</span>
                                     </div>

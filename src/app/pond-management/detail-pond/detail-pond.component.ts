@@ -32,6 +32,8 @@ export class DetailPondComponent implements OnInit {
   private errorFile: Promise<string> | null = null;
   preloader: boolean = false;
   timeOut: boolean = false;
+  btnEdit: boolean = false;
+  btnSave: boolean = true;
   imgSource: string; // để lưu id hình cũ nếu không cập nhật hình
   form: FormGroup;
   pond: Observable<any>;
@@ -92,6 +94,8 @@ export class DetailPondComponent implements OnInit {
         status: pond.status + '',
       });
     });
+    this.btnEdit =!this.btnEdit;
+    this.btnSave =!this.btnSave;
   }
 
   clickedMarker(label: string, index: number) {
@@ -149,6 +153,8 @@ export class DetailPondComponent implements OnInit {
   changeEdit() {
     this.form.enable();
     this.editName();
+    this.btnEdit =!this.btnEdit;
+    this.btnSave =!this.btnSave;
   }
 
   checkFile(fileType: string): boolean {

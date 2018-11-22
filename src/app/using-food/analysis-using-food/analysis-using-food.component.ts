@@ -162,6 +162,13 @@ export class AnalysisUsingFoodComponent implements OnInit {
             type: 0
         }
         this.seasionManagementService.getTakeCare(obj, this.token).subscribe(res => {
+            if(res.takeCare.length == 0) {
+                this.snackBar.open('Bạn chưa có ghi chú hoạt động cho ăn nào trong 30 ngày gần nhất cho ao này!', 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
             res.takeCare.forEach((takeCare: any) => {
                 takeCare.usingFoods.forEach((using: any) => {
                     const obj: any = {

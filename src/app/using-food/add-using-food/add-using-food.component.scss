@@ -1,3 +1,51 @@
 .mr {
     margin: 3vh 1vw;
 }
+.mr-5 {
+    margin: 5px;
+}
+
+.table-header {
+	background-color: #327ebd;
+	color: white;
+	padding: 0 5px;
+}
+.table-container {
+	padding: 5px 15px 15px 15px;
+}
+.table-component-holder {
+	border: 1px solid #327ebd;
+	background-color: white;
+}
+
+.mat-headline {
+	margin: 0 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.mr-left-5 {
+    margin-left: 5px !important;
+}
+
+.container {
+    margin: 10px;
+    padding: 5px 15px 5px 15px
+}
+.subtitle{
+    color: white;
+}
+.pad{
+    padding: 5px;
+}
+
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
