@@ -1,0 +1,4 @@
+<div fxLayout="rows">
+    <div [ngStyle]="data.style || null">{{ data.message }}&nbsp;<b>{{ data.destination || null | uppercase }}</b></div>
+    <div *ngIf="data.action" div fxLayout="row" fxLayoutAlign="end center" (click)="dismiss()"><button mat-button><span class="red">{{ data.action }}</span></button></div>
+</div>

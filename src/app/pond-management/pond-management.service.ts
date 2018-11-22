@@ -91,7 +91,7 @@ export class PondManagementService {
     }
 
     public getEmployeePond(token: string): Observable<any> {
-        return this.http.get<any>(host + '/user/roles/gets/employees/pond', this.appService.setHeader(token));
+        return this.http.get<any>(host + '/userRoles/gets/employees/pond', this.appService.setHeader(token));
     }
 
     public addPondUserRole(data: any, token: string): Observable<any> {
@@ -152,5 +152,18 @@ export class PondManagementService {
 
     countSeasonWithPond(data: any, token: string): Observable<any> {
         return this.http.post<any>(host + '/ponds/seasons/count', data, this.appService.setHeader(token));
+    }
+
+    /**
+     * Get All pond mà người dùng chỉ định không có quản lý
+     * @method POST
+     * @param data.employeeId
+     */
+    getPondWithUserNotManage(data: any, token: string): Observable<any> {
+        return this.http.post<any>(host + '/ponds/gets/notEmployee', data, this.appService.setHeader(token));
+    }
+
+    getPondOfBoss(token: string): Observable<any> {
+        return this.http.get<any>(host + '/ponds/gets/boss', this.appService.setHeader(token));
     }
 }

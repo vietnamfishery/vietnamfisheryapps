@@ -9,7 +9,7 @@
                 <mat-form-field fxFlex="100">
                     <mat-select [(value)]="selected" placeholder="Tên người quản lý" [formControl]="form.controls['userId']">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let emp of employees" value={{emp.userId}}>{{ emp.lastname }} {{ emp.firstname }}</mat-option>
+                        <mat-option *ngFor="let emp of employees" value={{emp.userInfo.userId}}>{{ emp.userInfo.lastname }} {{ emp.userInfo.firstname }}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

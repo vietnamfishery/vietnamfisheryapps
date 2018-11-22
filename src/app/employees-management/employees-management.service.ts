@@ -54,11 +54,30 @@ export class EmployeesManagementService {
     }
 
     public deleteRolesEmployee(token: string, data: any): Observable<any> {
-        return this.http.put(host + '/user/roles/delete', data, this.appService.setHeader(token));
+        return this.http.put(host + '/userRoles/delete', data, this.appService.setHeader(token));
     }
 
-    public getEmployeesPondRole(token: string): Observable<any> {
-        return this.http.get(host + '/user/gets/employees/pond', this.appService.setHeader(token));
+    /**
+     * Get all employees with they roles - if default get all employees
+     * @param token 
+     * @param roles - options('',1,2)
+     */
+    public getEmployees(token: string, roles?: any): Observable<any> {
+        const h: any = this.appService.customHeader({
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            'Authorization': token,
+            'roles': roles ? roles + '' : ''
+        });
+        return this.http.get(host + '/userRoles/gets', h);
+    }
+
+    /**
+     * @method GET
+     * Get all emp, pond manage with emp, info emp
+     */
+    getUserManageWithPond(token: string): Observable<any>  {
+        return this.http.get(host + '/pondUserRoles/gets', this.appService.setHeader(token));
     }
 
     public getAllPondAndEmployees(token: string): Observable<any> {
@@ -74,10 +93,10 @@ export class EmployeesManagementService {
     }
 
     public upsertUserRole(data: any, token: string): Observable<any> {
-        return this.http.put<any>(host + '/user/roles/upsert', data, this.appService.setHeader(token));
+        return this.http.put<any>(host + '/userRoles/upsert', data, this.appService.setHeader(token));
     }
 
     public changeRoles(data: any, token: string): Observable<any> {
-        return this.http.put<any>(host + '/user/roles/change', data, this.appService.setHeader(token));
+        return this.http.put<any>(host + '/userRoles/change', data, this.appService.setHeader(token));
     }
 }

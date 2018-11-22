@@ -1,4 +1,15 @@
-export const colors: any = {
+interface OptionsColors {
+    primary: string;
+    secondary: string;
+}
+
+interface Colors {
+    red: OptionsColors;
+    blue: OptionsColors;
+    yellow: OptionsColors;
+}
+
+export const colors: Colors = {
     red: {
         primary: '#ad2121',
         secondary: '#FAE3E3'

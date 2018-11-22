@@ -83,6 +83,7 @@ export class AddPondsComponent implements OnInit {
         this.pondManagementService.getPondNotInSeasonAndPond({
             seasonUUId: this.seasonUUId
         }, this.token).subscribe(res => {
+            console.log(res);
             if (res.success) {
                 this.ponds = res.ponds;
             } else {

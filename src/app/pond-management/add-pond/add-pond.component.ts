@@ -5,8 +5,10 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@an
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from '../../../environments';
+import { tokenName, colors } from '../../../environments';
 import { Router } from '@angular/router';
+import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
+import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
 
 interface marker {
     lat: number;
@@ -39,16 +41,40 @@ export class AddPondComponent implements OnInit {
 
     imgSource: string;
     markers: Array<marker> = []
+    token: string;
+
+    snackBarRef: any
 
     constructor(
         private fb: FormBuilder,
         private pondManagementService: PondManagementService,
+        private seasionManagementService: SeasionManagementService,
         private cd: ChangeDetectorRef,
         private router: Router,
         private appService: AppService,
         private adapter: DateAdapter<any>,
         public snackBar: MatSnackBar
-    ) { }
+    ) {
+        this.seasionManagementService.getSeasonWithOwner(this.appService.getCookie(tokenName)).subscribe(res => {
+            if(!res.success) {
+                this.form.reset();
+                this.snackBarRef = this.snackBar.openFromComponent(SnackBarComponent, {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: "top",
+                    data: {
+                        message: "Bạn chưa có vụ nuôi được kích hoạt. Chúng tôi sẽ chuyển bạn về chức năng",
+                        destination: "quản lý vụ nuôi",
+                        action: 'Đóng',
+                        style: {
+                            color: colors.yellow.primary
+                        }
+                    }
+                });
+                this.snackBarRef.instance.snackBarRefComponent = this.snackBarRef
+            }
+        })
+    }
 
     ngOnInit() {
         this.preloader = !this.preloader;

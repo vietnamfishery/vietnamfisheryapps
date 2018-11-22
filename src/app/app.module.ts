@@ -51,6 +51,7 @@ import { StoreModule } from '@ngrx/store';
 import { authorizationReducer } from './rootStores/';
 import { AppService } from './app.service';
 import { registerLocaleData } from '@angular/common';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 registerLocaleData(localeVi, 'vi', localeViExtra);
 export function createTranslateLoader(http: HttpClient) {
@@ -71,6 +72,7 @@ export function createTranslateLoader(http: HttpClient) {
         AccordionAnchorDirective,
         AccordionLinkDirective,
         AccordionDirective,
+        SnackBarComponent,
     ],
     imports: [
         BrowserModule,
@@ -114,6 +116,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppService,
         { provide: LOCALE_ID, useValue: 'vi' }
     ],
+    entryComponents: [SnackBarComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
