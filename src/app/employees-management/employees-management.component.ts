@@ -56,6 +56,8 @@ export class EmployeesManagementComponent implements OnInit {
                         arrayResult.push({
                             firstname: element.userInfo.firstname,
                             lastname: element.userInfo.lastname,
+                            userId: element.userInfo.userId,
+                            userUUId: element.userInfo.userUUId,
                             pond,
                         })
                     }
@@ -78,14 +80,14 @@ export class EmployeesManagementComponent implements OnInit {
         })
     }
 
-    changePondDialog(pondUserRolesId) {
+    changePondDialog(pondUserRolesId: any, userId: any) {
         const dialogRef = this.dialog.open(DialogChangePondComponent, {
             width: '280px',
-            data: { pondUserRolesId }
+            data: { pondUserRolesId, userId }
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
-            // this.updateTable();
+            // console.log(result);
+            this.updateTable();
         });
     }
 
