@@ -15,6 +15,10 @@ import { ImportManagementComponent } from './import-management/import-management
 import { CouponManagementComponent } from './coupon-management/coupon-management.component';
 import { ChangePriceManagementComponent } from './change-price-management/change-price-management.component';
 import { StorageManagementService } from './storage-management.service';
+import { AddFoodsComponent } from './foods-management/add-foods/add-foods.component';
+import { AddBreedsComponent } from './breed-management/add-breeds/add-breeds.component';
+import { AddMaterialsComponent } from './material-management/add-materials/add-materials.component';
+import { AddVeterinaryComponent } from './veterinary-management/add-veterinary/add-veterinary.component';
 
 @NgModule({
   imports: [
@@ -48,7 +52,7 @@ import { StorageManagementService } from './storage-management.service';
     StorageManagementComponent, 
     MaterialManagementComponent, 
     VeterinaryManagementComponent, 
-    FoodsManagementComponent, BreedManagementComponent, ImportManagementComponent, CouponManagementComponent, ChangePriceManagementComponent
+    FoodsManagementComponent, BreedManagementComponent, ImportManagementComponent, CouponManagementComponent, ChangePriceManagementComponent, AddFoodsComponent, AddBreedsComponent, AddMaterialsComponent, AddVeterinaryComponent
   ],
   providers: [
     StorageManagementService

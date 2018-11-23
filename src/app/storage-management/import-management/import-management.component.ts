@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Storages, Breed } from 'src/app/models';
 import { ActivatedRoute, Router } from '@angular/router';
+import { remove } from 'lodash';
 
 @Component({
 	selector: 'app-import-management',
@@ -105,9 +106,9 @@ export class ImportManagementComponent implements OnInit {
 		return this.breed ? this.breed.filter(option => option.breedName.toLowerCase().indexOf(filterValue) === 0) : [];
 	}
 
-	checkType = () => {
-		console.log(this.type);
-	}
+	// checkType = () => {
+	// 	console.log(this.type);
+	// }
 
 	clearValue() {
 		this.form.reset();
@@ -117,7 +118,13 @@ export class ImportManagementComponent implements OnInit {
 	goToLink = (type) => {
 		this.type = this.setType(type);
 		this.router.navigate(['/quan-ly-kho/nhap-kho', type]);
-	}
+    }
+    
+    removeForm(f: any) {
+        if(this.arrFormStorage.length > 1) {
+            remove(this.arrFormStorage, e => e.position === f.position);
+        }
+    }
 
 	/**********************/
 	/*       STORAGE      */

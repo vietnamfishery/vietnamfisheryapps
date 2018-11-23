@@ -161,7 +161,7 @@ export class AnalysisUsingVeterinaryComponent implements OnInit {
             seasonId: this.season.seasonId,
             type: 1
         }
-        this.seasionManagementService.getTakeCare(obj, this.token).subscribe(res => {
+        this.seasionManagementService.getUsingFood(obj, this.token).subscribe(res => {
             console.log(res);
             res.takeCare.forEach((takeCare: any) => {
                 takeCare.usingVeterinary.forEach((using: any) => {

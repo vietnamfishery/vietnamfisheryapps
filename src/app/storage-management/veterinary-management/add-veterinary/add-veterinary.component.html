@@ -1,0 +1,83 @@
+veter
+<!-- <mat-card *ngFor="let formStorage of arrFormStorage">
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <mat-icon *ngIf="arrFormStorage.length > 1" (click)="removeForm(formStorage)" class="mat-red-A700 size">close</mat-icon>
+    </div>
+    <form [formGroup]="formStorage.form" (ngSubmit)="onSubmitStorageAll()" (click)="changeFilteredOptionStorage(formStorage.position)">
+        <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
+            <div fxLayout="column" fxFlex="50">
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <mat-form-field fxFlex="48" fxFlexOffset="1">
+                        <input type="text" placeholder="Tên Vật Phẩm" aria-label="Tên Vật Phẩm" matInput [formControl]="formStorage.form.controls['product']"
+                            #tvp [matAutocomplete]="auto" required>
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredOptionStorages | async" [value]="option">
+                                {{option.productName}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48" fxFlexOffset="1">
+                        <mat-select placeholder="Đơn vị tính" required value="u.value" #u name="unit" [formControl]="formStorage.form.controls['unit']">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let unit of unitStorages" [value]="unit.value">
+                                {{unit.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <mat-form-field fxFlex="48" fxFlexOffset="1">
+                        <mat-label>Số lượng</mat-label>
+                        <input matInput placeholder="Số lượng" value="" #sl required autocomplete="off" [formControl]="formStorage.form.controls['quantity']">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48" fxFlexOffset="1">
+                        <mat-label>Giá/Đơn vị tính</mat-label>
+                        <input matInput placeholder="Giá trên một đơn vị tính" #gdv value="" required autocomplete="off"
+                            [formControl]="formStorage.form.controls['unitPrice']" [value]="formStorage.form.controls['unitPrice'].value">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex="50">
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <mat-form-field fxFlex="48" fxFlexOffset="1">
+                        <mat-label>Nhà cung cấp</mat-label>
+                        <input matInput placeholder="Nhà cung cấp" value="" #ncc required autocomplete="off"
+                            [formControl]="formStorage.form.controls['provider']">
+                    </mat-form-field>
+                    &nbsp;
+                    <mat-form-field fxFlex="48" fxFlexOffset="1">
+                        <mat-label>Địa chỉ nhà cung cấp</mat-label>
+                        <input matInput placeholder="Địa chỉ nhà cung cấp" value="" required autocomplete="off" #dcncc
+                            [formControl]="formStorage.form.controls['providerAddress']">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <mat-form-field fxFlex="98" fxFlexOffset="1">
+                        <mat-label>Mô tả</mat-label>
+                        <textarea #mt rows="3" matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..."
+                            [formControl]="formStorage.form.controls['descriptions']"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+        <button type="submit" hidden class="mat-green-700">
+        </button>
+    </form>
+</mat-card>
+<div fxLayout="row">
+    <mat-chip-list>
+        <mat-chip class="mat-green-700 mr-5" selected (click)="addFormStorage()" matTooltip="Nhấn để thêm một vật phẩm"
+            matTooltipPosition="right">
+            <mat-icon>add_circle_outline</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+    <div fxLayout="row" fxLayoutAlign="center center" fxFlex="90">
+        <button mat-button type="button" matTooltip="Gửi" (click)="onSubmitStorageAll()" class="mat-blue-500 mr-5">
+            <mat-icon>send</mat-icon>
+        </button>
+        <button mat-button type="button" matTooltip="Hủy" class="mat-pink-700 mr-5">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+</div> -->

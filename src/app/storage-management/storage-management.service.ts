@@ -16,6 +16,11 @@ export class StorageManagementService {
         private appService: AppService
     ) { }
 
+    /**
+     * Get vật phẩm trong kho theo loại
+     * @param token 
+     * @param type 
+     */
     getStorageWithUser(token: any, type): Observable<any> {
         return this.http.get(host + '/storages/gets', this.setHeader(token, type));
     }
