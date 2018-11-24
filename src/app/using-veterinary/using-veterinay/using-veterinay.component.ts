@@ -47,9 +47,9 @@ export class UsingVeterinayComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.init();
-        this.getFood();
         this.createForm();
+        this.init();
+        this.getVeterinary();
     }
 
     createForm = () => {
@@ -70,15 +70,23 @@ export class UsingVeterinayComponent implements OnInit {
 
     init() {
         this.route.paramMap.pipe(
-            switchMap(params => {
-                this.pondUUId = params.get('pondUUId');
-                return this.pondManagementService.getPondByUUId(this.pondUUId, this.token);
-            })).subscribe(res => {
+        switchMap(params => {
+            this.pondUUId = params.get('pondUUId');
+            return this.pondManagementService.getPondByUUId(this.pondUUId, this.token);
+        })).subscribe(res => {
+            if(res.success){
                 this.pond = res.pond
-            });
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+        });
     }
 
-    getFood = () => {
+    getVeterinary = () => {
         this.storageManagementService.getStorageWithUser(this.token, this.type).subscribe(res => {
             if (res.success) {
                 this.storages = res.storages;
@@ -95,8 +103,8 @@ export class UsingVeterinayComponent implements OnInit {
     onSubmit() {
         this.form.patchValue({
             pondId: this.pond.pondId
-        });
-        this.usingVeterinaryService.addUsingVeterinary(this.form.value, this.token).subscribe(res => {
+        })
+        this.usingVeterinaryService.addVeterinary(this.form.value, this.token).subscribe(res => {
             if (res.success) {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

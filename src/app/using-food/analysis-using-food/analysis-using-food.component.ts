@@ -107,7 +107,7 @@ export class AnalysisUsingFoodComponent implements OnInit {
         // }
     ];
 
-    activeDayIsOpen = true;
+    activeDayIsOpen = false;
 
     constructor(
         private pondManagementService: PondManagementService,
@@ -136,7 +136,7 @@ export class AnalysisUsingFoodComponent implements OnInit {
                     this.seasionManagementService.getSeasonBySeasonUUId(this.seasonUUId, this.token).subscribe(res$ => {
                         if (res.success) {
                             this.season = res$.season;
-                            this.getTake();
+                            this.getUsingFood(this.viewDate, this.view);
                         } else {
                             this.snackBar.open(res.message, 'Đóng', {
                                 duration: 3000,
@@ -155,23 +155,17 @@ export class AnalysisUsingFoodComponent implements OnInit {
             });
     }
 
-    getTake() {
+    getUsingFood(timeOut: Date, unitOfTime: string) {
         const obj: any = {
             pondId: this.pond.pondId,
             seasonId: this.season.seasonId,
-            type: 0,
             options: {
-                unitOfTime: 'month'
+                timeOut,
+                unitOfTime
             }
         }
-        this.seasionManagementService.getTakeCare(obj, this.token).subscribe(res => {
-            if(res.takeCare.length == 0) {
-                this.snackBar.open('Bạn chưa có ghi chú hoạt động cho ăn nào trong 30 ngày gần nhất cho ao này!', 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
+        this.seasionManagementService.getUsingFood(obj, this.token).subscribe(res => {
+            this.events = [];
             res.takeCare.forEach((takeCare: any) => {
                 takeCare.usingFoods.forEach((using: any) => {
                     const obj: any = {

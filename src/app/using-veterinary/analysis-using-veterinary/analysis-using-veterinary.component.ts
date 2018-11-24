@@ -161,14 +161,8 @@ export class AnalysisUsingVeterinaryComponent implements OnInit {
             seasonId: this.season.seasonId,
             type: 1
         }
-        this.seasionManagementService.getTakeCare(obj, this.token).subscribe(res => {
-            if(res.takeCare.length == 0) {
-                this.snackBar.open('Bạn chưa có ghi chú hoạt động sử dụng thuốc nào trong 30 ngày gần nhất cho ao này!', 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
+        this.seasionManagementService.getUsingFood(obj, this.token).subscribe(res => {
+            console.log(res);
             res.takeCare.forEach((takeCare: any) => {
                 takeCare.usingVeterinary.forEach((using: any) => {
                     const obj: any = {

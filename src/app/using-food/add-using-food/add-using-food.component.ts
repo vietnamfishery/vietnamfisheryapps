@@ -64,8 +64,15 @@ export class AddUsingFoodComponent implements OnInit {
             this.pondUUId = params.get('pondUUId');
             return this.pondManagementService.getPondByUUId(this.pondUUId, this.token);
         })).subscribe(res => {
-            console.log(res);
-            this.pond = res.pond
+            if(res.success){
+                this.pond = res.pond
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
         });
     }
 

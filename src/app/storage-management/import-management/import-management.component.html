@@ -1,196 +1,34 @@
 <div fxLayout="column" style="padding: 10px 20px">
-  <div fxLayout="column" class="mr-5">
-    <h2 fxFlex="100" fxLayoutAlign="center center"><span>NHẬP <span *ngIf="type === 0">THỨC ĂN</span> <span *ngIf="type === 1">CƠ
-          SỞ VẬT CHẤT</span> <span *ngIf="type === 2">THUỐC VÀ DƯỢC PHẨM</span> <span *ngIf="type === 3">GIỐNG</span>
-        CHO KHO</span></h2>
-    <P fxFlex="100" fxLayoutAlign="center center"><b>Ghi chú:</b>(<span style="color: red">*</span>) <i>Chỉ nhập thông
-        tin cho <b *ngIf="type === 0">thức ăn</b> <b *ngIf="type === 1">cơ sở vật chất</b> <b *ngIf="type === 2">thuốc
-          và dược phẩm</b> <b *ngIf="type === 3">giống</b></i></P>
-  </div>
-  <hr>
-  <div class="row">
-    <div fxLayout="row">
-      <button mat-button type="button" (click)="goToLink('thuc-an')" class="mat-teal mr-5" *ngIf="type !== 0" [ngClass]="{'animation': type === 0}">
-        Nhập Thức Ăn
-      </button>
-      <button mat-button type="button" (click)="goToLink('co-so-vat-chat')" class="mat-purple mr-5" *ngIf="type !== 1"
-        [ngClass]="{'animation': type === 1}">
-        Nhập Cơ Sở Vật Chất
-      </button>
-      <button mat-button type="button" (click)="goToLink('thuoc-va-duoc-pham')" class="mat-light-blue-800 mr-5" *ngIf="type !== 2"
-        [ngClass]="{'animation': type === 2}">
-        Nhập Thuốc/Dược Phẩm
-      </button>
-      <button mat-button type="button" (click)="goToLink('giong-nuoi')" class="mat-indigo mr-5" *ngIf="type !== 3"
-        [ngClass]="{'animation': type === 3}">
-        Nhập Giống
-      </button>
+    <div fxLayout="column" class="mr-5">
+        <h2 fxFlex="100" fxLayoutAlign="center center"><span>NHẬP <span *ngIf="type === 0">THỨC ĂN</span> <span *ngIf="type === 1">CƠ SỞ VẬT CHẤT</span> <span *ngIf="type === 2">THUỐC VÀ DƯỢC PHẨM</span> <span *ngIf="type === 3">GIỐNG</span>
+                CHO KHO</span></h2>
+        <P fxFlex="100" fxLayoutAlign="center center"><b>Ghi chú:</b>(<span style="color: red">*</span>) <i>Chỉ nhập
+                thông
+                tin cho <b *ngIf="type === 0">thức ăn</b> <b *ngIf="type === 1">cơ sở vật chất</b> <b *ngIf="type === 2">thuốc
+                    và dược phẩm</b> <b *ngIf="type === 3">giống</b></i></P>
     </div>
-    <div *ngIf="type !== 3">
-      <mat-card *ngFor="let formStorage of arrFormStorage">
-        <form [formGroup]="formStorage.form" (ngSubmit)="onSubmitStorageAll()"
-          (click)="changeFilteredOptionStorage(formStorage.position)">
-          <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
-            <div fxLayout="column" fxFlex="50">
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <input type="text" placeholder="Tên Vật Phẩm" aria-label="Tên Vật Phẩm" matInput [formControl]="formStorage.form.controls['product']"
-                    #tvp [matAutocomplete]="auto" required>
-                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                    <mat-option *ngFor="let option of filteredOptionStorages | async" [value]="option">
-                      {{option.productName}}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-select placeholder="Đơn vị tính" required value="u.value" #u name="unit" [formControl]="formStorage.form.controls['unit']">
-                    <mat-option>None</mat-option>
-                    <mat-option *ngFor="let unit of unitStorages" [value]="unit.value">
-                      {{unit.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-label>Số lượng</mat-label>
-                  <input matInput placeholder="Số lượng" value="" #sl required autocomplete="off" [formControl]="formStorage.form.controls['quantity']">
-                </mat-form-field>
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-label>Giá/Đơn vị tính</mat-label>
-                  <input matInput placeholder="Giá trên một đơn vị tính" #gdv value="" required autocomplete="off"
-                    [formControl]="formStorage.form.controls['unitPrice']" [value]="formStorage.form.controls['unitPrice'].value">
-                </mat-form-field>
-              </div>
-            </div>
-            <div fxLayout="column" fxFlex="50">
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-label>Nhà cung cấp</mat-label>
-                  <input matInput placeholder="Nhà cung cấp" value="" #ncc required autocomplete="off" [formControl]="formStorage.form.controls['provider']">
-                </mat-form-field>
-                &nbsp;
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-label>Địa chỉ nhà cung cấp</mat-label>
-                  <input matInput placeholder="Địa chỉ nhà cung cấp" value="" required autocomplete="off" #dcncc
-                    [formControl]="formStorage.form.controls['providerAddress']">
-                </mat-form-field>
-              </div>
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="98" fxFlexOffset="1">
-                  <mat-label>Mô tả</mat-label>
-                  <textarea #mt rows="3" matInput placeholder="Thông tin chi tiết nhà cung cấp hoặc giá của từng đơn vị tính..."
-                    [formControl]="formStorage.form.controls['descriptions']"></textarea>
-                </mat-form-field>
-              </div>
-            </div>
-            <mat-divider></mat-divider>
-          </div>
-          <button type="submit" hidden class="mat-green-700">
-          </button>
-        </form>
-      </mat-card>
-      <div fxLayout="row">
-        <mat-chip-list>
-          <mat-chip class="mat-green-700 mr-5" selected (click)="addFormStorage()" matTooltip="Nhấn để thêm một vật phẩm"
-            matTooltipPosition="right">
-            <mat-icon>add_circle_outline</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-        <div fxLayout="row" fxLayoutAlign="center center" fxFlex="90">
-          <button mat-button type="button" matTooltip="Gửi" (click)="onSubmitStorageAll()" class="mat-blue-500 mr-5">
-            <mat-icon>send</mat-icon>
-          </button>
-          <button mat-button type="button" matTooltip="Hủy" class="mat-pink-700 mr-5">
-            <mat-icon>cancel</mat-icon>
-          </button>
+    <hr>
+    <div class="row">
+        <div fxLayout="row">
+            <button mat-button type="button" (click)="goToLink('thuc-an')" class="mat-teal mr-5" *ngIf="type !== 0"
+                [ngClass]="{'animation': type === 0}">
+                Nhập Thức Ăn
+            </button>
+            <button mat-button type="button" (click)="goToLink('co-so-vat-chat')" class="mat-purple mr-5" *ngIf="type !== 1"
+                [ngClass]="{'animation': type === 1}">
+                Nhập Cơ Sở Vật Chất
+            </button>
+            <button mat-button type="button" (click)="goToLink('thuoc-&-duoc-pham')" class="mat-light-blue-800 mr-5"
+                *ngIf="type !== 2" [ngClass]="{'animation': type === 2}">
+                Nhập Thuốc/Dược Phẩm
+            </button>
+            <button mat-button type="button" (click)="goToLink('giong-nuoi')" class="mat-indigo mr-5" *ngIf="type !== 3"
+                [ngClass]="{'animation': type === 3}">
+                Nhập Giống
+            </button>
         </div>
-      </div>
-    </div>
-    <div *ngIf="type === 3">
-      <mat-card *ngFor="let formBreed of arrFormBreed">
-        <form [formGroup]="formBreed.form" (ngSubmit)="onSubmitBreedAll()"
-          (click)="changeFilteredOptionBreed(formBreed.position)">
-          <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
-            <div fxLayout="column" fxFlex="50">
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <input type="text" placeholder="Tên Giống" aria-label="Tên Giống" matInput [formControl]="formBreed.form.controls['breedName']"
-                    #tenGiong [matAutocomplete]="autoBreed" required>
-                  <mat-autocomplete #autoBreed="matAutocomplete" [displayWith]="displayFnBreed">
-                    <mat-option *ngFor="let breed of filteredOptionBreed | async" [value]="breed">
-                      {{breed.breedName}}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-select placeholder="Đơn vị tính" required value="u.value" #donViTinh [formControl]="formBreed.form.controls['unit']">
-                    <mat-option>None</mat-option>
-                    <mat-option *ngFor="let unit of unitBreed" [value]="unit.value">
-                      {{unit.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-label>Số lượng</mat-label>
-                  <input matInput placeholder="Số lượng" value="" #soLuong required autocomplete="off" [formControl]="formBreed.form.controls['quantity']">
-                </mat-form-field>
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-label>Giá/Đơn vị tính</mat-label>
-                  <input matInput placeholder="Giá trên một đơn vị tính" #giaDonVi value="" required autocomplete="off"
-                    [formControl]="formBreed.form.controls['unitPrice']">
-                </mat-form-field>
-              </div>
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-label>Vòng đời</mat-label>
-                  <input matInput placeholder="Vòng đời" value="" #vongDoi required autocomplete="off" [formControl]="formBreed.form.controls['loopOfBreed']">
-                </mat-form-field>
-                <mat-form-field fxFlex="48" fxFlexOffset="1">
-                  <mat-label>Cơ quan kiểm định</mat-label>
-                  <input matInput placeholder="Cơ quan kiểm định" value="" #coQuanKiemDinh required autocomplete="off" [formControl]="formBreed.form.controls['testingAgency']">
-                </mat-form-field>
-              </div>
-            </div>
-            <div fxLayout="column" fxFlex="50">
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="98" fxFlexOffset="1">
-                  <mat-label>Địa chỉ cung cấp giống</mat-label>
-                  <input matInput placeholder="Địa chỉ cung cấp giống" value="" #diaChiMua required autocomplete="off" [formControl]="formBreed.form.controls['soldAddress']">
-                </mat-form-field>
-              </div>
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-form-field fxFlex="98" fxFlexOffset="1">
-                  <mat-label>Mô tả</mat-label>
-                  <textarea #moTa rows="5" matInput placeholder="Mô tả chi tiết về giống..."
-                    [formControl]="formBreed.form.controls['descriptions']"></textarea>
-                </mat-form-field>
-              </div>
-            </div>
-            <mat-divider></mat-divider>
-          </div>
-          <button type="submit" hidden class="mat-green-700">
-          </button>
-        </form>
-      </mat-card>
-      <div fxLayout="row">
-        <mat-chip-list>
-          <mat-chip class="mat-green-700 mr-5" selected (click)="addFormBreed()" matTooltip="Nhấn để thêm một loài"
-            matTooltipPosition="right">
-            <mat-icon>add_circle_outline</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-        <div fxLayout="row" fxLayoutAlign="center center" fxFlex="90">
-          <button mat-button type="button" matTooltip="Gửi" (click)="onSubmitBreedAll()" class="mat-blue-500 mr-5">
-            <mat-icon>send</mat-icon>
-          </button>
-          <button mat-button type="button" matTooltip="Hủy" class="mat-pink-700 mr-5">
-            <mat-icon>cancel</mat-icon>
-          </button>
+        <div>
+            <router-outlet></router-outlet>
         </div>
-      </div>
     </div>
-  </div>
 </div>
