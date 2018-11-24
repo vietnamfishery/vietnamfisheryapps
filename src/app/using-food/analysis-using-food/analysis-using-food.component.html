@@ -5,7 +5,7 @@
             <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>{{ season.seasonName }} - {{ pond.pondName }}</i></h6>
         </div>
         <div fxLayout="column">
-            <!-- <button mat-raised-button (click)="goto('/cho-an/danh-sach-ao')" color="accent">Thêm</button> --
+            <button mat-raised-button (click)="goto('/cho-an/danh-sach-ao')" color="accent">Thêm</button>
         </div> -->
         <mat-toolbar-row>
             <span fxFlex fxShow="false" fxShow.gt-xs>{{ viewDate | calendarDate:(view + 'ViewTitle'):'vi' | uppercase }}</span>
@@ -39,6 +39,9 @@
             <button mat-icon-button mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
                 <mat-icon>chevron_right</mat-icon>
             </button>
+            <a mat-icon-button routerLink="/cho-an" color="white" matTooltip="Trở lại" matTooltipPosition="above">
+                <mat-icon>reply</mat-icon>
+            </a>
         </mat-toolbar-row>
     </mat-toolbar>
     <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>

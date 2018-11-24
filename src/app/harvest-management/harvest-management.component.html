@@ -47,7 +47,7 @@
                                         matTooltipPosition="left">
                                         <mat-icon>attach_money</mat-icon>
                                     </a>
-                                    <a href="javascript:;" matTooltip="Xem thống kê" matTooltipPosition="left">
+                                    <a href="javascript:;" matTooltip="Xem thống kê" matTooltipPosition="left" (click)="gotoAnalysis(pond.pondUUId)">
                                         <mat-icon>timeline</mat-icon>
                                     </a>
                                 </p>
@@ -57,13 +57,10 @@
                     <mat-card-content>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <div fxFlex>
-                                <p class="ma-0">{{ pond.pondName }}</p>
-                                <p class="ma-0 pa-0 text-md">Tôm</p>
+                                <p class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond.pondName }}</p>
                             </div>
-                            <div class="mat-text-primary text-xl">
-                                <span class="strikethrough mat-text-muted text-sm">$ 20.3</span>
-                                <!-- <span class="strikethrough mat-text-muted text-sm" *ngIf="product.discounted === 'discounted'">$ 20.3</span> -->
-                                <span> $ 15.2</span>
+                            <div>
+                                <span><mat-icon>attach_money</mat-icon></span>
                             </div>
                         </div>
                     </mat-card-content>

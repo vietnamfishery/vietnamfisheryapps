@@ -99,7 +99,7 @@ export class DiaryAnalysisComponent implements OnInit {
         draggable: true
     }];
 
-    activeDayIsOpen = true;
+    activeDayIsOpen = false;
 
     constructor(
         private appService: AppService,

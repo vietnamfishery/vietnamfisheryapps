@@ -13,6 +13,7 @@ import { DiaryAnalysisComponent } from './diary-analysis/diary-analysis.componen
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarDialogComponent } from './diary-analysis/dialog/component';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { CalendarDialogComponent } from './diary-analysis/dialog/component';
         MatSelectModule,
         MatRadioModule,
         MatProgressBarModule,
+        FlatpickrModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory

@@ -10,6 +10,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AdddetailHarvestComponent } from './adddetail-harvest/adddetail-harvest.component';
 import { EditDetailHarvestComponent } from './edit-detail-harvest/edit-detail-harvest.component';
 import { HarvestManagementService } from './harvest-management.service';
+import { AnalysisHarvestComponent } from './analysis-harvest/analysis-harvest.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,7 @@ import { HarvestManagementService } from './harvest-management.service';
     HarvestManagementRoutingModule
   ],
   entryComponents: [HarvestManagementComponent],
-  declarations: [HarvestManagementComponent, AdddetailHarvestComponent, EditDetailHarvestComponent],
+  declarations: [HarvestManagementComponent, AdddetailHarvestComponent, EditDetailHarvestComponent, AnalysisHarvestComponent],
   bootstrap: [HarvestManagementComponent],
   providers:[
     HarvestManagementService

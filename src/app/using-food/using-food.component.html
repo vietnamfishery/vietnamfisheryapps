@@ -1,9 +1,7 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="rows">
-        <div fxLayout="column" fxLayoutAlign="center center" fxFlex="100">
-            <h1 fxLayout="row" fxLayoutAlign="center center" fxFlex="100"><b>BẢNG THỐNG KÊ CHO ĂN</b></h1>
-            <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>Bảng
-                    thống kê cho ăn của 7 ngày gần nhất</i></h6>
+        <div fxLayout="column" fxFlex="100">
+            <h1 fxLayout="row" fxFlex="100"><b>QUẢN LÝ CHO ĂN</b></h1>
         </div>
         <div fxLayout="column">
             <!-- <button mat-raised-button (click)="goto('/cho-an/danh-sach-ao')" color="accent">Thêm</button> -->
@@ -40,7 +38,7 @@
                                 <p>
                                     <a href="javascript:;" matTooltip="Cho ăn" (click)="gotoAdd(pond.pondUUId)"
                                         matTooltipPosition="left">
-                                        <mat-icon>room_service</mat-icon>
+                                        <mat-icon>widgets</mat-icon>
                                     </a>
                                     <a href="javascript:;" matTooltip="Xem thống kê" (click)="gotoAnalysis(pond.pondUUId)"
                                         matTooltipPosition="left">
@@ -53,13 +51,12 @@
                     <mat-card-content>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <div fxFlex>
-                                <p class="ma-0">{{ pond.pondName }}</p>
-                                <p class="ma-0 pa-0 text-md">Tôm</p>
+                                <p class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond.pondName }}</p>
                             </div>
-                            <div class="mat-text-primary text-xl">
-                                <span class="strikethrough mat-text-muted text-sm">$ 20.3</span>
-                                <!-- <span class="strikethrough mat-text-muted text-sm" *ngIf="product.discounted === 'discounted'">$ 20.3</span> -->
-                                <span> $ 15.2</span>
+                            <div>
+                                <span>
+                                    <mat-icon>widgets</mat-icon>
+                                </span>
                             </div>
                         </div>
                     </mat-card-content>

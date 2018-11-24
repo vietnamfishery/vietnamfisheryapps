@@ -11,31 +11,29 @@
     <div fxLayout="row">
         <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
             <div fxLayout="row wrap">
-                <div class="zoom" fxFlex="33.33%" *ngFor="let pond of ponds">
+                <div class="zoom" fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let pond of ponds">
                     <mat-card class="pointer" (click)="gotoAdd(pond.pondUUId)">
-                        <div fxLayout="row" style="min-height:150px">
-                            <div class="media-grid compact bg-cover"
-                                [ngStyle]="{'background-image': 'url('+ pond.images +')'}" fxFlex="45">
-                                <figure>
-                                    <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
-                                    <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
-                                </figure>
-                            </div>
-                            <div class="pa-1" fxFlex>
-                                <div fxLayout="row" fxFlex>
+                        <div class="media-grid">
+                            <figure>
+                                <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
+                                <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
+                                <div class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url('+ pond.images +')'}"
+                                    fxFlex="45">
                                 </div>
-                                <div fxLayout="column" fxLayoutAlign="center center">
-                                    <div fxLayout="row" fxLayoutAlign="center center">
-                                        <div fxFlex>
-                                            <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond['pondName'] }}</h4>
-                                        </div>
-                                    </div>
-                                    <div style="font-size:13px" fxLayout="row" fxLayoutAlign="center center">
-                                        <span> Ngày tạo: {{ pond.pondCreatedDate }}</span>
-                                    </div>
-                                </div>
-                            </div>
+                                <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
+                            </figure>
                         </div>
+                        <mat-card-content>
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <div fxFlex>
+                                    <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{
+                                        pond['pondName'] }}</h4>
+                                </div>
+                                <span>
+                                    <mat-icon>pan_tool</mat-icon>
+                                </span>
+                            </div>
+                        </mat-card-content>
                     </mat-card>
                 </div>
             </div>

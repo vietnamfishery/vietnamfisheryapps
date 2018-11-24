@@ -1,26 +1,13 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="row">
         <h1 class="mat-headline center-align" fxFlex='100'>Quản lý chuẩn bị ao</h1>
-        <a mat-flat-button color="white" routerLink="/quan-ly-chuan-bi-ao/them-moi" matTooltip="Thêm một ao mới"
+        <a mat-flat-button color="white" routerLink="/quan-ly-chuan-bi-ao/them-moi" matTooltip="Thêm một ao mới và thêm chuẩn bị"
             matTooltipPosition="above" fxFlex style="margin-right: 10px">
             <mat-icon>library_add</mat-icon>
         </a>
-        <button mat-raised-button (click)="goto('/quan-ly-chuan-bi-ao/danh-sach-ao')" color="accent">Thêm</button>
     </mat-toolbar>
     <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
     <mat-sidenav-container class="background-none shadow-none height">
-        <!-- <div *ngIf="isBoss" class="mr">
-                <form>
-                    <mat-form-field>
-                        <mat-select placeholder="Vụ nuôi" [(ngModel)]="seasonPresent" [ngModelOptions]="{standalone: true}">
-                            <mat-option *ngFor="let s of seasons" [value]="s" (click)="changeSeason(s)">
-                                {{ s.seasonName }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </form>
-            </div>
-            <mat-divider *ngIf="isBoss"></mat-divider> -->
         <div fxLayout="row" fxFlex="100" class="mr-top">
             <div *ngIf="isBoss" fxFlexOffset="6" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="20px"
                 fxLayoutGap.sm="10px" fxLayoutGap.xs="0">
@@ -41,10 +28,8 @@
                 <mat-card>
                     <div class="media-grid">
                         <figure>
-                            <div class="product-badge" *ngIf="pond.isFed === '1'" matTooltip="Chưa cho ăn"
-                                matTooltipPosition="above" (click)="gotoAdd(pond.pondUUId)"><span>
-                                    <mat-icon>error_outline</mat-icon>
-                                </span></div>
+                            <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
+                            <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
                             <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
                             <figcaption>
                                 <p>
@@ -63,13 +48,10 @@
                     <mat-card-content>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <div fxFlex>
-                                <p class="ma-0">{{ pond.pondName }}</p>
-                                <p class="ma-0 pa-0 text-md">Tôm</p>
+                                <p class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond.pondName }}</p>
                             </div>
-                            <div class="mat-text-primary text-xl">
-                                <span class="strikethrough mat-text-muted text-sm">$ 20.3</span>
-                                <!-- <span class="strikethrough mat-text-muted text-sm" *ngIf="product.discounted === 'discounted'">$ 20.3</span> -->
-                                <span> $ 15.2</span>
+                            <div>
+                                <span><mat-icon>gavel</mat-icon></span>
                             </div>
                         </div>
                     </mat-card-content>

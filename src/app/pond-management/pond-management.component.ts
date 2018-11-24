@@ -70,7 +70,8 @@ export class PondManagementComponent implements OnInit {
                         pondCreatedDate: moment(element.pondCreatedDate).format(`DD - MM - YYYY`),
                         images: element.images,
                         pondId: element.pondId,
-                        employees: element.users
+                        employees: element.users,
+                        createCost: element.createCost
                     }
                 });
             } else {

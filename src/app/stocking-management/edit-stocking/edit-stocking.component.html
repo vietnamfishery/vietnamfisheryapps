@@ -36,6 +36,15 @@
                                     class="mat-text-warn">Số lượng thả không được trống.</small>
                             </div>
                         </div>
+                        <!-- <mat-form-field>
+                                <mat-label>Ngày thả nuôi</mat-label>
+                                <input matInput [matDatepicker]="CreatedDate" placeholder="Chọn một ngày" [formControl]="form.controls['CreatedDate']">
+                                <mat-datepicker-toggle matSuffix [for]="CreatedDate"></mat-datepicker-toggle>
+                                <mat-datepicker #CreatedDate></mat-datepicker>
+                            </mat-form-field>
+                            <small *ngIf="form.controls['CreatedDate'].hasError('required') && form.controls['CreatedDate'].touched"
+                                class="mat-text-warn">Ngày
+                                thả nuôi không được để trống.</small> -->
                         <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
                             fxLayoutGap.xs="0">
                             <mat-form-field fxFlex="100">

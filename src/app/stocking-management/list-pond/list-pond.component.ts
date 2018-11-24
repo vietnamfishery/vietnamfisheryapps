@@ -53,6 +53,7 @@ export class ListPondComponent implements OnInit {
                     e[`pondCreatedDate`] = moment(e.pondCreatedDate).format(`DD - MM - YYYY`);
                     return e;
                 });
+                console.log(res)
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 2500,

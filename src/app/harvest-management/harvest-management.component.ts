@@ -125,7 +125,11 @@ export class HarvestManagementComponent implements OnInit {
     }
 
     gotoAdd = (pondUUId: string) => {
-        this.router.navigate(['/cho-an/them', pondUUId]);
+        this.router.navigate(['/quan-ly-thu-hoach/them', pondUUId]);
+    }
+
+    gotoAnalysis = (pondUUId: string) => {
+        this.router.navigate(['/quan-ly-thu-hoach/thong-ke-thu-hoach/', pondUUId]);
     }
 
     changeSeason(season: any){

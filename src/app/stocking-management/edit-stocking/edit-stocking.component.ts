@@ -76,6 +76,7 @@ export class EditStockingComponent implements OnInit {
             stockingQuantity: [null, Validators.compose([Validators.required])],
             phFirst: [null, Validators.compose([Validators.required])],
             salinityFirst: [null, Validators.compose([Validators.required])],
+            CreatedDate: [null, Validators.compose([Validators.required])]
         });
     }
 
