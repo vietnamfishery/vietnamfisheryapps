@@ -47,17 +47,17 @@
 
         </mat-sidenav> -->
         <div *ngIf="isBoss" class="mr">
-                <form>
-                    <mat-form-field>
-                        <mat-select placeholder="Vụ nuôi" [(ngModel)]="seasonPresent" [ngModelOptions]="{standalone: true}">
-                            <mat-option *ngFor="let s of seasons" [value]="s" (click)="changeSeason(s)">
-                                {{ s.seasonName }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </form>
-            </div>
-            <mat-divider *ngIf="isBoss"></mat-divider>
+            <form>
+                <mat-form-field>
+                    <mat-select placeholder="Vụ nuôi" [(ngModel)]="seasonPresent" [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let s of seasons" [value]="s" (click)="changeSeason(s)">
+                            {{ s.seasonName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+        <mat-divider *ngIf="isBoss"></mat-divider>
         <!-- <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
             <button (click)="productsnav.toggle()" mat-icon-button>
                 <mat-icon>short_text</mat-icon>
@@ -70,7 +70,8 @@
                 <mat-card>
                     <div class="media-grid">
                         <figure>
-                            <div class="product-badge" *ngIf="pond.isFed === '1'" matTooltip="Chưa cho ăn" matTooltipPosition="above" (click)="gotoAdd(pond.pondUUId)"><span>
+                            <div class="product-badge" *ngIf="pond.isFed === '1'" matTooltip="Chưa cho ăn"
+                                matTooltipPosition="above" (click)="gotoAdd(pond.pondUUId)"><span>
                                     <mat-icon>error_outline</mat-icon>
                                 </span></div>
                             <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
@@ -80,7 +81,8 @@
                                         matTooltipPosition="left">
                                         <mat-icon>room_service</mat-icon>
                                     </a>
-                                    <a href="javascript:;" matTooltip="Xem thống kê" (click)="gotoAnalysis(pond.pondUUId)" matTooltipPosition="left">
+                                    <a href="javascript:;" matTooltip="Xem thống kê" (click)="gotoAnalysis(pond.pondUUId)"
+                                        matTooltipPosition="left">
                                         <mat-icon>timeline</mat-icon>
                                     </a>
                                 </p>

@@ -11,7 +11,7 @@ import { tokenName } from 'src/environments';
     styleUrls: ['./veterinary-management.component.scss']
 })
 export class VeterinaryManagementComponent implements OnInit {
-    type: string = 'thuoc-va-duoc-pham';
+    type: string = 'thuoc-&-duoc-pham';
     ELEMENT_DATA: Storages[] = [];
     displayedColumns: string[] = ['name', 'quantity', 'unit', 'descriptions'];
     dataSource = new MatTableDataSource<Storages>(this.ELEMENT_DATA);
@@ -34,9 +34,17 @@ export class VeterinaryManagementComponent implements OnInit {
 
     loadingData = () => {
         this.storageManagementService.getStorageWithUser(this.token, 2).subscribe((res: any) => {
-            this.dataSource.data = res.storages ? res.storages : [];
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+            if(res.success) {
+                this.dataSource.data = res.storages ? res.storages : [];
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
         })
     }
 }

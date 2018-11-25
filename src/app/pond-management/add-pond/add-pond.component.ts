@@ -161,7 +161,6 @@ export class AddPondComponent implements OnInit {
                 }
             });
         }
-        console.log(this.form.value);
     }
 
     onFileChange(event) {

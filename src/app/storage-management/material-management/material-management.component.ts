@@ -33,9 +33,17 @@ export class MaterialManagementComponent implements OnInit {
 
     loadingData = () => {
 		this.storageManagementService.getStorageWithUser(this.token, 1).subscribe((res: any) => {
-            this.dataSource.data = res.storages ? res.storages : [];
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+            if(res.success) {
+                this.dataSource.data = res.storages ? res.storages : [];
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
 		})
 	}
 }

@@ -49,6 +49,10 @@ export class StorageManagementService {
     }
 
     public updateFood(data: any, token: string): Observable<any> {
-        return this.http.put(host + '/storage/food/update', data, this.appService.setHeader(token));
+        return this.http.put(host + '/storages/food/update', data, this.appService.setHeader(token));
+    }
+
+    getCoupons(token: string, data?: any,): Observable<any> {
+        return this.http.post(host + '/storages/coupons/gets', data || {}, this.appService.setHeader(token));
     }
 }
