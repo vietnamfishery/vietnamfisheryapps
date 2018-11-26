@@ -64,4 +64,8 @@ export class SeasionManagementService {
     public getUsingFood(data: any, token: string): Observable<any> {
         return this.http.post(host + '/usingFoods/gets', data, this.appService.setHeader(token));
     }
+
+    public getUsingVeterinary(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/usingVeterinary/gets', data, this.appService.setHeader(token));
+    }
 }

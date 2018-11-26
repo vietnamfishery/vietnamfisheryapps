@@ -107,7 +107,7 @@ export class AnalysisUsingVeterinaryComponent implements OnInit {
         // }
     ];
 
-    activeDayIsOpen = true;
+    activeDayIsOpen = false;
 
     constructor(
         private pondManagementService: PondManagementService,
@@ -136,7 +136,7 @@ export class AnalysisUsingVeterinaryComponent implements OnInit {
                     this.seasionManagementService.getSeasonBySeasonUUId(this.seasonUUId, this.token).subscribe(res$ => {
                         if (res.success) {
                             this.season = res$.season;
-                            this.getTake();
+                            this.getTake(this.viewDate, this.view);
                         } else {
                             this.snackBar.open(res.message, 'Đóng', {
                                 duration: 3000,
@@ -155,27 +155,31 @@ export class AnalysisUsingVeterinaryComponent implements OnInit {
             });
     }
 
-    getTake() {
+    getTake(timeOut: Date, unitOfTime: string) {
         const obj: any = {
             pondId: this.pond.pondId,
             seasonId: this.season.seasonId,
-            type: 1
+            options: {
+                timeOut,
+                unitOfTime
+            }
         }
-        this.seasionManagementService.getUsingFood(obj, this.token).subscribe(res => {
+        this.seasionManagementService.getUsingVeterinary(obj, this.token).subscribe(res => {
+            this.events = [];
             console.log(res);
-            res.takeCare.forEach((takeCare: any) => {
-                takeCare.usingVeterinary.forEach((using: any) => {
-                    const obj: any = {
-                        start: moment(using.createdDate),
-                        // end: addDays(new Date(), 1),
-                        title: takeCare.takeCareName,
-                        color: colors.red,
-                        takeCare,
-                        using
-                    }
-                    this.events.push(obj);
-                })
-            })
+            // res.takeCare.forEach((takeCare: any) => {
+            //     takeCare.usingFoods.forEach((using: any) => {
+            //         const obj: any = {
+            //             start: moment(using.createdDate),
+            //             // end: addDays(new Date(), 1),
+            //             title: takeCare.takeCareName,
+            //             color: colors.red,
+            //             takeCare,
+            //             using
+            //         }
+            //         this.events.push(obj);
+            //     })
+            // })
             this.refresh.next();
         })
     }

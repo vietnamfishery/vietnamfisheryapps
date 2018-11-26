@@ -7,10 +7,10 @@
             <div fxLayout="column" fxFlex="50">
                 <div fxLayout="row" fxLayoutAlign="space-around center">
                     <mat-form-field fxFlex="48" fxFlexOffset="1">
-                        <input type="text" placeholder="Tên Vật Phẩm" aria-label="Tên Vật Phẩm" matInput [formControl]="formStorage.form.controls['product']"
+                        <input type="text" (keyup)="setAutocomplete($event.target.value, formStorage.position)" placeholder="Tên Vật Phẩm" aria-label="Tên Vật Phẩm" matInput [formControl]="formStorage.form.controls['product']"
                             #tvp [matAutocomplete]="auto" required>
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                            <mat-option *ngFor="let option of filteredOptionStorages | async" [value]="option">
+                            <mat-option (click)="setAutocomplete(option, formStorage.position)" *ngFor="let option of filteredOptionStorages | async" [value]="option">
                                 {{option.productName}}
                             </mat-option>
                         </mat-autocomplete>

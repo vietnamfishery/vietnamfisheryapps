@@ -11,7 +11,7 @@ import { ChangePriceManagementComponent } from './change-price-management/change
 import { AddFoodsComponent } from './foods-management/add-foods/add-foods.component';
 import { AddVeterinaryComponent } from './veterinary-management/add-veterinary/add-veterinary.component';
 import { AddMaterialsComponent } from './material-management/add-materials/add-materials.component';
-import { AddBreedsComponent } from './breed-management/add-breeds/add-breeds.component';
+import { AddBreedComponent } from './breed-management/add-breed/add-breed.component';
 
 
 const routes: Routes = [
@@ -36,7 +36,7 @@ const routes: Routes = [
                         path: 'co-so-vat-chat', component: AddMaterialsComponent
                     },
                     {
-                        path: 'giong-nuoi', component: AddBreedsComponent
+                        path: 'giong-nuoi', component: AddBreedComponent
                     }
                 ]
             }
