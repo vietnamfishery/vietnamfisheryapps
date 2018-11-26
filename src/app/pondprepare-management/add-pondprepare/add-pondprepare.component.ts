@@ -2,12 +2,13 @@ import { MY_FORMATS_DATE } from './../../constants/format-date';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondprepareManagementService } from '../pondprepare-management.service';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
 import { AppService } from 'src/app/app.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-add-pondprepare',
@@ -34,6 +35,7 @@ export class AddPondprepareComponent implements OnInit {
     constructor(
         private appService: AppService,
         private fb: FormBuilder,
+        private router: Router,
         private snackBar: MatSnackBar,
         private pondprepareManagementService: PondprepareManagementService,
         private storageManagementService: StorageManagementService
@@ -117,7 +119,24 @@ export class AddPondprepareComponent implements OnInit {
             ownerId: this.ownerId
         }
         this.pondprepareManagementService.addNewPrepare(this.token, obj).subscribe(res => {
-            console.log(res);
+            if (res.success) {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "right"
+                });
+                this.cancel();
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
         })
+    }
+
+    cancel() {
+        this.form.reset();
+        this.router.navigate(['/quan-ly-chuan-bi-ao'])
     }
 }
