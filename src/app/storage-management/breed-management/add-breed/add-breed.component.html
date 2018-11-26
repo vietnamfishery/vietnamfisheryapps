@@ -1,14 +1,13 @@
-breed
-<!-- <mat-card *ngFor="let formBreed of arrFormBreed">
+<mat-card *ngFor="let formBreed of arrFormBreed">
     <form [formGroup]="formBreed.form" (ngSubmit)="onSubmitBreedAll()" (click)="changeFilteredOptionBreed(formBreed.position)">
         <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
             <div fxLayout="column" fxFlex="50">
                 <div fxLayout="row" fxLayoutAlign="space-around center">
                     <mat-form-field fxFlex="48" fxFlexOffset="1">
-                        <input type="text" placeholder="Tên Giống" aria-label="Tên Giống" matInput [formControl]="formBreed.form.controls['breedName']"
+                        <input (keyup)="setAutocomplete($event.target.value, formBreed.position)" type="text" placeholder="Tên Giống" aria-label="Tên Giống" matInput [formControl]="formBreed.form.controls['breedName']"
                             #tenGiong [matAutocomplete]="autoBreed" required>
                         <mat-autocomplete #autoBreed="matAutocomplete" [displayWith]="displayFnBreed">
-                            <mat-option *ngFor="let breed of filteredOptionBreed | async" [value]="breed">
+                            <mat-option (click)="setAutocomplete(breed, formBreed.position)" *ngFor="let breed of filteredOptionBreed | async" [value]="breed">
                                 {{breed.breedName}}
                             </mat-option>
                         </mat-autocomplete>
@@ -79,8 +78,8 @@ breed
         <button mat-button type="button" matTooltip="Gửi" (click)="onSubmitBreedAll()" class="mat-blue-500 mr-5">
             <mat-icon>send</mat-icon>
         </button>
-        <button mat-button type="button" matTooltip="Hủy" class="mat-pink-700 mr-5">
+        <button mat-button type="button" (click)="back()" matTooltip="Hủy" class="mat-pink-700 mr-5">
             <mat-icon>cancel</mat-icon>
         </button>
     </div>
-</div> -->
+</div>
