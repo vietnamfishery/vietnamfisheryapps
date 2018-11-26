@@ -8,6 +8,7 @@ import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { PondprepareManagementService } from '../pondprepare-management.service';
 
 export interface Choose {
     productName: string;
@@ -39,6 +40,7 @@ export class AddOldPondPrepareComponent implements OnInit {
         private router: Router,
         public snackBar: MatSnackBar,
         private pondManagementService: PondManagementService,
+        private pondprepareManagementService: PondprepareManagementService,
         private appService: AppService,
         private storageManagementService: StorageManagementService
     ) {
@@ -133,6 +135,20 @@ export class AddOldPondPrepareComponent implements OnInit {
             detailsOfPrepare: this.detailsOfPrepare,
             ownerId: this.ownerId
         }
-        console.log(obj);
+        this.pondprepareManagementService.addPrepareOldPond(this.token, obj).subscribe(res => {
+            if (res.success) {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "right"
+                });
+                this.cancel();
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+        })
     }
 }

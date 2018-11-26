@@ -1,10 +1,11 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="row">
         <h1 class="mat-headline center-align" fxFlex='100'>Quản lý chuẩn bị ao</h1>
-        <a mat-flat-button color="white" routerLink="/quan-ly-chuan-bi-ao/them-moi" matTooltip="Thêm một ao mới và thêm chuẩn bị"
+        <a mat-flat-button color="white" routerLink="/quan-ly-chuan-bi-ao/them" *ngIf="isBoss" matTooltip="Thêm một ao mới"
             matTooltipPosition="above" fxFlex style="margin-right: 10px">
             <mat-icon>library_add</mat-icon>
         </a>
+        <!-- <button mat-raised-button (click)="goto('/quan-ly-chuan-bi-ao/danh-sach-ao')" color="accent">Thêm</button> -->
     </mat-toolbar>
     <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
     <mat-sidenav-container class="background-none shadow-none height">

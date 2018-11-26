@@ -24,6 +24,10 @@ export class PondprepareManagementService {
         return this.http.post(host + '/pondPrepares/addNew', data, this.appService.setHeader(token));
     }
     
+    public addPrepareOldPond(token: string, data: any): Observable<any> {
+        return this.http.post(host + '/pondPrepares/add/exiting-pond', data, this.appService.setHeader(token));
+    }
+    
     public addIncurred(data: any, token: string): Observable<any> {
         return this.http.post(host + '/pondPrepares/incurreds/add', data, this.appService.setHeader(token));
     }
