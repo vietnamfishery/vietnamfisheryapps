@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HarvestManagementRoutingModule } from './harvest-management-routing.module';
 import { HarvestManagementComponent } from './harvest-management.component';
-import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSidenavModule, MatSliderModule, MatListModule, MatButtonToggleModule, MatTabsModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatSnackBarModule, MatProgressBarModule } from '@angular/material';
+import { MatCardModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSidenavModule, MatSliderModule, MatListModule, MatButtonToggleModule, MatTabsModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatSnackBarModule, MatProgressBarModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -28,7 +28,10 @@ import { AnalysisHarvestComponent } from './analysis-harvest/analysis-harvest.co
     FormsModule,
     FlexLayoutModule,
     MatDialogModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatFormFieldModule,
+    MatTableModule,
     MatInputModule,
     MatSelectModule,
     NgxDatatableModule,

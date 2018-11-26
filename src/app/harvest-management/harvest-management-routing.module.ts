@@ -8,8 +8,8 @@ import { AnalysisHarvestComponent } from './analysis-harvest/analysis-harvest.co
 const routes: Routes = [
   { path: '', component: HarvestManagementComponent },
   { path: 'them/:pondUUId', component: AdddetailHarvestComponent },
-  { path: 'thong-ke-thu-hoach/:pondUUId', component: AnalysisHarvestComponent },
-  { path: 'sua-chi-tiet-thu-hoach/:pondUUId', component: EditDetailHarvestComponent }
+  { path: 'thong-ke/:pondUUId/:seasonUUId', component: AnalysisHarvestComponent },
+  { path: 'sua-chi-tiet-thu-hoach', component: EditDetailHarvestComponent }
 ];
 
 @NgModule({

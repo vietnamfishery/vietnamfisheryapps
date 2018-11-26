@@ -8,6 +8,7 @@ import { AppService } from '../app.service';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import * as jwtDecode from 'jwt-decode';
+import { find } from 'lodash';
 
 @Component({
   selector: 'app-harvest-management',
@@ -44,11 +45,7 @@ export class HarvestManagementComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.isBoss){
-            this.initBoss();
-        } else {
-            this.initEmp();
-        }
+        this.getSeason();
     }
 
     initBoss() {
@@ -63,22 +60,19 @@ export class HarvestManagementComponent implements OnInit {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
             if (res.success) {
                 this.seasons = res.seasons;
-                for(let i = 0; i < res.seasons.length;  i++) {
-                    if(res.seasons[i].status === 0) {
-                        this.seasonPresent = res.seasons[i]
-                        this.realSeasonPresent = res.seasons[i]
-                        break;
-                    }
-                    if(i === res.seasons.length - 1){
-                        this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
-                            duration: 3000,
-                            horizontalPosition: "center",
-                            verticalPosition: 'top'
-                        });
-                        this.router.navigate['/quan-ly-chat-thai']
-                    }
+                this.seasonPresent = find(this.seasons, (e) => e.status === 0);
+                if(!this.seasonPresent) {
+                    this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
                 }
-                this.getAllPondWithSeasonUUId();
+                if(this.isBoss) {
+                    this.getAllPondWithSeasonUUId();
+                } else {
+                    this.getPond();
+                }
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -91,6 +85,10 @@ export class HarvestManagementComponent implements OnInit {
 
     goto(path) {
         this.router.navigate([path]);
+    }
+
+    gotoAnalysis(pondUUId: string) {
+        this.router.navigate(['/quan-ly-thu-hoach/thong-ke', pondUUId, this.seasonPresent.seasonUUId])
     }
 
     getPond() {
@@ -147,7 +145,7 @@ export class HarvestManagementComponent implements OnInit {
             if (res.success) {
                 this.ponds = res.ponds;
                 if(!res.ponds.length) {
-                    this.snackBar.open('Không tìm thấy ao khả dụng.', 'Đóng', {
+                    this.snackBar.open('Không tìm thấy ao khả dụng. Có thể ao chưa được thêm vào vụ nuôi.', 'Đóng', {
                         duration: 3000,
                         horizontalPosition: "center",
                         verticalPosition: 'top'

@@ -8,7 +8,7 @@ import { StorageManagementService } from '../storage-management.service';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from '../../../environments';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, switchMap } from 'rxjs/operators';
 import { Storages, Breed } from 'src/app/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { remove } from 'lodash';
@@ -26,7 +26,7 @@ import { remove } from 'lodash';
 export class ImportManagementComponent implements OnInit {
 	couponId: number = null; // Giữ phiếu nhập hiện tại - khởi đầu null - sử dụng cho trường hợp nhập sai 
 	boughtBreedId: number = null; // Giữ phiếu nhập hiện tại - khởi đầu null - sử dụng cho trường hợp nhập sai 
-	type: number;
+	type: number = 0;
 	form: FormGroup;
 	formBreed: FormGroup;
 	arrFormStorage: any[] = [];
@@ -55,17 +55,17 @@ export class ImportManagementComponent implements OnInit {
 		private storageManagementService: StorageManagementService,
 		private appService: AppService
 	) {
-		this.token = this.appService.getCookie(tokenName);
+        this.token = this.appService.getCookie(tokenName);
 	}
-
+    
 	ngOnInit() {
+        this.type = this.router.url.includes('thuc-an') ? 0 : this.router.url.includes('co-so-vat-chat') ? 1 : this.router.url.includes('thuoc-&-duoc-pham') ? 2 : 3;
 		/**
 		 * thuc-an = 0
 		 * co-so-vat-chat = 1
-		 * thuoc-va-duoc-pham = 2
+		 * thuoc-&-duoc-pham = 2
 		 * giong-nuoi = 3
 		 */
-		this.type = this.setType((<any>this.route.snapshot.params).type);
 		this.storageManagementService.getStorageWithUser(this.token, this.type).subscribe((res: any) => {
 			this.storage = res.storages ? res.storages : [];
 			this.storageManagementService.getBreedWithUser(this.token).subscribe((res: any) => {
@@ -87,7 +87,7 @@ export class ImportManagementComponent implements OnInit {
 	/*         ALL        */
 	/**********************/
 	setType(type) {
-		return type === 'thuc-an' ? 0 : type === 'co-so-vat-chat' ? 1 : type === 'thuoc-va-duoc-pham' ? 2 : 3;
+		return type === 'thuc-an' ? 0 : type === 'co-so-vat-chat' ? 1 : type === 'thuoc-&-duoc-pham' ? 2 : 3;
 	}
 
 	vietnamese() {

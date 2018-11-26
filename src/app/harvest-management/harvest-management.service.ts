@@ -18,14 +18,12 @@ export class HarvestManagementService {
         private router: Router
     ) { }
 
-    public getHarvestAll(token: string): Observable<any> {
-        return this.http.post(host + '/harvest/gets', {
-            seasonId: 15,
-            pondId: 39
-        }, this.appService.setHeader(token));
-    }
-
+    
     addHarvest(data: any, token: string): Observable<any> {
         return this.http.post<any>(host + '/harvests/add', data, this.appService.setHeader(token));
+    }
+    
+    public getHarvest(data: any, token: string): Observable<any> {
+        return this.http.post(host + '/harvests/gets', data, this.appService.setHeader(token));
     }
 }

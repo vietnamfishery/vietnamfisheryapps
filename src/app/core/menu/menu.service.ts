@@ -123,7 +123,7 @@ const MENUITEMS: Array<Menu> = [
         children: [
             { state: 'thuc-an', name: 'Thức ăn' },
             { state: 'co-so-vat-chat', name: 'Cơ sở vật chất' },
-            { state: 'thuoc-va-duoc-pham', name: 'Thuốc và Dược phẩm' },
+            { state: 'thuoc-&-duoc-pham', name: 'Thuốc và Dược phẩm' },
             { state: 'giong-nuoi', name: 'Giống nuôi' }
         ],
         isRole: false
@@ -255,7 +255,7 @@ export class MenuService {
             children: [
                 { state: 'thuc-an', name: 'Thức ăn' },
                 { state: 'co-so-vat-chat', name: 'Cơ sở vật chất' },
-                { state: 'thuoc-va-duoc-pham', name: 'Thuốc và Dược phẩm' },
+                { state: 'thuoc-&-duoc-pham', name: 'Thuốc và Dược phẩm' },
                 { state: 'giong-nuoi', name: 'Giống nuôi' }
             ],
             isRole: this.isBoss || this.isStorage

@@ -22,7 +22,7 @@ const routes: Routes = [
             { path: '', component: FoodsManagementComponent },
             { path: 'thuc-an', component: FoodsManagementComponent },
             { path: 'co-so-vat-chat', component: MaterialManagementComponent },
-            { path: 'thuoc-va-duoc-pham', component: VeterinaryManagementComponent },
+            { path: 'thuoc-&-duoc-pham', component: VeterinaryManagementComponent },
             { path: 'giong-nuoi', component: BreedManagementComponent },
             {
                 path: 'nhap-kho', component: ImportManagementComponent, children: [

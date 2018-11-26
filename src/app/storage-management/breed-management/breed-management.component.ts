@@ -29,6 +29,7 @@ export class BreedManagementComponent implements OnInit {
 
     ngOnInit() {
         this.storageManagementService.getBreedWithUser(this.token).subscribe((res: any) => {
+            console.log(res);
             this.dataSource.data = res.breeds;
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;

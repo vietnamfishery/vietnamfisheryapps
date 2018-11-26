@@ -200,4 +200,8 @@ export class AddFoodsComponent implements OnInit {
             this.arrFormStorage[position].form.controls.unit.enable();
         }
     }
+
+    goto(path: string) {
+        this.router.navigate([path]);
+    }
 }
