@@ -166,20 +166,19 @@ export class AnalysisUsingVeterinaryComponent implements OnInit {
         }
         this.seasionManagementService.getUsingVeterinary(obj, this.token).subscribe(res => {
             this.events = [];
-            console.log(res);
-            // res.takeCare.forEach((takeCare: any) => {
-            //     takeCare.usingFoods.forEach((using: any) => {
-            //         const obj: any = {
-            //             start: moment(using.createdDate),
-            //             // end: addDays(new Date(), 1),
-            //             title: takeCare.takeCareName,
-            //             color: colors.red,
-            //             takeCare,
-            //             using
-            //         }
-            //         this.events.push(obj);
-            //     })
-            // })
+            res.takeCare.forEach((takeCare: any) => {
+                takeCare.usingVeterinary.forEach((using: any) => {
+                    const obj: any = {
+                        start: moment(using.createdDate),
+                        // end: addDays(new Date(), 1),
+                        title: takeCare.takeCareName,
+                        color: colors.red,
+                        takeCare,
+                        using
+                    }
+                    this.events.push(obj);
+                })
+            })
             this.refresh.next();
         })
     }

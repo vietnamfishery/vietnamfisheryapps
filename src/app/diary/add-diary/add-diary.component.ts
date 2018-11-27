@@ -50,6 +50,7 @@ export class AddDiaryComponent implements OnInit {
         this.form = this.fb.group({
             pondId: [null],
             ownerId: [this.ownerId],
+            diaryName: [null, Validators.compose([Validators.required])],
             fisheryQuantity: [null, Validators.compose([Validators.required])],
             healthOfFishery: [null, Validators.compose([Validators.required])],
             pondVolume: [null, Validators.compose([Validators.required])],

@@ -12,6 +12,9 @@ import { Subject } from 'rxjs';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
 import { colors } from '../../constants';
 import { CalendarDialogComponent } from './dialog/component';
+import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
+import { DiaryService } from '../diary.service';
+import * as moment from 'moment-timezone';
 
 @Component({
     selector: 'app-diary-analysis',
@@ -21,10 +24,12 @@ import { CalendarDialogComponent } from './dialog/component';
 export class DiaryAnalysisComponent implements OnInit {
 
     pondUUId: string;
+    seasonUUId: string;
     token: string;
     ownerId: number;
     isBoss: boolean = false;
     pond: any = {};
+    season: any = {};
 
     dialogRef: MatDialogRef<CalendarDialogComponent>;
     lastCloseResult: string;
@@ -70,41 +75,48 @@ export class DiaryAnalysisComponent implements OnInit {
 
     refresh: Subject<any> = new Subject();
 
-    events: CalendarEvent[] = [{
-        start: subDays(startOfDay(new Date()), 1),
-        end: addDays(new Date(), 1),
-        title: 'A 3 day event',
-        color: colors.red,
-        actions: this.actions
-    }, {
-        start: startOfDay(new Date()),
-        title: 'An event with no end date',
-        color: colors.yellow,
-        actions: this.actions
-    }, {
-        start: subDays(endOfMonth(new Date()), 3),
-        end: addDays(endOfMonth(new Date()), 3),
-        title: 'A long event that spans 2 months',
-        color: colors.blue
-    }, {
-        start: addHours(startOfDay(new Date()), 2),
-        end: new Date(),
-        title: 'A draggable and resizable event',
-        color: colors.yellow,
-        actions: this.actions,
-        resizable: {
-            beforeStart: true,
-            afterEnd: true
-        },
-        draggable: true
-    }];
+    events: CalendarEvent[] = [
+        // {
+        //     start: subDays(startOfDay(new Date()), 1),
+        //     end: addDays(new Date(), 1),
+        //     title: 'A 3 day event',
+        //     color: colors.red,
+        //     actions: this.actions
+        // },
+        // {
+        //     start: startOfDay(new Date()),
+        //     title: 'An event with no end date',
+        //     color: colors.yellow,
+        //     actions: this.actions
+        // },
+        // {
+        //     start: subDays(endOfMonth(new Date()), 3),
+        //     end: addDays(endOfMonth(new Date()), 3),
+        //     title: 'A long event that spans 2 months',
+        //     color: colors.blue
+        // },
+        // {
+        //     start: addHours(startOfDay(new Date()), 2),
+        //     end: new Date(),
+        //     title: 'A draggable and resizable event',
+        //     color: colors.yellow,
+        //     actions: this.actions,
+        //     resizable: {
+        //         beforeStart: true,
+        //         afterEnd: true
+        //     },
+        //     draggable: true
+        // }
+    ];
 
     activeDayIsOpen = false;
 
     constructor(
         private appService: AppService,
         public snackBar: MatSnackBar,
+        private seasionManagementService: SeasionManagementService,
         private route: ActivatedRoute,
+        private diaryService: DiaryService,
         private pondManagementService: PondManagementService,
         public dialog: MatDialog
     ) {
@@ -122,12 +134,25 @@ export class DiaryAnalysisComponent implements OnInit {
 
     init() {
         this.route.paramMap.pipe(
-            switchMap(params => {
+            switchMap((params: any) => {
                 this.pondUUId = params.get('pondUUId');
+                this.seasonUUId = params.get('seasonUUId')
                 return this.pondManagementService.getPondByUUId(this.pondUUId, this.token);
             })).subscribe(res => {
                 if (res.success) {
                     this.pond = res.pond;
+                    this.seasionManagementService.getSeasonBySeasonUUId(this.seasonUUId, this.token).subscribe(res$ => {
+                        if (res.success) {
+                            this.season = res$.season;
+                            this.getDiary(this.viewDate, this.view);
+                        } else {
+                            this.snackBar.open(res.message, 'Đóng', {
+                                duration: 3000,
+                                horizontalPosition: "center",
+                                verticalPosition: 'top'
+                            });
+                        }
+                    })
                 } else {
                     this.snackBar.open(res.message, 'Đóng', {
                         duration: 3000,
@@ -138,8 +163,29 @@ export class DiaryAnalysisComponent implements OnInit {
             });
     }
 
-    getDiary() {
-
+    getDiary(timeOut: Date, unitOfTime: string) {
+        const obj: any = {
+            pondId: this.pond.pondId,
+            seasonId: this.season.seasonId,
+            options: {
+                timeOut,
+                unitOfTime
+            }
+        }
+        this.diaryService.getDiary(obj, this.token).subscribe(res => {
+            this.events = [];
+            res.diaries.forEach((diary: any) => {
+                const obj: any = {
+                    start: moment(diary.createdDate),
+                    // end: addDays(new Date(), 1),
+                    title: diary.diaryName,
+                    color: colors.red,
+                    diary,
+                }
+                this.events.push(obj);
+            })
+            this.refresh.next();
+        })
     }
 
     dayClicked({ date, events }: { date: Date, events: CalendarEvent[] }): void {

@@ -11,8 +11,10 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
             <br>
             <mat-form-field>
-                <input matInput placeholder="Số lượng hiện tại trong ao - ước tính" type="number" min="1" [formControl]="form.controls['fisheryQuantity']"
-                    autocomplete="off" required>
+                <input matInput placeholder="Tên gợi nhắc" [formControl]="form.controls['diaryName']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Số lượng hiện tại trong ao - ước tính" [formControl]="form.controls['fisheryQuantity']" autocomplete="off" required>
             </mat-form-field>
             <small *ngIf="form.controls['fisheryQuantity'].hasError('required') && form.controls['fisheryQuantity'].touched"
                 class="mat-text-warn">Số lượng hiện tại trong ao - ước tính không được để trống.</small>
