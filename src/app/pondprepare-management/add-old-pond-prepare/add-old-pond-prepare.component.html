@@ -1,9 +1,17 @@
 <mat-card fxLayout="column">
-    <mat-toolbar color="primary" class="table-header" fxLayout="column">
+    <!-- <mat-toolbar color="primary" class="table-header" fxLayout="column">
         <h1 fxLayout="row" fxLayoutAlign="center center" fxFlex="100"><b>THÊM CHI TIẾT CHUẨN BỊ AO - {{ (pond ?
                 pond.pondName : '') | uppercase }}</b></h1>
         <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>Điền thông tin vào mẫu dưới đây và nhấn nút </i><b>&nbsp;Gửi</b></h6>
-    </mat-toolbar>
+    </mat-toolbar> -->
+    <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>
+            <h2 class="mat-headline center-align">THÊM CHI TIẾT CHUẨN BỊ AO - {{ (pond ? pond.pondName : '') | uppercase }}</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h4 class="subtitle">Nhập chi tiết thông tin chuẩn bị ao của bạn</h4>
+        </mat-card-subtitle>
+    </div>
     <div fxLayout="column" class="mr">
         <div fxLayout="rows">
             <form [formGroup]="form" class="mr" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
@@ -21,11 +29,11 @@
                     <input matInput placeholder="Số lượng" type="number" [formControl]="form.controls['quantity']"
                         autocomplete="off" required>
                 </mat-form-field>
-                <div class="mr-b-5">
-                    <button mat-raised-button type="button" (click)="addArray()" class="mat-green-700" [disabled]="form.invalid" *ngIf="detailsOfPrepare.length === 0">Thêm</button>
-                    <button mat-raised-button type="button" (click)="addArray()" class="mat-green-700" [disabled]="form.invalid" *ngIf="detailsOfPrepare.length > 0">Tiếp tục thêm</button>
-                    <button type="submit" [disabled]="form.invalid || detailsOfPrepare.length === 0" mat-button>Gửi</button>
-                    <button type="button" (click)="cancel()" mat-button>Hủy</button>
+                <div class="mr-b-5" fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button type="button" class="mr-5" (click)="addArray()" color="primary" [disabled]="form.invalid" *ngIf="detailsOfPrepare.length === 0">Thêm</button>
+                    <button mat-raised-button type="button" class="mr-5" (click)="addArray()" class="mat-green-700" [disabled]="form.invalid" *ngIf="detailsOfPrepare.length > 0">Tiếp tục thêm</button>
+                    <button mat-raised-button type="submit" class="mr-5" [disabled]="form.invalid || detailsOfPrepare.length === 0" class="mat-pink-700">Gửi</button>
+                    <button mat-raised-button color="warn" class="mr-5" (click)="cancel()">Hủy</button>
                 </div>
             </form>
         </div>
