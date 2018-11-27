@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --host vietnamfishery -o",
     "hp6": "ng serve --host 172.16.193.103",
+    "ktx": "ng serve --host 10.1.27.5",
     "build": "ng build --prod -aot",
     "test": "ng test",
     "lint": "ng lint",

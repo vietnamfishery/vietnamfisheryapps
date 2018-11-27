@@ -42,21 +42,9 @@ export class DiaryComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.isBoss){
-            this.initBoss();
-        } else {
-            this.initEmp();
-        }
-    }
-
-    initBoss() {
         this.getSeason();
     }
-
-    initEmp() {
-        this.getPond();
-    }
-
+    
     getSeason() {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
             if (res.success) {
@@ -76,7 +64,11 @@ export class DiaryComponent implements OnInit {
                         this.router.navigate['/quan-ly-chat-thai']
                     }
                 }
-                this.getAllPondWithSeasonUUId();
+                if(this.isBoss) {
+                    this.getAllPondWithSeasonUUId();
+                } else {
+                    this.getPond();
+                }
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -123,7 +115,7 @@ export class DiaryComponent implements OnInit {
     }
 
     gotoAnalysis = (pondUUId: string) => {
-        this.router.navigate(['/nhat-ky/thong-ke', pondUUId]);
+        this.router.navigate(['/nhat-ky/thong-ke', pondUUId, this.seasonPresent.seasonUUId]);
     }
 
     changeSeason(season: any){

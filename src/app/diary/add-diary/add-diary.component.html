@@ -6,6 +6,9 @@
     <div fxLayout="rows" class="mr-b-5">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
             <mat-form-field>
+                <input matInput placeholder="Tên gợi nhắc" [formControl]="form.controls['diaryName']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
                 <input matInput placeholder="Số lượng hiện tại trong ao - ước tính" [formControl]="form.controls['fisheryQuantity']" autocomplete="off" required>
             </mat-form-field>
             <mat-form-field>

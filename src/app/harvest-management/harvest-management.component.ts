@@ -48,14 +48,6 @@ export class HarvestManagementComponent implements OnInit {
         this.getSeason();
     }
 
-    initBoss() {
-        this.getSeason();
-    }
-
-    initEmp() {
-        this.getPond();
-    }
-
     getSeason() {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
             if (res.success) {

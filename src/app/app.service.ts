@@ -80,4 +80,16 @@ export class AppService {
             headers: new HttpHeaders(obj)
         }
     }
+
+    vertify(token: string) {
+        return this.http.get(host + '/user/vertify', this.setHeader(token));
+    }
+    
+    vertifyBoss(token: string) {
+        return this.http.get(host + '/user/vertify/boss', this.setHeader(token));
+    }
+    
+    vertifyRoles(token: string) {
+        return this.http.get(host + '/user/vertify/roles', this.setHeader(token));
+    }
 }

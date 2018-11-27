@@ -12,7 +12,7 @@ const routes: Routes = [
         path: 'them/:pondUUId', component: AddDiaryComponent
     },
     {
-        path: 'thong-ke/:pondUUId', component: DiaryAnalysisComponent
+        path: 'thong-ke/:pondUUId/:seasonUUId', component: DiaryAnalysisComponent
     }
 ];
 
