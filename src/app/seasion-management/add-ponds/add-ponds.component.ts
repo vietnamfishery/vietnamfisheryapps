@@ -83,7 +83,6 @@ export class AddPondsComponent implements OnInit {
         this.pondManagementService.getPondNotInSeasonAndPond({
             seasonUUId: this.seasonUUId
         }, this.token).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.ponds = res.ponds;
             } else {
@@ -111,12 +110,15 @@ export class AddPondsComponent implements OnInit {
             this.dataSource.data.forEach(row => this.selection.select(row));
     }
 
-    addWithChecker(pondId: number) {
-        if(!pondId) {
+    addWithChecker(data: any) {
+        if(!data) {
             const obj: object = {
                 seasonId: this.season.seasonId,
                 pondIdArr: this.selection.selected.map(e => {
-                    return e.pondId
+                    return {
+                        pondId: e.pondId,
+                        userId: e.userId
+                    }
                 })
             }
             this.seasionManagementService.addSeasonAndPond(obj, this.token).subscribe(res => {
@@ -137,7 +139,7 @@ export class AddPondsComponent implements OnInit {
         } else {
             const obj: object = {
                 seasonId: this.season.seasonId,
-                pondIdArr: pondId
+                pondIdArr: [data]
             }
             this.seasionManagementService.addSeasonAndPond(obj, this.token).subscribe(res => {
                 if (res.success) {

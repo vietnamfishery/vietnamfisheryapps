@@ -67,7 +67,8 @@
                           <div class="product-badge" *ngIf="pond.isFed === '1'" matTooltip="Chưa ghi nhật ký cho hôm nay" matTooltipPosition="above" (click)="gotoAdd(pond.pondUUId)"><span>
                                   <mat-icon>error_outline</mat-icon>
                               </span></div>
-                          <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
+                          <img [src]="pond.image || imagePlaceHolder" height="150px" width="100%" style="background-size: cover">
+                          <!-- <div [ngStyle]="getImage(pond.images)"></div> -->
                           <figcaption>
                               <p>
                                   <a href="javascript:;" matTooltip="Ghi nhật ký" (click)="gotoAdd(pond.pondUUId)" matTooltipPosition="left">

@@ -13,7 +13,7 @@ export class AppService {
     constructor(
         private http: HttpClient
     ) { }
-    setCookie(cname, cvalue, exdays) {
+    setCookie(cname: string, cvalue: any, exdays: any) {
         if (exdays != 0) {
             var d = new Date();
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -25,7 +25,7 @@ export class AppService {
     }
 
     getCookie(cname: string) {
-        let res;
+        let res: any;
         const arr = document.cookie.split('; ');
         arr.forEach(e => {
             if (e.split('=')[0] === cname) {
@@ -81,15 +81,29 @@ export class AppService {
         }
     }
 
+    loadImage(id: string): Promise<any>{
+        return new Promise((resolve, reject) => {
+            this.http.get(host + '/getFile/image/' + id).subscribe((res: any) => {
+                if(res) {
+                    resolve(res.data)
+                }
+            })
+        })
+	}
+
     vertify(token: string) {
-        return this.http.get(host + '/user/vertify', this.setHeader(token));
+        return this.http.get(host + '/user/vertify', this.setHeader(token || ''));
     }
     
     vertifyBoss(token: string) {
-        return this.http.get(host + '/user/vertify/boss', this.setHeader(token));
+        return this.http.get(host + '/user/vertify/boss', this.setHeader(token || ''));
     }
     
-    vertifyRoles(token: string) {
-        return this.http.get(host + '/user/vertify/roles', this.setHeader(token));
+    vertifyPondRoles(token: string) {
+        return this.http.get(host + '/user/vertify/roles/pond', this.setHeader(token || ''));
+    }
+    
+    vertifyStorageRoles(token: string) {
+        return this.http.get(host + '/user/vertify/roles/storage', this.setHeader(token || ''));
     }
 }

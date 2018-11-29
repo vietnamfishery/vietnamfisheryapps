@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { PondManagementService } from '../pond-management/pond-management.service';
@@ -7,6 +6,8 @@ import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import { MatSnackBar } from '@angular/material';
+import { find } from 'lodash';
+import { imagePlaceHolder } from '../constants/constant';
 
 @Component({
     selector: 'app-using-veterinary',
@@ -27,6 +28,8 @@ export class UsingVeterinaryComponent implements OnInit {
     realSeasonPresent: any = {};
     checkSeasonPresent: boolean = true;
 
+    imagePlaceHolder: string = imagePlaceHolder;
+
     constructor(
         private pondManagementService: PondManagementService,
         private seasionManagementService: SeasionManagementService,
@@ -43,41 +46,27 @@ export class UsingVeterinaryComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.isBoss){
-            this.initBoss();
-        } else {
-            this.initEmp();
-        }
-    }
-
-    initBoss() {
-        this.getSeason();
-    }
-
-    initEmp() {
-        this.getPond();
+        this.getSeason()
     }
 
     getSeason() {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
             if (res.success) {
                 this.seasons = res.seasons;
-                for(let i = 0; i < res.seasons.length;  i++) {
-                    if(res.seasons[i].status === 0) {
-                        this.seasonPresent = res.seasons[i]
-                        this.realSeasonPresent = res.seasons[i]
-                        break;
-                    }
-                    if(i === res.seasons.length - 1){
-                        this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
-                            duration: 3000,
-                            horizontalPosition: "center",
-                            verticalPosition: 'top'
-                        });
-                        this.router.navigate['/quan-ly-chat-thai']
-                    }
+                this.seasonPresent = find(res.seasons, e => e.status === 0);
+                if(!this.seasonPresent) {
+                    this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                    this.router.navigate['/quan-ly-chat-thai']
                 }
-                this.getAllPondWithSeasonUUId();
+                if(this.isBoss) {
+                    this.getAllPondWithSeasonUUId();
+                } else {
+                    this.getPond();
+                }
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -95,7 +84,7 @@ export class UsingVeterinaryComponent implements OnInit {
     getPond() {
         this.preloader = !this.preloader;
         this.pondManagementService.getPondAdvanced({
-            image: true,
+            image: false,
             isnotnull: true
         },this.token).subscribe(res => {
             if (res.success) {
@@ -107,6 +96,7 @@ export class UsingVeterinaryComponent implements OnInit {
                         verticalPosition: 'top'
                     });
                 }
+                this.getImage();
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -135,7 +125,7 @@ export class UsingVeterinaryComponent implements OnInit {
     getAllPondWithSeasonUUId() {
         this.preloader = !this.preloader;
         this.pondManagementService.getPondAdvanced({
-            image: true,
+            image: false,
             isnotnull: true,
             seasonid: this.seasonPresent.seasonId
         }, this.token).subscribe(res => {
@@ -148,6 +138,7 @@ export class UsingVeterinaryComponent implements OnInit {
                         verticalPosition: 'top'
                     });
                 }
+                this.getImage()
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -166,5 +157,14 @@ export class UsingVeterinaryComponent implements OnInit {
 
     gotoAnalysis = (pondUUId: string) => {
         this.router.navigate(['/su-dung-thuoc-&-duoc-pham/thong-ke', pondUUId, this.seasonPresent.seasonUUId]);
+    }
+
+    async getImage() {
+        const arr = [];
+        for(let p of this.ponds){
+            p[`image`] = await this.appService.loadImage(p.images);
+            arr.push(p);
+        }
+        this.ponds = arr;
     }
 }

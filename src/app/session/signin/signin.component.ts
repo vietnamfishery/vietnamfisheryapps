@@ -48,6 +48,7 @@ export class SigninComponent implements OnInit {
                     this.appService.setCookie(tokenName, res.token, 0);
                 }
                 let redirect: string = this.sessionService.redirectUrl ? this.sessionService.redirectUrl : '/';
+                console.log(redirect);
                 this.router.navigate([redirect]);
             } else {
                 this.form.reset();

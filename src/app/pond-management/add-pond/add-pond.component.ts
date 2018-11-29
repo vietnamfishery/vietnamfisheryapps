@@ -43,7 +43,10 @@ export class AddPondComponent implements OnInit {
     markers: Array<marker> = []
     token: string;
 
-    snackBarRef: any
+    snackBarRef: any;
+
+    minDate = new Date(1940, 0, 1);
+    maxDate = new Date();
 
     constructor(
         private fb: FormBuilder,
@@ -55,6 +58,7 @@ export class AddPondComponent implements OnInit {
         private adapter: DateAdapter<any>,
         public snackBar: MatSnackBar
     ) {
+        this.token = this.appService.getCookie(tokenName);
         this.seasionManagementService.getSeasonWithOwner(this.appService.getCookie(tokenName)).subscribe(res => {
             if(!res.success) {
                 this.form.reset();
@@ -136,13 +140,19 @@ export class AddPondComponent implements OnInit {
     }
 
     onSubmit() {
-        const token: string = this.appService.getCookie(tokenName);
+        if(this.form.invalid) {
+            return this.snackBar.open('Vui lòng nhập đủ thông tin mẫu.', 'Đóng', {
+                duration: 3000,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+        }
         const data: any = {
             ...this.form.value,
             images: this.selectedFile
         }
-        if(this.checkForm(this.form.controls.createCost.value, this.form.controls.pondArea.value, this.form.controls.pondDepth.value)) {
-            this.pondManagementService.addPond(data, token).subscribe((res) => {
+        if(this.checkForm(this.form.controls.createCost.value, this.form.controls.pondArea.value, this.form.controls.pondDepth.value, this.form.controls.pondCreatedDate.value)) {
+            this.pondManagementService.addPond(data, this.token).subscribe((res) => {
                 if (res.success) {
                     this.snackBar.open(res.message, 'Đóng', {
                         duration: 3000,
@@ -153,7 +163,6 @@ export class AddPondComponent implements OnInit {
                         this.router.navigate(['quan-ly-ao']);
                     }, 500);
                 } else {
-                    this.form.reset();
                     this.snackBar.open(res.message, 'Đóng', {
                         duration: 3000,
                         horizontalPosition: "right"
@@ -173,7 +182,6 @@ export class AddPondComponent implements OnInit {
                 this.pondManagementService.getBase64(files).then((base: string) => {
                     this.imageLink = base;
                 });
-                console.log(files);
             } else {
                 this.snackBar.open("Hình ảnh không được cho phép, vui lòng thử lại!", 'Đóng', {
                     duration: 2500,
@@ -188,7 +196,7 @@ export class AddPondComponent implements OnInit {
         this.adapter.setLocale('vn');
     }
 
-    checkForm(cp, dt, ds) {
+    checkForm(cp: any, dt: any, ds: any, pondCreateDate: any) {
 		const reg = new RegExp(/^[0-9]+$/);
 		if (!reg.test(cp) || !reg.test(dt) || !reg.test(ds)) {
 			this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
@@ -197,6 +205,14 @@ export class AddPondComponent implements OnInit {
 				verticalPosition: 'top'
 			});
 			return false;
+        }
+        if(new Date(pondCreateDate) > new Date()){
+            this.snackBar.open('Ngày tạo ao không được lớn hơn ngày hiện tại, kiểm tra và nhập lại cảm ơn!', 'Đóng', {
+				duration: 2500,
+				horizontalPosition: "center",
+				verticalPosition: 'top'
+            });
+            return false;
         }
         return true; 
 	}

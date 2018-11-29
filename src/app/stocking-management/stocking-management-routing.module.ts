@@ -4,6 +4,7 @@ import { StockingManagementComponent } from './stocking-management.component';
 import { AddStockingComponent } from './add-stocking/add-stocking.component';
 import { EditStockingComponent } from './edit-stocking/edit-stocking.component';
 import { ListPondComponent } from './list-pond/list-pond.component';
+import { AuthGuardBoss } from '../auth/auth.guard';
 
 const routes: Routes = [
     {
@@ -21,6 +22,11 @@ const routes: Routes = [
     {
         path: 'danh-sach-ao',
         component: ListPondComponent
+    },
+    {
+        path: 'danh-sach-ao/:seasonUUId',
+        component: ListPondComponent,
+        canActivate: [AuthGuardBoss]
     }
 ];
 

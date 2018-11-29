@@ -16,3 +16,5 @@ export enum ActionServer {
     INSERT = 'insert',
     UPDATE = 'update'
 }
+
+export const imagePlaceHolder: string = "https://via.placeholder.com/200x150";

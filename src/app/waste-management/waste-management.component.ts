@@ -3,12 +3,12 @@ import { WasteManagementService } from './waste-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
 import { MatSnackBar } from '@angular/material';
-import * as moment from 'moment';
 import * as jwtDecode from 'jwt-decode';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { Router } from '@angular/router';
+import { find } from 'lodash';
 
 @Component({
     selector: 'app-waste-management',
@@ -92,20 +92,15 @@ export class WasteManagementComponent implements OnInit {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
             if (res.success) {
                 this.seasons = res.seasons;
-                for(let i = 0; i < res.seasons.length;  i++) {
-                    if(res.seasons[i].status === 0) {
-                        this.seasonPresent = res.seasons[i]
-                        this.realSeasonPresent = res.seasons[i]
-                        break;
-                    }
-                    if(i === res.seasons.length - 1){
-                        this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
-                            duration: 3000,
-                            horizontalPosition: "center",
-                            verticalPosition: 'top'
-                        });
-                        this.router.navigate['/quan-ly-chat-thai']
-                    }
+                this.seasonPresent = find(res.seasons, e => e.status === 0);
+                this.realSeasonPresent = this.seasonPresent;
+                if(!this.seasonPresent) {
+                    this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                    this.router.navigate['/quan-ly-chat-thai']
                 }
                 this.getAllPondWithSeasonUUId();
                 this.form.patchValue({
@@ -138,6 +133,7 @@ export class WasteManagementComponent implements OnInit {
     }
 
     getWates() {
+        this.preloader = !this.preloader;
         const obj: any = {
             seasonId: this.seasonPresent.seasonId,
             pondId: this.initPond ? this.initPond.pondId : null,
@@ -145,10 +141,7 @@ export class WasteManagementComponent implements OnInit {
         }
         this.wasteManagementService.getAllWaste(obj, this.token).subscribe(res => {
             if (res.success) {
-                this.wastes = res.wastes.map(e => {
-                    e['createdDate'] = moment(e[`createdDate`]).format(`DD - MM - YYYY`)
-                    return e;
-                })
+                this.wastes = res.wastes;
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -156,7 +149,7 @@ export class WasteManagementComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
-            this.preloader = !this.preloader;
+            this.preloader = false;
         })
     }
 

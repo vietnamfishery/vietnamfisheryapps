@@ -11,7 +11,7 @@ import { SeasionManagementService } from '../seasion-management/seasion-manageme
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { Router } from '@angular/router';
 import { StockingService } from './stocking.service';
-import * as moment from 'moment';
+import { find } from 'lodash';
 
 @Component({
     selector: 'app-stocking-management',
@@ -93,20 +93,15 @@ export class StockingManagementComponent implements OnInit {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
             if (res.success) {
                 this.seasons = res.seasons;
-                for (let i = 0; i < res.seasons.length; i++) {
-                    if (res.seasons[i].status === 0) {
-                        this.seasonPresent = res.seasons[i]
-                        this.realSeasonPresent = res.seasons[i]
-                        break;
-                    }
-                    if (i === res.seasons.length - 1) {
-                        this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
-                            duration: 3000,
-                            horizontalPosition: "center",
-                            verticalPosition: 'top'
-                        });
-                        this.router.navigate['/quan-ly-vu-nuoi']
-                    }
+                this.seasonPresent = find(res.seasons, e => e.status === 0);
+                this.realSeasonPresent = this.seasonPresent;
+                if(!this.seasonPresent) {
+                    this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                    this.router.navigate['/quan-ly-chat-thai']
                 }
                 this.form.patchValue({
                     season: this.seasonPresent
@@ -188,5 +183,9 @@ export class StockingManagementComponent implements OnInit {
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    goto(path: string) {
+        this.router.navigate([path, this.isBoss ? this.seasonPresent.seasonUUId : ''])
     }
 }

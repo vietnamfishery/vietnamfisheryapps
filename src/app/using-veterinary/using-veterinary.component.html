@@ -69,7 +69,7 @@
                                 <!-- <div class="product-badge" *ngIf="pond.isFed === '1'" matTooltip="Chưa cho ăn" matTooltipPosition="above" (click)="gotoAdd(pond.pondUUId)"><span>
                                         <mat-icon>error_outline</mat-icon>
                                     </span></div> -->
-                                <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
+                                <img [src]="pond.image || imagePlaceHolder" height="150px" width="100%" style="background-size: cover">
                                 <figcaption>
                                     <p>
                                         <a href="javascript:;" matTooltip="Thêm nhật ký sử dụng thuốc" (click)="gotoAdd(pond.pondUUId)"

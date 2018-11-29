@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PondManagementService } from './pond-management.service';
 import { AppService } from '../app.service';
 import { tokenName } from '../../environments';
-import * as moment from 'moment';
+import { imagePlaceHolder } from '../constants/constant';
 import { DialogAddRole } from './dialog-add-role.component';
 import * as jwtDecode from 'jwt-decode';
 
@@ -31,6 +31,7 @@ export class PondManagementComponent implements OnInit {
     token: string;
     isBoss: boolean;
     notOwner: boolean = false;
+    imagePlaceHolder: string = imagePlaceHolder;
     constructor(
         private router: Router,
         public dialog: MatDialog,
@@ -54,25 +55,8 @@ export class PondManagementComponent implements OnInit {
         this.preloader = !this.preloader;
         this.pondManagementService.getAllPond(this.token).subscribe((res: any) => {
             if (res.success) {
-                if (res.ponds.length == 0) {
-                    this.snackBar.open('Bạn chưa có ao nào trong hệ thống', 'Đóng', {
-                        duration: 2500,
-                        horizontalPosition: "center",
-                        verticalPosition: "top"
-                    });
-                    this.notOwner = !this.notOwner;
-                }
-                this.ponds = res.ponds.map((element: any) => {
-                    return {
-                        pondUUId: element.pondUUId,
-                        status: element.status,
-                        pondName: element.pondName,
-                        pondCreatedDate: moment(element.pondCreatedDate).format(`DD - MM - YYYY`),
-                        images: element.images,
-                        pondId: element.pondId,
-                        employees: element.users
-                    }
-                });
+                this.ponds = res.ponds;
+                this.getImage();
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 2500,
@@ -82,18 +66,6 @@ export class PondManagementComponent implements OnInit {
             this.preloader = !this.preloader;
         });
     }
-
-    // countSeasonWithPond = async (pondUUId: string): Promise<any> => {
-    //     console.log(pondUUId);
-    //     return new Promise((resolve, reject) => {
-    //         this.pondManagementService.countSeasonWithPond({
-    //             pondUUId
-    //         }, this.token).subscribe(res => {
-    //             console.log(res);
-    //             return resolve(res)
-    //         })
-    //     })
-    // }
 
     openDialogAddRole(pondId: number): void {
         const dialogRef = this.dialog.open(DialogAddRole, {
@@ -109,5 +81,14 @@ export class PondManagementComponent implements OnInit {
 
     isOver(): boolean {
         return window.matchMedia(`(max-width: 960px)`).matches;
+    }
+
+    async getImage() {
+        const arr = [];
+        for(let p of this.ponds){
+            p[`image`] = await this.appService.loadImage(p.images);
+            arr.push(p);
+        }
+        this.ponds = arr;
     }
 }

@@ -53,7 +53,7 @@
                     <mat-card class="pointer" (click)="gotoAdd(pond.pondUUId)">
                         <div fxLayout="row">
                             <div class="media-grid compact bg-cover"
-                                [ngStyle]="{'background-image': 'url('+ pond.images +')'}" fxFlex="40">
+                                [ngStyle]="{'background-image': 'url('+ (pond.image || imagePlaceHolder) +')'}" fxFlex="40">
                                 <figure>
                                     <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
                                     <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
@@ -67,7 +67,7 @@
                                         </div>
                                     </div>
                                     <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
-                                        <span><b>Ngày tạo: </b>{{ pond.pondCreatedDate }}</span>
+                                        <span><b>Ngày tạo: </b>{{ pond.pondCreatedDate | date:'dd - MM -yyyy':'vi' }}</span>
                                     </div>
                                 </div>
                             </div>

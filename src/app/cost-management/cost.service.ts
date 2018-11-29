@@ -9,19 +9,19 @@ const host = api_url + ':' + api_port + '/api';
 @Injectable({
     providedIn: 'root'
 })
-export class HarvestManagementService {
+export class CostService {
 
     constructor(
         private appService: AppService,
         private http: HttpClient
     ) { }
 
-    
-    addHarvest(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/harvests/add', data, this.appService.setHeader(token));
-    }
-    
-    public getHarvest(data: any, token: string): Observable<any> {
-        return this.http.post(host + '/harvests/gets', data, this.appService.setHeader(token));
+    /**
+     * get cost theo vụ
+     * @param data JSON { seasonId }
+     * @param token 
+     */
+    public getCost(data: any, token: string): Observable<any> {
+        return this.http.get(host + '/prices/gets/' + data.seasonId, this.appService.setHeader(token));
     }
 }
