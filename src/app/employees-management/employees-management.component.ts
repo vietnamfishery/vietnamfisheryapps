@@ -8,6 +8,8 @@ import { Users } from '../models/users';
 import { DialogChangePondComponent } from './dialogChangePond.component';
 import { AddPondUserRolesComponent } from './add-pond-user-roles/add-pond-user-roles.component';
 
+import { find } from 'lodash';
+
 @Component({
     selector: 'app-employees-management',
     templateUrl: './employees-management.component.html',
@@ -44,7 +46,7 @@ export class EmployeesManagementComponent implements OnInit {
         this.employeesManagementService.getUserManageWithPond(this.token).subscribe((res: any) => {
             if (res.success) {
                 const arrayResult: any[] = [];
-                if(res.employees[0].userInfo.pondUserRole.length === 0) {
+                if(res.employees.length === 1 && res.employees[0].userInfo.pondUserRole.length === 0) {
                     return this.snackBar.open('Chưa có người dùng nào có quyền quản lý ao.', 'Đóng', {
                         duration: 2500,
                         horizontalPosition: "center",

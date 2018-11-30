@@ -56,7 +56,7 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
                     <td mat-cell *matCellDef="let element">
-                        <button (click)="addWithChecker(element.pondId)" mat-raised-button matTooltip="Thêm ao vào vụ nuôi" matTooltipPosition="above">
+                        <button (click)="addWithChecker({pondId: element.pondId, userId: element.userId})" mat-raised-button matTooltip="Thêm ao vào vụ nuôi" matTooltipPosition="above">
                             <mat-icon>add</mat-icon>
                         </button>
                     </td>

@@ -8,58 +8,57 @@ import {
   CanLoad, Route
 }                           from '@angular/router';
 import { SessionService } from '../session/session.service';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as Actions from '../rootStores/actions';
 import { AuthorizationState } from '../rootStores/models';
 import { tokenName } from '../../environments';
 import { AppService } from '../app.service';
 import * as jwtDecode from 'jwt-decode';
+import { find } from 'lodash';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  private isLogin: boolean;
-  constructor(
-    private sessionService: SessionService,
-    private appService: AppService,
-    private store: Store<AuthorizationState>,
-    private router: Router
-  ) {
-  }
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
-
-    return this.checkLogin(url);
-  }
-
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.canActivate(route, state);
-  }
-
-  canLoad(route: Route): boolean {
-    let url = `/${route.path}`;
-
-    return this.checkLogin(url);
-  }
-
-  checkLogin(url: string): boolean {
-    try{
-      this.isLogin = (jwtDecode(this.appService.getCookie(tokenName)) as any).username ? true : false 
-    } catch {
-      this.isLogin = false;    
+    private isLogin: boolean;
+    constructor(
+        private sessionService: SessionService,
+        private appService: AppService,
+        private router: Router
+    ) {
     }
-    if (this.isLogin) {
-      return true;
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        let url: string = state.url;
+
+        return this.checkLogin(url);
     }
-    // Store the attempted URL for redirecting
-    this.sessionService.redirectUrl = url;
-    // Navigate to the login page with extras
-    this.router.navigate(['/session/signin']);
-    return false;
-  }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(route, state);
+    }
+
+    canLoad(route: Route): boolean {
+        let url = `/${route.path}`;
+
+        return this.checkLogin(url);
+    }
+
+    checkLogin(url: string): boolean {
+        try {
+            this.isLogin = (jwtDecode(this.appService.getCookie(tokenName)) as any).isLogin;
+        } catch {
+            this.isLogin = false;
+        }
+        if (this.isLogin) {
+            // this.router.navigate['/']
+            return true;
+        }
+        // Store the attempted URL for redirecting
+        this.sessionService.redirectUrl = url;
+        // Navigate to the login page with extras
+        this.router.navigate(['/session/signin']);
+        return false;
+    }
 }
 
 @Injectable({
@@ -91,7 +90,7 @@ export class AuthGuarded implements CanActivate, CanActivateChild, CanLoad {
 
   checkLogin = (url: string): boolean => {
     try{
-      this.isLogin = (jwtDecode(this.appService.getCookie(tokenName)) as any).username ? true : false 
+      this.isLogin = (jwtDecode(this.appService.getCookie(tokenName)) as any).isLogin
     } catch {
       this.isLogin = false;    
     }
@@ -107,4 +106,166 @@ export class AuthGuarded implements CanActivate, CanActivateChild, CanLoad {
     // this.router.navigate(['/session/signin']);
     return true;
   }
+}
+
+
+@Injectable({
+    providedIn: 'root',
+})
+export class AuthGuardBoss implements CanActivate, CanActivateChild, CanLoad {
+    private isBoss: boolean;
+    constructor(
+        private sessionService: SessionService,
+        private appService: AppService,
+        private router: Router
+    ) {
+    }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        let url: string = state.url;
+        return this.checkBoss(url);
+    }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(route, state);
+    }
+
+    canLoad(route: Route): boolean {
+        let url = `/${route.path}`;
+        return this.checkBoss(url);
+    }
+
+    checkBoss = (url: string): boolean => {
+        this.appService.getCookie(tokenName)
+        try {
+            this.isBoss = !(jwtDecode(this.appService.getCookie(tokenName)) as any).roles.length && (jwtDecode(this.appService.getCookie(tokenName)) as any).createdBy === null;
+        } catch {
+            this.isBoss = false;
+        }
+        if(!this.isBoss) {
+            this.router.navigate(['/session/404'])
+        }
+        return this.isBoss;
+    }
+}
+
+@Injectable({
+    providedIn: 'root',
+})
+export class AuthGuardPond implements CanActivate, CanActivateChild, CanLoad {
+    private isRole: boolean;
+    constructor(
+        private sessionService: SessionService,
+        private appService: AppService,
+        private router: Router
+    ) {
+    }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        let url: string = state.url;
+        return this.checkPondRoles(url);
+    }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(route, state);
+    }
+
+    canLoad(route: Route): boolean {
+        let url = `/${route.path}`;
+        return this.checkPondRoles(url);
+    }
+
+    checkPondRoles = (url: string): boolean => {
+        this.appService.getCookie(tokenName)
+        try {
+            this.isRole = !!find((jwtDecode(this.appService.getCookie(tokenName)) as any).roles, e => e.roles === 1) || !(jwtDecode(this.appService.getCookie(tokenName)) as any).roles.length;
+            
+        } catch {
+            this.isRole = false;
+        }
+        if(!this.isRole) {
+            this.router.navigate(['/session/404'])
+        }
+        return this.isRole;
+    }
+}
+
+@Injectable({
+    providedIn: 'root',
+})
+export class AuthGuardStorage implements CanActivate, CanActivateChild, CanLoad {
+    private isRole: boolean;
+    constructor(
+        private sessionService: SessionService,
+        private appService: AppService,
+        private router: Router
+    ) {
+    }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        let url: string = state.url;
+        return this.checkPondRoles(url);
+    }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(route, state);
+    }
+
+    canLoad(route: Route): boolean {
+        let url = `/${route.path}`;
+        return this.checkPondRoles(url);
+    }
+
+    checkPondRoles = (url: string): boolean => {
+        this.appService.getCookie(tokenName)
+        try {
+            this.isRole = !!find((jwtDecode(this.appService.getCookie(tokenName)) as any).roles, e => e.roles === 2) || !(jwtDecode(this.appService.getCookie(tokenName)) as any).roles.length;
+        } catch {
+            this.isRole = false;
+        }
+        if(!this.isRole) {
+            this.router.navigate(['/session/404'])
+        }
+        return this.isRole;
+    }
+}
+
+@Injectable({
+    providedIn: 'root',
+})
+export class AuthGuardPondWithUser implements CanActivate, CanActivateChild, CanLoad {
+    private isRole: boolean;
+    constructor(
+        private sessionService: SessionService,
+        private appService: AppService,
+        private router: Router
+    ) {
+    }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        let url: string = state.url;
+        return this.checkPondRoles(url, route);
+    }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(route, state);
+    }
+
+    canLoad(route: Route): boolean {
+        let url = `/${route.path}`;
+        return this.checkPondRoles(url, route as any);
+    }
+
+    checkPondRoles = (url: string, route: ActivatedRouteSnapshot): boolean => {
+        this.appService.getCookie(tokenName)
+        try {
+            this.isRole = !!find((jwtDecode(this.appService.getCookie(tokenName)) as any).pondUserRole, e => e.pond.pondUUId === route.params.get('pondUUID'))
+        } catch {
+            this.isRole = false;
+        }
+        if(!this.isRole) {
+            this.router.navigate(['/session/404'])
+        }
+        return this.isRole;
+    }
 }

@@ -1,14 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { HarvestManagementService } from './harvest-management.service';
 import { tokenName } from '../../environments';
-import * as moment from 'moment';
 import { AppService } from '../app.service';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import * as jwtDecode from 'jwt-decode';
 import { find } from 'lodash';
+import { imagePlaceHolder } from '../constants/constant'
 
 @Component({
   selector: 'app-harvest-management',
@@ -28,6 +27,8 @@ export class HarvestManagementComponent implements OnInit {
 
     realSeasonPresent: any = {};
     checkSeasonPresent: boolean = true;
+
+    imagePlaceHolder: string = imagePlaceHolder;
 
     constructor(
         private pondManagementService: PondManagementService,
@@ -86,11 +87,12 @@ export class HarvestManagementComponent implements OnInit {
     getPond() {
         this.preloader = !this.preloader;
         this.pondManagementService.getPondAdvanced({
-            image: true,
+            image: false,
             isnotnull: true
         },this.token).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
+                this.getImage();
                 if(!res.ponds.length) {
                     this.snackBar.open('Không tìm thấy ao khả dụng.', 'Đóng', {
                         duration: 3000,
@@ -126,12 +128,13 @@ export class HarvestManagementComponent implements OnInit {
     getAllPondWithSeasonUUId() {
         this.preloader = !this.preloader;
         this.pondManagementService.getPondAdvanced({
-            image: true,
+            image: false,
             isnotnull: true,
             seasonid: this.seasonPresent.seasonId
         }, this.token).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
+                this.getImage();
                 if(!res.ponds.length) {
                     this.snackBar.open('Không tìm thấy ao khả dụng. Có thể ao chưa được thêm vào vụ nuôi.', 'Đóng', {
                         duration: 3000,
@@ -167,6 +170,14 @@ export class HarvestManagementComponent implements OnInit {
         return bool;
     }
 
+    async getImage() {
+        const arr = [];
+        for(let p of this.ponds){
+            p[`image`] = await this.appService.loadImage(p.images);
+            arr.push(p);
+        }
+        this.ponds = arr;
+    }
 }
 
 

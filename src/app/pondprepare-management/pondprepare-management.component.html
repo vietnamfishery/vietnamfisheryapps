@@ -31,7 +31,7 @@
                         <figure>
                             <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
                             <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
-                            <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
+                            <img [src]="pond.image || imagePlaceHolder" height="150px" width="100%" style="background-size: cover">
                             <figcaption>
                                 <p>
                                     <a href="javascript:;" matTooltip="Thêm chuẩn bị ao" (click)="gotoAdd(pond.pondUUId)"

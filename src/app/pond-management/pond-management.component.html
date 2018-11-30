@@ -49,7 +49,7 @@
                     <mat-card>
                         <div fxLayout="row">
                             <div [routerLink]="['/quan-ly-ao/chi-tiet-ao-nuoi', pond.pondUUId ]" class="media-grid compact bg-cover"
-                                [ngStyle]="{'background-image': 'url('+ pond.images +')'}" fxFlex="40">
+                                [ngStyle]="{'background-image': 'url('+ (pond.image || imagePlaceHolder) +')'}" fxFlex="40">
                                 <figure>
                                     <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
                                     <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
@@ -81,7 +81,7 @@
                                         <span> vụ</span>
                                     </div>
                                     <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
-                                        <span>{{ pond.pondCreatedDate }}</span>
+                                        <span>{{ pond.pondCreatedDate | date:'dd - MM - yyyy':'vi' }}</span>
                                     </div>
                                 </div>
                             </div>

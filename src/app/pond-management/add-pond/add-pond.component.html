@@ -22,7 +22,7 @@
                             ao không được để trống.</small>
                         <mat-form-field>
                             <mat-label>Ngày tạo ao</mat-label>
-                            <input matInput [matDatepicker]="pondCreatedDate" placeholder="Chọn một ngày" [formControl]="form.controls['pondCreatedDate']"
+                            <input matInput [matDatepicker]="pondCreatedDate" [min]="minDate" [max]="maxDate" placeholder="Chọn một ngày" [formControl]="form.controls['pondCreatedDate']"
                                 required autocomplete="off">
                             <mat-datepicker-toggle matSuffix [for]="pondCreatedDate"></mat-datepicker-toggle>
                             <mat-datepicker #pondCreatedDate></mat-datepicker>

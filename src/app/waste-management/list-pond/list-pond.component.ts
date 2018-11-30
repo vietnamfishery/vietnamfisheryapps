@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import * as moment from 'moment';
+import { switchMap } from 'rxjs/operators';
+import { imagePlaceHolder } from '../../constants/constant';
 
 @Component({
     selector: 'app-list-pond',
@@ -19,13 +21,18 @@ export class ListPondComponent implements OnInit {
 
     animal: string;
     name: string;
-    imgSource: string = '';
     preloader: boolean = false;
     token: string;
     isBoss: boolean;
     ownerId: number;
+
+    seasonUUId: string;
+
+    imagePlaceHolder: string = imagePlaceHolder;
+
     constructor(
         public dialog: MatDialog,
+        private route: ActivatedRoute,
         public snackBar: MatSnackBar,
         private router: Router,
         private pondManagementService: PondManagementService,
@@ -39,7 +46,53 @@ export class ListPondComponent implements OnInit {
 
     ngOnInit() {
         this.preloader = !this.preloader;
-        this.reloadPond();
+        this.init();
+    }
+
+    init() {
+        this.route.paramMap.pipe(
+            switchMap(params => {
+                this.seasonUUId = params.get('seasonUUId');
+                return this.pondManagementService.getPondAdvanced({
+                    image: false,
+                    isnotnull: true,
+                    seasonuuid: this.seasonUUId
+                }, this.token);
+            })).subscribe(res => {
+                if (res.success) {
+                    this.ponds = res.ponds;
+                    this.getImage();
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+                this.preloader = !this.preloader;
+                return;
+            })
+        this.getPond()
+    }
+
+    getPond() {
+        this.preloader = !this.preloader;
+        this.pondManagementService.getPondAdvanced({
+            image: false,
+            isnotnull: true
+        },this.token).subscribe(res => {
+            if (res.success) {
+                this.ponds = res.ponds;
+                this.getImage();
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+            this.preloader = !this.preloader;
+        })
     }
 
     reloadPond = () => {
@@ -69,5 +122,14 @@ export class ListPondComponent implements OnInit {
 
     gotoAdd = (pondUUId: string) => {
         this.router.navigate(['/quan-ly-chat-thai/them', pondUUId]);
+    }
+
+    async getImage() {
+        const arr = [];
+        for(let p of this.ponds){
+            p[`image`] = await this.appService.loadImage(p.images);
+            arr.push(p);
+        }
+        this.ponds = arr;
     }
 }

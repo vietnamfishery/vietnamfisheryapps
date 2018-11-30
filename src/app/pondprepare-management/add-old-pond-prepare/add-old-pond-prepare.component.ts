@@ -130,7 +130,7 @@ export class AddOldPondPrepareComponent implements OnInit {
         this.form.patchValue({
             pondId: this.pond.pondId
         })
-        const obj: object = {
+        let obj: object = {
             ...this.form.value,
             detailsOfPrepare: this.detailsOfPrepare,
             ownerId: this.ownerId
