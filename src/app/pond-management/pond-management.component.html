@@ -45,59 +45,16 @@
                     <h3 class="mat-text-warn">Tạo ao nuôi đầu tiên để sử dụng các tính
                         năng của hệ thống</h3>
                 </div>
-                <!-- <div class="zoom" fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let pond of ponds">
-                    <mat-card>
-                        <div fxLayout="row">
-                            <div [routerLink]="['/quan-ly-ao/chi-tiet-ao-nuoi', pond.pondUUId ]" class="media-grid compact bg-cover"
-                                [ngStyle]="{'background-image': 'url('+ (pond.image || imagePlaceHolder) +')'}" fxFlex="40">
-                                <figure>
-                                    <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
-                                    <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
-                                </figure>
-                            </div>
-                            <div class="pa-1" fxFlex>
-                                <div fxLayout="column">
-                                    <div fxLayout="row">
-                                        <div fxFlex>
-                                            <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{
-                                                pond['pondName'] }}</h4>
-                                        </div>
-                                        <a *ngIf="isBoss" (click)="openDialogAddRole(pond.pondId)" matTooltip="Giao quyền quản lý"
-                                            matTooltipPosition="above" style="margin-right:5px">
-                                            <mat-icon>library_add</mat-icon>
-                                        </a>
-                                        <a [routerLink]="['/quan-ly-ao/chi-tiet-ao-nuoi', pond.pondUUId ]" class="pointer"
-                                            matTooltip="Chi tiết ao nuôi" matTooltipPosition="above">
-                                            <mat-icon>library_books</mat-icon>
-                                        </a>
-                                    </div>
-                                    <div class="mat-text-warn text-xl" *ngIf="pond.employees == 0">
-                                        <span><small></small></span>
-                                    </div>
-                                    <div class="mat-text-accent text-xl" *ngFor="let empl of pond.employees">
-                                        <span><small>{{ empl.lastname }} {{ empl.firstname }}</small></span>
-                                    </div>
-                                    <div class="mat-text-primary text-xl">
-                                        <span> vụ</span>
-                                    </div>
-                                    <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
-                                        <span>{{ pond.pondCreatedDate | date:'dd - MM - yyyy':'vi' }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-card>
-                </div> -->
                 <div class="zoom" fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let pond of ponds">
                     <mat-card>
                         <div class="media-grid">
                             <figure>
                                 <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
                                 <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
-                                <div class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url('+ pond.images +')'}"
-                                    fxFlex="45">
-                                </div>
-                                <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
+                                <!-- <div class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url('+ (pond.image || imagePlaceHolder) +')'}"
+                                    fxFlex="45>
+                                </div> -->
+                                <img [src]="pond.image || imagePlaceHolder" height="150px" width="100%" style="background-size: cover">
                                 <figcaption>
                                     <p>
                                         <a *ngIf="isBoss" (click)="openDialogAddRole(pond.pondId)" matTooltip="Giao quyền quản lý"
@@ -126,14 +83,11 @@
                             <div class="mat-text-accent text-xl" *ngFor="let empl of pond.employees">
                                 <span><small>{{ empl.lastname }} {{ empl.firstname }}</small></span>
                             </div>
-                            <!-- <div class="mat-text-primary text-xl">
-                                <span> vụ</span>
-                            </div> -->
                             <div style="font-size:13px" fxLayout="row" fxLayoutAlign="start center">
                                 <span>{{ pond.createCost | currency:'VNĐ '}}</span>
                             </div>
                             <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
-                                <span>{{ pond.pondCreatedDate }}</span>
+                                <span>{{ pond.pondCreatedDate | date:'dd - MM - yyyy':'vi' }}</span>
                             </div>
                         </mat-card-content>
                     </mat-card>

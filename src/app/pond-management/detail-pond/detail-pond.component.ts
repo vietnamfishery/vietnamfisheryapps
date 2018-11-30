@@ -45,6 +45,8 @@ export class DetailPondComponent implements OnInit {
     lng: number = 105.76896160840988;
     markers: marker[] = [];
     private selectedFile: File = null;
+    btnSave: boolean = false;
+    btnEdit: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -99,6 +101,7 @@ export class DetailPondComponent implements OnInit {
                 status: pond.status + '',
             });
         });
+        this.btnEdit = !this.btnEdit;
     }
 
     clickedMarker(label: string, index: number) {
@@ -156,6 +159,8 @@ export class DetailPondComponent implements OnInit {
     changeEdit() {
         this.form.enable();
         this.editName();
+        this.btnSave = !this.btnSave;
+        this.btnEdit = !this.btnEdit;
     }
 
     checkFile(fileType: string): boolean {

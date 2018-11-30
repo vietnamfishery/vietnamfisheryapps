@@ -40,7 +40,7 @@
                 <mat-card>
                     <div class="media-grid">
                         <figure>
-                            <img [src]="pond.images" height="150px" width="100%" style="background-size: cover">
+                            <img [src]="pond.image || imagePlaceHolder" height="150px" width="100%" style="background-size: cover">
                             <figcaption>
                                 <p>
                                     <a href="javascript:;" matTooltip="Thêm thu hoạch" (click)="gotoAdd(pond.pondUUId)"
