@@ -9,7 +9,6 @@ import { PondManagementService } from '../pond-management/pond-management.servic
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import { Router } from '@angular/router';
-import { tokenName } from '../constants/constant';
 import { find } from 'lodash';
 
 @Component({
@@ -34,9 +33,6 @@ export class GrowthsManagementComponent implements OnInit {
 
     initPond: any = {};
     ponds: any[] = [];
-    seasonSelected: any = {};
-    pondSelected: any = {};
-
     seasonSelected: any = {};
     pondSelected: any = {};
 

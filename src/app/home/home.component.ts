@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { tokenName } from '../constants/constant';
 import { AppService } from '../app.service';
 import * as jwtDecode from 'jwt-decode';
 import { tokenName } from '../constants/constant';

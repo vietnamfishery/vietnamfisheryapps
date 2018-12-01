@@ -10,11 +10,12 @@ import { CalendarEvent } from 'calendar-utils';
 import { CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
-import { colors, tokenName } from '../../constants';
+// import { colors, tokenName } from '../../constants';
 import { CalendarDialogComponent } from './dialog/component';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
 import { DiaryService } from '../diary.service';
 import * as moment from 'moment-timezone';
+import { colors } from 'src/app/constants/colors';
 
 @Component({
     selector: 'app-diary-analysis',

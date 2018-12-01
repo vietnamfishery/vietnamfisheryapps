@@ -5,7 +5,6 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@an
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { AppService } from 'src/app/app.service';
-import { tokenName, colors } from '../../constants';
 import { Router } from '@angular/router';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
