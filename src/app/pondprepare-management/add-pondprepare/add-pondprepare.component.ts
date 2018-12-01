@@ -32,6 +32,8 @@ export class AddPondprepareComponent implements OnInit {
     ownerId: number;
     type: number = 1;
     storages: any[] = [];
+    selected: any = {};
+
     constructor(
         private appService: AppService,
         private fb: FormBuilder,

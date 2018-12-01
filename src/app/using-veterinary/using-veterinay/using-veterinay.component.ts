@@ -31,6 +31,7 @@ export class UsingVeterinayComponent implements OnInit {
     form: FormGroup;
     storages: any;
     type: number = 2;
+    selected: any = {};
 
     constructor(
         private appService: AppService,

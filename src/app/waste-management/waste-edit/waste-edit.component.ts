@@ -69,23 +69,38 @@ export class WasteEditComponent implements OnInit {
         });
     }
 
+    checkForm(sl) {
+        const reg = new RegExp(/^[0-9]+$/);
+        if (!reg.test(sl)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
-        this.wasteManagementService.updateWaste(this.form.value, this.token).subscribe((res) => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-                this.router.navigate(['/quan-ly-chat-thai']);
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 2500,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-                this.form.reset();
-            }
-        });
+        if (this.checkForm(this.form.controls.quantity.value)) {
+            this.wasteManagementService.updateWaste(this.form.value, this.token).subscribe((res) => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    this.router.navigate(['/quan-ly-chat-thai']);
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 2500,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                    this.form.reset();
+                }
+            });
+        }
     }
 
 }

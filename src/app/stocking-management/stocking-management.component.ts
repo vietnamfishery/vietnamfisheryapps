@@ -63,7 +63,7 @@ export class StockingManagementComponent implements OnInit {
         if (deToken.userId === this.ownerId) {
             this.isBoss = true;
         }
-        this.displayedColumns = this.isBoss ? ['pondName', 'breedName', 'totalQuantity', 'createdDate', 'action'] : ['pondName', 'breedName', 'totalQuantity', 'createdDate'];
+        this.displayedColumns = this.isBoss ? ['pondName', 'breedName', 'totalQuantity', 'phFirst', 'salinityFirst', 'createdDate', 'action'] : ['pondName', 'breedName', 'totalQuantity', 'phFirst', 'salinityFirst', 'createdDate'];
     }
 
     ngOnInit() {
@@ -161,6 +161,7 @@ export class StockingManagementComponent implements OnInit {
                     horizontalPosition: "center",
                     verticalPosition: 'top'
                 });
+                this.loadTable();
             }
             if(this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId){
                 this.checkSeasonPresent = false;

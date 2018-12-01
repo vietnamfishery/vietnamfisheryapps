@@ -33,7 +33,7 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Số lượng thả (con)" type="number" [formControl]="form.controls['stockingQuantity']"
+                <input matInput placeholder="Số lượng thả (con)" #slt type="number" [formControl]="form.controls['stockingQuantity']"
                   autocomplete="off" required>
               </mat-form-field>
             </div>
@@ -47,11 +47,11 @@
             <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
               fxLayoutGap.xs="0">
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ pH ban đầu" type="number" [formControl]="form.controls['phFirst']"
+                <input matInput placeholder="Độ pH ban đầu" #pH type="number" [formControl]="form.controls['phFirst']"
                   autocomplete="off" required>
               </mat-form-field>
               <mat-form-field fxFlex="100">
-                <input matInput placeholder="Độ mặn ban đầu" type="number" [formControl]="form.controls['salinityFirst']"
+                <input matInput placeholder="Độ mặn ban đầu" #salty type="number" [formControl]="form.controls['salinityFirst']"
                   autocomplete="off" required>
               </mat-form-field>
             </div>

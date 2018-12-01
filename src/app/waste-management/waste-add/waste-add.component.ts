@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { tokenName } from 'src/app/constants/constant';
 import { AppService } from 'src/app/app.service';
 import * as jwtDecode from 'jwt-decode';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { WasteManagementService } from '../waste-management.service';
@@ -21,13 +21,15 @@ export class WasteAddComponent implements OnInit {
     ownerId: number;
     pondUUId: string;
     pond: any;
+    selected: any = {};
     constructor(
         private appService: AppService,
         private route: ActivatedRoute,
         private pondManagementService: PondManagementService,
         public snackBar: MatSnackBar,
         private wasteManagementService: WasteManagementService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router: Router
     ) {
         this.token = this.appService.getCookie(tokenName);
         const deToken: any = jwtDecode(this.token);
@@ -56,23 +58,42 @@ export class WasteAddComponent implements OnInit {
         });
     }
 
+    checkForm(sl) {
+        const reg = new RegExp(/^[0-9]+$/);
+        if (!reg.test(sl)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
         this.form.patchValue({
             pondId: this.pond.pondId
         });
-        this.wasteManagementService.addWaste(this.form.value, this.token).subscribe(res => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-        })
+        if (this.checkForm(this.form.controls.quantity.value)) {
+            this.wasteManagementService.addWaste(this.form.value, this.token).subscribe(res => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    setTimeout(() => {
+                        this.form.reset();
+                        this.router.navigate(['quan-ly-chat-thai']);
+                    }, 500);
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            })
+        }
     }
 }

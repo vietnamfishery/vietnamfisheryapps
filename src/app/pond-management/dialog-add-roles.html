@@ -13,17 +13,14 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <small *ngIf="form.controls['userId'].hasError('required') && form.controls['userId'].touched"
-                    class="mat-text-warn">Cần chọn người quản lý.</small>
-            <div class="pt-1 pb-1 text-xs-right">
-                <a style="font-weight:450; color: #3f51b5">Thêm tài khoản?</a>
-            </div>
+            <small *ngIf="form.controls['userId'].hasError('required') && form.controls['userId'].touched" class="mat-text-warn">Cần
+                chọn người quản lý.</small>
         </div>
         <div class="pb-1">
             <hr>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-around">
-            <button mat-flat-button color="primary" type="submit">Thêm</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">Thêm</button>
             <button mat-flat-button [mat-dialog-close]="true" color="warn">Huỷ</button>
         </div>
     </form>

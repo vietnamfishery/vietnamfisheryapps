@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddPondComponent } from './add-pond/add-pond.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DetailPondComponent } from './detail-pond/detail-pond.component';
-// import { MatFileUploadModule } from 'angular-material-fileupload';
 import { PondManagementService } from './pond-management.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogAddRole } from './dialog-add-role.component';
@@ -44,7 +43,6 @@ import { DialogAddRole } from './dialog-add-role.component';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBV-uHTqX6aH5_16ZmLa9uv16Op_R4t-1Y'
         }),
-        // MatFileUploadModule,
         MatDatepickerModule,
         PondManagementRoutingModule
     ],

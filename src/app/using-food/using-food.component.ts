@@ -21,7 +21,7 @@ export class UsingFoodComponent implements OnInit {
     isBoss: boolean = false;
     seasons: any[] = [];
     seasonPresent: any = {};
-
+    selected: any = {};
     preloader: boolean = false;
 
     realSeasonPresent: any = {};

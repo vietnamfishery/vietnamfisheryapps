@@ -1,38 +1,41 @@
 <mat-card fxLayout="column">
-    <mat-toolbar color="primary" fxLayout="column" fxLayoutAlign="center center">
-        <h1 class="mat-headline center-align">Thêm thông tin chất thải</h1>
-    </mat-toolbar>
+  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title>
+      <h2 class="mat-headline center-align">THÊM THÔNG TIN CHẤT THẢI</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="subtitle">Nhập chi tiết thông tin chất thải</h4>
+    </mat-card-subtitle>
+  </div>
 
-    <div fxLayout="row">
-        <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
-            fxFlexOffset.md="15" fxFlex.md="70">
-            <div>
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <mat-card-content fxLayout="column">
-                        <mat-form-field>
-                            <mat-select placeholder="Danh mục" [formControl]="form.controls['card']"
-                                required>
-                                <mat-option>None</mat-option>
-                                <mat-option value="0">Hoá chất quá hạn sử dụng</mat-option>
-                                <mat-option value="1">Rác</mat-option>
-                                <mat-option value="2">Xác tôm, cá</mat-option>
-                                <mat-option value="3">Chất thải</mat-option>
-                                <mat-option value="4">Khác</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <small *ngIf="form.controls['card'].hasError('required') && form.controls['card'].touched"
-                            class="mat-text-warn">Chưa
-                            chọn danh mục.</small>
-                        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
-                            fxLayoutGap.xs="0">
-                            <mat-form-field fxFlex="100">
-                                <input matInput placeholder="Số lượng hoặc trọng lượng" type="number" min="1"
-                                    [formControl]="form.controls['quantity']" autocomplete="off" required>
-                            </mat-form-field>
-                            <mat-form-field fxFlex="100">
-                                <input matInput placeholder="Người xử lý" type="text" [formControl]="form.controls['employee']"
-                                    autocomplete="off">
-                            </mat-form-field>
+  <div fxLayout="row">
+    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+      fxFlexOffset.md="15" fxFlex.md="70">
+      <div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-card-content fxLayout="column">
+            <mat-form-field>
+              <mat-select [(value)]="selected" placeholder="Danh mục" [formControl]="form.controls['card']" required>
+                <mat-option>None</mat-option>
+                <mat-option value="0">Hoá chất quá hạn sử dụng</mat-option>
+                <mat-option value="1">Rác</mat-option>
+                <mat-option value="2">Xác tôm, cá</mat-option>
+                <mat-option value="3">Chất thải</mat-option>
+                <mat-option value="4">Khác</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <small *ngIf="form.controls['card'].hasError('required') && form.controls['card'].touched" class="mat-text-warn">Chưa
+              chọn danh mục.</small>
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+              fxLayoutGap.xs="0">
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Số lượng hoặc trọng lượng" #sl type="number" min="1" [formControl]="form.controls['quantity']"
+                  autocomplete="off" required>
+              </mat-form-field>
+              <mat-form-field fxFlex="100">
+                <input matInput placeholder="Người xử lý" type="text" [formControl]="form.controls['employee']"
+                  autocomplete="off">
+              </mat-form-field>
                         </div>
                         <small *ngIf="form.controls['quantity'].hasError('required') && form.controls['quantity'].touched"
                             class="mat-text-warn">Số

@@ -1,11 +1,11 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="row">
-        <h1 class="mat-headline center-align" fxFlex='100'>Quản lý chuẩn bị ao</h1>
-        <a mat-flat-button color="white" routerLink="/quan-ly-chuan-bi-ao/them-moi" matTooltip="Thêm một ao mới"
+        <h1 class="mat-headline center-align" fxFlex='100'>Thống Kê Chuẩn bị ao</h1>
+        <!-- <a mat-flat-button color="white" routerLink="/quan-ly-chuan-bi-ao/them-moi" matTooltip="Thêm một ao mới"
             matTooltipPosition="above" fxFlex style="margin-right: 10px">
             <mat-icon>library_add</mat-icon>
         </a>
-        <button mat-raised-button (click)="goto('/quan-ly-chuan-bi-ao/danh-sach-ao')" color="accent">Thêm</button>
+        <button mat-raised-button (click)="goto('/quan-ly-chuan-bi-ao/danh-sach-ao')" color="accent">Thêm</button> -->
     </mat-toolbar>
     <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
     <div fxLayout="row">
@@ -67,8 +67,8 @@
                                     <div fxFlex="100">
                                         <h4 class="ma-0">{{ pp.pondprepareName | uppercase }}</h4>
                                     </div>
-                                    <a matTooltip="Sửa" matTooltipPosition="above">
-                                        <mat-icon>create</mat-icon>
+                                    <a>
+                                        <mat-icon>gavel</mat-icon>
                                     </a>
                                 </div>
                                 <div class="text-date" fxLayout="column">
@@ -106,25 +106,6 @@
                                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                                         </table>
-                                        <!-- <div fxLayout="column" fxFlex="53.33">
-                                            <b>Nguyên, vật liệu sử dụng</b>
-                                            <p>Thuốc diệt rong</p>
-                                            <p>Thuốc diệt rong</p>
-                                            <p>Thuốc diệt rong</p>
-                                        </div>
-                                        <div fxLayout="column" fxFlex="23.33">
-                                            <b>Số lượng</b>
-                                            <p>1 chai</p>
-                                            <p>1 chai</p>
-                                            <p>1 chai</p>
-                                        </div>
-                                        <div fxLayout="column" fxFlex="23.33">
-                                            <b>Chi phí</b>
-                                            <p>200 000</p>
-                                            <p>200 000</p>
-                                            <p>200 000</p>
-                                        </div> -->
-
                                     </div>
                                 </div>
                                 <br>

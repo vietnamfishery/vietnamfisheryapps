@@ -53,7 +53,17 @@
 
                 <ng-container matColumnDef="totalQuantity">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Số Lượng Thả</th>
-                    <td mat-cell *matCellDef="let element">{{ element.details.stockingQuantity }} (con)</td>
+                    <td mat-cell *matCellDef="let element">{{ element.details.stockingQuantity }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="phFirst">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>pH ban đầu</th>
+                    <td mat-cell *matCellDef="let element">{{ element.details.phFirst }} (độ)</td>
+                </ng-container>
+
+                <ng-container matColumnDef="salinityFirst">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Độ mặn ban đầu</th>
+                    <td mat-cell *matCellDef="let element">{{ element.details.salinityFirst }} (‱)</td>
                 </ng-container>
 
                 <ng-container matColumnDef="createdDate">

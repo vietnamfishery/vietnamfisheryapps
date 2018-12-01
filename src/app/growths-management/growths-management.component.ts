@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { GrowthsManagementService } from './growths-management.service';
 import { MatSnackBar } from '@angular/material';
+import { tokenName } from '../constants/constant';
 import * as moment from 'moment';
 import * as jwtDecode from 'jwt-decode';
 import { PondManagementService } from '../pond-management/pond-management.service';
@@ -33,6 +34,8 @@ export class GrowthsManagementComponent implements OnInit {
 
     initPond: any = {};
     ponds: any[] = [];
+    seasonSelected: any = {};
+    pondSelected: any = {};
 
     seasonSelected: any = {};
     pondSelected: any = {};
@@ -73,6 +76,13 @@ export class GrowthsManagementComponent implements OnInit {
             ownerId: this.ownerId
         }, this.token).subscribe(res => {
             if (res.success) {
+                if(res.ponds.length == 0){
+                    this.snackBar.open('Bạn không có ao nuôi nào trong vụ nuôi vừa chọn', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
                 this.ponds = res.ponds;
                 this.initPond = this.ponds[0];
                 this.getGrowth();

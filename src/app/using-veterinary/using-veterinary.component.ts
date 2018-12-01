@@ -22,6 +22,7 @@ export class UsingVeterinaryComponent implements OnInit {
     isBoss: boolean = false;
     seasons: any[] = [];
     seasonPresent: any = {};
+    selected: any = {};
 
     preloader: boolean = false;
 

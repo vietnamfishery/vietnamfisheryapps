@@ -33,9 +33,11 @@ export class WasteManagementComponent implements OnInit {
 
     initPond: any = {};
     ponds: any[] = [];
-    seasonSelected: any = {}
-    pondSelected: any = {}
-    
+
+    seasonSelected: any = {};
+    pondSelected: any = {};
+    selected: any = {};
+    selected2: any = {};
     constructor(
         private appService: AppService,
         private fb: FormBuilder,

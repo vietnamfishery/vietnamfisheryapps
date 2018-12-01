@@ -6,7 +6,7 @@ import { EmployeesManagementService } from '../employees-management.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { AppService } from '../../app.service';
-import { tokenName } from '../../constants';
+import { tokenName } from '../../constants/constant';
 
 
 const password = new FormControl('', Validators.required);

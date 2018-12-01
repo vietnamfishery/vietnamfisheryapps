@@ -33,31 +33,24 @@ const MENUITEMS: Array<Menu> = [
       icon: 'explore'
     },
     {
-        state: 'nhat-ky',
-        name: 'Ghi nhật ký',
+        state: 'quan-ly-phan-quyen',
+        name: 'Quản lý phân quyền',
         type: 'link',
-        icon: 'note_add',
-        isRole: false
+        icon: 'record_voice_over',
+        isRole: true
+    },
+    {
+        state: 'quan-ly-phan-quyen-ao',
+        name: 'Quản lý phân quyền ao',
+        type: 'link',
+        icon: 'assignment_ind',
+        isRole: true
     },
     {
         state: 'quan-ly-ao',
         name: 'Quản lý ao',
         type: 'link',
         icon: 'view_quilt',
-        isRole: false
-    },
-    {
-        state: 'cho-an',
-        name: 'Cho ăn',
-        type: 'link',
-        icon: 'room_service',
-        isRole: false
-    },
-    {
-        state: 'su-dung-thuoc-&-duoc-pham',
-        name: 'Sử dụng thuốc & dược phẩm',
-        type: 'link',
-        icon: 'room_service',
         isRole: false
     },
     {
@@ -79,6 +72,27 @@ const MENUITEMS: Array<Menu> = [
         name: 'Quản lý thả nuôi',
         type: 'link',
         icon: 'pan_tool',
+        isRole: false
+    },
+    {
+        state: 'nhat-ky',
+        name: 'Ghi nhật ký',
+        type: 'link',
+        icon: 'note_add',
+        isRole: false
+    },
+    {
+        state: 'cho-an',
+        name: 'Quản lý cho ăn',
+        type: 'link',
+        icon: 'widgets',
+        isRole: false
+    },
+    {
+        state: 'su-dung-thuoc-&-duoc-pham',
+        name: 'Sử dụng thuốc & dược phẩm',
+        type: 'link',
+        icon: 'add_location',
         isRole: false
     },
     {
@@ -126,20 +140,6 @@ const MENUITEMS: Array<Menu> = [
             { state: 'thu-hoach', name: 'Thu hoạch' },
         ],
         isRole: false
-    },
-    {
-        state: 'quan-ly-phan-quyen',
-        name: 'Quản lý phân quyền',
-        type: 'link',
-        icon: 'record_voice_over',
-        isRole: true
-    },
-    {
-        state: 'quan-ly-phan-quyen-ao',
-        name: 'Quản lý phân quyền ao',
-        type: 'link',
-        icon: 'assignment_ind',
-        isRole: true
     }
 ];
 
@@ -166,31 +166,24 @@ export class MenuService {
           isRole: true
         },
         {
-            state: 'nhat-ky',
-            name: 'Ghi nhật ký',
+            state: 'quan-ly-phan-quyen',
+            name: 'Quản lý phân quyền',
             type: 'link',
-            icon: 'note_add',
-            isRole: this.isBoss || this.isPond
+            icon: 'record_voice_over',
+            isRole: this.isBoss
+        },
+        {
+            state: 'quan-ly-phan-quyen-ao',
+            name: 'Quản lý phân quyền ao',
+            type: 'link',
+            icon: 'assignment_ind',
+            isRole: this.isBoss
         },
         {
             state: 'quan-ly-ao',
             name: 'Quản lý ao',
             type: 'link',
             icon: 'view_quilt',
-            isRole: this.isBoss || this.isPond
-        },
-        {
-            state: 'cho-an',
-            name: 'Cho ăn',
-            type: 'link',
-            icon: 'room_service',
-            isRole: this.isBoss || this.isPond
-        },
-        {
-            state: 'su-dung-thuoc-&-duoc-pham',
-            name: 'Sử dụng thuốc & dược phẩm',
-            type: 'link',
-            icon: 'room_service',
             isRole: this.isBoss || this.isPond
         },
         {
@@ -212,6 +205,27 @@ export class MenuService {
             name: 'Quản lý thả nuôi',
             type: 'link',
             icon: 'pan_tool',
+            isRole: this.isBoss || this.isPond
+        },
+        {
+            state: 'nhat-ky',
+            name: 'Ghi nhật ký',
+            type: 'link',
+            icon: 'note_add',
+            isRole: this.isBoss || this.isPond
+        },
+        {
+            state: 'cho-an',
+            name: 'Quản lý cho ăn',
+            type: 'link',
+            icon: 'widgets',
+            isRole: this.isBoss || this.isPond
+        },
+        {
+            state: 'su-dung-thuoc-&-duoc-pham',
+            name: 'Sử dụng thuốc & dược phẩm',
+            type: 'link',
+            icon: 'add_location',
             isRole: this.isBoss || this.isPond
         },
         {
@@ -258,20 +272,6 @@ export class MenuService {
                 { state: 'chi-phi-cham-soc', name: 'Chi phí chăm sóc' },
                 { state: 'thu-hoach', name: 'Thu hoạch' },
             ],
-            isRole: this.isBoss
-        },
-        {
-            state: 'quan-ly-phan-quyen',
-            name: 'Quản lý phân quyền',
-            type: 'link',
-            icon: 'record_voice_over',
-            isRole: this.isBoss
-        },
-        {
-            state: 'quan-ly-phan-quyen-ao',
-            name: 'Quản lý phân quyền ao',
-            type: 'link',
-            icon: 'assignment_ind',
             isRole: this.isBoss
         }
     ];

@@ -25,7 +25,7 @@
                         <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
                             fxLayoutGap.xs="0">
                             <mat-form-field fxFlex="100">
-                                <input matInput placeholder="Số lượng thả (con)" type="number" [formControl]="form.controls['stockingQuantity']"
+                                <input matInput placeholder="Số lượng thả" #slt type="number" [formControl]="form.controls['stockingQuantity']"
                                     autocomplete="off" required>
                             </mat-form-field>
                         </div>
@@ -36,11 +36,42 @@
                                     class="mat-text-warn">Số lượng thả không được trống.</small>
                             </div>
                         </div>
+                        <!-- <mat-form-field>
+                                <mat-label>Ngày thả nuôi</mat-label>
+                                <input matInput [matDatepicker]="CreatedDate" placeholder="Chọn một ngày" [formControl]="form.controls['CreatedDate']">
+                                <mat-datepicker-toggle matSuffix [for]="CreatedDate"></mat-datepicker-toggle>
+                                <mat-datepicker #CreatedDate></mat-datepicker>
+                            </mat-form-field>
+                            <small *ngIf="form.controls['CreatedDate'].hasError('required') && form.controls['CreatedDate'].touched"
+                                class="mat-text-warn">Ngày
+                                thả nuôi không được để trống.</small> -->
+                        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
+                            fxLayoutGap.xs="0">
+                            <mat-form-field fxFlex="100">
+                                <input matInput placeholder="pH ban đầu (độ)" #pH type="number" [formControl]="form.controls['phFirst']"
+                                    autocomplete="off" required>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="100">
+                                <input matInput placeholder="Độ mặn ban đầu (‱)" #salty type="number" [formControl]="form.controls['salinityFirst']"
+                                    autocomplete="off" required>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
+                            fxLayoutGap.xs="0">
+                            <div fxFlex="100">
+                                <small *ngIf="form.controls['phFirst'].hasError('required') && form.controls['phFirst'].touched"
+                                    class="mat-text-warn">pH ban đầu không được trống.</small>
+                            </div>
+                            <div fxFlex="100">
+                                <small *ngIf="form.controls['salinityFirst'].hasError('required') && form.controls['salinityFirst'].touched"
+                                    class="mat-text-warn">Độ mặn ban đầu không được trống.</small>
+                            </div>
+                        </div>
                     </mat-card-content>
                     <hr>
                     <mat-card-actions>
                         <div fxLayout="row" fxLayoutAlign="center center" class="pad">
-                            <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Cập nhật</button>
+                            <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Lưu</button>
                             <button mat-raised-button color="warn" type="submit" routerLink="/quan-ly-tha-nuoi">Huỷ</button>
                         </div>
                     </mat-card-actions>

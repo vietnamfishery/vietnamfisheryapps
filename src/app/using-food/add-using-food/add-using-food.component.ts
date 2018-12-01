@@ -17,6 +17,7 @@ import { StorageManagementService } from 'src/app/storage-management/storage-man
 })
 export class AddUsingFoodComponent implements OnInit {
 
+    preloader: boolean = false;
     token: string;
     ownerId: number;
     pondUUId: string;
@@ -24,6 +25,7 @@ export class AddUsingFoodComponent implements OnInit {
     form: FormGroup;
     storages: any;
     type: number = 0;
+    selected: any = {};
 
     constructor(
         private appService: AppService,

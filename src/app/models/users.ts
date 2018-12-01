@@ -27,6 +27,9 @@ export interface Users {
     updatedDate?: Date;
     isDeleted?: number;
     pondsBy?: any[];
+    wards?: string;
+    districts?: string;
+    provinces?: string;
 }
 
 export interface Roles {

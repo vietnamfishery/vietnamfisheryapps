@@ -39,6 +39,9 @@
             <button mat-icon-button mwlCalendarNextView (click)="getTake(viewDate, view)" [view]="view" [(viewDate)]="viewDate">
                 <mat-icon>chevron_right</mat-icon>
             </button>
+            <a mat-icon-button routerLink="/su-dung-thuoc-&-duoc-pham" color="white" matTooltip="Trở lại" matTooltipPosition="above">
+                <mat-icon>reply</mat-icon>
+            </a>
         </mat-toolbar-row>
     </mat-toolbar>
     <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>

@@ -39,6 +39,10 @@ export class AnalysisHarvestComponent implements OnInit {
         this.token = this.appService.getCookie(tokenName);
     }
 
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
     ngOnInit() {
         this.init()
     }

@@ -4,10 +4,11 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
+import { tokenName } from '../../constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { GrowthsManagementService } from '../growths-management.service';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
-import { tokenName } from '../../constants/constant';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-add-growths',
@@ -35,7 +36,8 @@ export class AddGrowthsComponent implements OnInit {
         public snackBar: MatSnackBar,
         private growthsManagementService: GrowthsManagementService,
         private pondManagementService: PondManagementService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router: Router
     ) {
         this.token = this.appService.getCookie(tokenName);
         const deToken: any = jwtDecode(this.token);
@@ -68,20 +70,36 @@ export class AddGrowthsComponent implements OnInit {
         this.adapter.setLocale('vi');
     }
 
+    checkForm(mdtb, sltb, tdtt, tls) {
+        const reg = new RegExp(/^[0-9]+$/);
+        if (!reg.test(mdtb) || !reg.test(sltb) || !reg.test(tdtt) || !reg.test(tls)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
-        this.growthsManagementService.addGrowth(this.form.value, this.token).subscribe(res => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-        })
+        if (this.checkForm(this.form.controls.averageDensity.value, this.form.controls.averageMass.value, this.form.controls.speedOdGrowth.value, this.form.controls.livingRatio.value)) {
+            this.growthsManagementService.addGrowth(this.form.value, this.token).subscribe(res => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    this.router.navigate(['/quan-ly-tang-truong']);
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            })
+        }
     }
 }

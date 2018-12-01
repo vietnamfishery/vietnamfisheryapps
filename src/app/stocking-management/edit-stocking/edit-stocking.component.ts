@@ -29,7 +29,8 @@ export class EditStockingComponent implements OnInit {
     stockingDetailUUId: string;
     stockingDetalis: any[] = [];
     breeds: any = []; // select cac con giong hien co trong kho
-
+    selected: any = {};
+    
     constructor(
         private appService: AppService,
         private route: ActivatedRoute,
@@ -74,6 +75,9 @@ export class EditStockingComponent implements OnInit {
             stockingDetailUUId: [this.stockingDetailUUId],
             breedId: [null, Validators.compose([Validators.required])],
             stockingQuantity: [null, Validators.compose([Validators.required])],
+            phFirst: [null, Validators.compose([Validators.required])],
+            salinityFirst: [null, Validators.compose([Validators.required])],
+            CreatedDate: [null, Validators.compose([Validators.required])]
         });
     }
 
@@ -83,21 +87,36 @@ export class EditStockingComponent implements OnInit {
         });
     }
 
+    checkForm(slt, pH, salty) {
+        const reg = new RegExp(/^[0-9]+$/);
+        if (!reg.test(slt) || !reg.test(pH) || !reg.test(salty)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
-        this.stockingService.updateStockingDetailsByStockingDetailsUUId(this.form.value, this.token).subscribe(res => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-                this.router.navigate(['/quan-ly-tha-nuoi']);
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-        })
+        if (this.checkForm(this.form.controls.stockingQuantity.value, this.form.controls.phFirst.value, this.form.controls.salinityFirst.value)) { 
+            this.stockingService.updateStockingDetailsByStockingDetailsUUId(this.form.value, this.token).subscribe(res => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    this.router.navigate(['/quan-ly-tha-nuoi']);
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            })
+        }
     }
 }

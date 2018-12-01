@@ -1,77 +1,37 @@
 <mat-card fxLayout="column">
-    <mat-toolbar color="primary" class="table-header" fxLayout="column">
-        <h1 fxLayout="row" fxLayoutAlign="center center" fxFlex="100"><b>QUẢN LÝ CHẤT THẢI</b></h1>
-        <h6 fxLayout="row" fxLayoutAlign="center center" fxFlex="100" style="font-size: 13px; opacity: 0.85;"><i>Chọn một ao cụ thể để ghi thông tin chất thải của ao đó</i></h6>
-    </mat-toolbar>
+    <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>
+            <h2 class="mat-headline center-align">THÔNG TIN CHẤT THẢI</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h4 class="subtitle">Chọn một ao cụ thể để ghi thông quản lý chất thải của ao đó</h4>
+        </mat-card-subtitle>
+    </div>
     <mat-progress-bar mode="indeterminate" *ngIf="preloader" color="accent"></mat-progress-bar>
     <div fxLayout="row">
         <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
-            <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
-                <hr>
-                <div class="pa-1">
-                    <h3 class="mt-1">Trạng thái</h3>
-                    <mat-radio-group>
-                        <div class="pb-1">
-                            <mat-radio-button value="1">Đang nuôi</mat-radio-button>
-                        </div>
-                        <div class="pb-1">
-                            <mat-radio-button value="2">Ao trống</mat-radio-button>
-                        </div>
-                        <div class="pb-1">
-                            <mat-radio-button value="3">Nâng cấp</mat-radio-button>
-                        </div>
-                    </mat-radio-group>
-                </div>
-                <hr>
-                <div class="pa-1">
-                    <h3>Số lượng vụ nuôi</h3>
-                    <mat-radio-group>
-                        <div class="pb-1">
-                            <mat-radio-button value="1">Tăng dần</mat-radio-button>
-                        </div>
-                        <div class="pb-1">
-                            <mat-radio-button value="2">Giảm dần</mat-radio-button>
-                        </div>
-                    </mat-radio-group>
-                </div>
-                <hr>
-
-                <div class="pa-1">
-                    <button mat-raised-button class="mat-green-700">Lọc</button>
-                </div>
-
-            </mat-sidenav>
-            <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
-                <button (click)="productsnav.toggle()" mat-icon-button>
-                    <mat-icon>short_text</mat-icon>
-                </button>
-                <span class="mr-1 ml-1">Xem theo</span>
-            </mat-toolbar>
-
             <div fxLayout="row wrap">
-                <div class="zoom mr-3" fxFlex="35%" *ngFor="let pond of ponds">
+                <div class="zoom" fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let pond of ponds">
                     <mat-card class="pointer" (click)="gotoAdd(pond.pondUUId)">
-                        <div fxLayout="row">
-                            <div class="media-grid compact bg-cover"
-                                [ngStyle]="{'background-image': 'url('+ (pond.image || imagePlaceHolder) +')'}" fxFlex="40">
-                                <figure>
-                                    <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
-                                    <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
-                                </figure>
-                            </div>
-                            <div class="pa-1" fxFlex>
-                                <div fxLayout="column">
-                                    <div fxLayout="row">
-                                        <div fxFlex>
-                                            <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{ pond['pondName'] }}</h4>
-                                        </div>
-                                    </div>
-                                    <div style="font-size:13px" fxLayout="row" fxLayoutAlign="end center">
-                                        <span><b>Ngày tạo: </b>{{ pond.pondCreatedDate | date:'dd - MM - yyyy':'vi' }}</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="media-grid">
+                            <figure>
+                                <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>
+                                <div class="product-badge-maintenance" *ngIf="pond.status === 2 "><span>Sửa</span></div>
+                                <!-- <div class="media-grid compact bg-cover" [ngStyle]="{'background-image': 'url('+ (pond.image || imagePlaceHolder) +')'}"
+                                    fxFlex="45">
+                                </div> -->
+                                <img [src]="pond.image || imagePlaceHolder" height="150px" width="100%" style="background-size: cover">
+                            </figure>
                         </div>
+                        <mat-card-content>
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <div fxFlex>
+                                    <h4 class="ma-0" style="text-transform: uppercase; font-weight: 500">{{
+                                        pond['pondName'] }}</h4>
+                                </div>
+                                <span><mat-icon>delete_sweep</mat-icon></span>
+                            </div>
+                        </mat-card-content>
                     </mat-card>
                 </div>
             </div>

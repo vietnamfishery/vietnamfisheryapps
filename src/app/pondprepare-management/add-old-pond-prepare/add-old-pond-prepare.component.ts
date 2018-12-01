@@ -33,6 +33,7 @@ export class AddOldPondPrepareComponent implements OnInit {
     dataSource = new MatTableDataSource<Choose>(this.showDetailsOfPrepare);
     storages: any[] = [];
     pondUUId: string;
+    selected: any = {};
 
     constructor(
         private fb: FormBuilder,

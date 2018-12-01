@@ -26,7 +26,7 @@ export class RoleManagementComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 
 	animal: string;
-	name: string;
+    name: string;
 	constructor(
 		private router: Router,
 		private employeesManagementService: EmployeesManagementService,
@@ -37,8 +37,12 @@ export class RoleManagementComponent implements OnInit {
 
 	ngOnInit() {
 		this.token = this.appService.getCookie(tokenName);
-		this.updateTable();
-	}
+        this.updateTable();
+    }
+    
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
 
 	openDialogAddRoleManagement(rolesId): void {
 		const dialogRef = this.dialog.open(DialogAddRoleManagement, {
@@ -65,7 +69,7 @@ export class RoleManagementComponent implements OnInit {
 				}
 			}
 			this.ELEMENT_DATA = arrayResult;
-			this.dataSource = new MatTableDataSource<Users>(this.ELEMENT_DATA);
+            this.dataSource = new MatTableDataSource<Users>(this.ELEMENT_DATA);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
 		})
