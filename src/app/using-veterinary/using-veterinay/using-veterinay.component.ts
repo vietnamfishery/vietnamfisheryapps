@@ -6,7 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
 import { UsingVeterinaryService } from '../using-veterinary.service';
-import { tokenName, MY_FORMATS_DATE } from 'src/environments';
+import { tokenName } from '../../constants';
+import { MY_FORMATS_DATE } from '../../constants/format-date';
 import * as jwtDecode from 'jwt-decode';
 import { switchMap } from 'rxjs/operators';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -30,6 +31,7 @@ export class UsingVeterinayComponent implements OnInit {
     form: FormGroup;
     storages: any;
     type: number = 2;
+    selected: any = {};
 
     constructor(
         private appService: AppService,

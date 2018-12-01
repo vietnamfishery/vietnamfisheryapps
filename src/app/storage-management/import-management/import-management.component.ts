@@ -6,7 +6,7 @@ import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StorageManagementService } from '../storage-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from '../../../environments';
+import { tokenName } from '../../constants/constant';
 import { Observable } from 'rxjs';
 import { startWith, map, switchMap } from 'rxjs/operators';
 import { Storages, Breed } from 'src/app/models';

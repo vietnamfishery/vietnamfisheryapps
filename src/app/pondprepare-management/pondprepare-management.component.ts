@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from './../constants/format-date';
-import { tokenName } from '../../environments';
+import { tokenName } from '../constants/constant';
 import { AppService } from '../app.service';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { Router } from '@angular/router';
@@ -29,6 +29,7 @@ export class PondprepareManagementComponent implements OnInit {
     isBoss: boolean = false;
     seasons: any[] = [];
     seasonPresent: any = {};
+    selected: any = {}
 
     preloader: boolean = false;
 

@@ -6,7 +6,7 @@ import { MY_FORMATS_DATE } from './../../constants/format-date';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import { switchMap } from 'rxjs/operators';
 
 @Component({

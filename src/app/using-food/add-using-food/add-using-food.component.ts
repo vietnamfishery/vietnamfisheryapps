@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { UsingFoodService } from '../using-food.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { switchMap } from 'rxjs/operators';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
@@ -17,6 +17,7 @@ import { StorageManagementService } from 'src/app/storage-management/storage-man
 })
 export class AddUsingFoodComponent implements OnInit {
 
+    preloader: boolean = false;
     token: string;
     ownerId: number;
     pondUUId: string;
@@ -24,6 +25,7 @@ export class AddUsingFoodComponent implements OnInit {
     form: FormGroup;
     storages: any;
     type: number = 0;
+    selected: any = {};
 
     constructor(
         private appService: AppService,

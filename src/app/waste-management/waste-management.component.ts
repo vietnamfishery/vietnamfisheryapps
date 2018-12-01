@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WasteManagementService } from './waste-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
+import { tokenName } from '../constants/constant';
 import { MatSnackBar } from '@angular/material';
 import * as jwtDecode from 'jwt-decode';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -33,7 +33,11 @@ export class WasteManagementComponent implements OnInit {
 
     initPond: any = {};
     ponds: any[] = [];
-    
+
+    seasonSelected: any = {};
+    pondSelected: any = {};
+    selected: any = {};
+    selected2: any = {};
     constructor(
         private appService: AppService,
         private fb: FormBuilder,
@@ -94,6 +98,7 @@ export class WasteManagementComponent implements OnInit {
                 this.seasons = res.seasons;
                 this.seasonPresent = find(res.seasons, e => e.status === 0);
                 this.realSeasonPresent = this.seasonPresent;
+                this.seasonSelected = this.seasonPresent;
                 if(!this.seasonPresent) {
                     this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
                         duration: 3000,

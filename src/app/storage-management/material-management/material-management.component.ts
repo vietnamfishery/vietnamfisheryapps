@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
 import { Storages } from 'src/app/models';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import { StorageManagementService } from '../storage-management.service';
 import { AppService } from 'src/app/app.service';
 

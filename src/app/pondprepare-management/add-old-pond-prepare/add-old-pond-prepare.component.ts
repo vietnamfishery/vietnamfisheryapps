@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
@@ -33,6 +33,7 @@ export class AddOldPondPrepareComponent implements OnInit {
     dataSource = new MatTableDataSource<Choose>(this.showDetailsOfPrepare);
     storages: any[] = [];
     pondUUId: string;
+    selected: any = {};
 
     constructor(
         private fb: FormBuilder,

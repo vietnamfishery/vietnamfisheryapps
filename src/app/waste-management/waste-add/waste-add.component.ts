@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import { AppService } from 'src/app/app.service';
 import * as jwtDecode from 'jwt-decode';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,6 +21,7 @@ export class WasteAddComponent implements OnInit {
     ownerId: number;
     pondUUId: string;
     pond: any;
+    selected: any = {};
     constructor(
         private appService: AppService,
         private route: ActivatedRoute,

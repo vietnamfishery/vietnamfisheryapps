@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Storages } from 'src/app/models';
-import { unitStorages, tokenName } from 'src/environments';
+import { unitStorages, tokenName } from '../../../constants';
 import { FormBuilder, Validators } from '@angular/forms';
 import { StorageManagementService } from '../../storage-management.service';
 import { DateAdapter, MatSnackBar } from '@angular/material';

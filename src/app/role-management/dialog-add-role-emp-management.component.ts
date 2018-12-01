@@ -6,7 +6,7 @@ import { Users } from '../models/users';
 
 import { EmployeesManagementService } from '../employees-management/employees-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
+import { tokenName } from '../constants/constant';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({

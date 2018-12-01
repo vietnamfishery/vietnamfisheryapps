@@ -10,6 +10,8 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class ChangePriceManagementComponent implements OnInit {
 
+    selected: any = {};
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
   

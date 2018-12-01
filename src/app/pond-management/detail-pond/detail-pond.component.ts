@@ -5,7 +5,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { PondManagementService } from '../pond-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from '../../../environments';
+import { tokenName } from '../../constants/constant';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -47,6 +47,7 @@ export class DetailPondComponent implements OnInit {
     private selectedFile: File = null;
     btnSave: boolean = false;
     btnEdit: boolean = false;
+    selected: any = {};
 
     constructor(
         private fb: FormBuilder,

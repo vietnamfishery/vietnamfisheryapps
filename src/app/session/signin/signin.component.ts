@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import * as Actions from '../../rootStores/actions';
 import { AuthorizationState } from '../../rootStores/models';
 import { AppService } from 'src/app/app.service';
-import { tokenName, isLogin } from '../../../environments';
+import { tokenName, isLogin } from '../../constants';
 import * as jwtDecode from 'jwt-decode';
 import { MatSnackBar } from '@angular/material';
 

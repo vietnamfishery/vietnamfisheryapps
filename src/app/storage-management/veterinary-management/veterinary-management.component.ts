@@ -3,7 +3,7 @@ import { MatPaginator, MatTableDataSource, MatSort, MatSnackBar } from '@angular
 import { Storages } from 'src/app/models';
 import { StorageManagementService } from '../storage-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 
 @Component({
     selector: 'app-veterinary-management',

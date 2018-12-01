@@ -3,7 +3,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import * as moment from 'moment';
 import { imagePlaceHolder } from '../../constants/constant';

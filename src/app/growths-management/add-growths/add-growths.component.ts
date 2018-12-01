@@ -4,7 +4,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { GrowthsManagementService } from '../growths-management.service';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
@@ -27,6 +27,7 @@ export class AddGrowthsComponent implements OnInit {
     token: string;
     ponds: any;
     ownerId: number;
+    selected: any = {};
     
     constructor(
         private adapter: DateAdapter<any>,

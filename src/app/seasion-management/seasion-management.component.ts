@@ -10,7 +10,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../constants/format-date';
 import { SeasionManagementService } from './seasion-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
+import { tokenName } from '../constants/constant';
 import { DialogAddSeasion } from './dialog-add-seasion.component.';
 
 export interface DialogData {

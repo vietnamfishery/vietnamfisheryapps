@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../constants/constant';
 import { AppService } from '../app.service';
 import * as jwtDecode from 'jwt-decode';
 
@@ -9,10 +9,14 @@ import * as jwtDecode from 'jwt-decode';
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+    
+    preloader: boolean = false;
     token: string;
     ownerId: number;
     lastname: string;
     firstname: string;
+    isBoss: boolean = false;
+    lineChartOptions: any = {};
 
     // public lineChartData: Array<any> = [
     //     {data: [1], label: 'Series A'},

@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { GrowthsManagementService } from '../growths-management.service';
 import { switchMap } from 'rxjs/operators';
-import { tokenName } from '../../../environments';
+import { tokenName } from '../../constants/constant';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

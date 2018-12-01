@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { AppService } from '../app.service';
 import { EmployeesManagementService } from '../employees-management/employees-management.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../constants/constant';
 
 @Component({
 	selector: 'dialog-add-role-management',

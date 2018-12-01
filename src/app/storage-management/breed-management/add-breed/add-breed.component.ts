@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageManagementService } from '../../storage-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName, unitBreed } from 'src/environments';
+import { tokenName, unitBreed } from '../../../constants';
 import { Breed } from 'src/app/models';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';

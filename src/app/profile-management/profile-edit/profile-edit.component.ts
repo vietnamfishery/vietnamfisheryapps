@@ -7,7 +7,7 @@ import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { ProfileManagementService } from '../profile-management.service';
 import { AppService } from '../../../app/app.service';
 import { Users } from '../../models/users';
-import { tokenName } from '../../../environments';
+import { tokenName } from '../../constants/constant';
 import { distanceInWordsToNow } from 'date-fns';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -30,9 +30,9 @@ const confirmPasswordchange = new FormControl('', CustomValidators.equalTo(passw
 export class ProfileEditComponent implements OnInit {
     public form: FormGroup;
     public form_Pass: FormGroup;
-    private errorFile: Promise<string> | null = null;
-    private updateErrorTimeout: boolean = false;
-    private updateSuccessTimeout: boolean = false;
+    public errorFile: Promise<string> | null = null;
+    public updateErrorTimeout: boolean = false;
+    public updateSuccessTimeout: boolean = false;
     timeOut: boolean = false;
 
     // for select field of form

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { GrowthsManagementService } from './growths-management.service';
 import { MatSnackBar } from '@angular/material';
-import { tokenName } from '../../environments';
+import { tokenName } from '../constants/constant';
 import * as moment from 'moment';
 import * as jwtDecode from 'jwt-decode';
 import { PondManagementService } from '../pond-management/pond-management.service';
@@ -32,6 +32,8 @@ export class GrowthsManagementComponent implements OnInit {
 
     initPond: any = {};
     ponds: any[] = [];
+    seasonSelected: any = {};
+    pondSelected: any = {};
 
     constructor(
         private appService: AppService,

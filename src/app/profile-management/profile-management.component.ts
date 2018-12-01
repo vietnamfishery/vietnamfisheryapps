@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProfileManagementService } from './profile-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
+import { tokenName } from '../constants/constant';
 import { Users } from '../models/users';
 import * as moment from 'moment';
 
@@ -20,7 +20,7 @@ interface marker {
 export class ProfileManagementComponent implements OnInit {
     imageLink: string = '';
     preloader: boolean = false;
-    private errorFile: Promise<string> | null = null;
+    public errorFile: Promise<string> | null = null;
     imgSource: string;
     timeOut: boolean = false;
 
@@ -40,7 +40,7 @@ export class ProfileManagementComponent implements OnInit {
     lat: number = 10.036344152103853;
     lng: number = 105.78569861415724;
     // thong tin user
-    private userInfo: Users = {
+    public userInfo: Users = {
         address: '',
         birthday: new Date(),
         createdBy: '',
@@ -67,7 +67,7 @@ export class ProfileManagementComponent implements OnInit {
     bday: string;
 
 
-    private markers: marker[] = []
+    public markers: marker[] = []
 
     constructor(
         private profileManagementService: ProfileManagementService,

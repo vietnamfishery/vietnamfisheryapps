@@ -2,7 +2,7 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import { MatSnackBar } from '@angular/material';
@@ -22,6 +22,7 @@ export class UsingVeterinaryComponent implements OnInit {
     isBoss: boolean = false;
     seasons: any[] = [];
     seasonPresent: any = {};
+    selected: any = {};
 
     preloader: boolean = false;
 

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { MatSnackBar, MatDialogConfig, MatDialogRef, MatDialog } from '@angular/material';
 import { CalendarEvent } from 'calendar-utils';

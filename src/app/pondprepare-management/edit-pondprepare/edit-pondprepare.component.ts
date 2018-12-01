@@ -18,6 +18,7 @@ import { MY_FORMATS_DATE } from './../../constants/format-date';
 export class EditPondprepareComponent implements OnInit {
 
     public form: FormGroup;
+    selected: any = {};
 
     constructor(
         private fb: FormBuilder,

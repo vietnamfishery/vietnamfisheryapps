@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
-import { tokenName, colors } from 'src/environments';
+import { tokenName, colors } from '../../constants';
 import { AppService } from 'src/app/app.service';
 import { MatSnackBar, MatDialogRef, MatDialogConfig, MatDialog } from '@angular/material';
 import { CalendarDialogComponent } from './dialog/component';
@@ -20,6 +20,7 @@ import * as moment from 'moment-timezone';
 })
 export class AnalysisUsingVeterinaryComponent implements OnInit {
 
+    preloader: boolean = false;
     pondUUId: string;
     seasonUUId: string;
     pond: any = {};

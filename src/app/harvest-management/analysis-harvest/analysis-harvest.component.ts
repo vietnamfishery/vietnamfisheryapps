@@ -5,7 +5,7 @@ import { AppService } from 'src/app/app.service';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../../constants/constant';
 import { HarvestManagementService } from '../harvest-management.service';
 
 @Component({
@@ -15,6 +15,7 @@ import { HarvestManagementService } from '../harvest-management.service';
 })
 export class AnalysisHarvestComponent implements OnInit {
 
+    preloader: boolean = false;
     pondUUId: string;
     seasonUUId: string;
     pond: any = {};
@@ -36,6 +37,10 @@ export class AnalysisHarvestComponent implements OnInit {
         private appService: AppService
     ) {
         this.token = this.appService.getCookie(tokenName);
+    }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
     ngOnInit() {

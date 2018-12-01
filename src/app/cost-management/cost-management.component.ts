@@ -3,7 +3,7 @@ import { CostService } from './cost.service';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import { find } from 'lodash';
 import { AppService } from '../app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from '../constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { MatSnackBar } from '@angular/material';
 

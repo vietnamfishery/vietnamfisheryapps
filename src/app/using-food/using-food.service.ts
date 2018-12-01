@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from '../app.service';
-import { api_url, api_port } from 'src/environments';
+import { api_url, api_port } from '../constants/api';
 const host = api_url + ':' + api_port + '/api';
 
 @Injectable({

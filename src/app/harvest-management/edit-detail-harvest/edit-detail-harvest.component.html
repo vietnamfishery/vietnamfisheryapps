@@ -11,10 +11,8 @@
     <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
       fxFlexOffset.md="15" fxFlex.md="70">
       <div>
-        <form [formGroup]="form" (ngSubmit)=(onSubmit()) style="font-size:20px">
+        <form [formGroup]="form" style="font-size:20px">
           <mat-card-content fxLayout="column">
-
-
             <mat-form-field fxFlex="100">
               <input matInput placeholder="Tên thu hoạch" type="text" [formControl]="form.controls['harvestName']"
                 autocomplete="off" required>

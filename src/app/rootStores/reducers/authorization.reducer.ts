@@ -5,7 +5,7 @@ const authorization: any = {
     userInfo: {}
 }
 
-export const authorizationReducer = (state: any = authorization, action: AuthActionsUnion) => {
+export function authorizationReducer(state: any = authorization, action: AuthActionsUnion) {
     switch (action.type) {
         case AuthActionTypes.LOGIN: {
             return state = {

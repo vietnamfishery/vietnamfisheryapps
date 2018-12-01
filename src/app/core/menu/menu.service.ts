@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { Router } from '@angular/router';
+import { tokenName } from '../../constants';
 import * as jwtDecode from 'jwt-decode';
 
 export interface BadgeItem {
