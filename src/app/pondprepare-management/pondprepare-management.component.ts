@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from './../constants/format-date';
-import { tokenName } from '../../environments';
 import { AppService } from '../app.service';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { Router } from '@angular/router';
 import * as jwtDecode from 'jwt-decode';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import { find } from 'lodash';
-import { imagePlaceHolder } from '../constants/constant';
+import { imagePlaceHolder, tokenName } from '../constants/constant';
 
 @Component({
     selector: 'app-pondprepare-management',

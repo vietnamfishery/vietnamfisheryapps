@@ -7,7 +7,7 @@ import { MY_FORMATS_DATE } from './../../constants/format-date';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from 'src/app/constants/constant';
 
 
 @Component({

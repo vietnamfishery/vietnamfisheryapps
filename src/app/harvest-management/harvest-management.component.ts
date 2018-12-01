@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { tokenName } from '../../environments';
 import { AppService } from '../app.service';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import * as jwtDecode from 'jwt-decode';
 import { find } from 'lodash';
-import { imagePlaceHolder } from '../constants/constant'
+import { imagePlaceHolder, tokenName } from '../constants/constant'
 
 @Component({
   selector: 'app-harvest-management',

@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
-import { tokenName, colors } from 'src/environments';
 import { AppService } from 'src/app/app.service';
 import { MatSnackBar, MatDialogRef, MatDialogConfig, MatDialog } from '@angular/material';
 import { CalendarDialogComponent } from './dialog/component';
@@ -12,6 +11,8 @@ import { CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-cal
 import { Subject } from 'rxjs';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, endOfDay, isSameMonth, isSameDay } from 'date-fns';
 import * as moment from 'moment-timezone';
+import { tokenName } from 'src/app/constants/constant';
+import { colors } from 'src/app/constants/colors';
 
 @Component({
     selector: 'app-analysis-using-food',
@@ -20,6 +21,7 @@ import * as moment from 'moment-timezone';
 })
 export class AnalysisUsingFoodComponent implements OnInit {
 
+    preloader: boolean = false;
     pondUUId: string;
     seasonUUId: string;
     pond: any = {};

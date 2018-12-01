@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PeriodicElement } from '../../models/PeriodicElement';
 import { MatSort, MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from 'src/app/constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
 

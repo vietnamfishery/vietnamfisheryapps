@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Storages } from 'src/app/models';
-import { unitStorages, tokenName } from 'src/environments';
 import { FormBuilder, Validators } from '@angular/forms';
 import { StorageManagementService } from '../../storage-management.service';
 import { DateAdapter, MatSnackBar } from '@angular/material';
@@ -9,6 +8,8 @@ import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { startWith, map } from 'rxjs/operators';
 import { remove, find } from 'lodash';
+import { unitStorages } from 'src/app/constants/select-data';
+import { tokenName } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-add-materials',

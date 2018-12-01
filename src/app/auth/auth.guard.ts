@@ -10,10 +10,10 @@ import {
 import { SessionService } from '../session/session.service';
 import { Store } from '@ngrx/store';
 import { AuthorizationState } from '../rootStores/models';
-import { tokenName } from '../../environments';
 import { AppService } from '../app.service';
 import * as jwtDecode from 'jwt-decode';
 import { find } from 'lodash';
+import { tokenName } from '../constants/constant';
 
 @Injectable({
   providedIn: 'root',

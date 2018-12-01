@@ -4,7 +4,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from './../constants/format-date';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { tokenName } from 'src/environments';
+import { tokenName } from 'src/app/constants/constant';
 import { AppService } from '../app.service';
 import * as jwtDecode from 'jwt-decode';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';

@@ -9,6 +9,9 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 export class EditDetailHarvestComponent implements OnInit {
 
     public form: FormGroup;
+    selected: any = {}
+    selected2: any = {}
+    selected3: any = {}
 
     constructor(
         private fb: FormBuilder
@@ -25,4 +28,5 @@ export class EditDetailHarvestComponent implements OnInit {
         });
     }
 
+    onSubmit() {}
 }

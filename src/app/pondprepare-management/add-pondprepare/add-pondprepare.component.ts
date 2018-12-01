@@ -4,11 +4,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondprepareManagementService } from '../pondprepare-management.service';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
 import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
+import { tokenName } from 'src/app/constants/constant';
 
 @Component({
     selector: 'app-add-pondprepare',

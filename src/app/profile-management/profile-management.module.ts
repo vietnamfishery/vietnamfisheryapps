@@ -10,7 +10,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AgmCoreModule } from '@agm/core';
-import { MatFileUploadModule } from 'angular-material-fileupload';
+// import { MatFileUploadModule } from 'angular-material-fileupload';
 import { ProfileManagementService } from './profile-management.service';
 import { FileNamePipe } from './file-name.pipe';
 
@@ -37,7 +37,7 @@ import { FileNamePipe } from './file-name.pipe';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBV-uHTqX6aH5_16ZmLa9uv16Op_R4t-1Y'
     }),
-    MatFileUploadModule,
+    // MatFileUploadModule,
     MatSelectModule
   ],
   declarations: [ProfileManagementComponent, ProfileEditComponent, FileNamePipe],

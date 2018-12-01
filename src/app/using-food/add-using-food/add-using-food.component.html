@@ -16,7 +16,7 @@
             </mat-form-field>
 
             <mat-form-field fxFlex="100">
-                <mat-select [(value)]="selected" placeholder="Tên thức ăn" [formControl]="form.controls['storageId']" required>
+                <mat-select placeholder="Tên thức ăn" [formControl]="form.controls['storageId']" required>
                     <mat-option>None</mat-option>
                     <mat-option *ngFor="let material of storages" [value]="material.storageId">{{ material.productName }}</mat-option>
                 </mat-select>

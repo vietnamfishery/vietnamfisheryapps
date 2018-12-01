@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ContentChild, ElementRef } from '@angular
 import { MatPaginator, MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
 import { StorageManagementService } from '../storage-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from '../../../environments';
+import { tokenName } from 'src/app/constants/constant';
 import { Storages } from 'src/app/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 

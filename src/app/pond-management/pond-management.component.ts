@@ -3,8 +3,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { PondManagementService } from './pond-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
-import { imagePlaceHolder } from '../constants/constant';
+import { imagePlaceHolder, tokenName } from '../constants/constant';
 import { DialogAddRole } from './dialog-add-role.component';
 import * as jwtDecode from 'jwt-decode';
 

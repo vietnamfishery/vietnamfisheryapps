@@ -11,7 +11,7 @@
                     <input matInput placeholder="Tên gợi nhớ lần chuẩn bị ao" [formControl]="form.controls['pondPrepareName']" autocomplete="off" required>
                 </mat-form-field>
                 <mat-form-field fxFlex="100">
-                    <mat-select [(value)]="selected" placeholder="Nguyên, vật liệu" [formControl]="form.controls['storage']"
+                    <mat-select placeholder="Nguyên, vật liệu" [formControl]="form.controls['storage']"
                         required>
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let material of storages" [value]="material">{{ material.productName }}</mat-option>

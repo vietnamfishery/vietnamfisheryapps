@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { GrowthsManagementService } from './growths-management.service';
 import { MatSnackBar } from '@angular/material';
-import { tokenName } from '../../environments';
 import * as moment from 'moment';
 import * as jwtDecode from 'jwt-decode';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import { Router } from '@angular/router';
+import { tokenName } from '../constants/constant';
+import { find } from 'lodash';
 
 @Component({
     selector: 'app-growths-management',
@@ -32,6 +33,9 @@ export class GrowthsManagementComponent implements OnInit {
 
     initPond: any = {};
     ponds: any[] = [];
+
+    seasonSelected: any = {};
+    pondSelected: any = {};
 
     constructor(
         private appService: AppService,
@@ -94,23 +98,22 @@ export class GrowthsManagementComponent implements OnInit {
     getSeason() {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
             if (res.success) {
-                this.seasons = res.seasons;
-                for(let i = 0; i < res.seasons.length;  i++) {
-                    if(res.seasons[i].status === 0) {
-                        this.seasonPresent = res.seasons[i]
-                        this.realSeasonPresent = res.seasons[i]
-                        break;
-                    }
-                    if(i === res.seasons.length - 1){
-                        this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
-                            duration: 3000,
-                            horizontalPosition: "center",
-                            verticalPosition: 'top'
-                        });
-                        this.router.navigate['/quan-ly-vu-nuoi']
-                    }
+                this.seasonPresent = find(res.seasons, e => e.status === 0);
+                this.seasonSelected = this.seasonPresent;
+                this.realSeasonPresent = this.seasonPresent;
+                if(!this.seasonPresent) {
+                    this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                    this.router.navigate['/quan-ly-chat-thai']
                 }
-                this.getAllPondWithSeasonUUId();
+                if(this.isBoss) {
+                    this.getAllPondWithSeasonUUId();
+                } else {
+                    this.getPond();
+                }
                 this.form.patchValue({
                     season: this.seasonPresent
                 });
@@ -123,6 +126,41 @@ export class GrowthsManagementComponent implements OnInit {
             }
             this.preloader = !this.preloader;
         })
+    }
+
+    getPond() {
+        this.preloader = !this.preloader;
+        this.pondManagementService.getPondAdvanced({
+            image: true
+        },this.token).subscribe(res => {
+            if (res.success) {
+                this.ponds = res.ponds;
+                if(!res.ponds.length) {
+                    this.snackBar.open('Không tìm thấy ao khả dụng.', 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+                this.getImage();
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 3000,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
+            this.preloader = !this.preloader;
+        })
+    }
+
+    async getImage() {
+        const arr = [];
+        for(let p of this.ponds){
+            p[`image`] = await this.appService.loadImage(p.images);
+            arr.push(p);
+        }
+        this.ponds = arr;
     }
 
     changeSeason(season: any) {

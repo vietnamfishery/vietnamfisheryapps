@@ -4,9 +4,9 @@ import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { PondprepareManagementService } from '../pondprepare-management.service';
-import { tokenName } from 'src/environments';
 import { switchMap } from 'rxjs/operators';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
+import { tokenName } from 'src/app/constants/constant';
 
 @Component({
     selector: 'app-analysis-pond-prepare',

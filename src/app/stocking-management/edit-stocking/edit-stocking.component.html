@@ -14,7 +14,7 @@
                 <form [formGroup]="form" (ngSubmit)="onSubmit()" style="font-size:20px">
                     <mat-card-content fxLayout="column">
                         <mat-form-field>
-                            <mat-select [(value)]="selected" placeholder="Giống nuôi" [formControl]="form.controls['breedId']"
+                            <mat-select placeholder="Giống nuôi" [formControl]="form.controls['breedId']"
                                 required>
                                 <mat-option>None</mat-option>
                                 <mat-option *ngFor="let breed of breeds" [value]="breed.breedId">{{ breed.breedName }}</mat-option>

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import { Router, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { HarvestManagementService } from '../harvest-management.service';
 import { MatSnackBar } from '@angular/material';
+import { tokenName } from '../../constants/constant';
 
 @Component({
     selector: 'app-adddetail-harvest',

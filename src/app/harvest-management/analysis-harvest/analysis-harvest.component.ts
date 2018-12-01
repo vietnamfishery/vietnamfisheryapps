@@ -5,8 +5,8 @@ import { AppService } from 'src/app/app.service';
 import { switchMap } from 'rxjs/operators';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
-import { tokenName } from 'src/environments';
 import { HarvestManagementService } from '../harvest-management.service';
+import { tokenName } from '../../constants/constant';
 
 @Component({
     selector: 'app-analysis-harvest',
@@ -15,6 +15,7 @@ import { HarvestManagementService } from '../harvest-management.service';
 })
 export class AnalysisHarvestComponent implements OnInit {
 
+    preloader: boolean = false;
     pondUUId: string;
     seasonUUId: string;
     pond: any = {};
@@ -106,4 +107,5 @@ export class AnalysisHarvestComponent implements OnInit {
             }
         });
     }
+    applyFilter(v) {}
 }

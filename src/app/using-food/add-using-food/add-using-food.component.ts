@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { UsingFoodService } from '../using-food.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from 'src/app/constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { switchMap } from 'rxjs/operators';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';

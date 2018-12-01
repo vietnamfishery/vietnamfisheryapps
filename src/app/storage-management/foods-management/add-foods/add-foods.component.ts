@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { Storages } from 'src/app/models/storages';
 import { startWith, map } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
-import { tokenName, MY_FORMATS_DATE } from 'src/environments';
 import { AppService } from 'src/app/app.service';
 import { StorageManagementService } from '../../storage-management.service';
 import { remove } from 'lodash';
@@ -12,6 +11,8 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { unitStorages } from '../../../constants/select-data';
 import { Router } from '@angular/router';
 import { find } from 'lodash';
+import { MY_FORMATS_DATE } from 'src/app/constants/format-date';
+import { tokenName } from 'src/app/constants/constant';
 
 @Component({
     selector: 'app-add-foods',

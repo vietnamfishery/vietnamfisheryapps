@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { AppService } from 'src/app/app.service';
 import { WasteManagementService } from '../waste-management.service';
 import { Observable } from 'rxjs';
-import { tokenName } from '../../../environments';
+import { tokenName } from 'src/app/constants/constant';
 import { switchMap } from 'rxjs/operators';
 
 

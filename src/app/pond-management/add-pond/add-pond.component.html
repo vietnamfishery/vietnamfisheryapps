@@ -22,8 +22,9 @@
                             ao không được để trống.</small>
                         <mat-form-field>
                             <mat-label>Ngày tạo ao</mat-label>
-                            <input matInput [matDatepicker]="pondCreatedDate" [min]="minDate" [max]="maxDate" placeholder="Chọn một ngày" [formControl]="form.controls['pondCreatedDate']"
-                                required autocomplete="off">
+                            <input matInput [matDatepicker]="pondCreatedDate" [min]="minDate" [max]="maxDate"
+                                placeholder="Chọn một ngày" [formControl]="form.controls['pondCreatedDate']" required
+                                autocomplete="off">
                             <mat-datepicker-toggle matSuffix [for]="pondCreatedDate"></mat-datepicker-toggle>
                             <mat-datepicker #pondCreatedDate></mat-datepicker>
                         </mat-form-field>
@@ -33,7 +34,7 @@
                         <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
                             fxLayoutGap.xs="0">
                             <mat-form-field fxFlex="100">
-                                <mat-select [(value)]="selected" placeholder="Trạng thái ao" [formControl]="form.controls['status']"
+                                <mat-select placeholder="Trạng thái ao" [formControl]="form.controls['status']"
                                     required>
                                     <mat-option>None</mat-option>
                                     <mat-option value={{0}}>Ao trống</mat-option>
@@ -126,13 +127,6 @@
                                     </div>
                                 </mat-card-content>
                                 <br>
-                            </mat-card>
-                            <mat-card class="mat-red-700" *ngIf="ErrorTimeout">
-                                <div style="height: 20px;">Thêm ao lỗi, vui lòng thử lại sau!</div>
-                            </mat-card>
-                            <br>
-                            <mat-card class="mat-green-700" *ngIf="SuccessTimeout">
-                                <div style="height: 20px;">Thêm ao thành công! Vui lòng đợi...</div>
                             </mat-card>
                         </div>
                     </mat-card-content>

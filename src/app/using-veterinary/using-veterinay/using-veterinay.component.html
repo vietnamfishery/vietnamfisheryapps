@@ -37,7 +37,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <mat-select [(value)]="selected" placeholder="Tên thuốc - dược phẩm" [formControl]="form.controls['storageId']" required>
+                <mat-select placeholder="Tên thuốc - dược phẩm" [formControl]="form.controls['storageId']" required>
                     <mat-option>None</mat-option>
                     <mat-option *ngFor="let material of storages" [value] ="material.storageId">{{ material.productName }}</mat-option>
                 </mat-select>

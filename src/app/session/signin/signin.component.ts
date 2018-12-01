@@ -7,9 +7,9 @@ import { Store } from '@ngrx/store';
 import * as Actions from '../../rootStores/actions';
 import { AuthorizationState } from '../../rootStores/models';
 import { AppService } from 'src/app/app.service';
-import { tokenName, isLogin } from '../../../environments';
 import * as jwtDecode from 'jwt-decode';
 import { MatSnackBar } from '@angular/material';
+import { tokenName } from 'src/app/constants/constant';
 
 @Component({
     selector: 'app-signin',
@@ -48,11 +48,10 @@ export class SigninComponent implements OnInit {
                     this.appService.setCookie(tokenName, res.token, 0);
                 }
                 let redirect: string = this.sessionService.redirectUrl ? this.sessionService.redirectUrl : '/';
-                console.log(redirect);
                 this.router.navigate([redirect]);
             } else {
                 this.form.reset();
-                this.appService.setCookie(isLogin, res.success.toString(), 0);
+                // this.appService.setCookie(isLogin, res.success.toString(), 0);
                 this.sessionService.signout();
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

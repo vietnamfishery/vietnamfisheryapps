@@ -9,7 +9,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../constants/format-date';
 import { SeasionManagementService } from './seasion-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
+import {  tokenName } from '../constants/constant';
 
 @Component({
     selector: 'dialog-add-seasion',

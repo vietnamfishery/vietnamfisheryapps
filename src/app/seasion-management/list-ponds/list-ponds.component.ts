@@ -3,7 +3,7 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from '../../../environments';
+import { tokenName } from 'src/app/constants/constant';
 import { SeasionManagementService } from '../seasion-management.service';
 import * as jwtDecode from 'jwt-decode';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
@@ -14,6 +14,8 @@ import { PondManagementService } from 'src/app/pond-management/pond-management.s
     styleUrls: ['./list-ponds.component.scss']
 })
 export class ListPondsComponent implements OnInit {
+    
+    preloader: boolean = false;
     ponds: any = {};
     season: any = {};
     seasonUUId: any;

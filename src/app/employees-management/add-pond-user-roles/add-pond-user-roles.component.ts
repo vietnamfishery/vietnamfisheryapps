@@ -3,9 +3,9 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 
 import { EmployeesManagementService } from '../../employees-management/employees-management.service';
 import { AppService } from '../../app.service';
-import { tokenName } from '../../../environments';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
+import { tokenName } from '../../constants';
 
 @Component({
     selector: 'add-pond-user-roles',

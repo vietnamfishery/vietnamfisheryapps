@@ -5,11 +5,11 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from '../../constants/format-date';
 import { PondManagementService } from '../pond-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from '../../../environments';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
+import { tokenName } from 'src/app/constants/constant';
 
 interface marker {
     lat: number;

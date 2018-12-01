@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DialogData } from './pond-management.component';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
 import { PondManagementService } from './pond-management.service';
 import { EmployeesManagementService } from '../employees-management/employees-management.service';
+import { tokenName } from '../constants/constant';
 
 @Component({
     selector: 'dialog-add-roles',
@@ -15,6 +15,7 @@ export class DialogAddRole implements OnInit {
     public form: FormGroup;
     private token: string;
     employees: any[] = [];
+    selected: any = {};
     constructor(
         public dialogRef: MatDialogRef<DialogAddRole>,
         private pondManagementService: PondManagementService,

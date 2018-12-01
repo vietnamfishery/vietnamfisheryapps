@@ -4,7 +4,7 @@ import { AppService } from 'src/app/app.service';
 import { SeasionManagementService } from '../seasion-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { tokenName } from '../../../environments';
+import { tokenName } from 'src/app/constants/constant';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import * as jwtDecode from 'jwt-decode';
@@ -15,6 +15,8 @@ import * as jwtDecode from 'jwt-decode';
     styleUrls: ['./add-ponds.component.scss']
 })
 export class AddPondsComponent implements OnInit {
+    
+    preloader: boolean = false;
     season: any;
     seasonUUId: string;
     token: string;
@@ -110,7 +112,7 @@ export class AddPondsComponent implements OnInit {
             this.dataSource.data.forEach(row => this.selection.select(row));
     }
 
-    addWithChecker(data: any) {
+    addWithChecker(data?: any) {
         if(!data) {
             const obj: object = {
                 seasonId: this.season.seasonId,

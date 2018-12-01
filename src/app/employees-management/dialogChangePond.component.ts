@@ -4,9 +4,9 @@ import { DialogData } from '../pond-management/pond-management.component';
 
 import { EmployeesManagementService } from '../employees-management/employees-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PondManagementService } from '../pond-management/pond-management.service';
+import { tokenName } from '../constants/constant';
 
 @Component({
     selector: 'dialog-change-pond',

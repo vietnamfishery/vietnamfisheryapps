@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
@@ -9,6 +8,7 @@ import { PondManagementService } from 'src/app/pond-management/pond-management.s
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PondprepareManagementService } from '../pondprepare-management.service';
+import { tokenName } from 'src/app/constants/constant';
 
 export interface Choose {
     productName: string;

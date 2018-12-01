@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { api_url, api_port } from 'src/environments';
 import { AppService } from '../app.service';
+import { api_url, api_port } from '../constants/api';
 
 const host = api_url + ':' + api_port + '/api';
 
@@ -42,7 +42,7 @@ export class StorageManagementService {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-                'Authorization': token,
+                'Authorization': 'vietnamfishery' + ' ' + token,
                 'type': type + ''
             })
         }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PondManagementService } from '../pond-management/pond-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from 'src/app/constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
 import { MatSnackBar } from '@angular/material';

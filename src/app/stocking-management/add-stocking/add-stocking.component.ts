@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from 'src/app/constants/constant';
 import * as jwtDecode from 'jwt-decode';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
 import { StockingService } from '../stocking.service';

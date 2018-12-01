@@ -6,7 +6,7 @@ import { EmployeesManagementService } from '../employees-management.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { AppService } from '../../app.service';
-import { tokenName } from '../../../environments';
+import { tokenName } from '../../constants';
 
 
 const password = new FormControl('', Validators.required);
@@ -61,10 +61,15 @@ export class AddAccountEmployeesComponent implements OnInit {
     this.employeesManagementService.register_employees(user, this.token).subscribe(res => {
       if(res.success){
         this.form.reset();
+        this.snackBar.open(res.message, 'Đóng', {
+            duration: 5000,
+            horizontalPosition: "right",
+            verticalPosition: 'bottom'
+          });
         this.router.navigate( ['/quan-ly-phan-quyen'] );
       }else{
         this.snackBar.open(res.message, 'Đóng', {
-          duration: 2500,
+          duration: 5000,
           horizontalPosition: "right",
           verticalPosition: 'bottom'
         });

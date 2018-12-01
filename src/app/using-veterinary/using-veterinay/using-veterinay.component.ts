@@ -6,10 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PondManagementService } from 'src/app/pond-management/pond-management.service';
 import { StorageManagementService } from 'src/app/storage-management/storage-management.service';
 import { UsingVeterinaryService } from '../using-veterinary.service';
-import { tokenName, MY_FORMATS_DATE } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
 import { switchMap } from 'rxjs/operators';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS_DATE } from 'src/app/constants/format-date';
+import { tokenName } from 'src/app/constants/constant';
 
 @Component({
     selector: 'app-using-veterinay',

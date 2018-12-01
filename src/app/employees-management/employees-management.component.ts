@@ -3,12 +3,12 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatPaginator, MatSort, MatTab
 
 import { EmployeesManagementService } from './employees-management.service';
 import { AppService } from '../app.service';
-import { tokenName } from '../../environments';
 import { Users } from '../models/users';
 import { DialogChangePondComponent } from './dialogChangePond.component';
 import { AddPondUserRolesComponent } from './add-pond-user-roles/add-pond-user-roles.component';
 
 import { find } from 'lodash';
+import { tokenName } from '../constants/constant';
 
 @Component({
     selector: 'app-employees-management',

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageManagementService } from '../../storage-management.service';
 import { AppService } from 'src/app/app.service';
-import { tokenName, unitBreed } from 'src/environments';
 import { Breed } from 'src/app/models';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -9,6 +8,8 @@ import { startWith, map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { find } from 'lodash';
+import { unitBreed } from 'src/app/constants/select-data';
+import { tokenName } from 'src/app/constants/constant';
 
 @Component({
 	selector: 'app-add-breed',

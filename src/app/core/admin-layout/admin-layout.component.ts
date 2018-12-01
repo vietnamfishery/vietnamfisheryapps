@@ -10,96 +10,96 @@ const SMALL_WIDTH_BREAKPOINT = 960;
 
 
 @Component({
-  selector: 'app-admin-layout',
-  templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.scss']
+    selector: 'app-admin-layout',
+    templateUrl: './admin-layout.component.html',
+    styleUrls: ['./admin-layout.component.scss']
 })
 export class AdminLayoutComponent implements OnInit {
-  private _router: Subscription;
+    private _router: Subscription;
 
-  mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
-  url: string;
-  sidePanelOpened;
-  options = {
-    collapsed: false,
-    compact: false,
-    boxed: false,
-    dark: false,
-    dir: 'ltr'
-  };
+    mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
+    url: string;
+    sidePanelOpened;
+    options = {
+        collapsed: false,
+        compact: false,
+        boxed: false,
+        dark: false,
+        dir: 'ltr'
+    };
 
-  @ViewChild('sidemenu') sidemenu;
-  @ViewChild(PerfectScrollbarDirective) directiveScroll: PerfectScrollbarDirective;
+    @ViewChild('sidemenu') sidemenu;
+    @ViewChild(PerfectScrollbarDirective) directiveScroll: PerfectScrollbarDirective;
 
-  public config: PerfectScrollbarConfigInterface = {};
+    public config: PerfectScrollbarConfigInterface = {};
 
-  constructor(
-    private _element: ElementRef,
-    private router: Router,
-    zone: NgZone
-  ) {
-    this.mediaMatcher.addListener((mql: any) => zone.run(() => {
-      this.mediaMatcher = mql;
-    }));
-  }
-
-  ngOnInit(): void {
-
-    this.url = this.router.url;
-
-    this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-      document.querySelector('.app-inner > .mat-drawer-content > div').scrollTop = 0;
-      this.url = event.url;
-      this.runOnRouteChange();
-    });
-  }
-
-  ngOnDestroy(): void  {
-    this._router.unsubscribe();
-  }
-
-  runOnRouteChange(): void {
-    if (this.isOver()) {
-      this.sidemenu.close();
+    constructor(
+        private _element: ElementRef,
+        private router: Router,
+        zone: NgZone
+    ) {
+        this.mediaMatcher.addListener((mql: any) => zone.run(() => {
+            this.mediaMatcher = mql;
+        }));
     }
 
-    this.updatePS();
-  }
+    ngOnInit(): void {
 
-  receiveOptions($event): void {
-    this.options = $event;
-  }
+        this.url = this.router.url;
 
-  isOver(): boolean {
-    if (this.url === '/apps/messages' ||
-      this.url === '/apps/calendar' ||
-      this.url === '/apps/media' ||
-      this.url === '/maps/leaflet' ||
-      this.url === '/taskboard') {
-      return true;
-    } else {
-      return this.mediaMatcher.matches;
+        this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+            document.querySelector('.app-inner > .mat-drawer-content > div').scrollTop = 0;
+            this.url = event.url;
+            this.runOnRouteChange();
+        });
     }
-  }
 
-  menuMouseOver(): void {
-    if (this.mediaMatcher.matches && this.options.collapsed) {
-      this.sidemenu.mode = 'over';
+    ngOnDestroy(): void {
+        this._router ? this._router.unsubscribe() : null;
     }
-  }
 
-  menuMouseOut(): void {
-    if (this.mediaMatcher.matches && this.options.collapsed) {
-      this.sidemenu.mode = 'side';
-    }
-  }
+    runOnRouteChange(): void {
+        if (this.isOver()) {
+            this.sidemenu.close();
+        }
 
-  updatePS(): void  {
-    if (!this.mediaMatcher.matches && !this.options.compact) {
-      setTimeout(() => {
-        this.directiveScroll.update();
-      }, 350);
+        this.updatePS();
     }
-  }
+
+    receiveOptions($event): void {
+        this.options = $event;
+    }
+
+    isOver(): boolean {
+        if (this.url === '/apps/messages' ||
+            this.url === '/apps/calendar' ||
+            this.url === '/apps/media' ||
+            this.url === '/maps/leaflet' ||
+            this.url === '/taskboard') {
+            return true;
+        } else {
+            return this.mediaMatcher.matches;
+        }
+    }
+
+    menuMouseOver(): void {
+        if (this.mediaMatcher.matches && this.options.collapsed) {
+            this.sidemenu.mode = 'over';
+        }
+    }
+
+    menuMouseOut(): void {
+        if (this.mediaMatcher.matches && this.options.collapsed) {
+            this.sidemenu.mode = 'side';
+        }
+    }
+
+    updatePS(): void {
+        if (!this.mediaMatcher.matches && !this.options.compact) {
+            setTimeout(() => {
+                this.directiveScroll.update();
+            }, 350);
+        }
+    }
 
 }

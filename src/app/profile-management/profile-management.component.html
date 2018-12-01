@@ -1,93 +1,101 @@
 <mat-card fxLayout="column">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <h1 class="mat-headline center-align">Quản lý thông tin</h1>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <div class="wrapper">
-    <div fxLayout="row wrap">
-      <div fxFlex="100">
-        <mat-card>
-          <mat-card-content>
-            <div fxLayout="row">
-              <div fxFlex="45" class="text-xs-center text">
-                <h1 class="ma-0"><b>{{ userInfo.lastname || '' }}</b>&nbsp;<b>{{ userInfo.firstname || '' }}</b></h1>
-                <p><span class="mt-xs mb-xs text-label">Ngày sinh:</span><span class="mt-xs mb-xs"><small> {{ bday ||
-                      'Chưa cập nhật' }}</small></span></p>
-                <p><span class="mt-xs mb-xs text-label">SĐT:</span><small> {{ userInfo.phone || 'Chưa cập nhật' }}</small></p>
-                <p *ngIf="userInfo && userInfo.wards != null && userInfo.districts != null && userInfo.provinces != null"><span class="mt-xs mb-xs text-label">Địa
-                    chỉ:</span><span class="mt-xs mb-xs"><small> {{ userInfo.wards.name || '' }},
-                      {{ userInfo.districts.name || '' }}, {{ userInfo.provinces.name || '' }}</small></span></p>
-                <p><span class="mt-xs mb-xs text-label">Email:</span><span class="mt-xs mb-xs"><small> {{
-                      userInfo.email || 'Chưa cập nhật' }}</small></span></p>
-                <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700">Cập
-                  nhật</button>
-              </div>
-              <div fxFlex="10" fxLayoutAlign="center center">
-              </div>
-              <div fxFlex="45">
-                <figure>
-                  <div class="text-xs-center">
-                    <label for="fileToUpload">
-                      <div class="imgLoading img-responsive" mat-card-image [ngStyle]="getImage()" title="Nhấn để cập nhật ảnh"></div>
-                    </label>
-                    <figcaption>
-                      <p style="margin-top:5px">
-                        <a type="button">
-                          <label for="fileToUpload">
-                            <mat-icon>recent_actors</mat-icon>
-                          </label>
-                          <br>
-                          <small class="mat-text-warn" *ngIf="timeOut">{{ errorFile | async }}</small>
-                          <input id="fileToUpload" type="file" hidden (change)="onFileChange($event)">
-                        </a>
-                      </p>
-                      <div class="text-lg mt10 text-username ">{{ userInfo.username || '' }}</div>
-                    </figcaption>
-                    <br>
-                  </div>
-                </figure>
-              </div>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <h1 class="mat-headline center-align">Quản lý thông tin</h1>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="wrapper">
+        <div fxLayout="row wrap">
+            <div fxFlex="100">
+                <mat-card>
+                    <mat-card-content>
+                        <div fxLayout="row">
+                            <div fxFlex="45" class="text-xs-center text">
+                                <h1 class="ma-0"><b>{{ userInfo.lastname || '' }}</b>&nbsp;<b>{{ userInfo.firstname ||
+                                        '' }}</b></h1>
+                                <p><span class="mt-xs mb-xs text-label">Ngày sinh:</span><span class="mt-xs mb-xs"><small>
+                                            {{ bday ||
+                                            'Chưa cập nhật' }}</small></span></p>
+                                <p><span class="mt-xs mb-xs text-label">SĐT:</span><small> {{ userInfo.phone || 'Chưa
+                                        cập nhật' }}</small></p>
+                                <p *ngIf="userInfo && userInfo.wards != null && userInfo.districts != null && userInfo.provinces != null"><span
+                                        class="mt-xs mb-xs text-label">Địa
+                                        chỉ:</span><span class="mt-xs mb-xs"><small> {{ userInfo.wards.name || '' }},
+                                            {{ userInfo.districts.name || '' }}, {{ userInfo.provinces.name || '' }}</small></span></p>
+                                <p><span class="mt-xs mb-xs text-label">Email:</span><span class="mt-xs mb-xs"><small>
+                                            {{
+                                            userInfo.email || 'Chưa cập nhật' }}</small></span></p>
+                                <button mat-raised-button routerLink="/thong-tin-ca-nhan/chinh-sua-thong-tin" class="mat-green-700">Cập
+                                    nhật</button>
+                            </div>
+                            <div fxFlex="10" fxLayoutAlign="center center">
+                            </div>
+                            <div fxFlex="45">
+                                <figure>
+                                    <div class="text-xs-center">
+                                        <label for="fileToUpload">
+                                            <div class="imgLoading img-responsive" mat-card-image [ngStyle]="getImage()"
+                                                title="Nhấn để cập nhật ảnh"></div>
+                                        </label>
+                                        <figcaption>
+                                            <p style="margin-top:5px">
+                                                <a type="button">
+                                                    <label for="fileToUpload">
+                                                        <mat-icon>recent_actors</mat-icon>
+                                                    </label>
+                                                    <br>
+                                                    <small class="mat-text-warn" *ngIf="timeOut">{{ errorFile | async
+                                                        }}</small>
+                                                    <input id="fileToUpload" type="file" hidden (change)="onFileChange($event)">
+                                                </a>
+                                            </p>
+                                            <div class="text-lg mt10 text-username ">{{ userInfo.username || '' }}</div>
+                                        </figcaption>
+                                        <br>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                        <br>
+                    </mat-card-content>
+                    <hr>
+                    <mat-card-content>
+                        <div fxLayout="row" class="text-xs-center">
+                            <div fxFlex="49">
+                                <h1 class="ma-0"><b>20</b></h1>
+                                <small>Tổng ao nuôi đang có</small>
+                            </div>
+                            <div fxFlex="49">
+                                <h1 class="ma-0"><b>86</b></h1>
+                                <small>Tổng vụ nuôi</small>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <hr>
+                </mat-card>
             </div>
-            <br>
-          </mat-card-content>
-          <hr>
-          <mat-card-content>
-            <div fxLayout="row" class="text-xs-center">
-              <div fxFlex="49">
-                <h1 class="ma-0"><b>20</b></h1>
-                <small>Tổng ao nuôi đang có</small>
-              </div>
-              <div fxFlex="49">
-                <h1 class="ma-0"><b>86</b></h1>
-                <small>Tổng vụ nuôi</small>
-              </div>
-            </div>
-          </mat-card-content>
-          <hr>
+        </div>
+        <mat-card *ngIf="userInfo.district && userInfo.town">
+            <mat-card-content>
+                <h2 class="title-maps"> {{ title }}</h2>
+                <hr class="hr">
+                <br>
+                <agm-map [latitude]="lat" [longitude]="lng">
+
+                    <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
+                        [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable">
+
+                        <agm-info-window>
+                            <strong>{{ userInfo.lastname || '' }} {{ userInfo.firstname || '' }}</strong><br>
+                            <span>{{ userInfo.wards.name || '' }}, {{ userInfo.districts.name || '' }}, {{
+                                userInfo.provinces.name || '' }}</span>
+                        </agm-info-window>
+
+                    </agm-marker>
+
+                </agm-map>
+            </mat-card-content>
         </mat-card>
-      </div>
     </div>
-    <mat-card *ngIf="userInfo.district && userInfo.town">
-      <mat-card-content>
-        <h2 class="title-maps"> {{ title }}</h2>
-        <hr class="hr">
-        <br>
-        <agm-map [latitude]="lat" [longitude]="lng">
-
-          <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
-            [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable">
-
-            <agm-info-window>
-              <strong>{{ userInfo.lastname || '' }} {{ userInfo.firstname || '' }}</strong><br>
-              <span>{{ userInfo.wards.name || '' }}, {{ userInfo.districts.name || '' }}, {{ userInfo.provinces.name || '' }}</span>
-            </agm-info-window>
-
-          </agm-marker>
-
-        </agm-map>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <br>
+    <br>
 </mat-card>

@@ -10,10 +10,13 @@ export interface Users {
     phone?: string;
     address?: string;
     town?: string;
+    wards?: string;
     lat?: number;
     long?: number;
     district?: string;
+    districts?: string;
     province?: string;
+    provinces?: string;
     roles?: Roles[];
     role?: Roles;
     status?: number;

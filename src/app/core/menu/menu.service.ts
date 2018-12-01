@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
 import * as jwtDecode from 'jwt-decode';
+import { Router } from '@angular/router';
+import { tokenName } from '../../constants';
 
 export interface BadgeItem {
     type: string;
@@ -150,7 +151,8 @@ const MENUITEMS: Array<Menu> = [
 export class MenuService {
     token: string = this.appService.getCookie(tokenName);
     deToken: any = jwtDecode(this.token);
-    ownerId: number = this.deToken.createdBy == null && this.deToken.roles.length == 0 ? this.deToken.userId : this.deToken.roles[0].bossId;;
+    reload: any = (!this.deToken.roles.length && !this.deToken.employees.length) ? this.router.navigate(['/session/404']) : 1;
+    ownerId: number = this.deToken.createdBy == null && this.deToken.roles.length == 0 ? this.deToken.userId : (this.deToken.roles[0] ? this.deToken.roles[0].bossId : null);
     isBoss: boolean = this.deToken.userId === this.ownerId;
     isPond: boolean = !this.isBoss ? (this.deToken.roles[0] ? this.deToken.roles[0].roles : 0) === 1 ||  (this.deToken.roles[1] ? this.deToken.roles[1].roles : 0) === 1 : false;
     isStorage: boolean = !this.isBoss ? (this.deToken.roles[0] ? this.deToken.roles[0].roles : 0) === 2 ||  (this.deToken.roles[1] ? this.deToken.roles[1].roles : 0) === 2 : false;
@@ -275,7 +277,8 @@ export class MenuService {
     ];
 
     constructor(
-        private appService: AppService
+        private appService: AppService,
+        private router: Router
     ) {}
 
     getAll(): Menu[] {

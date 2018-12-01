@@ -13,12 +13,12 @@
             <form [formGroup]="form">
                 <div class="pa-1" fxLayout="column">
                     <mat-form-field fxFlex="100" *ngIf="isBoss">
-                        <mat-select [(value)]="selected" [formControl]="form.controls['season']" placeholder="Tên vụ nuôi">`
+                        <mat-select [(value)]="seasonSelected" [formControl]="form.controls['season']" placeholder="Tên vụ nuôi">`
                             <mat-option *ngFor="let season of seasons" [value]="season" (click)="changeSeason(season)">{{ season.seasonName }}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field fxFlex="100">
-                        <mat-select [(value)]="selected2" [formControl]="form.controls['pond']" placeholder="Tên ao nuôi">
+                        <mat-select [(value)]="pondSelected" [formControl]="form.controls['pond']" placeholder="Tên ao nuôi">
                             <mat-option *ngFor="let p of ponds" [value]="p" (click)="changePond(p)">{{ p.pondName }}</mat-option>
                         </mat-select>
                     </mat-form-field>

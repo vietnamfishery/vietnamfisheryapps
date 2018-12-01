@@ -6,8 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { GrowthsManagementService } from '../growths-management.service';
 import { switchMap } from 'rxjs/operators';
-import { tokenName } from '../../../environments';
 import { ActivatedRoute, Router } from '@angular/router';
+import { tokenName } from '../../constants/constant';
 
 @Component({
     selector: 'app-edit-detail-growths',

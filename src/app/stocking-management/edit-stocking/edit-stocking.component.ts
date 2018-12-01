@@ -5,7 +5,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@an
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from './../../constants/format-date';
 import { AppService } from 'src/app/app.service';
-import { tokenName } from 'src/environments';
+import { tokenName } from 'src/app/constants/constant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { StockingService } from '../stocking.service';
