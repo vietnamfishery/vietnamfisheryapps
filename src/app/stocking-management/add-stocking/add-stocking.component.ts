@@ -31,6 +31,8 @@ export class AddStockingComponent implements OnInit {
     pond: any;
     breeds: any = []; // select cac con giong hien co trong kho
     selected: any = {};
+    minDate: Date = new Date(2000,1,1)
+    maxDate: Date = new Date();
     
     constructor(
         private route: ActivatedRoute,

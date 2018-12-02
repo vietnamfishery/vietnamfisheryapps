@@ -47,15 +47,20 @@ export class DialogAddRole implements OnInit {
                 const arrayResult: any[] = [];
                 if(res.employees.length === 0) {
                     return this.snackBar.open('Bạn chưa có tài khoản con nào. Chọn chức năng quản lý phân quyền để thêm tài khoản con.', 'Đóng', {
-                        duration: 2500,
+                        duration: 4500,
                         horizontalPosition: "center",
                         verticalPosition: 'top'
+                    });
+                } else {
+                    return this.snackBar.open(res.message, 'Đóng', {
+                        duration: 4500,
+                        horizontalPosition: "right"
                     });
                 }
                 this.employees = res.employees
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
-                    duration: 2500,
+                    duration: 4500,
                     horizontalPosition: "center",
                     verticalPosition: 'top'
                 });
@@ -70,7 +75,7 @@ export class DialogAddRole implements OnInit {
     onSubmit() {
         if (this.form.invalid) {
             this.snackBar.open('Hãy chọn người quản lý ao.', 'Đóng', {
-                duration: 2500,
+                duration: 4500,
                 horizontalPosition: "center",
                 verticalPosition: 'top'
             })
@@ -81,7 +86,7 @@ export class DialogAddRole implements OnInit {
             }
             this.pondManagementService.addPondUserRole(this.form.value, this.token).subscribe((res: any) => {
                 this.snackBar.open(res.message, 'Đóng', {
-                    duration: 2500,
+                    duration: 4500,
                     horizontalPosition: "right",
                 })
             })

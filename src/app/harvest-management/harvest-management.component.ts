@@ -85,10 +85,9 @@ export class HarvestManagementComponent implements OnInit {
 
     getPond() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getPondAdvanced({
-            image: false,
-            isnotnull: true
-        },this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            status: 1
+        }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 this.getImage();
@@ -126,11 +125,10 @@ export class HarvestManagementComponent implements OnInit {
 
     getAllPondWithSeasonUUId() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getPondAdvanced({
-            image: false,
-            isnotnull: true,
-            seasonid: this.seasonPresent.seasonId
-        }, this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            seasonUUId: this.seasonPresent.seasonUUId,
+            status: 1
+        }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 this.getImage();

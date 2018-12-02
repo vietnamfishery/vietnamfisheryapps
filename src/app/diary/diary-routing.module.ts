@@ -10,10 +10,10 @@ const routes: Routes = [
         path: '', component: DiaryComponent
     },
     {
-        path: 'them/:pondUUId', component: AddDiaryComponent, canActivate: [AuthGuardPondWithUser]
+        path: 'them/:pondUUId', component: AddDiaryComponent//, canActivate: [AuthGuardPondWithUser]
     },
     {
-        path: 'thong-ke/:pondUUId/:seasonUUId', component: DiaryAnalysisComponent, canActivate: [AuthGuardPondWithUser]
+        path: 'thong-ke/:pondUUId/:seasonUUId', component: DiaryAnalysisComponent//, canActivate: [AuthGuardPondWithUser]
     }
 ];
 

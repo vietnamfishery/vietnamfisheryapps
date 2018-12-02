@@ -126,6 +126,9 @@ export class DetailPondComponent implements OnInit {
     }
 
     mapClicked($event: any) {
+        if(!this.isBoss) {
+            return;
+        }
         if (this.markers.length < 1) {
             this.markers.push({
                 lat: $event.coords.lat,

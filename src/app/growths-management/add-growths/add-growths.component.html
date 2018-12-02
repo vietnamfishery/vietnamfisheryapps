@@ -1,37 +1,39 @@
 <mat-card fxLayout="column">
-  <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
-    <mat-card-title>
-      <h2 class="mat-headline center-align">THÊM THÔNG TIN TĂNG TRƯỞNG</h2>
-    </mat-card-title>
-    <mat-card-subtitle>
-      <h4 class="subtitle">Nhập chi tiết thông tin tăng trưởng</h4>
-    </mat-card-subtitle>
-  </div>
-  <div fxLayout="row">
-    <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
-      fxFlexOffset.md="15" fxFlex.md="70">
-      <div>
-        <form [formGroup]="form" (ngSubmit)=(onSubmit()) style="font-size:20px">
-          <mat-card-content fxLayout="column">
-            <mat-form-field fxFlex="100">
-              <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondId']" required>
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let pond of ponds" [value]="pond.pondId">{{ pond.pondName }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <small *ngIf="form.controls['pondId'].hasError('required') && form.controls['pondId'].touched" class="mat-text-warn">Chưa
-              chọn ao nuôi.</small>
-            <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
-              fxLayoutGap.xs="0">
-              <mat-form-field fxFlex="100">
-                <input matInput placeholder="Mật độ trung bình (con/m2)" #mdtb type="number" autocomplete="off" [formControl]="form.controls['averageDensity']"
-                  required>
-              </mat-form-field>
-              <mat-form-field fxFlex="100">
-                <input matInput placeholder="Sản lượng trung bình (g/con)" #sltb type="number" autocomplete="off" [formControl]="form.controls['averageMass']"
-                  required>
-              </mat-form-field>
-            </div>
+    <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>
+            <h2 class="mat-headline center-align">THÊM THÔNG TIN TĂNG TRƯỞNG</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h4 class="subtitle">Nhập chi tiết thông tin tăng trưởng</h4>
+        </mat-card-subtitle>
+    </div>
+    <div fxLayout="row">
+        <div fxFlexOffset="20" fxFlex="60" fxFlexOffset.xs="5" fxFlex.xs="90" fxFlexOffset.sm="10" fxFlex.sm="80"
+            fxFlexOffset.md="15" fxFlex.md="70">
+            <div>
+                <form [formGroup]="form" (ngSubmit)=(onSubmit()) style="font-size:20px">
+                    <mat-card-content fxLayout="column">
+                        <mat-form-field fxFlex="100">
+                            <mat-select [(value)]="selected" placeholder="Ao nuôi" [formControl]="form.controls['pondId']"
+                                required>
+                                <mat-option>None</mat-option>
+                                <mat-option *ngFor="let pond of ponds" [value]="pond.pondId">{{ pond.pondName }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <small *ngIf="form.controls['pondId'].hasError('required') && form.controls['pondId'].touched"
+                            class="mat-text-warn">Chưa
+                            chọn ao nuôi.</small>
+                        <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
+                            fxLayoutGap.xs="0">
+                            <mat-form-field fxFlex="100">
+                                <input matInput placeholder="Mật độ trung bình (con/m2)" #mdtb type="number"
+                                    autocomplete="off" [formControl]="form.controls['averageDensity']" required>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="100">
+                                <input matInput placeholder="Sản lượng trung bình (g/con)" #sltb type="number"
+                                    autocomplete="off" [formControl]="form.controls['averageMass']" required>
+                            </mat-form-field>
+                        </div>
 
                         <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutGap.sm="0"
                             fxLayoutGap.xs="0">
@@ -45,14 +47,16 @@
                             </div>
                         </div>
 
-            <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
-              fxLayoutGap.xs="0">
-              <mat-form-field fxFlex="100">
-                <input matInput placeholder="Tốc độ tăng trưởng (%)" #tdtt type="number" autocomplete="off" [formControl]="form.controls['speedOdGrowth']" required>
-              </mat-form-field>
-              <mat-form-field fxFlex="100">
-                <input matInput placeholder="Tỉ lệ sống (%)" type="number" #tls autocomplete="off" [formControl]="form.controls['livingRatio']" required>
-              </mat-form-field>
+                        <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="10px"
+                            fxLayoutGap.xs="0">
+                            <mat-form-field fxFlex="100">
+                                <input matInput placeholder="Tốc độ tăng trưởng (%)" #tdtt type="number" autocomplete="off"
+                                    [formControl]="form.controls['speedOdGrowth']" required>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="100">
+                                <input matInput placeholder="Tỉ lệ sống (%)" type="number" #tls autocomplete="off"
+                                    [formControl]="form.controls['livingRatio']" required>
+                            </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.sm="0"
                             fxLayoutGap.xs="0">

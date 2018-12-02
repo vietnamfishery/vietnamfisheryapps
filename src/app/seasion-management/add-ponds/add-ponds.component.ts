@@ -82,6 +82,7 @@ export class AddPondsComponent implements OnInit {
     }
 
     reloadTable() {
+        this.selection = new SelectionModel<any>(true, []);
         this.pondManagementService.getPondNotInSeasonAndPond({
             seasonUUId: this.seasonUUId
         }, this.token).subscribe(res => {

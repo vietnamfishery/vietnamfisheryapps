@@ -53,11 +53,10 @@ export class ListPondComponent implements OnInit {
         this.route.paramMap.pipe(
             switchMap(params => {
                 this.seasonUUId = params.get('seasonUUId');
-                return this.pondManagementService.getPondAdvanced({
-                    image: false,
-                    isnotnull: true,
-                    seasonuuid: this.seasonUUId
-                }, this.token);
+                return this.pondManagementService.getAllPond(this.token, {
+                    status: 'notnull',
+                    seasonUUId: this.seasonUUId
+                });
             })).subscribe(res => {
                 if (res.success) {
                     this.ponds = res.ponds;
@@ -77,10 +76,9 @@ export class ListPondComponent implements OnInit {
 
     getPond() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getPondAdvanced({
-            image: false,
-            isnotnull: true
-        },this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            status: 'notnull'
+        }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 this.getImage();

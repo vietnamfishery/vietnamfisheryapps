@@ -67,10 +67,9 @@ export class GrowthsManagementComponent implements OnInit {
     }
 
     getAllPondWithSeasonUUId() {
-        this.pondManagementService.getPondBySeasonUUId({
-            seasonUUId: this.seasonPresent.seasonUUId,
-            ownerId: this.ownerId
-        }, this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            seasonUUId: this.seasonPresent.seasonUUId
+        }).subscribe(res => {
             if (res.success) {
                 if(res.ponds.length == 0){
                     this.snackBar.open('Bạn không có ao nuôi nào trong vụ nuôi vừa chọn', 'Đóng', {
@@ -104,8 +103,9 @@ export class GrowthsManagementComponent implements OnInit {
     getSeason() {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe(res => {
             if (res.success) {
+                this.seasons = res.seasons;
                 this.seasonPresent = find(res.seasons, e => e.status === 0);
-                this.seasonSelected = this.seasonPresent;
+                // this.seasonSelected = this.seasonPresent;
                 this.realSeasonPresent = this.seasonPresent;
                 if(!this.seasonPresent) {
                     this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
@@ -136,9 +136,7 @@ export class GrowthsManagementComponent implements OnInit {
 
     getPond() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getPondAdvanced({
-            image: true
-        },this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 if(!res.ponds.length) {
@@ -187,10 +185,7 @@ export class GrowthsManagementComponent implements OnInit {
         }
         this.growthsManagementService.getGrowth(obj, this.token).subscribe(res => {
             if (res.success) {
-                this.growths = res.growths.map(e => {
-                    e['createdDate'] = moment(e[`createdDate`]).format(`DD - MM - YYYY`)
-                    return e;
-                })
+                this.growths = res.growths;
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

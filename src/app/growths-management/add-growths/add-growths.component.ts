@@ -45,11 +45,9 @@ export class AddGrowthsComponent implements OnInit {
     }
 
     ngOnInit() {
-        const obj: any = {
-            ownerId: this.ownerId,
+        this.pondManagementService.getAllPond(this.token, {
             status: 1
-        }
-        this.pondManagementService.getAllPondWithPresentSeason(obj, this.token).subscribe(res => {
+        }).subscribe(res => {
             this.ponds = res.ponds;
         })
         this.createForm();

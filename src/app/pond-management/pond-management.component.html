@@ -10,27 +10,26 @@
     <div fxLayout="row">
         <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
             <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
+                <div class="pa-1">
+                    <button  (click)="selectStatus('')" mat-raised-button class="mat-green-700">Tất cả</button>
+                </div>
                 <hr>
-
                 <div class="pa-1">
                     <h3 class="mt-1">Trạng thái</h3>
                     <mat-radio-group>
                         <div class="pb-1">
-                            <mat-radio-button value="1">Đang nuôi</mat-radio-button>
+                            <mat-radio-button [checked]="status === 1" (click)="selectStatus(notNull.value)" #notNull value={{1}}>Đang nuôi</mat-radio-button>
                         </div>
                         <div class="pb-1">
-                            <mat-radio-button value="2">Ao trống</mat-radio-button>
+                            <mat-radio-button [checked]="status === 0" (click)="selectStatus(isNull.value)" #isNull value={{0}}>Ao trống</mat-radio-button>
                         </div>
                         <div class="pb-1">
-                            <mat-radio-button value="3">Sửa chửa</mat-radio-button>
+                            <mat-radio-button [checked]="status === 2" (click)="selectStatus(isPrepare.value)" #isPrepare value={{2}}>Sửa chửa</mat-radio-button>
                         </div>
                     </mat-radio-group>
                 </div>
                 <hr>
 
-                <div class="pa-1">
-                    <button mat-raised-button class="mat-green-700">Lọc</button>
-                </div>
 
             </mat-sidenav>
             <mat-toolbar color="primary" fxHide="false" fxHide.gt-sm>
@@ -77,11 +76,11 @@
                                 </div>
 
                             </div>
-                            <div class="mat-text-warn text-xl" *ngIf="pond.employees == 0">
+                            <div class="mat-text-warn text-xl" *ngIf="pond.users.length === 0">
                                 <span><small></small></span>
                             </div>
-                            <div class="mat-text-accent text-xl" *ngFor="let empl of pond.employees">
-                                <span><small>{{ empl.lastname }} {{ empl.firstname }}</small></span>
+                            <div class="mat-text-accent text-xl" *ngFor="let empl of pond.users">
+                                <span *ngIf="userId !== empl.userId"><small>{{ empl.lastname }} {{ empl.firstname }}</small></span>
                             </div>
                             <div style="font-size:13px" fxLayout="row" fxLayoutAlign="start center">
                                 <span>{{ pond.createCost | currency:'VNĐ '}}</span>

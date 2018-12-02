@@ -22,6 +22,7 @@ export class PondManagementComponent implements OnInit {
     pondCreatedDate: string;
     ponds: any[] = [];
     ownerId: number;
+    userId: number;
 
     animal: string;
     name: string;
@@ -31,6 +32,8 @@ export class PondManagementComponent implements OnInit {
     isBoss: boolean;
     notOwner: boolean = false;
     imagePlaceHolder: string = imagePlaceHolder;
+
+    status: any = null;
     constructor(
         private router: Router,
         public dialog: MatDialog,
@@ -40,6 +43,7 @@ export class PondManagementComponent implements OnInit {
     ) {
         this.token = this.appService.getCookie(tokenName);
         const deToken: any = jwtDecode(this.token);
+        this.userId = deToken.userId;
         this.ownerId = deToken.createdBy == null && deToken.roles.length == 0 ? deToken.userId : deToken.roles[0].bossId;
         if(deToken.userId === this.ownerId) {
             this.isBoss = true;
@@ -80,7 +84,7 @@ export class PondManagementComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.reloadPond();
+            // this.reloadPond();
         });
     }
 
@@ -96,5 +100,32 @@ export class PondManagementComponent implements OnInit {
             arr.push(p);
         }
         this.ponds = arr;
+    }
+
+    selectStatus(stt: number) {
+        this.preloader = true;        
+        this.pondManagementService.getAllPond(this.token, {
+            seasonUUId: '',
+            seasonId: '',
+            status: stt
+        }).subscribe(res => {
+            if (res.success) {
+                if (res.ponds.length == 0) {
+                    this.snackBar.open('Bạn chưa có ao nào trong hệ thống', 'Đóng', {
+                        duration: 2500,
+                        horizontalPosition: "center",
+                        verticalPosition: "top"
+                    });
+                }
+                this.ponds = res.ponds;
+                this.getImage();
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "right"
+                });
+            }
+            this.preloader = false;
+        })
     }
 }

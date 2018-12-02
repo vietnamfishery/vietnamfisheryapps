@@ -155,12 +155,12 @@ export class StockingManagementComponent implements OnInit {
                 this.stocking = res.stocking
                 this.loadTable();
             } else {
-                this.dataSource.data = [];
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
                     horizontalPosition: "center",
                     verticalPosition: 'top'
                 });
+                this.stocking = [];
                 this.loadTable();
             }
             if(this.seasonPresent.seasonId !== this.realSeasonPresent.seasonId){

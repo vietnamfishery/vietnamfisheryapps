@@ -50,10 +50,9 @@ export class ListPondsComponent implements OnInit {
         this.route.paramMap.pipe(
             switchMap(params => {
                 this.seasonUUId = params.get('seasonUUId');
-                return this.pondManagementService.getPondBySeasonUUId({
-                    seasonUUId: this.seasonUUId,
-                    ownerId: this.ownerId
-                }, this.token);
+                return this.pondManagementService.getAllPond(this.token, {
+                    seasonUUId: this.seasonUUId
+                });
             })
         ).subscribe(res => {
             this.ponds = res.ponds;

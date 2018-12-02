@@ -70,10 +70,10 @@ export class WasteManagementComponent implements OnInit {
     }
 
     getAllPondWithSeasonUUId() {
-        this.pondManagementService.getPondBySeasonUUId({
-            seasonUUId: this.seasonPresent.seasonUUId,
-            ownerId: this.ownerId
-        }, this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            status: 'notnull',
+            seasonUUId: this.seasonPresent.seasonUUId
+        }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 this.initPond = this.ponds[0];

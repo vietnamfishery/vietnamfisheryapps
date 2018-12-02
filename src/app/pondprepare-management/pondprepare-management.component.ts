@@ -90,9 +90,9 @@ export class PondprepareManagementComponent implements OnInit {
 
     getPond() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getPondAdvanced({
-            image: true
-        },this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            status: 'forPrepare'
+        }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 if(!res.ponds.length) {
@@ -129,10 +129,10 @@ export class PondprepareManagementComponent implements OnInit {
 
     getAllPondWithSeasonUUId() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getPondAdvanced({
-            image: true,
-            seasonid: this.seasonPresent.seasonId
-        }, this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            seasonUUId: this.seasonPresent.seasonUUId,
+            status: 'forPrepare'
+        }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 if(!res.ponds.length) {

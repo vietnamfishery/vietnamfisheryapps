@@ -58,8 +58,12 @@ export class PondManagementService {
         });
     }
 
-    public getAllPond(token: string): Observable<any> {
-        return this.http.get<any>(host + '/ponds/gets', this.appService.setHeader(token));
+    public getAllPond(token: string, data: any = {
+        seasonUUId: '',
+        status: '',
+        seasonId: ''
+    }): Observable<any> {
+        return this.http.get<any>(host + `/ponds/gets?seasonUUId=${ data.seasonUUId ? data.seasonUUId : '' }&status=${ data.status ? data.status : '' }&seasonId=${ data.seasonId ? data.seasonId : '' }`, this.appService.setHeader(token));
     }
 
     public getPondByUUId(UUid: string, token: string): Observable<any> {
@@ -85,7 +89,7 @@ export class PondManagementService {
         return this.http.put(host + '/ponds/update', fd, {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
-                'Authorization': token
+                'Authorization': 'vietnamfishery' + ' ' + token
             })
         });
     }

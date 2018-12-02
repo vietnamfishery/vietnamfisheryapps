@@ -77,10 +77,9 @@ export class DiaryComponent implements OnInit {
 
     getPond() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getPondAdvanced({
-            image: false,
-            isnotnull: true
-        },this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            status: 1
+        }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 if(!res.ponds.length) {
@@ -107,7 +106,8 @@ export class DiaryComponent implements OnInit {
     }
 
     gotoAdd = (pondUUId: string) => {
-        this.router.navigate(['/nhat-ky/them', pondUUId]);
+        // console.log(pondUUId);
+        this.router.navigate(['nhat-ky/them', pondUUId]);
     }
 
     gotoAnalysis = (pondUUId: string) => {
@@ -121,11 +121,10 @@ export class DiaryComponent implements OnInit {
 
     getAllPondWithSeasonUUId() {
         this.preloader = !this.preloader;
-        this.pondManagementService.getPondAdvanced({
-            image: false,
-            isnotnull: true,
-            seasonid: this.seasonPresent.seasonId
-        }, this.token).subscribe(res => {
+        this.pondManagementService.getAllPond(this.token, {
+            status: 1,
+            pondUUId: this.seasonPresent.seasonUUId
+        }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
                 this.getImage();
