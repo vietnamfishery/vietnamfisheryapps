@@ -78,7 +78,7 @@ export function createTranslateLoader(http: HttpClient) {
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(AppRoutes, {
-            useHash: true
+            // useHash: true
         }),
         FormsModule,
         HttpClientModule,

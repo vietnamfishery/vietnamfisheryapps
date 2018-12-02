@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
 import { AdminLayoutComponent, AuthLayoutComponent } from './core';
-import { AuthGuard, AuthGuardBoss, AuthGuardPond, AuthGuardStorage } from './auth/auth.guard';
+import { AuthGuard, AuthGuardBoss, AuthGuardPond, AuthGuardStorage, NotNullRoleGuard } from './auth/auth.guard';
 
 export const AppRoutes: Routes = [
 	{
 		path: '',
 		component: AdminLayoutComponent,
-		canActivate: [AuthGuard],
+		canActivate: [NotNullRoleGuard, AuthGuard],
 		children: [
 			{
 				path: '',

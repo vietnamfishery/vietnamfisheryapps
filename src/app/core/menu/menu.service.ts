@@ -151,7 +151,7 @@ const MENUITEMS: Array<Menu> = [
 export class MenuService {
     token: string = this.appService.getCookie(tokenName);
     deToken: any = jwtDecode(this.token);
-    reload: any = (!this.deToken.roles.length && !this.deToken.employees.length) ? this.router.navigate(['/session/404']) : 1;
+    // reload: any = (!this.deToken.roles.length && !this.deToken.employees.length) ? this.router.navigate(['/session/404']) : 1;
     ownerId: number = this.deToken.createdBy == null && this.deToken.roles.length == 0 ? this.deToken.userId : (this.deToken.roles[0] ? this.deToken.roles[0].bossId : null);
     isBoss: boolean = this.deToken.userId === this.ownerId;
     isPond: boolean = !this.isBoss ? (this.deToken.roles[0] ? this.deToken.roles[0].roles : 0) === 1 ||  (this.deToken.roles[1] ? this.deToken.roles[1].roles : 0) === 1 : false;

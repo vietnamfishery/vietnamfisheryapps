@@ -6,33 +6,33 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  hasStyle: boolean = true;
-  @Output() toggleSidenav = new EventEmitter<void>();
-  @Output() toggleNotificationSidenav = new EventEmitter<void>();
+    hasStyle: boolean = true;
+    @Output() toggleSidenav = new EventEmitter<void>();
+    @Output() toggleNotificationSidenav = new EventEmitter<void>();
 
-  constructor(
-    private appService: AppService,
-    private sessionService: SessionService,
-		private router: Router
-  ) { }
+    constructor(
+        private appService: AppService,
+        private sessionService: SessionService,
+        private router: Router
+    ) { }
 
-  ngOnInit() {
-  }
-
-  fullScreenToggle(): void {
-    if (screenfull.enabled) {
-      screenfull.toggle();
+    ngOnInit() {
     }
-  }
 
-  signgout() {
-    this.appService.setCookie('vietnamfishery','','expires=Thu, 01 Jan 1970 00:00:00 UTC');
-    this.sessionService.signout();
-    this.router.navigate(['session/signin']);
-  }
+    fullScreenToggle(): void {
+        if (screenfull.enabled) {
+            screenfull.toggle();
+        }
+    }
+
+    signgout() {
+        this.appService.setCookie('vietnamfishery', '', 'expires=Thu, 01 Jan 1970 00:00:00 UTC');
+        this.sessionService.signout();
+        this.router.navigate(['session/signin']);
+    }
 }
