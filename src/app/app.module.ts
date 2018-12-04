@@ -49,6 +49,7 @@ import {
 } from './core';
 import { StoreModule } from '@ngrx/store';
 import { authorizationReducer } from './rootStores/reducers/authorization.reducer';
+import { costStorageReducer } from './rootStores/reducers/storageCost.reducer';
 import { AppService } from './app.service';
 import { registerLocaleData } from '@angular/common';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
@@ -72,7 +73,7 @@ export function createTranslateLoader(http: HttpClient) {
         AccordionAnchorDirective,
         AccordionLinkDirective,
         AccordionDirective,
-        SnackBarComponent,
+        SnackBarComponent
     ],
     imports: [
         BrowserModule,
@@ -90,11 +91,12 @@ export function createTranslateLoader(http: HttpClient) {
             }
         }),
         StoreModule.forRoot({
-            authorization: authorizationReducer
+            authorization: authorizationReducer,
+            storageCost: costStorageReducer
         }),
-        // StoreDevtoolsModule.instrument({
-        //     maxAge: false
-        // }),
+        StoreDevtoolsModule.instrument({
+            maxAge: false
+        }),
         LoadingBarRouterModule,
         MatSidenavModule,
         MatCardModule,

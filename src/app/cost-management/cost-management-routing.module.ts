@@ -11,9 +11,9 @@ const routes: Routes = [
     component: CostManagementComponent,
     children: [
       { path: '', component: CostPondprepareComponent },
-      { path: 'chi-phi-chuan-bi-ao', component: CostPondprepareComponent },
+      { path: 'chi-phi-nhap-kho', component: CostPondprepareComponent },
       { path: 'thu-hoach', component: HarvestManagementComponent },
-      { path: 'chi-phi-cham-soc', component: CostTakecareofComponent }
+      { path: 'chi-phi-nhap-giong', component: CostTakecareofComponent }
 
     ]
   }

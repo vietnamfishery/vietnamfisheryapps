@@ -9,7 +9,7 @@ import {
 } from '@angular/router';
 import { SessionService } from '../session/session.service';
 import { Store } from '@ngrx/store';
-import { AuthorizationState } from '../rootStores/models';
+import { AppState } from '../rootStores/models';
 import { AppService } from '../app.service';
 import * as jwtDecode from 'jwt-decode';
 import { find } from 'lodash';
@@ -69,7 +69,7 @@ export class AuthGuarded implements CanActivate, CanActivateChild, CanLoad {
     constructor(
         private sessionService: SessionService,
         private appService: AppService,
-        private store: Store<AuthorizationState>,
+        private store: Store<AppState>,
         private router: Router
     ) {
     }

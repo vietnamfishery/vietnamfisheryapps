@@ -44,7 +44,7 @@ export class PondManagementService {
         return this.http.post(host + '/ponds/add', fd, {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
-                'Authorization': token
+                'Authorization': 'vietnamfishery' + ' ' + token
             })
         });
     }
@@ -143,7 +143,7 @@ export class PondManagementService {
             headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json',
-                'Authorization': token,
+                'Authorization': 'vietnamfishery' + ' ' + token,
                 'image': options.image ? options.image + '' : '',
                 'isnull': options.isnull ? options.isnull + '' : '',
                 'isnotnull': options.isnotnull ? options.isnotnull + '' : '',

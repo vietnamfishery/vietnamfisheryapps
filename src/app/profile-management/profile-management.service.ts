@@ -3,7 +3,6 @@ import { api_url, api_port } from '../constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { actionUserServices } from '../constants';
-import { fbind } from 'q';
 
 const host = api_url + ':' + api_port + '/api';
 
@@ -21,7 +20,7 @@ export class ProfileManagementService {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json',
-				'Authorization': token
+				'Authorization': 'vietnamfishery' + ' ' + token
 			})
 		}
 		return this.http.get(host + '/user/get', h);
@@ -38,7 +37,7 @@ export class ProfileManagementService {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json',
-				'Authorization': token
+				'Authorization': 'vietnamfishery' + ' ' + token
 			})
 		}
 
@@ -49,7 +48,7 @@ export class ProfileManagementService {
 		const h: any = {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
-				'Authorization': token
+				'Authorization': 'vietnamfishery' + ' ' + token
 			})
 		}
 		const fd = new FormData();
@@ -69,7 +68,7 @@ export class ProfileManagementService {
 		const h: any = {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
-				'Authorization': token
+				'Authorization': 'vietnamfishery' + ' ' + token
 			})
 		}
 		data[`action`] = actionUserServices.CHANGEUSERPASSWORD;
@@ -84,7 +83,7 @@ export class ProfileManagementService {
 		const h: any = {
 			headers: new HttpHeaders({
 				'Access-Control-Allow-Origin': '*',
-				'Authorization': token
+				'Authorization': 'vietnamfishery' + ' ' + token
 			})
 		}
 		const fd = new FormData();

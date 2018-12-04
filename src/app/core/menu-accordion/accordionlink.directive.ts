@@ -1,45 +1,45 @@
 import {
-  Directive, HostBinding, Inject, Input, OnInit, OnDestroy
+    Directive, HostBinding, Inject, Input, OnInit, OnDestroy
 } from '@angular/core';
 
 import { AccordionDirective } from './accordion.directive';
 
 @Directive({
-  selector: '[appAccordionLink]'
+    selector: '[appAccordionLink]'
 })
 export class AccordionLinkDirective implements OnInit, OnDestroy {
 
-  @Input() public group: any;
+    @Input() public group: any;
 
-  @HostBinding('class.open')
-  @Input()
-  get open(): boolean {
-    return this._open;
-  }
-
-  set open(value: boolean) {
-    this._open = value;
-    if (value) {
-      this.nav.closeOtherLinks(this);
+    @HostBinding('class.open')
+    @Input()
+    get open(): boolean {
+        return this._open;
     }
-  }
 
-  protected _open: boolean;
-  protected nav: AccordionDirective;
+    set open(value: boolean) {
+        this._open = value;
+        if (value) {
+            this.nav.closeOtherLinks(this);
+        }
+    }
 
-  constructor(@Inject(AccordionDirective) nav: AccordionDirective) {
-    this.nav = nav;
-  }
+    protected _open: boolean;
+    protected nav: AccordionDirective;
 
-  ngOnInit(): any {
-    this.nav.addLink(this);
-  }
+    constructor(@Inject(AccordionDirective) nav: AccordionDirective) {
+        this.nav = nav;
+    }
 
-  ngOnDestroy(): any {
-    this.nav.removeGroup(this);
-  }
+    ngOnInit(): any {
+        this.nav.addLink(this);
+    }
 
-  toggle(): any {
-    this.open = !this.open;
-  }
+    ngOnDestroy(): any {
+        this.nav.removeGroup(this);
+    }
+
+    toggle(): any {
+        this.open = !this.open;
+    }
 }

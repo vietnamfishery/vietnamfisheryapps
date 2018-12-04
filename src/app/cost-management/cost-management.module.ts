@@ -10,30 +10,32 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { CostPondprepareComponent } from './cost-pondprepare/cost-pondprepare.component';
 import { CostTakecareofComponent } from './cost-takecareof/cost-takecareof.component';
+import { DateArrayPipe } from './date-array.pipe';
+import { BreedNameLabelPipe } from './breed-name-label.pipe';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatSelectModule,
-    MatButtonModule,
-    FormsModule,
-    MatInputModule,
-    MatDatepickerModule,
-    FlexLayoutModule,
-    MatNativeDateModule,
-    MatTabsModule,
-    MatListModule,
-    MatMenuModule,
-    ChartsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    CostManagementRoutingModule
-  ],
-  declarations: [CostManagementComponent, HarvestManagementComponent, CostPondprepareComponent, CostTakecareofComponent]
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatSelectModule,
+        MatButtonModule,
+        FormsModule,
+        MatInputModule,
+        MatDatepickerModule,
+        FlexLayoutModule,
+        MatNativeDateModule,
+        MatTabsModule,
+        MatListModule,
+        MatMenuModule,
+        ChartsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        CostManagementRoutingModule
+    ],
+    declarations: [CostManagementComponent, HarvestManagementComponent, CostPondprepareComponent, CostTakecareofComponent, DateArrayPipe, BreedNameLabelPipe]
 })
 export class CostManagementModule { }

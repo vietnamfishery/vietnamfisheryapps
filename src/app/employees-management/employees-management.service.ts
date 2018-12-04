@@ -39,7 +39,7 @@ export class EmployeesManagementService {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-                'Authorization': token,
+                'Authorization': 'vietnamfishery' + ' ' + token,
                 'rolesid': rolesId.toString()
             })
         });
@@ -66,7 +66,7 @@ export class EmployeesManagementService {
         const h: any = this.appService.customHeader({
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
-            'Authorization': token,
+            'Authorization': 'vietnamfishery' + ' ' + token,
             'roles': roles ? roles + '' : ''
         });
         return this.http.get(host + '/userRoles/gets', h);

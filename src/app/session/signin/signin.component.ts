@@ -5,7 +5,7 @@ import { SessionService } from '../session.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as Actions from '../../rootStores/actions';
-import { AuthorizationState } from '../../rootStores/models';
+import { AppState } from '../../rootStores/models';
 import { AppService } from 'src/app/app.service';
 import * as jwtDecode from 'jwt-decode';
 import { MatSnackBar } from '@angular/material';
@@ -20,7 +20,7 @@ export class SigninComponent implements OnInit {
     public form: FormGroup;
 
     constructor(
-        private store: Store<AuthorizationState>,
+        private store: Store<AppState>,
         private fb: FormBuilder,
         private appService: AppService,
         private router: Router,

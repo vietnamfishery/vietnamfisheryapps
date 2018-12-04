@@ -27,7 +27,7 @@ export class EditStockingComponent implements OnInit {
     token: string;
     ownerId: number;
     stockingDetailUUId: string;
-    stockingDetalis: any[] = [];
+    stockingDetails: any = {};
     breeds: any = []; // select cac con giong hien co trong kho
     selected: any = {};
     
@@ -55,7 +55,7 @@ export class EditStockingComponent implements OnInit {
             }, this.token);
         })).subscribe(res => {
             if (res.success) {
-                this.stockingDetalis = res.stockingDetails;
+                this.stockingDetails = res.stockingDetails;
                 this.form.patchValue({
                     ...res.stockingDetails
                 })
@@ -77,7 +77,6 @@ export class EditStockingComponent implements OnInit {
             stockingQuantity: [null, Validators.compose([Validators.required])],
             phFirst: [null, Validators.compose([Validators.required])],
             salinityFirst: [null, Validators.compose([Validators.required])],
-            CreatedDate: [null, Validators.compose([Validators.required])]
         });
     }
 
@@ -101,8 +100,12 @@ export class EditStockingComponent implements OnInit {
     }
 
     onSubmit() {
-        if (this.checkForm(this.form.controls.stockingQuantity.value, this.form.controls.phFirst.value, this.form.controls.salinityFirst.value)) { 
-            this.stockingService.updateStockingDetailsByStockingDetailsUUId(this.form.value, this.token).subscribe(res => {
+        if (this.checkForm(this.form.controls.stockingQuantity.value, this.form.controls.phFirst.value, this.form.controls.salinityFirst.value)) {
+            const obj: any = {
+                oldValue: this.stockingDetails.stockingQuantity,
+                ...this.form.value
+            }
+            this.stockingService.updateStockingDetailsByStockingDetailsUUId(obj, this.token).subscribe(res => {
                 if (res.success) {
                     this.snackBar.open(res.message, 'Đóng', {
                         duration: 3000,

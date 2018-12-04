@@ -1,1 +1,1 @@
-export * from './authorization.model';
+export * from './model';

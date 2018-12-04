@@ -5,41 +5,41 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
-  providers: [MenuService]
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.scss'],
+    providers: [MenuService]
 })
 export class MenuComponent implements OnInit {
-  private route: ActivatedRoute;
-  private location: Location;
+    private route: ActivatedRoute;
+    private location: Location;
 
-  currentLang = 'en';
+    currentLang = 'en';
 
-  constructor(
-    public menuService: MenuService,
-    public translate: TranslateService
-  ) {
-    //
-  }
+    constructor(
+        public menuService: MenuService,
+        public translate: TranslateService
+    ) {
+        //
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  addMenuItem(): void {
-    this.menuService.add({
-      state: 'menu',
-      name: 'MENU',
-      type: 'sub',
-      icon: 'trending_flat',
-      children: [
-        {state: 'menu', name: 'MENU'},
-        {state: 'timeline', name: 'MENU'}
-      ]
-    });
-  }
+    addMenuItem(): void {
+        this.menuService.add({
+            state: 'menu',
+            name: 'MENU',
+            type: 'sub',
+            icon: 'trending_flat',
+            children: [
+                { state: 'menu', name: 'MENU' },
+                { state: 'timeline', name: 'MENU' }
+            ]
+        });
+    }
 
-  disableArrow(e){
-    console.log(this.route);
-  }
+    disableArrow(e) {
+        console.log(this.route);
+    }
 }

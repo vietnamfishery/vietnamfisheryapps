@@ -132,13 +132,13 @@ const MENUITEMS: Array<Menu> = [
     {
         state: 'quan-ly-chi-phi',
         name: 'Quản lý chi phí',
-        type: 'sub',
+        type: 'link',
         icon: 'style',
-        children: [
-            { state: 'chi-phi-chuan-bi-ao', name: 'Chi phí chuẩn bị ao' },
-            { state: 'chi-phi-cham-soc', name: 'Chi phí chăm sóc' },
-            { state: 'thu-hoach', name: 'Thu hoạch' },
-        ],
+        // children: [
+        //     { state: 'chi-phi-chuan-bi-ao', name: 'Chi phí chuẩn bị ao' },
+        //     { state: 'chi-phi-cham-soc', name: 'Chi phí chăm sóc' },
+        //     { state: 'thu-hoach', name: 'Thu hoạch' },
+        // ],
         isRole: false
     }
 ];
@@ -265,13 +265,13 @@ export class MenuService {
         {
             state: 'quan-ly-chi-phi',
             name: 'Quản lý chi phí',
-            type: 'sub',
+            type: 'link',
             icon: 'style',
-            children: [
-                { state: 'chi-phi-chuan-bi-ao', name: 'Chi phí chuẩn bị ao' },
-                { state: 'chi-phi-cham-soc', name: 'Chi phí chăm sóc' },
-                { state: 'thu-hoach', name: 'Thu hoạch' },
-            ],
+            // children: [
+            //     { state: 'chi-phi-chuan-bi-ao', name: 'Chi phí chuẩn bị ao' },
+            //     { state: 'chi-phi-cham-soc', name: 'Chi phí chăm sóc' },
+            //     { state: 'thu-hoach', name: 'Thu hoạch' },
+            // ],
             isRole: this.isBoss
         }
     ];

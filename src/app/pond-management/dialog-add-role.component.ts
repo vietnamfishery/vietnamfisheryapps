@@ -52,12 +52,8 @@ export class DialogAddRole implements OnInit {
                         verticalPosition: 'top'
                     });
                 } else {
-                    return this.snackBar.open(res.message, 'Đóng', {
-                        duration: 4500,
-                        horizontalPosition: "right"
-                    });
+                    this.employees = res.employees;
                 }
-                this.employees = res.employees
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 4500,
