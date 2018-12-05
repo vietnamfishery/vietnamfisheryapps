@@ -52,6 +52,7 @@ export class DiaryComponent implements OnInit {
             if (res.success) {
                 this.seasons = res.seasons;
                 this.seasonPresent = find(res.seasons, e => e.status === 0);
+                this.realSeasonPresent = this.seasonPresent;
                 if(!this.seasonPresent) {
                     this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
                         duration: 3000,

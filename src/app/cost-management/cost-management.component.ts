@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CostService } from './cost.service';
 import { SeasionManagementService } from '../seasion-management/seasion-management.service';
-import { find, uniqBy } from 'lodash';
+import { find } from 'lodash';
 import { AppService } from '../app.service';
 import * as jwtDecode from 'jwt-decode';
 import { MatSnackBar } from '@angular/material';
 import { tokenName } from '../constants/constant';
-import { sumBy } from 'lodash';
 import { Store } from '@ngrx/store';
 import { AppState } from '../rootStores/models/model';
 import { GetCost } from '../rootStores/actions'

@@ -32,7 +32,7 @@
                             <figcaption>
                                 <p>
                                     <a href="javascript:;" matTooltip="Thêm nhật ký sử dụng thuốc" (click)="gotoAdd(pond.pondUUId)"
-                                        matTooltipPosition="left">
+                                        matTooltipPosition="left" *ngIf="checkSeasonPresent">
                                         <mat-icon>add_location</mat-icon>
                                     </a>
                                     <a href="javascript:;" matTooltip="Xem thống kê" (click)="gotoAnalysis(pond.pondUUId)"

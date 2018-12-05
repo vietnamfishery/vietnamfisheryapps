@@ -52,7 +52,7 @@ export class StorageManagementService {
         return this.http.put(host + '/storages/food/update', data, this.appService.setHeader(token));
     }
 
-    getCoupons(token: string, data?: any,): Observable<any> {
-        return this.http.post(host + '/storages/coupons/gets', data || {}, this.appService.setHeader(token));
+    getCoupons(token: string, data: any): Observable<any> {
+        return this.http.get(host + `/storages/coupons/gets/${ data.seasonId }`, this.appService.setHeader(token));
     }
 }

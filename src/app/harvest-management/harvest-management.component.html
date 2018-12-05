@@ -44,7 +44,7 @@
                             <figcaption>
                                 <p>
                                     <a href="javascript:;" matTooltip="Thêm thu hoạch" (click)="gotoAdd(pond.pondUUId)"
-                                        matTooltipPosition="left">
+                                        matTooltipPosition="left" *ngIf="checkSeasonPresent">
                                         <mat-icon>attach_money</mat-icon>
                                     </a>
                                     <a href="javascript:;" matTooltip="Xem thống kê" matTooltipPosition="left" (click)="gotoAnalysis(pond.pondUUId)">

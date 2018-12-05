@@ -11,7 +11,7 @@
         <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
             <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
                 <div class="pa-1">
-                    <button  (click)="selectStatus('')" mat-raised-button class="mat-green-700">Tất cả</button>
+                    <button  (click)="selectStatus(-1)" mat-raised-button class="mat-green-700">Tất cả</button>
                 </div>
                 <hr>
                 <div class="pa-1">

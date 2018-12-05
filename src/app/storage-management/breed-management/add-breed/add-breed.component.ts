@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { find } from 'lodash';
+import { find, remove } from 'lodash';
 import { unitBreed } from 'src/app/constants/select-data';
 import { tokenName } from 'src/app/constants/constant';
 
@@ -186,5 +186,12 @@ export class AddBreedComponent implements OnInit {
 
     back() {
         this.router.navigate(['/quan-ly-kho/giong-nuoi'])
+    }
+
+    removeForm(f: any) {
+        if(this.arrFormBreed.length > 1) {
+            this.arrFormBreedPosition--;
+            remove(this.arrFormBreed, e => e.position === f.position);
+        }
     }
 }

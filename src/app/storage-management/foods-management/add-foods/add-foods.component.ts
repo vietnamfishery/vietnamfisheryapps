@@ -93,7 +93,9 @@ export class AddFoodsComponent implements OnInit {
     
     removeForm(f: any) {
         if(this.arrFormStorage.length > 1) {
+    		this.arrFormStoragePosition--;
             remove(this.arrFormStorage, e => e.position === f.position);
+
         }
     }
 

@@ -19,7 +19,8 @@ export class CostTakecareofComponent implements OnInit {
     ownerId: number;
     isBoss: boolean = false;
     totalAll: number = null;
-    
+    // dataSource: any = [];
+    // displayedColumns: any = [];
     constructor(
         private seasionManagementService: SeasionManagementService,
         public snackBar: MatSnackBar,

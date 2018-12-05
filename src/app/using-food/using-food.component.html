@@ -37,7 +37,7 @@
                             <figcaption>
                                 <p>
                                     <a href="javascript:;" matTooltip="Cho ăn" (click)="gotoAdd(pond.pondUUId)"
-                                        matTooltipPosition="left">
+                                        matTooltipPosition="left" *ngIf="checkSeasonPresent">
                                         <mat-icon>widgets</mat-icon>
                                     </a>
                                     <a href="javascript:;" matTooltip="Xem thống kê" (click)="gotoAnalysis(pond.pondUUId)"

@@ -22,7 +22,7 @@ export class AnalysisHarvestComponent implements OnInit {
     season: any = {};
     token: string;
 
-    displayedColumns: string[] = ['harvestName', 'quantity', 'unitPrice', 'breedName', 'stockingQuantity', 'unit'];
+    displayedColumns: string[] = ['harvestName', 'harvestDay', 'quantity', 'unitPrice', 'breedName', 'stockingQuantity', 'unit'];
     dataSource = new MatTableDataSource<any>([]);
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -83,25 +83,10 @@ export class AnalysisHarvestComponent implements OnInit {
             seasonId: this.season.seasonId,
             pondId: this.pond.pondId
         }, this.token).subscribe(res => {
-            const tmp: Array<any> = [];
-            const data: any = {};
             if(res.success) {
-                for(let harvest of res.harvests) {
-                    for(let stocking of harvest.harvestsnp.stocking) {
-                        data.breedName = stocking.details.breed.breedName;
-                        data.stockingQuantity = stocking.details.stockingQuantity;
-                        data.unit = stocking.details.breed.unit;
-                    }
-                    for(let details of harvest.details) {
-                        data.quantity = details.quantity
-                        data.unitPrice = details.unitPrice
-                    }
-                    data.harvestName = harvest.harvestName;
-                    tmp.push(data)
-                }
-                this.dataSource.data = tmp;
-                this.dataSource.sort = this.sort
-                this.dataSource.paginator = this.paginator
+                this.dataSource.data = this.harvestManagementService.extractHarvest(res.harvests);
+                this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -109,6 +94,32 @@ export class AnalysisHarvestComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
+            // const tmp: Array<any> = [];
+            // const data: any = {};
+            // if(res.success) {
+            //     for(let harvest of res.harvests) {
+            //         for(let stocking of harvest.harvestsnp.stocking) {
+            //             data.breedName = stocking.details.breed.breedName;
+            //             data.stockingQuantity = stocking.details.stockingQuantity;
+            //             data.unit = stocking.details.breed.unit;
+            //         }
+            //         for(let details of harvest.details) {
+            //             data.quantity = details.quantity
+            //             data.unitPrice = details.unitPrice
+            //         }
+            //         data.harvestName = harvest.harvestName;
+            //         tmp.push(data)
+            //     }
+            //     this.dataSource.data = tmp;
+            //     this.dataSource.sort = this.sort
+            //     this.dataSource.paginator = this.paginator
+            // } else {
+            //     this.snackBar.open(res.message, 'Đóng', {
+            //         duration: 3000,
+            //         horizontalPosition: "center",
+            //         verticalPosition: 'top'
+            //     });
+            // }
         });
     }
 }

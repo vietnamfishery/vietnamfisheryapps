@@ -17,7 +17,7 @@ import { StorageManagementService } from '../storage-management.service';
 })
 export class CouponManagementComponent implements OnInit {
 
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+    displayedColumns: string[] = ['type', 'name', 'quatity', 'unitPrice', 'unit', 'createdDate'];
     dataSource = new MatTableDataSource<PeriodicElement>([]);
     token: string;
     ownerId: number;
@@ -84,20 +84,29 @@ export class CouponManagementComponent implements OnInit {
         this.storageManagementService.getCoupons(this.token, {seasonId}).subscribe(res => {
             if(res.success) {
                 for(let coupon of res.coupons) {
-                    for(let material of coupon.materials){
-                        this.coupons.push({
-                            couponCreatedDate: coupon.createdDate,
-                            ...material
-                        })
-                    }
-                    for(let breed of coupon.breeds) {
-                        this.coupons.push({
-                            couponCreatedDate: coupon.createdDate,
-                            ...breed
-                        })
+                    if(!!coupon.materials.length) {
+                        for(let material of coupon.materials){
+                            let tmp: any = {
+                                couponCreatedDate: coupon.createdDate,
+                                ...material,
+                                ...material.storage
+                            }
+                            this.coupons.push(tmp);
+                        }
+                    } else {
+                        for(let bbd of coupon.boughtBreedDetails) {
+                            let tmp: any = {
+                                couponCreatedDate: coupon.createdDate,
+                                ...bbd,
+                                ...bbd.breed
+                            }
+                            this.coupons.push(tmp);
+                        }
                     }
                 }
-                console.log(this.coupons);
+                this.dataSource.data = this.coupons;
+                this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3500,

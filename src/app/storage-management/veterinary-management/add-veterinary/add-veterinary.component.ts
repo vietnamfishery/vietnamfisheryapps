@@ -85,6 +85,7 @@ export class AddVeterinaryComponent implements OnInit {
     
     removeForm(f: any) {
         if(this.arrFormStorage.length > 1) {
+            this.arrFormStoragePosition--;
             remove(this.arrFormStorage, e => e.position === f.position);
         }
     }
@@ -192,5 +193,9 @@ export class AddVeterinaryComponent implements OnInit {
         } else {
             this.arrFormStorage[position].form.controls.unit.enable();
         }
+    }
+
+    goto(path: string) {
+        this.router.navigate([path]);
     }
 }

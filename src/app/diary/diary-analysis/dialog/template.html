@@ -1,10 +1,30 @@
-<h5 class="mt-0">Event action occurred</h5>
-<div>
-    Action:
-    <pre>{{ data?.action }}</pre>
-</div>
-<div>
-    Event:
-    <pre>{{ data?.event | json }}</pre>
-</div>
-<button md-button type="button" (click)="dialogRef.close()">Close dialog</button>
+<div fxLayout="column" fxLayoutAlign="center center">
+        <div class="text-xs-center pb-1">
+            <h2 class="mat-text-muted">NHẬT KÝ HÀNG NGÀY AO {{ data.event.diary.snp.ponds.pondName | uppercase }} - VỤ {{ data.event.diary.snp.seasons.seasonName | uppercase }}</h2>
+            <p>{{ data.event.diary.createdDate | date:'dd/MM/yyyy - hh:mm:ss a' }}</p>
+            <div class="pb-1">
+                <hr>
+            </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-around">
+            <div>
+                <b>Số lượng thuỷ sản ước tính: </b>&nbsp;<span>{{ data.event.diary.fisheryQuantity }}</span>
+            </div>
+            <div>
+                <b>Đánh giá sức khoẻ: </b>&nbsp;<span>{{ data.event.diary.healthOfFishery }}</span>
+            </div>
+            <div>
+                <b>Dung tích ao: </b>&nbsp;<span>{{ data.event.diary.pondVolume }}</span>
+            </div>
+            <div>
+                <b>Số lượng chết: </b>&nbsp;<span>{{ data.event.diary.diedFishery }}</span>
+            </div>
+            <br>
+            <div class="pb-1">
+                <hr>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around">
+                <button mat-flat-button [mat-dialog-close]="true" color="warn" (click)="dialogRef.close()">Đóng</button>
+            </div>
+        </div>
+    </div>

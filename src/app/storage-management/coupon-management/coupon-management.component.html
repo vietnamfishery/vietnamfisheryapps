@@ -19,30 +19,48 @@
     </div>
     <div fxLayout="row">
         <div class="mat-elevation-z8 mr-top" matSort fxFlex="100">
-            <table mat-table [dataSource]="dataSource">
+            <table mat-table [dataSource]="dataSource" *ngIf="!!coupons.length">
 
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-                    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Loại </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="!!element.materialId">Vật phẩm trong kho</span>
+                        <span *ngIf="!!element.breedId">Giống</span>
+                    </td>
                 </ng-container>
 
-                <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.productName || element.breedName }} </td>
                 </ng-container>
 
-                <!-- Weight Column -->
-                <ng-container matColumnDef="weight">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-                    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                <ng-container matColumnDef="quatity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Số lượng </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
                 </ng-container>
 
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="symbol">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-                    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                <ng-container matColumnDef="unitPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Giá/Đơn vị </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.unitPrice }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="unit">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> đơn vị </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="!!element.breedId && element.unit === 0">Con</span>
+                        <span *ngIf="!!element.breedId && element.unit === 1">Kg</span>
+                        <span *ngIf="!!element.materialId && element.unit === 0">Bao</span>
+                        <span *ngIf="!!element.materialId && element.unit === 1">Chai</span>
+                        <span *ngIf="!!element.materialId && element.unit === 2">Cái</span>
+                        <span *ngIf="!!element.materialId && element.unit === 3">Kg</span>
+                        <span *ngIf="!!element.materialId && element.unit === 4">Thùng</span>
+                        <span *ngIf="!!element.materialId && element.unit === 5">Vĩ</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="createdDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày nhập </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.createdDate | date:'dd - MM - yyyy':'vi' }} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
