@@ -138,7 +138,7 @@
                     <mat-card-actions>
                         <div fxLayout="row" fxLayoutAlign="center center" class="pad">
                             <button mat-raised-button name="edit_btn" class="mat-green-700" type="button" (click)="changeEdit()" *ngIf="isBoss && btnEdit">Sửa</button>
-                            <button mat-raised-button type="submit" color="primary" class="btn-block" [disabled]="!form.valid" *ngIf="isBoss && btnSave">Cập nhật</button>
+                            <button mat-raised-button type="submit" color="primary" class="btn-block" [disabled]="!form.valid" *ngIf="isBoss && btnSave">Lưu</button>
                             <button mat-raised-button color="warn" routerLink="/quan-ly-ao" *ngIf="isBoss">Huỷ</button>
                             <button mat-raised-button color="warn" *ngIf="!isBoss" routerLink="/quan-ly-ao">Trở về</button>
                         </div>

@@ -9,9 +9,10 @@
                 <mat-card class="card-widget mat-teal active">
                     <div mat-card-widget>
                         <div mat-card-float-icon>
-                            <mat-icon>business</mat-icon>
+                            <mat-icon>widgets</mat-icon>
                         </div>
                         <div class="pl-0">
+                            <h2 mat-card-widget-title>103</h2>
                             <p>CHI PHÍ NHẬP KHO</p>
                         </div>
                     </div>
@@ -21,9 +22,10 @@
                 <mat-card class="card-widget mat-purple active">
                     <div mat-card-widget>
                         <div mat-card-float-icon>
-                            <mat-icon>adb</mat-icon>
+                            <mat-icon>toys</mat-icon>
                         </div>
                         <div class="pl-0">
+                            <h2 mat-card-widget-title>230</h2>
                             <p>CHI PHÍ NHẬP GIỐNG</p>
                         </div>
                     </div>
@@ -33,9 +35,10 @@
                 <mat-card class="card-widget mat-light-blue-800 active">
                     <div mat-card-widget>
                         <div mat-card-float-icon>
-                            <mat-icon>av_timer</mat-icon>
+                            <mat-icon>local_hospital</mat-icon>
                         </div>
                         <div class="pl-0">
+                            <h2 mat-card-widget-title>323</h2>
                             <p>THỐNG KÊ THU HOẠCH</p>
                         </div>
                     </div>
@@ -107,6 +110,8 @@
                     </mat-card>
                 </a>
             </div>
+            <p>{{ barChartLabels | json }}</p>
+            <p>{{ barChartDataHarvest | json }}</p>
             <!--  | [date:'dd/MM/yyyy':'vi'] -->
             <!-- <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100">
                 <a routerLink="/quan-ly-chi-phi/chi-phi-cham-soc" fxFlex="100" routerLinkActive="active">

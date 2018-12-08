@@ -5,7 +5,6 @@
     <form [formGroup]="formStorage.form" (ngSubmit)="onSubmitStorageAll()" (click)="changeFilteredOptionStorage(formStorage.position)">
         <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
             <div fxLayout="column" fxFlex="50">
-                <br>
                 <div fxLayout="row" fxLayoutAlign="space-around center">
                     <mat-form-field fxFlex="48" fxFlexOffset="1">
                         <input type="text" (keyup)="setAutocomplete($event.target.value, formStorage.position)" placeholder="Tên Vật Phẩm" aria-label="Tên Vật Phẩm" matInput [formControl]="formStorage.form.controls['product']"
@@ -38,7 +37,6 @@
                 </div>
             </div>
             <div fxLayout="column" fxFlex="50">
-                <br>
                 <div fxLayout="row" fxLayoutAlign="space-around center">
                     <mat-form-field fxFlex="48" fxFlexOffset="1">
                         <mat-label>Nhà cung cấp</mat-label>
@@ -74,7 +72,7 @@
         </mat-chip>
     </mat-chip-list>
     <div fxLayout="row" fxLayoutAlign="center center" fxFlex="90">
-        <button mat-button type="button" matTooltip="Nhập vào kho" (click)="onSubmitStorageAll()" class="mat-blue-500 mr-5">
+        <button mat-button type="button" matTooltip="Gửi" (click)="onSubmitStorageAll()" class="mat-blue-500 mr-5">
             <mat-icon>send</mat-icon>
         </button>
         <button mat-button type="button" (click)="goto('/quan-ly-kho/co-so-vat-chat')" matTooltip="Hủy" class="mat-pink-700 mr-5">

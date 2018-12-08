@@ -16,7 +16,7 @@ export class DialogAddRole implements OnInit {
     private token: string;
     employees: any[] = [];
     selected: any = {};
-
+    
     constructor(
         public dialogRef: MatDialogRef<DialogAddRole>,
         private pondManagementService: PondManagementService,
@@ -45,7 +45,7 @@ export class DialogAddRole implements OnInit {
         this.employeesManagementService.getUserManageWithPond(this.token).subscribe((res: any) => {
             if (res.success) {
                 const arrayResult: any[] = [];
-                if (res.employees.length === 0) {
+                if(res.employees.length === 0) {
                     return this.snackBar.open('Bạn chưa có tài khoản con nào. Chọn chức năng quản lý phân quyền để thêm tài khoản con.', 'Đóng', {
                         duration: 4500,
                         horizontalPosition: "center",
@@ -84,9 +84,8 @@ export class DialogAddRole implements OnInit {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 4500,
                     horizontalPosition: "right",
-                });
-            });
-            this.dialogRef.close();
+                })
+            })
         }
     }
 }

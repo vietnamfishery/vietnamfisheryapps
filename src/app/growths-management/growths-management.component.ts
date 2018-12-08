@@ -54,7 +54,7 @@ export class GrowthsManagementComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.preloader = !this.preloader;
+        this.preloader = !this.preloader;
         this.createForm();
         this.getSeason();
     }
@@ -96,7 +96,7 @@ export class GrowthsManagementComponent implements OnInit {
             this.form.patchValue({
                 pond: this.initPond
             })
-            // this.preloader = !this.preloader;
+            this.preloader = !this.preloader;
         })
     }
 
@@ -130,12 +130,12 @@ export class GrowthsManagementComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
-            // this.preloader = !this.preloader;
+            this.preloader = !this.preloader;
         })
     }
 
     getPond() {
-        // this.preloader = !this.preloader;
+        this.preloader = !this.preloader;
         this.pondManagementService.getAllPond(this.token).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
@@ -154,7 +154,7 @@ export class GrowthsManagementComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
-            // this.preloader = !this.preloader;
+            this.preloader = !this.preloader;
         })
     }
 
@@ -169,14 +169,11 @@ export class GrowthsManagementComponent implements OnInit {
 
     changeSeason(season: any) {
         this.seasonPresent = season;
-        this.ponds = [];
-        this.growths = [];
         this.getAllPondWithSeasonUUId();
     }
     
     changePond(pond: any) {
         this.initPond = pond;
-        this.growths = [];
         this.getGrowth();
     }
 
@@ -196,7 +193,7 @@ export class GrowthsManagementComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
-            // this.preloader = !this.preloader;
+            this.preloader = !this.preloader;
         })
     }
 
