@@ -5,3 +5,6 @@ export const api_url='http://localhost';
 export const api_port='9999';
 // export const api_port='7979';
 // export const api_port='3000';
+const api_url = 'http://localhost';
+const api_port = '7979';
+export const api = api_url + ':' + api_port + '/api/v1';

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { api_url, api_port } from './constants';
+import { api } from './constants/api';
 
-const host = api_url + ':' + api_port + '/api';
+// const api = api + ':' + api_port + '/api';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AppService {
-
     constructor(
-        private http: HttpClient
-    ) { }
+        protected http: HttpClient
+    ) {
+
+    }
     setCookie(cname: string, cvalue: any, exdays: any) {
         if (exdays != 0) {
             var d = new Date();
@@ -36,15 +37,15 @@ export class AppService {
     }
 
     getProvince(): Observable<any[]> {
-        return this.http.get<any[]>(host + '/province');
+        return this.http.get<any[]>(api + '/province');
     }
 
     getDistrict(): Observable<any[]> {
-        return this.http.get<any[]>(host + '/district');
+        return this.http.get<any[]>(api + '/district');
     }
 
     getDistrictByProvinceId(proId): Observable<any[]> {
-        return this.http.get<any[]>(host + '/district', {
+        return this.http.get<any[]>(api + '/district', {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
                 'provinceid': proId
@@ -53,11 +54,11 @@ export class AppService {
     }
 
     getWard(): Observable<any[]> {
-        return this.http.get<any[]>(host + '/ward');
+        return this.http.get<any[]>(api + '/ward');
     }
 
     getWardByDistrictId(disId): Observable<any[]> {
-        return this.http.get<any[]>(host + '/ward', {
+        return this.http.get<any[]>(api + '/ward', {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
                 'districtid': disId
@@ -83,7 +84,7 @@ export class AppService {
 
     loadImage(id: string): Promise<any>{
         return new Promise((resolve, reject) => {
-            this.http.get(host + '/getFile/image/' + id).subscribe((res: any) => {
+            this.http.get(api + '/getFile/image/' + id).subscribe((res: any) => {
                 if(res) {
                     resolve(res.data)
                 }
@@ -92,18 +93,22 @@ export class AppService {
 	}
 
     vertify(token: string) {
-        return this.http.get(host + '/user/vertify', this.setHeader(token || ''));
+        return this.http.get(api + '/user/vertify', this.setHeader(token || ''));
     }
     
     vertifyBoss(token: string) {
-        return this.http.get(host + '/user/vertify/boss', this.setHeader(token || ''));
+        return this.http.get(api + '/user/vertify/boss', this.setHeader(token || ''));
     }
     
     vertifyPondRoles(token: string) {
-        return this.http.get(host + '/user/vertify/roles/pond', this.setHeader(token || ''));
+        return this.http.get(api + '/user/vertify/roles/pond', this.setHeader(token || ''));
     }
     
     vertifyStorageRoles(token: string) {
-        return this.http.get(host + '/user/vertify/roles/storage', this.setHeader(token || ''));
+        return this.http.get(api + '/user/vertify/roles/storage', this.setHeader(token || ''));
+    }
+
+    static getGoogleAPIKey(): Observable<any> {
+        return 
     }
 }

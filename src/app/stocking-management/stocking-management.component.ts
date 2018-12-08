@@ -119,7 +119,7 @@ export class StockingManagementComponent implements OnInit {
     }
 
     getSeasonEmp() {
-        this.seasionManagementService.getPresentSeason(this.ownerId, this.token).subscribe(res => {
+        this.seasionManagementService.getPresentSeason4Stocking(this.ownerId, this.token).subscribe(res => {
             if (res.success) {
                 this.seasons = res.seasons;
                 this.seasonPresent = res.season;

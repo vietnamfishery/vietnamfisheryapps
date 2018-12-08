@@ -75,7 +75,7 @@ export class SeasionManagementComponent implements OnInit {
     reloadTable = () => {
         this.seasionManagementService.getSeasonWithOwner(this.token).subscribe((res: any) => {
             if (res.success == true) {
-                this.dataSource.data = res.seasons.reverse();
+                this.dataSource.data = res.seasons;
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             } else {

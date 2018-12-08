@@ -4,6 +4,7 @@ import { DiaryComponent } from './diary.component';
 import { AddDiaryComponent } from './add-diary/add-diary.component';
 import { DiaryAnalysisComponent } from './diary-analysis/diary-analysis.component';
 import { AuthGuardPondWithUser } from '../auth/auth.guard';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
     {
@@ -14,6 +15,9 @@ const routes: Routes = [
     },
     {
         path: 'thong-ke/:pondUUId/:seasonUUId', component: DiaryAnalysisComponent//, canActivate: [AuthGuardPondWithUser]
+    },
+    {
+        path: 'cap-nhat/:pondDiaryUUId', component: UpdateComponent
     }
 ];
 

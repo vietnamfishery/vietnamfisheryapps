@@ -168,10 +168,8 @@ export class DiaryAnalysisComponent implements OnInit {
         const obj: any = {
             pondId: this.pond.pondId,
             seasonId: this.season.seasonId,
-            options: {
-                timeOut,
-                unitOfTime
-            }
+            timeOut,
+            unitOfTime
         }
         this.diaryService.getDiary(obj, this.token).subscribe(res => {
             this.events = [];
