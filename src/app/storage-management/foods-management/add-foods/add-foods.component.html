@@ -6,12 +6,15 @@
         <form [formGroup]="formStorage.form" (ngSubmit)="onSubmitStorageAll()" (click)="changeFilteredOptionStorage(formStorage.position)">
             <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
                 <div fxLayout="column" fxFlex="50">
+                    <br>
                     <div fxLayout="row" fxLayoutAlign="space-around center">
                         <mat-form-field fxFlex="48" fxFlexOffset="1">
-                            <input type="text" (keyup)="setAutocomplete($event.target.value, formStorage.position)" placeholder="Tên Vật Phẩm" aria-label="Tên Vật Phẩm" matInput [formControl]="formStorage.form.controls['product']"
+                            <input type="text" (keyup)="setAutocomplete($event.target.value, formStorage.position)"
+                                placeholder="Tên Vật Phẩm" aria-label="Tên Vật Phẩm" matInput [formControl]="formStorage.form.controls['product']"
                                 #tvp [matAutocomplete]="auto" required>
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                <mat-option (click)="setAutocomplete(option, formStorage.position)" *ngFor="let option of filteredOptionStorages | async" [value]="option">
+                                <mat-option (click)="setAutocomplete(option, formStorage.position)" *ngFor="let option of filteredOptionStorages | async"
+                                    [value]="option">
                                     {{option.productName}}
                                 </mat-option>
                             </mat-autocomplete>
@@ -28,7 +31,8 @@
                     <div fxLayout="row" fxLayoutAlign="space-around center">
                         <mat-form-field fxFlex="48" fxFlexOffset="1">
                             <mat-label>Số lượng</mat-label>
-                            <input matInput placeholder="Số lượng" value="" #sl required autocomplete="off" [formControl]="formStorage.form.controls['quantity']">
+                            <input matInput placeholder="Số lượng" value="" #sl required autocomplete="off"
+                                [formControl]="formStorage.form.controls['quantity']">
                         </mat-form-field>
                         <mat-form-field fxFlex="48" fxFlexOffset="1">
                             <mat-label>Giá/Đơn vị tính</mat-label>
@@ -38,6 +42,7 @@
                     </div>
                 </div>
                 <div fxLayout="column" fxFlex="50">
+                    <br>
                     <div fxLayout="row" fxLayoutAlign="space-around center">
                         <mat-form-field fxFlex="48" fxFlexOffset="1">
                             <mat-label>Nhà cung cấp</mat-label>
@@ -47,8 +52,8 @@
                         &nbsp;
                         <mat-form-field fxFlex="48" fxFlexOffset="1">
                             <mat-label>Địa chỉ nhà cung cấp</mat-label>
-                            <input matInput placeholder="Địa chỉ nhà cung cấp" value="" required autocomplete="off" #dcncc
-                                [formControl]="formStorage.form.controls['providerAddress']">
+                            <input matInput placeholder="Địa chỉ nhà cung cấp" value="" required autocomplete="off"
+                                #dcncc [formControl]="formStorage.form.controls['providerAddress']">
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="space-around center">
@@ -74,7 +79,7 @@
         </mat-chip>
     </mat-chip-list>
     <div fxLayout="row" fxLayoutAlign="center center" fxFlex="90">
-        <button mat-button type="button" matTooltip="Gửi" (click)="onSubmitStorageAll()" class="mat-blue-500 mr-5">
+        <button mat-button type="button" matTooltip="Nhập vào kho" (click)="onSubmitStorageAll()" class="mat-blue-500 mr-5">
             <mat-icon>send</mat-icon>
         </button>
         <button mat-button type="button" (click)="goto('/quan-ly-kho/thuc-an')" matTooltip="Hủy" class="mat-pink-700 mr-5">
