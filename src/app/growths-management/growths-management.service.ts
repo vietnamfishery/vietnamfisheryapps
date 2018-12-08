@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { api_url, api_port } from '../constants/api';
+import { api } from '../constants/api';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppService } from '../app.service';
 
-const host = api_url + ':' + api_port + '/api';
 @Injectable({
     providedIn: 'root'
 })
@@ -31,18 +30,18 @@ export class GrowthsManagementService {
 
 
     public getGrowth(data: any, token: string): Observable<any> {
-        return this.http.post(host + '/growths/gets', data, this.appService.setHeader(token));
+        return this.http.post(api + '/growths/gets', data, this.appService.setHeader(token));
     }
 
     public getGrowthByGrowthUUId(data: any, token): Observable<any> {
-        return this.http.post(host + '/growths/get/growthUUId', data, this.appService.setHeader(token));
+        return this.http.post(api + '/growths/get/growthUUId', data, this.appService.setHeader(token));
     }
 
     public updateGrowth(data: any, token): Observable<any> {
-        return this.http.put(host + '/growths/update', data, this.appService.setHeader(token));
+        return this.http.put(api + '/growths/update', data, this.appService.setHeader(token));
     }
 
     addGrowth(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/growths/add', data, this.appService.setHeader(token));
+        return this.http.post<any>(api + '/growths/add', data, this.appService.setHeader(token));
     }
 }

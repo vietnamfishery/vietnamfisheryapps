@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-calendar-dialog',
@@ -8,8 +9,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 export class CalendarDialogComponent {
     constructor(
         public dialogRef: MatDialogRef<CalendarDialogComponent>,
+        private router: Router,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
-        console.log(this.data);
+    }
+
+    goto(path: string) {
+        this.router.navigate([path]);
     }
 }

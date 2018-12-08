@@ -14,6 +14,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarDialogComponent } from './diary-analysis/dialog/component';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { UpdateComponent } from './update/update.component';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
         MatSnackBarModule,
         DiaryRoutingModule
     ],
-    declarations: [DiaryComponent, AddDiaryComponent, DiaryAnalysisComponent, CalendarDialogComponent],
+    declarations: [DiaryComponent, AddDiaryComponent, DiaryAnalysisComponent, CalendarDialogComponent, UpdateComponent],
     entryComponents: [
         DiaryComponent, AddDiaryComponent, DiaryAnalysisComponent, CalendarDialogComponent
     ],

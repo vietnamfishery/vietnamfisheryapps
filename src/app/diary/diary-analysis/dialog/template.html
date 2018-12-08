@@ -24,6 +24,7 @@
                 <hr>
             </div>
             <div fxLayout="row" fxLayoutAlign="space-around">
+                <button mat-flat-button [mat-dialog-close]="true" color="primary" (click)="goto('/nhat-ky/cap-nhat/' + data.event.diary.pondDiaryUUId)">Cập nhật</button>
                 <button mat-flat-button [mat-dialog-close]="true" color="warn" (click)="dialogRef.close()">Đóng</button>
             </div>
         </div>

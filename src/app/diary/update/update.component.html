@@ -1,0 +1,48 @@
+<mat-card fxLayout="column">
+    <div class="table-header" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>
+            <h2 class="mat-headline center-align">GHI NHẬT KÝ {{ (pond ? pond.pondName : '') | uppercase }}</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h4 class="subtitle">Nhập chi tiết thông tin nhật ký của bạn</h4>
+        </mat-card-subtitle>
+    </div>
+    <div fxLayout="rows" class="mr-b-5">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="50" fxFlexOffset="25">
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="Tên gợi nhắc" [formControl]="form.controls['diaryName']" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Số lượng thuỷ sản hiện tại trong ao - ước tính" [formControl]="form.controls['fisheryQuantity']" autocomplete="off" required>
+            </mat-form-field>
+            <small *ngIf="form.controls['fisheryQuantity'].hasError('required') && form.controls['fisheryQuantity'].touched"
+                class="mat-text-warn">Số lượng hiện tại trong ao - ước tính không được để trống.</small>
+            <mat-form-field>
+                <input matInput placeholder="Tình trạng vật nuôi" [formControl]="form.controls['healthOfFishery']"
+                    autocomplete="off" required>
+            </mat-form-field>
+            <small *ngIf="form.controls['healthOfFishery'].hasError('required') && form.controls['healthOfFishery'].touched"
+                class="mat-text-warn">Tình trạng vật nuôi không được để trống.</small>
+            <mat-form-field>
+                <input matInput placeholder="Thể tích ao (m3)" [formControl]="form.controls['pondVolume']" type="number" min="1" autocomplete="off"
+                    required>
+            </mat-form-field>
+            <small *ngIf="form.controls['pondVolume'].hasError('required') && form.controls['pondVolume'].touched"
+                class="mat-text-warn">Thể tích ao không được để trống.</small>
+            <mat-form-field>
+                <input matInput placeholder="Số tôm, cá bị loại thải, chết (con)" type="number" min="1" [formControl]="form.controls['diedFishery']"
+                    autocomplete="off" required>
+            </mat-form-field>
+            <small *ngIf="form.controls['diedFishery'].hasError('required') && form.controls['diedFishery'].touched"
+                class="mat-text-warn">Số tôm, cá bị loại thải, chết không được để trống.</small>
+            <mat-form-field>
+                <textarea matInput placeholder="Ghi chú" cols="30" [formControl]="form.controls['notes']" rows="7"></textarea>
+            </mat-form-field>
+            <div fxLayout="row" class="mr-b-5" fxLayoutAlign="center center">
+                <button mat-raised-button type="submit" color="primary" class="mr-5" [disabled]="!form.valid">Thêm</button>
+                <button mat-raised-button color="warn" (click)="cancel()">Hủy</button>
+            </div>
+        </form>
+    </div>
+</mat-card>

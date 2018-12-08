@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { api_url, api_port } from '../constants/api';
+import { api } from '../constants/api';
 import { Observable } from 'rxjs';
 import { AppService } from '../app.service';
 import { flattenDeep } from 'lodash';
 
-const host = api_url + ':' + api_port + '/api';
+// const api = api + ':' + api_port + '/api';
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +23,7 @@ export class CostService {
      * @param token 
      */
     public getCost(token: string, data: any, flag: string): Observable<any> {
-        return this.http.get(host + '/costs/gets/' + flag + '/' + data.seasonUUId, this.appService.setHeader(token));
+        return this.http.get(api + '/costs/gets/' + flag + '/' + data.seasonUUId, this.appService.setHeader(token));
     }
 
     /**

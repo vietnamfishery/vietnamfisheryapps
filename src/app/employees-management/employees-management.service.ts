@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { api_url, api_port } from '../constants/api';
+import { api } from '../constants/api';
 import { headers } from '../constants/http';
 import { Users } from '../models/users';
 import { AppService } from '../app.service';
 
-const host = api_url + ':' + api_port + '/api';
+// const api = api + ':' + api_port + '/api';
 
 @Injectable({
     providedIn: 'root'
@@ -19,23 +19,23 @@ export class EmployeesManagementService {
     ) { }
 
     public register_employees(user: Users, token: string): Observable<any> {
-        return this.http.post(host + '/user/register/employee', user, this.appService.setHeader(token));
+        return this.http.post(api + '/user/register/employee', user, this.appService.setHeader(token));
     }
 
     public getEmployee(token: string): Observable<any> {
-        return this.http.get(host + '/user/gets/employees', this.appService.setHeader(token));
+        return this.http.get(api + '/user/gets/employees', this.appService.setHeader(token));
     }
 
     public getEmployeesWithoutIsDeleted(token: string): Observable<any> {
-        return this.http.get(host + '/user/gets/employees/withoutIsDelete', this.appService.setHeader(token));
+        return this.http.get(api + '/user/gets/employees/withoutIsDelete', this.appService.setHeader(token));
     }
 
     // public getEmployeePondRoles(token: string): Observable<any> {
-    //     return this.http.get(host + '/ponds/gets/employees', this.appService.setHeader(token));
+    //     return this.http.get(api + '/ponds/gets/employees', this.appService.setHeader(token));
     // }
 
     public getEmployeeById(token: string, rolesId: number): Observable<any> {
-        return this.http.get(host + '/user/get/employee', {
+        return this.http.get(api + '/user/get/employee', {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
@@ -46,15 +46,15 @@ export class EmployeesManagementService {
     }
 
     public addOnlyRolesEmployee(token, data): Observable<any> {
-        return this.http.post(host + '/user/insert/employee/role', data, this.appService.setHeader(token));
+        return this.http.post(api + '/user/insert/employee/role', data, this.appService.setHeader(token));
     }
 
     public updateRolesEmployee(token: string, data: any): Observable<any> {
-        return this.http.put(host + '/pondUserRoles/update', data, this.appService.setHeader(token));
+        return this.http.put(api + '/pondUserRoles/update', data, this.appService.setHeader(token));
     }
 
     public deleteRolesEmployee(token: string, data: any): Observable<any> {
-        return this.http.put(host + '/userRoles/delete', data, this.appService.setHeader(token));
+        return this.http.put(api + '/userRoles/delete', data, this.appService.setHeader(token));
     }
 
     /**
@@ -69,7 +69,7 @@ export class EmployeesManagementService {
             'Authorization': 'vietnamfishery' + ' ' + token,
             'roles': roles ? roles + '' : ''
         });
-        return this.http.get(host + '/userRoles/gets', h);
+        return this.http.get(api + '/userRoles/gets', h);
     }
 
     /**
@@ -77,26 +77,26 @@ export class EmployeesManagementService {
      * Get all emp, pond manage with emp, info emp
      */
     getUserManageWithPond(token: string): Observable<any>  {
-        return this.http.get(host + '/pondUserRoles/gets', this.appService.setHeader(token));
+        return this.http.get(api + '/pondUserRoles/gets', this.appService.setHeader(token));
     }
 
     public getAllPondAndEmployees(token: string): Observable<any> {
-        return this.http.get(host + '/user/gets/all/employees/pond', this.appService.setHeader(token));
+        return this.http.get(api + '/user/gets/all/employees/pond', this.appService.setHeader(token));
     }
 
     public addPondUserRole(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/pondUserRoles/add', data, this.appService.setHeader(token));
+        return this.http.post<any>(api + '/pondUserRoles/add', data, this.appService.setHeader(token));
     }
 
     public delPondUserRole(data: any, token: string): Observable<any> {
-        return this.http.put<any>(host + '/pondUserRoles/delete', data, this.appService.setHeader(token));
+        return this.http.put<any>(api + '/pondUserRoles/delete', data, this.appService.setHeader(token));
     }
 
     public upsertUserRole(data: any, token: string): Observable<any> {
-        return this.http.put<any>(host + '/userRoles/upsert', data, this.appService.setHeader(token));
+        return this.http.put<any>(api + '/userRoles/upsert', data, this.appService.setHeader(token));
     }
 
     public changeRoles(data: any, token: string): Observable<any> {
-        return this.http.put<any>(host + '/userRoles/change', data, this.appService.setHeader(token));
+        return this.http.put<any>(api + '/userRoles/change', data, this.appService.setHeader(token));
     }
 }

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { api_url, api_port } from '../constants';
+import { api } from '../constants/api';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { actionUserServices } from '../constants';
-
-const host = api_url + ':' + api_port + '/api';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,7 +21,7 @@ export class ProfileManagementService {
 				'Authorization': 'vietnamfishery' + ' ' + token
 			})
 		}
-		return this.http.get(host + '/user/get', h);
+		return this.http.get(api + '/user/get', h);
 	}
 
 	/**
@@ -41,7 +39,7 @@ export class ProfileManagementService {
 			})
 		}
 
-		return this.http.get(host + '/user/getWithUpdate', h);
+		return this.http.get(api + '/user/getWithUpdate', h);
 	}
 
 	updateUserInfo(user: any, token: string): Observable<any> {
@@ -61,7 +59,7 @@ export class ProfileManagementService {
 		fd.append('province', province);
 		fd.append('district', district);
 		fd.append('town', town);
-		return this.http.put(host + '/user/update', fd, h);
+		return this.http.put(api + '/user/update', fd, h);
 	}
 
 	updateUserPassword(data: any, token: string): Observable<any>{
@@ -72,11 +70,11 @@ export class ProfileManagementService {
 			})
 		}
 		data[`action`] = actionUserServices.CHANGEUSERPASSWORD;
-		return this.http.put(host + '/user/update/password', data, h);
+		return this.http.put(api + '/user/update/password', data, h);
 	}
 
 	loadImage(id: string){
-		return this.http.get(host + '/getFile/image/' + id);
+		return this.http.get(api + '/getFile/image/' + id);
 	}
 
 	uploadImage(file: File, token: string): Observable<any> {
@@ -88,6 +86,6 @@ export class ProfileManagementService {
 		}
 		const fd = new FormData();
 		fd.append('image', file, file.name);
-		return this.http.put(host + '/user/update', fd, h);
+		return this.http.put(api + '/user/update', fd, h);
 	}
 }

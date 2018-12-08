@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from '../app.service';
-import { api_url, api_port } from '../constants/api';
-const host = api_url + ':' + api_port + '/api';
+import { api } from '../constants/api';
 
 @Injectable({
     providedIn: 'root'
@@ -16,10 +15,10 @@ export class UsingFoodService {
     ) { }
 
     addUsingFood = (data: any, token: string): Observable<any> => {
-        return this.http.post(host + '/usingFoods/add', data, this.appService.setHeader(token))
+        return this.http.post(api + '/usingFoods/add', data, this.appService.setHeader(token))
     }
 
     getTake(data: any, token: string): Observable<any> {
-        return this.http.post(host + '/usingFoods/add', data, this.appService.setHeader(token))
+        return this.http.post(api + '/usingFoods/add', data, this.appService.setHeader(token))
     }
 }

@@ -29,7 +29,7 @@
                 <mat-card>
                     <div class="media-grid">
                         <figure>
-                            <div class="product-badge" *ngIf="pond.isFed === '1'" matTooltip="Chưa cho ăn"
+                            <div class="product-badge" *ngIf="pond.isFed === 0" matTooltip="Chưa cho ăn"
                                 matTooltipPosition="above" (click)="gotoAdd(pond.pondUUId)"><span>
                                     <mat-icon>error_outline</mat-icon>
                                 </span></div>

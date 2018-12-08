@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { api_url, api_port } from '../constants/api';
+import { api } from '../constants/api';
 import { actionUserServices } from '../constants';
 import { AppService } from '../app.service';
 
-const host = api_url + ':' + api_port + '/api';
 @Injectable({
     providedIn: 'root'
 })
@@ -19,7 +18,7 @@ export class PondManagementService {
     }
 
     public loadImage(id: string) {
-        return this.http.get(host + '/getFile/image/' + id);
+        return this.http.get(api + '/getFile/image/' + id);
     }
 
     public uploadImage(file: File, token: string): Observable<any> {
@@ -27,7 +26,7 @@ export class PondManagementService {
         fd.append('image', file, file.name);
         fd.append('action', actionUserServices.UPLOAD_IMAGE);
 
-        return this.http.post(host + '/user/updateUser', fd, this.appService.setHeader(token));
+        return this.http.post(api + '/user/updateUser', fd, this.appService.setHeader(token));
     }
 
     public addPond(data: any, token: string): Observable<any> {
@@ -41,7 +40,7 @@ export class PondManagementService {
         fd.append('pondLatitude', data.pondLatitude ? data.pondLatitude : '');
         fd.append('pondLongitude', data.pondLongitude ? data.pondLongitude : '');
         fd.append('status', data.status);
-        return this.http.post(host + '/ponds/add', fd, {
+        return this.http.post(api + '/ponds/add', fd, {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
                 'Authorization': 'vietnamfishery' + ' ' + token
@@ -63,15 +62,15 @@ export class PondManagementService {
         status: '',
         seasonId: ''
     }): Observable<any> {
-        return this.http.get<any>(host + `/ponds/gets?seasonUUId=${ data.seasonUUId ? data.seasonUUId : '' }&status=${ data.status ? data.status : '' }&seasonId=${ data.seasonId ? data.seasonId : '' }`, this.appService.setHeader(token));
+        return this.http.get<any>(api + `/ponds/gets?seasonUUId=${ data.seasonUUId ? data.seasonUUId : '' }&status=${ data.status ? data.status : '' }&seasonId=${ data.seasonId ? data.seasonId : '' }`, this.appService.setHeader(token));
     }
 
     public getPondByUUId(UUid: string, token: string): Observable<any> {
-        return this.http.get(host + '/ponds/get/' + UUid, this.appService.setHeader(token));
+        return this.http.get(api + '/ponds/get/' + UUid, this.appService.setHeader(token));
     }
 
     public getPondWithoutImages(token: string): Observable<any> {
-        return this.http.get(host + '/ponds/gets/withoutImage', this.appService.setHeader(token));
+        return this.http.get(api + '/ponds/gets/withoutImage', this.appService.setHeader(token));
     }
 
     public updatePond(data: any, token: string): Observable<any> {
@@ -86,7 +85,7 @@ export class PondManagementService {
         fd.append('pondLatitude', data.pondLatitude);
         fd.append('pondLongitude', data.pondLongitude);
         fd.append('status', data.status);
-        return this.http.put(host + '/ponds/update', fd, {
+        return this.http.put(api + '/ponds/update', fd, {
             headers: new HttpHeaders({
                 'Access-Control-Allow-Origin': '*',
                 'Authorization': 'vietnamfishery' + ' ' + token
@@ -95,15 +94,15 @@ export class PondManagementService {
     }
 
     public getEmployeePond(token: string): Observable<any> {
-        return this.http.get<any>(host + '/userRoles/gets/employees/pond', this.appService.setHeader(token));
+        return this.http.get<any>(api + '/userRoles/gets/employees/pond', this.appService.setHeader(token));
     }
 
     public addPondUserRole(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/pondUserRoles/add', data, this.appService.setHeader(token));
+        return this.http.post<any>(api + '/pondUserRoles/add', data, this.appService.setHeader(token));
     }
     
     public getPondNotInSeasonAndPond(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/ponds/get/notin/seasonAndPond', data, this.appService.setHeader(token));
+        return this.http.post<any>(api + '/ponds/get/notin/seasonAndPond', data, this.appService.setHeader(token));
     }
     
     /**
@@ -113,15 +112,15 @@ export class PondManagementService {
      * @param token 
      */
     public getAllPondWithPresentSeason(data: any, token: string): Observable<any> {
-        return this.http.post(host + '/ponds/gets/ownerSeason', data, this.appService.setHeader(token));
+        return this.http.post(api + '/ponds/gets/ownerSeason', data, this.appService.setHeader(token));
     }
     
     public getAllPondWithPresentSeasonWithImage(data: any, token: string): Observable<any> {
-        return this.http.post(host + '/ponds/gets/ownerSeason/WithImage', data, this.appService.setHeader(token));
+        return this.http.post(api + '/ponds/gets/ownerSeason/WithImage', data, this.appService.setHeader(token));
     }
 
     public getPondBySeasonUUId(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/ponds/gets/seasonUUId', data, this.appService.setHeader(token));
+        return this.http.post<any>(api + '/ponds/gets/seasonUUId', data, this.appService.setHeader(token));
     }
     
     /**
@@ -151,11 +150,11 @@ export class PondManagementService {
                 'seasonid': options.seasonid ? options.seasonid + '' : ''
 			})
         }
-        return this.http.get<any>(host + '/ponds/gets/advanced', headers);
+        return this.http.get<any>(api + '/ponds/gets/advanced', headers);
     }
 
     countSeasonWithPond(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/ponds/seasons/count', data, this.appService.setHeader(token));
+        return this.http.post<any>(api + '/ponds/seasons/count', data, this.appService.setHeader(token));
     }
 
     /**
@@ -164,10 +163,10 @@ export class PondManagementService {
      * @param data.employeeId
      */
     getPondWithUserNotManage(data: any, token: string): Observable<any> {
-        return this.http.post<any>(host + '/ponds/gets/notEmployee', data, this.appService.setHeader(token));
+        return this.http.post<any>(api + '/ponds/gets/notEmployee', data, this.appService.setHeader(token));
     }
 
     getPondOfBoss(token: string): Observable<any> {
-        return this.http.get<any>(host + '/ponds/gets/boss', this.appService.setHeader(token));
+        return this.http.get<any>(api + '/ponds/gets/boss', this.appService.setHeader(token));
     }
 }
