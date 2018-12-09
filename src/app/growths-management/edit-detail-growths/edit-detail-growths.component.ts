@@ -74,7 +74,7 @@ export class EditDetailGrowthsComponent implements OnInit {
     }
 
     checkForm(mdtb, sltb, tdtt, tls) {
-        const reg = new RegExp(/^[0-9]+$/);
+        const reg = new RegExp(/^\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/);
         if (!reg.test(mdtb) || !reg.test(sltb) || !reg.test(tdtt) || !reg.test(tls)) {
             this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
                 duration: 2500,

@@ -77,6 +77,7 @@ export class CouponManagementComponent implements OnInit {
 
     changeSeason(season: any){
         this.seasonPresent = season;
+        this.coupons = [];
         this.getCoupons(season.seasonId);
     }
 

@@ -6,6 +6,7 @@ import { AppService } from '../app.service';
 import { PondManagementService } from './pond-management.service';
 import { EmployeesManagementService } from '../employees-management/employees-management.service';
 import { tokenName } from '../constants/constant';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'dialog-add-roles',
@@ -24,7 +25,8 @@ export class DialogAddRole implements OnInit {
         public snackBar: MatSnackBar,
         private appService: AppService,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router: Router
     ) {
         this.token = this.appService.getCookie(tokenName);
     }
@@ -85,6 +87,8 @@ export class DialogAddRole implements OnInit {
                     duration: 4500,
                     horizontalPosition: "right",
                 })
+                this.router.navigate(['quan-ly-ao']);
+                this.dialogRef.close();
             })
         }
     }

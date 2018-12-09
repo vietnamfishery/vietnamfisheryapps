@@ -11,8 +11,8 @@
     <div fxLayout="row">
         <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
             <div fxLayout="row wrap">
-                <div class="zoom" fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let pond of ponds">
-                    <mat-card class="pointer" (click)="gotoAdd(pond.pondUUId)">
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="33.3333%" fxFlex="100" *ngFor="let pond of ponds">
+                    <mat-card class="pointer" (click)="gotoAdd(pond.pondUUId)" matTooltip="Nhấp chuột để chọn ao nuôi" matTooltipPosition="above">
                         <div class="media-grid">
                             <figure>
                                 <div class="product-badge" *ngIf="pond.status === 0 "><span>Trống</span></div>

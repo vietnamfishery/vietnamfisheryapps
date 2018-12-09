@@ -72,20 +72,20 @@ export class UsingVeterinayComponent implements OnInit {
 
     init() {
         this.route.paramMap.pipe(
-        switchMap(params => {
-            this.pondUUId = params.get('pondUUId');
-            return this.pondManagementService.getPondByUUId(this.pondUUId, this.token);
-        })).subscribe(res => {
-            if(res.success){
-                this.pond = res.pond
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-        });
+            switchMap(params => {
+                this.pondUUId = params.get('pondUUId');
+                return this.pondManagementService.getPondByUUId(this.pondUUId, this.token);
+            })).subscribe(res => {
+                if (res.success) {
+                    this.pond = res.pond
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            });
     }
 
     getVeterinary = () => {
@@ -102,25 +102,40 @@ export class UsingVeterinayComponent implements OnInit {
         });
     }
 
+    checkForm(kctb, tsk, snthgn, sl) {
+        const reg = new RegExp(/^\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/);
+        if (!reg.test(kctb) || !reg.test(tsk) || !reg.test(snthgn) || !reg.test(sl)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
         this.form.patchValue({
             pondId: this.pond.pondId
-        })
-        this.usingVeterinaryService.addVeterinary(this.form.value, this.token).subscribe(res => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-                this.cancel();
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-        })
+        });
+        if (this.checkForm(this.form.controls.averageSize.value, this.form.controls.totalBiomass.value, this.form.controls.latestHarvestDate.value, this.form.controls.quantity.value)) {
+            this.usingVeterinaryService.addVeterinary(this.form.value, this.token).subscribe(res => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    this.cancel();
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            });
+        }
     }
 
     cancel() {

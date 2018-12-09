@@ -120,6 +120,7 @@ export class UsingVeterinaryComponent implements OnInit {
 
     changeSeason(season: any){
         this.seasonPresent = season;
+        this.ponds = [];
         this.getAllPondWithSeasonUUId();
     }
 

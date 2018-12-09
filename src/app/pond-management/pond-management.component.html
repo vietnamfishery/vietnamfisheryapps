@@ -10,21 +10,27 @@
     <div fxLayout="row">
         <mat-sidenav-container class="background-none shadow-none" style="min-height: 450px; min-width: 100%;">
             <mat-sidenav #productsnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" class="pa-0 ma-0">
-                <div class="pa-1">
-                    <button  (click)="reloadPond()" mat-raised-button class="mat-green-700">Tất cả</button>
-                </div>
+                <!-- <div class="pa-1">
+                    <button (click)="reloadPond()" mat-raised-button class="mat-green-700">Tất cả</button>
+                </div> -->
                 <hr>
                 <div class="pa-1">
                     <h3 class="mt-1">Trạng thái</h3>
                     <mat-radio-group>
                         <div class="pb-1">
-                            <mat-radio-button [checked]="status === 1" (click)="selectStatus(notNull.value)" #notNull value={{1}}>Đang nuôi</mat-radio-button>
+                            <mat-radio-button (click)="reloadPond()">Tất cả</mat-radio-button>
                         </div>
                         <div class="pb-1">
-                            <mat-radio-button [checked]="status === 0" (click)="selectStatus(isNull.value)" #isNull value={{0}}>Ao trống</mat-radio-button>
+                            <mat-radio-button [checked]="status === 1" (click)="selectStatus(notNull.value)" #notNull
+                                value={{1}}>Đang nuôi</mat-radio-button>
                         </div>
                         <div class="pb-1">
-                            <mat-radio-button [checked]="status === 2" (click)="selectStatus(isPrepare.value)" #isPrepare value={{2}}>Sửa chửa</mat-radio-button>
+                            <mat-radio-button [checked]="status === 0" (click)="selectStatus(isNull.value)" #isNull
+                                value={{0}}>Ao trống</mat-radio-button>
+                        </div>
+                        <div class="pb-1">
+                            <mat-radio-button [checked]="status === 2" (click)="selectStatus(isPrepare.value)"
+                                #isPrepare value={{2}}>Sửa chửa</mat-radio-button>
                         </div>
                     </mat-radio-group>
                 </div>

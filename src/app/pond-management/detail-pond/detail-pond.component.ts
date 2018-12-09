@@ -205,29 +205,52 @@ export class DetailPondComponent implements OnInit {
         }
     }
 
+    checkForm(cp: any, dt: any, ds: any, pondCreateDate: any) {
+		const reg = new RegExp(/^\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/);
+		if (!reg.test(cp) || !reg.test(dt) || !reg.test(ds)) {
+			this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+				duration: 2500,
+				horizontalPosition: "center",
+				verticalPosition: 'top'
+			});
+			return false;
+        }
+        if(new Date(pondCreateDate) > new Date()){
+            this.snackBar.open('Ngày tạo ao không được lớn hơn ngày hiện tại, kiểm tra và nhập lại cảm ơn!', 'Đóng', {
+				duration: 2500,
+				horizontalPosition: "center",
+				verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true; 
+	}
+
     onSubmit() {
         const data: any = {
             pondUUId: this.pondUUId,
             ...this.form.value,
             images: this.selectedFile || this.imgSource
         }
-        this.pondManagementService.updatePond(data, this.token).subscribe((res) => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-                setTimeout(() => {
-                    this.form.reset();
-                    this.router.navigate(['quan-ly-ao']);
-                }, 500);
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-            }
-        })
+        if(this.checkForm(this.form.controls.createCost.value, this.form.controls.pondArea.value, this.form.controls.pondDepth.value, this.form.controls.pondCreatedDate.value)) {
+            this.pondManagementService.updatePond(data, this.token).subscribe((res) => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    setTimeout(() => {
+                        this.form.reset();
+                        this.router.navigate(['quan-ly-ao']);
+                    }, 500);
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                }
+            });
+        }
     }
 
 }

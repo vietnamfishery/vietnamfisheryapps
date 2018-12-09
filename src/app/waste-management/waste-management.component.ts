@@ -57,7 +57,7 @@ export class WasteManagementComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.preloader = !this.preloader;
+        // this.preloader = !this.preloader;
         this.createForm();
         this.getSeason();
     }
@@ -88,7 +88,7 @@ export class WasteManagementComponent implements OnInit {
             this.form.patchValue({
                 pond: this.initPond
             })
-            this.preloader = !this.preloader;
+            // this.preloader = !this.preloader;
         })
     }
 
@@ -118,7 +118,7 @@ export class WasteManagementComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
-            this.preloader = !this.preloader;
+            // this.preloader = !this.preloader;
         })
     }
 
@@ -129,16 +129,19 @@ export class WasteManagementComponent implements OnInit {
         } else {
             this.checkSeasonPresent = true;
         }
+        this.ponds =  [];
+        this.wastes = [];
         this.getAllPondWithSeasonUUId();
     }
     
     changePond(pond: any) {
         this.initPond = pond;
+        this.wastes = [];
         this.getWates();
     }
 
     getWates() {
-        this.preloader = !this.preloader;
+        // this.preloader = !this.preloader;
         const obj: any = {
             seasonId: this.seasonPresent.seasonId,
             pondId: this.initPond ? this.initPond.pondId : null,
@@ -154,7 +157,7 @@ export class WasteManagementComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
-            this.preloader = false;
+            // this.preloader = false;
         })
     }
 

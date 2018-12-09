@@ -8,7 +8,7 @@
     </mat-toolbar>
     <hr>
     <div fxLayout="row" fxFlex="100" class="mr-top">
-        <div fxFlexOffset="6" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.sm="10px" fxLayoutGap.xs="0">
+        <div fxFlexOffset="2" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutGap.sm="10px" fxLayoutGap.xs="0">
             <form [formGroup]="form" *ngIf="isBoss">
                 <mat-form-field fxFlex="100" class="mr-5">
                     <mat-select [(value)]="selected" [formControl]="form.controls['season']" placeholder="Tên vụ nuôi">`

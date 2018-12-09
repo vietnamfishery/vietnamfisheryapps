@@ -117,6 +117,7 @@ export class DiaryComponent implements OnInit {
 
     changeSeason(season: any){
         this.seasonPresent = season;
+        this.ponds = [];
         this.getAllPondWithSeasonUUId();
     }
 
@@ -137,6 +138,7 @@ export class DiaryComponent implements OnInit {
                     });
                 }
             } else {
+                this.ponds = [];
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
                     horizontalPosition: "center",

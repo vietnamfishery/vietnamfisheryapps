@@ -6,12 +6,15 @@
         <form [formGroup]="formBreed.form" (ngSubmit)="onSubmitBreedAll()" (click)="changeFilteredOptionBreed(formBreed.position)">
             <div class="mr-top-10" fxFlex="1 0 auto" fxFlex="98" fxFlexOffset="1" fxLayout="row" fxLayoutAlign="wrap">
                 <div fxLayout="column" fxFlex="50">
+                    <br>
                     <div fxLayout="row" fxLayoutAlign="space-around center">
                         <mat-form-field fxFlex="48" fxFlexOffset="1">
-                            <input (keyup)="setAutocomplete($event.target.value, formBreed.position)" type="text" placeholder="Tên Giống" aria-label="Tên Giống" matInput [formControl]="formBreed.form.controls['breedName']"
+                            <input (keyup)="setAutocomplete($event.target.value, formBreed.position)" type="text"
+                                placeholder="Tên Giống" aria-label="Tên Giống" matInput [formControl]="formBreed.form.controls['breedName']"
                                 #tenGiong [matAutocomplete]="autoBreed" required>
                             <mat-autocomplete #autoBreed="matAutocomplete" [displayWith]="displayFnBreed">
-                                <mat-option (click)="setAutocomplete(breed, formBreed.position)" *ngFor="let breed of filteredOptionBreed | async" [value]="breed">
+                                <mat-option (click)="setAutocomplete(breed, formBreed.position)" *ngFor="let breed of filteredOptionBreed | async"
+                                    [value]="breed">
                                     {{breed.breedName}}
                                 </mat-option>
                             </mat-autocomplete>
@@ -33,8 +36,8 @@
                         </mat-form-field>
                         <mat-form-field fxFlex="48" fxFlexOffset="1">
                             <mat-label>Giá/Đơn vị tính</mat-label>
-                            <input matInput placeholder="Giá trên một đơn vị tính" #giaDonVi value="" required autocomplete="off"
-                                [formControl]="formBreed.form.controls['unitPrice']">
+                            <input matInput placeholder="Giá trên một đơn vị tính" #giaDonVi value="" required
+                                autocomplete="off" [formControl]="formBreed.form.controls['unitPrice']">
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="space-around center">
@@ -45,17 +48,18 @@
                         </mat-form-field>
                         <mat-form-field fxFlex="48" fxFlexOffset="1">
                             <mat-label>Cơ quan kiểm định</mat-label>
-                            <input matInput placeholder="Cơ quan kiểm định" value="" #coQuanKiemDinh required autocomplete="off"
-                                [formControl]="formBreed.form.controls['testingAgency']">
+                            <input matInput placeholder="Cơ quan kiểm định" value="" #coQuanKiemDinh required
+                                autocomplete="off" [formControl]="formBreed.form.controls['testingAgency']">
                         </mat-form-field>
                     </div>
                 </div>
                 <div fxLayout="column" fxFlex="50">
+                    <br>
                     <div fxLayout="row" fxLayoutAlign="space-around center">
                         <mat-form-field fxFlex="98" fxFlexOffset="1">
                             <mat-label>Địa chỉ cung cấp giống</mat-label>
-                            <input matInput placeholder="Địa chỉ cung cấp giống" value="" #diaChiMua required autocomplete="off"
-                                [formControl]="formBreed.form.controls['soldAddress']">
+                            <input matInput placeholder="Địa chỉ cung cấp giống" value="" #diaChiMua required
+                                autocomplete="off" [formControl]="formBreed.form.controls['soldAddress']">
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="space-around center">
@@ -80,7 +84,7 @@
         </mat-chip>
     </mat-chip-list>
     <div fxLayout="row" fxLayoutAlign="center center" fxFlex="90">
-        <button mat-button type="button" matTooltip="Gửi" (click)="onSubmitBreedAll()" class="mat-blue-500 mr-5">
+        <button mat-button type="button" matTooltip="Nhập vào kho" (click)="onSubmitBreedAll()" class="mat-blue-500 mr-5">
             <mat-icon>send</mat-icon>
         </button>
         <button mat-button type="button" (click)="back()" matTooltip="Hủy" class="mat-pink-700 mr-5">

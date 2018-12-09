@@ -61,7 +61,7 @@ export class WasteAddComponent implements OnInit {
     checkForm(sl) {
         const reg = new RegExp(/^[0-9]+$/);
         if (!reg.test(sl)) {
-            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+            this.snackBar.open('Giá trị nhập phải là số thực và không âm, vui lòng kiểm tra lại!', 'Đóng', {
                 duration: 2500,
                 horizontalPosition: "center",
                 verticalPosition: 'top'
