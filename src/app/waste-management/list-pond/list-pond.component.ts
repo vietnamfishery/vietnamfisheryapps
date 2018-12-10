@@ -77,7 +77,8 @@ export class ListPondComponent implements OnInit {
     getPond() {
         this.preloader = !this.preloader;
         this.pondManagementService.getAllPond(this.token, {
-            status: 'notnull'
+            status: 'notnull',
+            seasonUUId: this.seasonUUId
         }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;

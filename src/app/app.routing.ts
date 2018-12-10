@@ -9,14 +9,19 @@ export const AppRoutes: Routes = [
 		component: AdminLayoutComponent,
 		canActivate: [NotNullRoleGuard, AuthGuard],
 		children: [
-			{
-				path: '',
-				loadChildren: './home/home.module#HomeModule'
-			},
+			// {
+			// 	path: '',
+			// 	loadChildren: './home/home.module#HomeModule'
+			// },
 			{
 				path: 'nhat-ky',
                 loadChildren: './diary/diary.module#DiaryModule',
                 canActivate: [AuthGuardPond]
+			},
+			{
+				path: '',
+                loadChildren: './pond-management/pond-management.module#PondManagementModule',
+                canActivate: [AuthGuardPond]                
 			},
 			{
 				path: 'quan-ly-ao',

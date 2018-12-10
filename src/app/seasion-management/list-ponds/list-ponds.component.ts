@@ -81,6 +81,15 @@ export class ListPondsComponent implements OnInit {
                 horizontalPosition: "center",
                 verticalPosition: 'top'
             });
+            this.pondManagementService.getAllPond(this.token, {
+                seasonUUId: this.seasonUUId
+            }).subscribe(res => {
+                this.ponds = res.ponds;
+                this.dataSource.data = this.ponds
+                this.getSeasonBySeasonUUId();
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            });
         })
     }
 }

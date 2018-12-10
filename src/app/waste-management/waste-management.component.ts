@@ -174,7 +174,7 @@ export class WasteManagementComponent implements OnInit {
         this.step--;
     }
 
-    goto(diedFisheryUUId: string) {
-        console.log(diedFisheryUUId);
+    goto() {
+        this.router.navigate(['/quan-ly-chat-thai/danh-sach-ao', this.seasonPresent.seasonUUId])
     }
 }

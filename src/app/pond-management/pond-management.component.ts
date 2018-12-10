@@ -56,15 +56,10 @@ export class PondManagementComponent implements OnInit {
 
     reloadPond = () => {
         this.preloader = !this.preloader;
-        this.pondManagementService.getAllPond(this.token).subscribe((res: any) => {
+        this.pondManagementService.getAllPond(this.token, {
+            all: true
+        }).subscribe((res: any) => {
             if (res.success) {
-                // if (res.ponds.length == 0) {
-                //     this.snackBar.open('Bạn chưa có ao nào trong hệ thống', 'Đóng', {
-                //         duration: 2500,
-                //         horizontalPosition: "center",
-                //         verticalPosition: "top"
-                //     });
-                // }
                 this.ponds = res.ponds;
                 this.getImage();
             } else {
@@ -84,7 +79,7 @@ export class PondManagementComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            // this.reloadPond();
+            this.reloadPond();
         });
     }
 
@@ -107,7 +102,8 @@ export class PondManagementComponent implements OnInit {
         this.pondManagementService.getAllPond(this.token, {
             seasonUUId: '',
             seasonId: '',
-            status: stt
+            status: stt,
+            all: true
         }).subscribe(res => {
             if (res.success) {
                 if (res.ponds.length == 0) {

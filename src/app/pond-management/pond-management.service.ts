@@ -60,9 +60,10 @@ export class PondManagementService {
     public getAllPond(token: string, data: any = {
         seasonUUId: '',
         status: '',
-        seasonId: ''
+        seasonId: '',
+        all: ''
     }): Observable<any> {
-        return this.http.get<any>(api + `/ponds/gets?seasonUUId=${ data.seasonUUId ? data.seasonUUId : '' }&status=${ data.status ? data.status : '' }&seasonId=${ data.seasonId ? data.seasonId : '' }`, this.appService.setHeader(token));
+        return this.http.get<any>(api + `/ponds/gets?seasonUUId=${ data.seasonUUId ? data.seasonUUId : '' }&status=${ data.status ? data.status : '' }&seasonId=${ data.seasonId ? data.seasonId : '' }&all=${ data.all ? data.all : '' }`, this.appService.setHeader(token));
     }
 
     public getPondByUUId(UUid: string, token: string): Observable<any> {

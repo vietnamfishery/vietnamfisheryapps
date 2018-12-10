@@ -26,11 +26,18 @@ export interface Menu {
 }
 
 const MENUITEMS: Array<Menu> = [
+    // {
+    //   state: '/',
+    //   name: 'Trang chủ',
+    //   type: 'link',
+    //   icon: 'explore'
+    // },
     {
-      state: '/',
-      name: 'Trang chủ',
-      type: 'link',
-      icon: 'explore'
+        state: 'quan-ly-ao',
+        name: 'Quản lý ao',
+        type: 'link',
+        icon: 'view_quilt',
+        isRole: false
     },
     {
         state: 'quan-ly-phan-quyen',
@@ -46,13 +53,13 @@ const MENUITEMS: Array<Menu> = [
         icon: 'assignment_ind',
         isRole: true
     },
-    {
-        state: 'quan-ly-ao',
-        name: 'Quản lý ao',
-        type: 'link',
-        icon: 'view_quilt',
-        isRole: false
-    },
+    // {
+    //     state: 'quan-ly-ao',
+    //     name: 'Quản lý ao',
+    //     type: 'link',
+    //     icon: 'view_quilt',
+    //     isRole: false
+    // },
     {
         state: 'quan-ly-vu-nuoi',
         name: 'Quản lý vụ nuôi',

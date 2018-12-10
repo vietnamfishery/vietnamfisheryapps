@@ -4,7 +4,7 @@ import { PondprepareManagementService } from '../pondprepare-management.service'
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS_DATE } from './../../constants/format-date';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
 import { tokenName } from 'src/app/constants/constant';
@@ -29,6 +29,7 @@ export class AddcostPondprepareComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private snackBar: MatSnackBar,
         private fb: FormBuilder,
         private pondprepareManagementService: PondprepareManagementService,
@@ -81,6 +82,7 @@ export class AddcostPondprepareComponent implements OnInit {
                     duration: 3000,
                     horizontalPosition: "right"
                 });
+                this.router.navigate['/quan-ly-chuan-bi-ao/']
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

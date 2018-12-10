@@ -19,7 +19,7 @@ const routes: Routes = [
         component: WasteAddComponent
     },
     {
-        path: 'danh-sach-ao',
+        path: 'danh-sach-ao/:seasonUUId',
         component: ListPondComponent
     }
 ];

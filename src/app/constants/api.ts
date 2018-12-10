@@ -4,6 +4,6 @@
 // export const api_url='http://localhost';
 // export const api_port='9999';
 // export const api_port='7979';
-const api_url = 'http://localhost';
+const api_url = 'http://ec2-13-250-98-129.ap-southeast-1.compute.amazonaws.com';
 const api_port = '9999';
 export const api = api_url + ':' + api_port + '/api/v1';

@@ -16,6 +16,7 @@ export class UpdateComponent implements OnInit {
     pondDiaryUUId: string;
     form: FormGroup;
     token: string;
+    pond: any;
     constructor(
         private appService: AppService,
         public snackBar: MatSnackBar,
@@ -94,5 +95,8 @@ export class UpdateComponent implements OnInit {
                 }
             });
         }
+    }
+    cancel() {
+        this.router.navigate(['/nhat-ky'])
     }
 }
