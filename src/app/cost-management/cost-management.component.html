@@ -3,7 +3,7 @@
         <h2 class="mat-headline" fxFlex='100'>Quản lý chi phí</h2>
     </mat-toolbar>
     <mat-card-content fxLayout="column">
-        <hr>
+        <br>
         <div fxLayout="row" fxLayout.xs="column">
             <a href="javascript:;" (click)="goto('/quan-ly-chi-phi/chi-phi-nhap-kho', 'storage')" fxFlex="100" routerLinkActive="active">
                 <mat-card class="card-widget mat-teal active">
@@ -42,7 +42,7 @@
                 </mat-card>
             </a>
         </div>
-        <hr>
+        <br>
         <div fxLayout="row" fxFlex="100" class="mr-top">
             <div *ngIf="isBoss" fxFlexOffset="2" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="20px"
                 fxLayoutGap.sm="10px" fxLayoutGap.xs="0">
@@ -57,7 +57,7 @@
                 </form>
             </div>
         </div>
-        <hr />
+        <br />
         <div fxLayout="row wrap">
             <div fxFlex.gt-sm="100" fxFlex="100" *ngIf="flagLoadChart === 'storage'">
                 <a routerLink="/quan-ly-chi-phi/chi-phi-nhap-kho" fxFlex="100" routerLinkActive="active">
