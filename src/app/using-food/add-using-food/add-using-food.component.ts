@@ -92,25 +92,40 @@ export class AddUsingFoodComponent implements OnInit {
         });
     }
 
+    checkForm(klvn, tlca, slta) {
+        const reg = new RegExp(/^\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/);
+        if (!reg.test(klvn) || !reg.test(tlca) || !reg.test(slta)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
         this.form.patchValue({
             pondId: this.pond.pondId
-        })
-        this.usingFoodService.addUsingFood(this.form.value, this.token).subscribe(res => {
-            if (res.success) {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "right"
-                });
-                this.cancel();
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-        })
+        });
+        if (this.checkForm(this.form.controls.massOfFishery.value, this.form.controls.feedingRate.value, this.form.controls.quantity.value)) { 
+            this.usingFoodService.addUsingFood(this.form.value, this.token).subscribe(res => {
+                if (res.success) {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "right"
+                    });
+                    this.cancel();
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            });
+        }
     }
 
     cancel() {

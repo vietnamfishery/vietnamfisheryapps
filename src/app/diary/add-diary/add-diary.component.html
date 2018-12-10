@@ -14,7 +14,7 @@
                 <input matInput placeholder="Tên gợi nhắc" [formControl]="form.controls['diaryName']" autocomplete="off" required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Số lượng hiện tại trong ao - ước tính" [formControl]="form.controls['fisheryQuantity']" autocomplete="off" required>
+                <input matInput #slhtut placeholder="Số lượng hiện tại trong ao - ước tính" type="number" [formControl]="form.controls['fisheryQuantity']" autocomplete="off" required>
             </mat-form-field>
             <small *ngIf="form.controls['fisheryQuantity'].hasError('required') && form.controls['fisheryQuantity'].touched"
                 class="mat-text-warn">Số lượng hiện tại trong ao - ước tính không được để trống.</small>
@@ -25,13 +25,13 @@
             <small *ngIf="form.controls['healthOfFishery'].hasError('required') && form.controls['healthOfFishery'].touched"
                 class="mat-text-warn">Tình trạng vật nuôi không được để trống.</small>
             <mat-form-field>
-                <input matInput placeholder="Thể tích ao (m3)" [formControl]="form.controls['pondVolume']" type="number" min="1" autocomplete="off"
+                <input matInput #tta placeholder="Thể tích ao (m3)" [formControl]="form.controls['pondVolume']" type="number" min="1" autocomplete="off"
                     required>
             </mat-form-field>
             <small *ngIf="form.controls['pondVolume'].hasError('required') && form.controls['pondVolume'].touched"
                 class="mat-text-warn">Thể tích ao không được để trống.</small>
             <mat-form-field>
-                <input matInput placeholder="Số tôm, cá bị loại thải, chết (con)" type="number" min="1" [formControl]="form.controls['diedFishery']"
+                <input matInput #stc placeholder="Số tôm, cá bị loại thải, chết (con)" type="number" min="1" [formControl]="form.controls['diedFishery']"
                     autocomplete="off" required>
             </mat-form-field>
             <small *ngIf="form.controls['diedFishery'].hasError('required') && form.controls['diedFishery'].touched"

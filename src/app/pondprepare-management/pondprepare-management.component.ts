@@ -125,6 +125,7 @@ export class PondprepareManagementComponent implements OnInit {
 
     changeSeason(season: any){
         this.seasonPresent = season;
+        this.ponds = [];
         this.getAllPondWithSeasonUUId();
     }
 

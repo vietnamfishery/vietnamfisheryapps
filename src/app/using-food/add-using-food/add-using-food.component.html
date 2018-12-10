@@ -14,11 +14,11 @@
                     autocomplete="off" required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput type="number" placeholder="Khối lượng vật nuôi (ước tính)" [formControl]="form.controls['massOfFishery']"
+                <input matInput type="number" #klvn placeholder="Khối lượng vật nuôi (ước tính)" [formControl]="form.controls['massOfFishery']"
                     autocomplete="off" required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput type="number" placeholder="Tỷ lệ cho ăn (%)" [formControl]="form.controls['feedingRate']" autocomplete="off" required>
+                <input matInput type="number" #tlca placeholder="Tỷ lệ cho ăn (%)" [formControl]="form.controls['feedingRate']" autocomplete="off" required>
             </mat-form-field>
 
             <mat-form-field fxFlex="100">
@@ -30,7 +30,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="number" placeholder="Số lượng thức ăn" [formControl]="form.controls ['quantity']"
+                <input matInput type="number" #slta placeholder="Số lượng thức ăn" [formControl]="form.controls ['quantity']"
                     autocomplete="off" required>
             </mat-form-field>
             <br>

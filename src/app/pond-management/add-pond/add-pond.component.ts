@@ -199,7 +199,7 @@ export class AddPondComponent implements OnInit {
     }
 
     checkForm(cp: any, dt: any, ds: any, pondCreateDate: any) {
-		const reg = new RegExp(/^[0-9]+$/);
+		const reg = new RegExp(/^\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/);
 		if (!reg.test(cp) || !reg.test(dt) || !reg.test(ds)) {
 			this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
 				duration: 2500,

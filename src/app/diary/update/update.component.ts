@@ -60,24 +60,39 @@ export class UpdateComponent implements OnInit {
         })
     }
 
+    checkForm(slhtut, tta, stc) {
+        const reg = new RegExp(/^\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/);
+        if (!reg.test(slhtut) || !reg.test(tta) || !reg.test(stc)) {
+            this.snackBar.open('Giá trị nhập phải là số và không âm, vui lòng kiểm tra lại!', 'Đóng', {
+                duration: 2500,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
+            return false;
+        }
+        return true;
+    }
+
     onSubmit() {
         this.form.value[`pondDiaryUUId`] = this.pondDiaryUUId;
-        this.diaryService.updateDiaryByUUId(this.form.value, this.token).subscribe(res => {
-            if(res.success) {
-                this.form.disable();
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-                this.router.navigate(['/nhat-ky'])
-            } else {
-                this.snackBar.open(res.message, 'Đóng', {
-                    duration: 3000,
-                    horizontalPosition: "center",
-                    verticalPosition: 'top'
-                });
-            }
-        })
+        if (this.checkForm(this.form.controls.fisheryQuantity.value, this.form.controls.pondVolume.value, this.form.controls.diedFishery.value)) { 
+            this.diaryService.updateDiaryByUUId(this.form.value, this.token).subscribe(res => {
+                if(res.success) {
+                    this.form.disable();
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                    this.router.navigate(['/nhat-ky'])
+                } else {
+                    this.snackBar.open(res.message, 'Đóng', {
+                        duration: 3000,
+                        horizontalPosition: "center",
+                        verticalPosition: 'top'
+                    });
+                }
+            });
+        }
     }
 }

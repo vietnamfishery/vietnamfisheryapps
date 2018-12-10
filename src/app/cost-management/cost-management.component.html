@@ -3,16 +3,15 @@
         <h2 class="mat-headline" fxFlex='100'>Quản lý chi phí</h2>
     </mat-toolbar>
     <mat-card-content fxLayout="column">
-        <hr>
+        <br>
         <div fxLayout="row" fxLayout.xs="column">
             <a href="javascript:;" (click)="goto('/quan-ly-chi-phi/chi-phi-nhap-kho', 'storage')" fxFlex="100" routerLinkActive="active">
                 <mat-card class="card-widget mat-teal active">
                     <div mat-card-widget>
                         <div mat-card-float-icon>
-                            <mat-icon>widgets</mat-icon>
+                            <mat-icon>business</mat-icon>
                         </div>
                         <div class="pl-0">
-                            <h2 mat-card-widget-title>103</h2>
                             <p>CHI PHÍ NHẬP KHO</p>
                         </div>
                     </div>
@@ -22,10 +21,9 @@
                 <mat-card class="card-widget mat-purple active">
                     <div mat-card-widget>
                         <div mat-card-float-icon>
-                            <mat-icon>toys</mat-icon>
+                            <mat-icon>adb</mat-icon>
                         </div>
                         <div class="pl-0">
-                            <h2 mat-card-widget-title>230</h2>
                             <p>CHI PHÍ NHẬP GIỐNG</p>
                         </div>
                     </div>
@@ -35,19 +33,18 @@
                 <mat-card class="card-widget mat-light-blue-800 active">
                     <div mat-card-widget>
                         <div mat-card-float-icon>
-                            <mat-icon>local_hospital</mat-icon>
+                            <mat-icon>av_timer</mat-icon>
                         </div>
                         <div class="pl-0">
-                            <h2 mat-card-widget-title>323</h2>
                             <p>THỐNG KÊ THU HOẠCH</p>
                         </div>
                     </div>
                 </mat-card>
             </a>
         </div>
-        <hr>
+        <br>
         <div fxLayout="row" fxFlex="100" class="mr-top">
-            <div *ngIf="isBoss" fxFlexOffset="6" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="20px"
+            <div *ngIf="isBoss" fxFlexOffset="2" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutGap="20px"
                 fxLayoutGap.sm="10px" fxLayoutGap.xs="0">
                 <form>
                     <mat-form-field>
@@ -60,7 +57,7 @@
                 </form>
             </div>
         </div>
-        <hr />
+        <br />
         <div fxLayout="row wrap">
             <div fxFlex.gt-sm="100" fxFlex="100" *ngIf="flagLoadChart === 'storage'">
                 <a routerLink="/quan-ly-chi-phi/chi-phi-nhap-kho" fxFlex="100" routerLinkActive="active">
@@ -110,38 +107,6 @@
                     </mat-card>
                 </a>
             </div>
-            <!--  | [date:'dd/MM/yyyy':'vi'] -->
-            <!-- <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100">
-                <a routerLink="/quan-ly-chi-phi/chi-phi-cham-soc" fxFlex="100" routerLinkActive="active">
-                    <mat-card>
-                        <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
-                            Chi phí chuẩn chăm sóc &nbsp;
-                            <span fxFlex></span>
-                            <span class="font-weight-bold mat-text-warn">-46,68</span>
-                        </mat-card-subtitle>
-                        <mat-card-content>
-                            <canvas height="200" baseChart class="chart" [datasets]="ComboChartData" [labels]="comboChartLabels"
-                                [options]="ComboChartOptions" [colors]="chartColors" [legend]="comboChartLegend"
-                                [chartType]="barChartType"></canvas>
-                        </mat-card-content>
-                    </mat-card>
-                </a>
-            </div>
-            <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100">
-                <a routerLink="/quan-ly-chi-phi/thu-hoach" fxFlex="100" routerLinkActive="active">
-                    <mat-card>
-                        <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
-                            Thu hoạch &nbsp;
-                            <span fxFlex></span>
-                            <span class="font-weight-bold mat-text-accent">+2,50%</span>
-                        </mat-card-subtitle>
-                        <mat-card-content>
-                            <canvas height="200" baseChart class="chart" [datasets]="bubbleChartData" [labels]="comboChartLabels"
-                                [options]="ComboChartOptions" [legend]="comboChartLegend" [chartType]="bubbleChartType"></canvas>
-                        </mat-card-content>
-                    </mat-card>
-                </a>
-            </div> -->
         </div>
     </mat-card-content>
     <router-outlet></router-outlet>
