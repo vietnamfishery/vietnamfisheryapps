@@ -60,11 +60,12 @@ export class HarvestManagementComponent implements OnInit {
                         horizontalPosition: "center",
                         verticalPosition: 'top'
                     });
-                }
-                if(this.isBoss) {
-                    this.getAllPondWithSeasonUUId();
                 } else {
-                    this.getPond();
+                    if(this.isBoss) {
+                        this.getAllPondWithSeasonUUId();
+                    } else {
+                        this.getPond();
+                    }
                 }
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
@@ -87,7 +88,8 @@ export class HarvestManagementComponent implements OnInit {
     getPond() {
         this.preloader = !this.preloader;
         this.pondManagementService.getAllPond(this.token, {
-            status: 1
+            status: 1,
+            seasonUUId: this.seasonPresent.seasonUUId
         }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;

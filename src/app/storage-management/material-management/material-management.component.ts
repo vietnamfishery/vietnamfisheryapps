@@ -4,6 +4,7 @@ import { Storages } from 'src/app/models';
 import { tokenName } from 'src/app/constants/constant';
 import { StorageManagementService } from '../storage-management.service';
 import { AppService } from 'src/app/app.service';
+import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
 
 @Component({
     selector: 'app-material-management',
@@ -16,19 +17,28 @@ export class MaterialManagementComponent implements OnInit {
     displayedColumns: string[] = ['name', 'quantity', 'unit', 'descriptions'];
 	dataSource = new MatTableDataSource<Storages>(this.ELEMENT_DATA);
     token: string;
+    checkSeason: boolean = false;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         public snackBar: MatSnackBar,
 		private storageManagementService: StorageManagementService,
+        private seasionManagementService: SeasionManagementService,
 		private appService: AppService
     ) {
         this.token = this.appService.getCookie(tokenName);
     }
 
     ngOnInit() {
+        this.getSeason();
         this.loadingData();
+    }
+
+    getSeason() {
+        this.seasionManagementService.getPresentSeason(true,this.token).subscribe(res => {
+            this.checkSeason = !!res.seasons.length;
+        })
     }
 
     loadingData = () => {

@@ -39,6 +39,10 @@ export class SeasionManagementService {
         return this.http.get<any>(api + '/seasons/gets?present=true', headers);
     }
 
+    public getPresentSeason(present: boolean, token: string): Observable<any> {
+        return this.http.get<any>(api + `/seasons/gets?present=${ present }`, this.appService.setHeader(token));
+    }
+
     public getSeasonBySeasonUUId(seasonUUId: string, token: string): Observable<any> {
         return this.http.get<any>(api + '/seasons/gets/' + seasonUUId, this.appService.setHeader(token));
     }

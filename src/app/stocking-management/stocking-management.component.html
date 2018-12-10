@@ -1,7 +1,7 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="row">
         <h1 class="mat-headline center-align" fxFlex='100'>Quản lý thả nuôi</h1>
-        <a href="javascript:;" mat-flat-button color="white" (click)="goto('/quan-ly-tha-nuoi/danh-sach-ao')" *ngIf="checkSeasonPresent" matTooltip="Thêm thả nuôi"
+        <a href="javascript:;" mat-flat-button color="white" (click)="goto('/quan-ly-tha-nuoi/danh-sach-ao')" *ngIf="checkSeasonPresent && !!seasons.length" matTooltip="Thêm thả nuôi"
             matTooltipPosition="above" style="margin-right: 5px;">
             <mat-icon>library_add</mat-icon>
         </a>

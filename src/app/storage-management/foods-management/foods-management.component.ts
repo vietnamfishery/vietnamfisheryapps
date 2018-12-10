@@ -5,6 +5,7 @@ import { AppService } from 'src/app/app.service';
 import { tokenName } from 'src/app/constants/constant';
 import { Storages } from 'src/app/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
 
 @Component({
 	selector: 'app-foods-management',
@@ -22,13 +23,15 @@ export class FoodsManagementComponent implements OnInit {
 	ELEMENT_DATA: Storages[] = [];
 	displayedColumns: string[] = ['name', 'quantity', 'unit', 'descriptions'];
 	dataSource = new MatTableDataSource<Storages>(this.ELEMENT_DATA);
-	token: string;
+    token: string;
+    checkSeason: boolean = false;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
     @ContentChild('ssname') span: ElementRef;
 	constructor(
 		public snackBar: MatSnackBar,
 		private storageManagementService: StorageManagementService,
+        private seasionManagementService: SeasionManagementService,
         private appService: AppService,
         private fb: FormBuilder
 	) {
@@ -37,8 +40,15 @@ export class FoodsManagementComponent implements OnInit {
 
 	ngOnInit() {
         this.creatForm();
+        this.getSeason();
 		this.loadingData();
-	}
+    }
+    
+    getSeason() {
+        this.seasionManagementService.getPresentSeason(true,this.token).subscribe(res => {
+            this.checkSeason = !!res.seasons.length;
+        })
+    }
 
 	loadingData = () => {
 		this.storageManagementService.getStorageWithUser(this.token, 0).subscribe((res: any) => {

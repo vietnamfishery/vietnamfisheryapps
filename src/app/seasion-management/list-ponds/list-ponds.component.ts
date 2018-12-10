@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
@@ -21,7 +21,7 @@ export class ListPondsComponent implements OnInit {
     seasonUUId: any;
     token: string;
     seasonName: string;
-    displayedColumns: string[] = ['pondName', 'status'];
+    displayedColumns: string[] = ['pondName', 'status', 'action'];
     dataSource = new MatTableDataSource<any>([]);
     ownerId: number;
     isBoss: boolean = false;
@@ -34,6 +34,7 @@ export class ListPondsComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        public snackBar: MatSnackBar,
         private appService: AppService,
         private seasionManagementService: SeasionManagementService,
         private pondManagementService: PondManagementService
@@ -66,6 +67,20 @@ export class ListPondsComponent implements OnInit {
     getSeasonBySeasonUUId() {
         this.seasionManagementService.getSeasonBySeasonUUId(this.seasonUUId, this.token).subscribe(res => {
             this.season = res.season;
+        })
+    }
+
+    updatePond(pond: any) {
+        const data: any = {
+            ...pond,
+            status: 0
+        }
+        this.pondManagementService.updatePond(data, this.token).subscribe(res => {
+            this.snackBar.open(res.message, 'Đóng', {
+                duration: 3000,
+                horizontalPosition: "center",
+                verticalPosition: 'top'
+            });
         })
     }
 }

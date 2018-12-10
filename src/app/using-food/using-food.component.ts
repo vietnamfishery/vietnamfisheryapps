@@ -8,6 +8,7 @@ import { SeasionManagementService } from '../seasion-management/seasion-manageme
 import { MatSnackBar } from '@angular/material';
 import { find } from 'lodash';
 import { imagePlaceHolder } from '../constants/constant';
+import { UsingFoodService } from './using-food.service';
 
 @Component({
     selector: 'app-using-food',
@@ -34,6 +35,7 @@ export class UsingFoodComponent implements OnInit {
     constructor(
         private pondManagementService: PondManagementService,
         private seasionManagementService: SeasionManagementService,
+        private usingFoodService: UsingFoodService,
         private router: Router,
         private appService: AppService,
         public snackBar: MatSnackBar
@@ -47,7 +49,12 @@ export class UsingFoodComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getSeason()
+        this.getSeason();
+        this.usingFoodService.onUpdateUsingFood().subscribe(res => {
+            if(res.success) {
+                this.getPond();
+            }
+        })
     }
 
     getSeason() {
@@ -62,12 +69,13 @@ export class UsingFoodComponent implements OnInit {
                         horizontalPosition: "center",
                         verticalPosition: 'top'
                     });
-                    this.router.navigate['/quan-ly-chat-thai']
-                }
-                if(this.isBoss) {
-                    this.getAllPondWithSeasonUUId();
+                    this.router.navigate['/quan-ly-vu-nuoi']
                 } else {
-                    this.getPond();
+                    if(this.isBoss) {
+                        this.getAllPondWithSeasonUUId();
+                    } else {
+                        this.getPond();
+                    }
                 }
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
@@ -86,7 +94,8 @@ export class UsingFoodComponent implements OnInit {
     getPond() {
         this.preloader = true;
         this.pondManagementService.getAllPond(this.token, {
-            status: 1
+            status: 1,
+            seasonUUId: this.seasonPresent.seasonUUId
         }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
@@ -179,4 +188,6 @@ export class UsingFoodComponent implements OnInit {
         }
         this.ponds = arr;
     }
+
+    
 }

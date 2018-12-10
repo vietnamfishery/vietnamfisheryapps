@@ -26,7 +26,7 @@
 
         <ng-container matColumnDef="unitPrice">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Giá/Đơn vị </th>
-          <td mat-cell *matCellDef="let element"> {{element.unitPrice}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.unitPrice | currency:'VNĐ'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="unit">

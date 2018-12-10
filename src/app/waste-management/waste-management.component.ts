@@ -106,11 +106,12 @@ export class WasteManagementComponent implements OnInit {
                         verticalPosition: 'top'
                     });
                     this.router.navigate['/quan-ly-chat-thai']
+                } else {
+                    this.getAllPondWithSeasonUUId();
+                    this.form.patchValue({
+                        season: this.seasonPresent
+                    });
                 }
-                this.getAllPondWithSeasonUUId();
-                this.form.patchValue({
-                    season: this.seasonPresent
-                });
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

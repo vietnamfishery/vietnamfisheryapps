@@ -1,7 +1,7 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="row">
         <h2 class="mat-headline center-align" fxFlex='100'>Quản lý tăng trưởng</h2>
-        <a mat-flat-button color="white" routerLink="/quan-ly-tang-truong/them" matTooltip="Thêm mới" *ngIf="checkSeasonPresent"
+        <a mat-flat-button color="white" routerLink="/quan-ly-tang-truong/them" matTooltip="Thêm mới" *ngIf="checkSeasonPresent && !!seasons.length && !!ponds.length"
             matTooltipPosition="above" style="margin-right: 5px;">
             <mat-icon>library_add</mat-icon>
         </a>

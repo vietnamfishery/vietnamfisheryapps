@@ -59,7 +59,15 @@ export class AddStockingComponent implements OnInit {
                 this.pond = res.pond
             });
         this.storageManagementService.getBreedWithUser(this.token).subscribe(res => {
-            this.breeds = res.breeds ? res.breeds : [];
+            if(res.success) {
+                this.breeds = res.breeds ? res.breeds : [];
+            } else {
+                this.snackBar.open(res.message, 'Đóng', {
+                    duration: 2500,
+                    horizontalPosition: "center",
+                    verticalPosition: 'top'
+                });
+            }
         });
         this.createForm();
     }

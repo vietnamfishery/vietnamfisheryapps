@@ -96,17 +96,18 @@ export class StockingManagementComponent implements OnInit {
                 this.seasonPresent = find(res.seasons, e => e.status === 0);
                 this.realSeasonPresent = this.seasonPresent;
                 if(!this.seasonPresent) {
-                    this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                    this.snackBar.open('Bạn không có vụ nào được kích hoạt.', 'Đóng', {
                         duration: 3000,
                         horizontalPosition: "center",
                         verticalPosition: 'top'
                     });
-                    this.router.navigate['/quan-ly-chat-thai']
+                    this.router.navigate['/quan-ly-vu-nuoi']
+                } else {
+                    this.form.patchValue({
+                        season: this.seasonPresent
+                    });
+                    this.getStocking();
                 }
-                this.form.patchValue({
-                    season: this.seasonPresent
-                });
-                this.getStocking();
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

@@ -7,7 +7,6 @@ const cost: any = {
 export function costStorageReducer(state: any = cost, action: StorageCostActionsUnion) {
     switch (action.type) {
         case StorageCostActionTypes.GET: {
-            console.log(action);
             return state = {
                 body: action.payload
             };

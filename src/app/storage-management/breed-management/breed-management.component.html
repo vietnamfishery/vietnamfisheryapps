@@ -1,7 +1,7 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="end end" class="mr-5">
         <h3 fxFlex="100" fxLayoutAlign="center center"><span>Danh sách giống</span></h3>
-        <div fxFlex>
+        <div fxFlex *ngIf="checkSeason">
             <button mat-raised-button [routerLink]="['/quan-ly-kho/nhap-kho', type]" class="mat-green-700" matTooltip="Nhập giống"
                 matTooltipPosition="above">
                 <mat-icon>library_add</mat-icon>

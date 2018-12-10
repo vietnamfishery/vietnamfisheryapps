@@ -1,7 +1,7 @@
 <mat-card fxLayout="column">
     <mat-toolbar color="primary" class="table-header" fxLayout="row">
         <h1 class="mat-headline center-align" fxFlex='100'>Quản lý chất thải</h1>
-        <a mat-flat-button color="white" routerLink="/quan-ly-chat-thai/danh-sach-ao" matTooltip="Thêm thông tin" *ngIf="checkSeasonPresent"
+        <a mat-flat-button color="white" routerLink="/quan-ly-chat-thai/danh-sach-ao" matTooltip="Thêm thông tin" *ngIf="checkSeasonPresent && !!seasons.length  && !!ponds.length"
             matTooltipPosition="above" fxFlex style="margin-right: 10px">
             <mat-icon>library_add</mat-icon>
         </a>

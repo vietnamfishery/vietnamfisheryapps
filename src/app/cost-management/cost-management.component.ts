@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material';
 import { tokenName } from '../constants/constant';
 import { Store } from '@ngrx/store';
 import { AppState } from '../rootStores/models/model';
-import { GetCost } from '../rootStores/actions'
+import { GetCost, GetBreedCost, GetHarvestCost } from '../rootStores/actions'
 import { Router } from '@angular/router';
 
 @Component({
@@ -180,8 +180,9 @@ export class CostManagementComponent implements OnInit {
                         horizontalPosition: "center",
                         verticalPosition: 'top'
                     });
+                } else {
+                    this.changeSeason(this.seasonPresent);
                 }
-                this.changeSeason(this.seasonPresent);
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,
@@ -283,9 +284,11 @@ export class CostManagementComponent implements OnInit {
         ];
         this.costService.getCost(this.token, {
             seasonUUId: this.seasonPresent.seasonUUId
-        }, 'breed').subscribe(res => {
-            if (res.success) {
-                const labels: any[] = res.labels;
+        }, 'breed').subscribe(res$ => {
+            console.log(res$);
+            if (res$.success) {
+                const labels: any[] = res$.labels;
+                this.store.dispatch(new GetBreedCost(res$.tables))
                 this.barChartLabels = labels.map((e: any) => {
                     return e.createdDate;
                 });
@@ -293,7 +296,7 @@ export class CostManagementComponent implements OnInit {
                     return e.totals;
                 })
             } else {
-                this.snackBar.open(res.message, 'Đóng', {
+                this.snackBar.open(res$.message, 'Đóng', {
                     duration: 3000,
                     horizontalPosition: "center",
                     verticalPosition: 'top'
@@ -324,6 +327,7 @@ export class CostManagementComponent implements OnInit {
         }, 'harvest').subscribe(res => {
             if (res.success) {
                 const labels: any[] = res.charts;
+                this.store.dispatch(new GetHarvestCost(res.charts))
                 this.barChartLabels = labels.map(e => e.createdDate);
                 this.barChartDataHarvest[0].data = labels.map(e => e.totals);
             } else {

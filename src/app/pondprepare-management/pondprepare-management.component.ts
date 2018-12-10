@@ -62,17 +62,18 @@ export class PondprepareManagementComponent implements OnInit {
                 this.seasonPresent = find(res.seasons, e => e.status === 0);
                 this.realSeasonPresent = this.seasonPresent;
                 if(!this.seasonPresent) {
-                    this.snackBar.open('Bạn không có vụ nào được kích hoạt, vui lòng kích hoạt một vụ mùa trong hệ thống.', 'Đóng', {
+                    this.snackBar.open('Bạn không có vụ nào được kích hoạt.', 'Đóng', {
                         duration: 3000,
                         horizontalPosition: "center",
                         verticalPosition: 'top'
                     });
-                    this.router.navigate['/quan-ly-chat-thai']
-                }
-                if(this.isBoss) {
-                    this.getAllPondWithSeasonUUId();
+                    this.router.navigate['/quan-ly-vu-nuoi'];
                 } else {
-                    this.getPond();
+                    if(this.isBoss) {
+                        this.getAllPondWithSeasonUUId();
+                    } else {
+                        this.getPond();
+                    }
                 }
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
@@ -110,7 +111,7 @@ export class PondprepareManagementComponent implements OnInit {
                     verticalPosition: 'top'
                 });
             }
-            this.preloader = !this.preloader;
+            this.preloader = false;
         })
     }
 

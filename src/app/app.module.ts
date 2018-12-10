@@ -52,6 +52,8 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { authorizationReducer } from './rootStores/reducers/authorization.reducer';
 import { costStorageReducer } from './rootStores/reducers/storageCost.reducer';
+import { breedCostReducer } from './rootStores/reducers/breedCost.reducer';
+import { harvestCostReducer } from './rootStores/reducers/harvestCost.reducer';
 import { AppService } from './app.service';
 import { registerLocaleData } from '@angular/common';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
@@ -61,9 +63,9 @@ export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://172.16.193.103:7979', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:7979', options: {} };
 
 @NgModule({
     declarations: [
@@ -98,7 +100,9 @@ const config: SocketIoConfig = { url: 'http://172.16.193.103:7979', options: {} 
         }),
         StoreModule.forRoot({
             authorization: authorizationReducer,
-            storageCost: costStorageReducer
+            storageCost: costStorageReducer,
+            breedCost: breedCostReducer,
+            harvestCost: harvestCostReducer,
         }),
         StoreDevtoolsModule.instrument({
             maxAge: false

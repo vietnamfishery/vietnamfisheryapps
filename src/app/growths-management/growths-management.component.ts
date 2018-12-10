@@ -114,15 +114,16 @@ export class GrowthsManagementComponent implements OnInit {
                         verticalPosition: 'top'
                     });
                     this.router.navigate['/quan-ly-chat-thai']
-                }
-                if(this.isBoss) {
-                    this.getAllPondWithSeasonUUId();
                 } else {
-                    this.getPond();
+                    if(this.isBoss) {
+                        this.getAllPondWithSeasonUUId();
+                    } else {
+                        this.getPond();
+                    }
+                    this.form.patchValue({
+                        season: this.seasonPresent
+                    });
                 }
-                this.form.patchValue({
-                    season: this.seasonPresent
-                });
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
                     duration: 3000,

@@ -93,6 +93,10 @@ export class PondManagementService {
         });
     }
 
+    public updatePondJSON(data: any, token: string): Observable<any> {
+        return this.http.put<any>(api + '/ponds/update', data,this.appService.setHeader(token));
+    }
+
     public getEmployeePond(token: string): Observable<any> {
         return this.http.get<any>(api + '/userRoles/gets/employees/pond', this.appService.setHeader(token));
     }

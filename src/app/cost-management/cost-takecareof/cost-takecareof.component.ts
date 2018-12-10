@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SeasionManagementService } from 'src/app/seasion-management/seasion-management.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { AppService } from 'src/app/app.service';
 import { AppState } from 'src/app/rootStores/models/model';
 import { Store } from '@ngrx/store';
@@ -19,14 +19,16 @@ export class CostTakecareofComponent implements OnInit {
     ownerId: number;
     isBoss: boolean = false;
     totalAll: number = null;
-    // dataSource: any = [];
-    // displayedColumns: any = [];
+    dataSource: any = [];
+    displayedColumns: any = ["createdDate", "name", "quantity", "unitPrice", "unit"];
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+
     constructor(
-        private seasionManagementService: SeasionManagementService,
         public snackBar: MatSnackBar,
         private appService: AppService,
-        private store: Store<AppState>,
-        private costService: CostService
+        private store: Store<AppState>
     ) {
         this.token = this.appService.getCookie(tokenName);
         const deToken: any = jwtDecode(this.token);
@@ -37,6 +39,16 @@ export class CostTakecareofComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.store.select('breedCost').subscribe(res => {
+            if(!res.body.length) {
+                this.dataSource = new MatTableDataSource<any>([]);
+            } else {
+                this.dataSource = new MatTableDataSource<any>([]);
+                this.dataSource.data = res.body;
+                this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
+            }
+        });
     }
 
 }

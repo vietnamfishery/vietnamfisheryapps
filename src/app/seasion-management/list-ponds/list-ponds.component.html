@@ -21,15 +21,24 @@
 
                 <ng-container matColumnDef="pondName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên Ao</th>
-                    <td mat-cell *matCellDef="let element">{{ element.pondName }}</td>
+                    <td mat-cell *ngIf="element.status !== 0" *matCellDef="let element">{{ element.pondName }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Trạng thái ao</th>
-                    <td mat-cell *matCellDef="let element">
+                    <td mat-cell *matCellDef="let element" *ngIf="element.status !== 0">
                         <span *ngIf="element.status === 0">Ao trống</span>
                         <span *ngIf="element.status === 1">Đang nuôi</span>
                         <span *ngIf="element.status === 2">Đang nâng cấp</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành Động</th>
+                    <td mat-cell *matCellDef="let element" *ngIf="element.status !== 0">
+                        <button mat-button (click)="updatePond(element)">
+                            Hoàn Tất Thu Hoạch
+                        </button>
                     </td>
                 </ng-container>
 

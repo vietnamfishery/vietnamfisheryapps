@@ -59,12 +59,13 @@ export class DiaryComponent implements OnInit {
                         horizontalPosition: "center",
                         verticalPosition: 'top'
                     });
-                    this.router.navigate['/quan-ly-chat-thai']
-                }
-                if(this.isBoss) {
-                    this.getAllPondWithSeasonUUId();
+                    this.router.navigate['/quan-ly-vu-nuoi']
                 } else {
-                    this.getPond();
+                    if(this.isBoss) {
+                        this.getAllPondWithSeasonUUId();
+                    } else {
+                        this.getPond();
+                    }
                 }
             } else {
                 this.snackBar.open(res.message, 'Đóng', {
@@ -79,7 +80,8 @@ export class DiaryComponent implements OnInit {
     getPond() {
         this.preloader = !this.preloader;
         this.pondManagementService.getAllPond(this.token, {
-            status: 1
+            status: 1,
+            seasonUUId: this.seasonPresent.seasonUUId
         }).subscribe(res => {
             if (res.success) {
                 this.ponds = res.ponds;
