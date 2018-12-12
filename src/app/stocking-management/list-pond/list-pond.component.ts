@@ -54,7 +54,8 @@ export class ListPondComponent implements OnInit {
             switchMap(params => {
                 this.seasonUUId = params.get('seasonUUId');
                 return this.pondManagementService.getAllPond(this.token, {
-                    status: 'forStocking'
+                    status: 'forStocking',
+                    seasonUUId: this.seasonUUId
                 });
             })).subscribe(res => {
                 if (res.success) {

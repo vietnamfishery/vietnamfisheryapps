@@ -81,7 +81,7 @@ export class SeasionManagementComponent implements OnInit {
             } else {
 
             }
-            this.preloader = !this.preloader;
+            this.preloader = false;
         });
     }
 

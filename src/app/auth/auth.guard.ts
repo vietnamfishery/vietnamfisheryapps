@@ -232,7 +232,11 @@ export class AuthGuardPond implements CanActivate, CanActivateChild, CanLoad {
             this.isRole = false;
         }
         if (!this.isRole) {
-            this.router.navigate(['/session/404'])
+            if(!!find((jwtDecode(this.appService.getCookie(tokenName)) as any).roles, e => e.roles === 2) || !(jwtDecode(this.appService.getCookie(tokenName)) as any).roles.length) {
+                this.router.navigate(['/quan-ly-kho/thuc-an'])
+            } else {
+                this.router.navigate(['/session/404'])
+            }
         }
         return this.isRole;
     }

@@ -41,7 +41,7 @@
 
                 <ng-container matColumnDef="unitPrice">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Giá/Đơn vị </th>
-                    <td mat-cell *matCellDef="let element"> {{ element.unitPrice }} </td>
+                    <td mat-cell *matCellDef="let element"> {{ element.unitPrice | currency:'VNĐ' }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="unit">
@@ -60,7 +60,7 @@
 
                 <ng-container matColumnDef="createdDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày nhập </th>
-                    <td mat-cell *matCellDef="let element"> {{ element.createdDate | date:'dd - MM - yyyy':'vi' }} </td>
+                    <td mat-cell *matCellDef="let element"> {{ element.createdDate | date:'dd - MM - yyyy HH:ss':'vi' }} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
